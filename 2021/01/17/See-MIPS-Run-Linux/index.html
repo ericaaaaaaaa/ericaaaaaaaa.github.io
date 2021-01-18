@@ -255,7 +255,7 @@
 <li>这些指令常用于（系统调用、断点调试以及某些指令仿真等）。</li>
 <li>如 <code>syscall</code>, <code>break</code> 指令</li>
 </ul>
-<h1 id="CPU-控制寄存器及其编码"><a href="#CPU-控制寄存器及其编码" class="headerlink" title="CPU 控制寄存器及其编码"></a>CPU 控制寄存器及其编码</h1><h2 id="状态寄存器-SR"><a href="#状态寄存器-SR" class="headerlink" title="状态寄存器 (SR)"></a>状态寄存器 (SR)</h2><p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20201222101737808.png" alt="image-20201222101737808"></p>
+<h1 id="CPU-控制寄存器及其编码"><a href="#CPU-控制寄存器及其编码" class="headerlink" title="CPU 控制寄存器及其编码"></a>CPU 控制寄存器及其编码</h1><h2 id="状态寄存器-SR"><a href="#状态寄存器-SR" class="headerlink" title="状态寄存器 (SR)"></a>状态寄存器 (SR)</h2><p><img src="/2021/01/17/See-MIPS-Run-Linux/image/SR.png" alt="image-20201222101737808"></p>
 <h3 id="CPU3-0"><a href="#CPU3-0" class="headerlink" title="CPU3-0"></a>CPU3-0</h3><ul>
 <li>CU3-0 每个分别代表协处理器 3-0 的 “协处理器使能”。协处理器 1 是浮点处理单元 FPU  —— 设置为1 代表有浮点处理器并且使用，设置为 0 则代表进制 FPU。</li>
 <li><strong>当设置为 0 的时候，所有 FPU 指令都会导致异常</strong></li>
@@ -370,7 +370,7 @@
 <h3 id="IE-全局的中断使能位："><a href="#IE-全局的中断使能位：" class="headerlink" title="IE 全局的中断使能位："></a>IE 全局的中断使能位：</h3><ul>
 <li><strong>不管这位是什么值，EXL 或 ERL 总是禁止所有的中断。</strong></li>
 </ul>
-<h2 id="原因寄存器（Cause）"><a href="#原因寄存器（Cause）" class="headerlink" title="原因寄存器（Cause）"></a>原因寄存器（Cause）</h2><p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20201222152044095.png" alt="image-20201222152044095"></p>
+<h2 id="原因寄存器（Cause）"><a href="#原因寄存器（Cause）" class="headerlink" title="原因寄存器（Cause）"></a>原因寄存器（Cause）</h2><p><img src="/2021/01/17/See-MIPS-Run-Linux/image/cause.png" alt="image-20201222152044095"></p>
 <h3 id="BD-分支延迟："><a href="#BD-分支延迟：" class="headerlink" title="BD 分支延迟："></a>BD 分支延迟：</h3><ul>
 <li>EPC 保存的是异常处理完之后的返回地址。正常情况下，这也指向异常受害指令。</li>
 <li>但是<strong>如果发生异常的指令是在一条转移指令的延迟操里，EPC 得指向那条转移指令</strong>；重新执行转移指令没有什么害处，但如果返回到延迟槽指令本身，转移就不会发生，从而这个异常将破坏被中断的程序</li>

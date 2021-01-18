@@ -16,7 +16,7 @@
 #main-page a:hover {
   color: #808080;
 }
-#main-page::after {
+#main-page:after {
   content: "";
   background-image: url("../image/bgi.jpg");
   background-position: center center;

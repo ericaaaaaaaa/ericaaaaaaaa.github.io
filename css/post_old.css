@@ -32,7 +32,7 @@
   border: 1px solid #000;
 }
 #post table tbody tr:nth-child(odd) {
-  background: #e8e8e8;
+  background: #d3d3d3;
 }
 #post table tbody tr:nth-child(even) {
   background: #fff;
@@ -42,11 +42,11 @@
   float: right;
 }
 code {
-  font-family: 'Courier New', monospace;
+  font-family: 'Source Sans Pro', sans-serif;
   width: 100%;
   box-sizing: border-box;
-  background: #f0f0f0;
-  color: #000;
+  background: #d3d3d3;
+  color: #1f2d3d;
 }
 img {
   max-width: 100%;
