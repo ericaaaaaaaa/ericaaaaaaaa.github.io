@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Computer Vision | Erica’s Blog</title>
+<meta name="generator" content="Jekyll v4.2.1">
+<meta property="og:title" content="Computer Vision">
+<meta name="author" content="ericaaaaaaaa">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="计算机视觉">
+<meta property="og:description" content="计算机视觉">
+<link rel="canonical" href="http://localhost:4000/artificialintelligence/2021/09/14/ComputerVision.html">
+<meta property="og:url" content="http://localhost:4000/artificialintelligence/2021/09/14/ComputerVision.html">
+<meta property="og:site_name" content="Erica’s Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-09-14T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Computer Vision">
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/artificialintelligence/2021/09/14/ComputerVision.html","headline":"Computer Vision","dateModified":"2021-09-14T00:00:00+08:00","datePublished":"2021-09-14T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/artificialintelligence/2021/09/14/ComputerVision.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"计算机视觉","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Erica's Blog" src="" onerror="this.style.display='none'">
+  Erica's Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Computer Vision</h1>
+  <h2 class="post-subtitle">计算机视觉课程笔记</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2021-09-14T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 14, 2021
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#note">#note</a><a class="post-tag" href="/tags.html#artificial-intelligence">#artificial-intelligence</a><a class="post-tag" href="/tags.html#computer-vision">#computer-vision</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="计算机视觉"><center>计算机视觉</center></h1>
+
+<p>本文档主要针对图像分类问题，在第一部 分中整理了相关背景知识，包括人工神经网络相关术语——激活函数、损失函数，正向与逆向传播等；在第二部分中主要介绍了图像分类相关的知识，包括它的输入输出与常见的处理方法。</p>
+
+<h1 id="一知识">（一）知识</h1>
+
+<h2 id="1-拟合-fitting">1. 拟合 (Fitting)</h2>
+
+<p>利用曲线描述样本，曲线应当具有良好的泛化能力 (generalization)。在拟合时可能出现两种可能的情况——<strong>过拟合</strong> (overfitting) 和<strong>欠拟合</strong> (underfitting)。其中，欠拟合反映在训练时模型效果良好，但测试时正确率较低的情况。它往往是由于过度依赖训练集数据，从而缺乏对更多数据良好的泛化性。一种可能的原因是模型过于复杂且训练集较小。欠拟合与过拟合相反，无法对样本给出较好的估计。一种可能的原因是模型过于简单，无法拟合或区分样本点。</p>
+
+<h2 id="2-正则化-regularization">2. 正则化 (Regularization)</h2>
+
+<p>正则化的引入是为了防止过拟合的发生。举例来说，在多项式拟合坐标点问题中，多项式的阶数越高，对于样本点的拟合情况越好，但由于可能出现过拟合问题，因此反而可能导致对于最终测试点的拟合情况较差。因此，正则化可以有效的评估模型的复杂程度，尽可能减少测试误差。</p>
+
+<h2 id="3-激活函数-activation-function">3. 激活函数 (Activation Function)</h2>
+
+<p>神经网络受人类神经元工作原理的启发，因此神经网络中很重要的一个部分是它的激活函数。激活函数负责将神经元的输入映射到输出端。常用的激活函数图像如下图所示：</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Gjl-t%28x%29.svg/320px-Gjl-t%28x%29.svg.png" alt="img"></p>
+
+<h3 id="a-sigmoid-函数-sigma">a. sigmoid 函数 ($\sigma$​​​)</h3>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/320px-Logistic-curve.svg.png" alt="img"></p>
+
+<p>sigmoid 函数[1]是饱和激活函数，其公式为 $S(x) = \frac{1}{1+\exp^{-x}} = \frac{\exp^x}{\exp^x+1}=1-S(-x)$​ ，可以将输入映射到 (0,1) 区间内。</p>
+
+<h4 id="优点">优点</h4>
+
+<p>可以将任何范围的输入映射到 (0,1) 区间内</p>
+
+<h4 id="缺点">缺点</h4>
+
+<ul>
+  <li>
+    <p>在输出接近 0 或 1 时梯度几乎为 0，对反向传输中的梯度下降运算不利</p>
+  </li>
+  <li>
+    <p>会使得大量的数据集中在 (0, 1) 区间内，数据密度分配不均</p>
+  </li>
+  <li>
+    <p>输出并不是以 0 为中心，可能导致后续的神经元计算结果分布出现问题</p>
+  </li>
+</ul>
+
+<p>因此在现在的神经网络中很少使用。</p>
+
+<h3 id="b-tanh-函数">b. tanh 函数</h3>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Sinh_cosh_tanh.svg/300px-Sinh_cosh_tanh.svg.png" alt="Sinh cosh tanh.svg"></p>
+
+<p>tanh[2]是饱和激活函数，其公式为 $\tanh(x) = 2\sigma(2x)-1=\frac{\sinh(x)}{\cosh(x)} = \frac{\exp^x-\exp^{-x}}{\exp^x+\exp^{-x}}=\frac{\exp^{2x}-1}{\exp^{2x}+1}$​​</p>
+
+<h3 id="c-relu-函数">c. ReLU 函数</h3>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/ReLU_and_GELU.svg/220px-ReLU_and_GELU.svg.png" alt="img"></p>
+
+<p>不同于上述两种激活函数，ReLU 函数[3]属于非饱和激活函数，它的全称是修正线性单元激活函数 (Recitified Linear Unit active function)，也可以成为 Rectifier，它的公式为 $ReLU(x) = x^+ = \max(0,x)$​​</p>
+
+<h4 id="优点-1">优点</h4>
+
+<p>相比于上述 Sigmoid 和 tanh 激活函数，ReLU 的计算量较小，计算速度较快</p>
+
+<h4 id="缺点-1">缺点</h4>
+
+<p>ReLU 可能造成神经网络中的有用信息丢失，因为所有小于 0 的输入都会映射到 0，因此这些神经元将不再工作，不再向下传播。</p>
+
+<h4 id="变体">变体</h4>
+
+<p>以下是 ReLU 的部分变体。</p>
+
+<ul>
+  <li>
+    <p>Leaky ReLU</p>
+
+    <p>$Leaky_ReLU(x)=\begin{cases}x&amp;&amp; x\gt 0\\ 0.01x&amp;&amp;x\le0\end{cases}$​</p>
+  </li>
+  <li>
+    <p>含参 ReLU</p>
+
+    <p>$Parameter_ReLU(x)=\begin{cases}x&amp;&amp; x\gt 0\\ ax&amp;&amp;x\le0\end{cases}$​​</p>
+  </li>
+  <li>
+    <p>SiLU</p>
+
+    <p>$SiLU(x) = x\cdot sigmoid(x) = x\cot\sigma(x)$​</p>
+  </li>
+  <li>
+    <p>Softplus</p>
+
+    <p>$Softplus(x)=\ln(1+\exp^x)$</p>
+  </li>
+  <li>
+    <p>ELU</p>
+
+    <p>$ELU(x) = \begin{cases}x&amp;&amp;x\gt0\\ a(\exp^x-1)&amp;&amp;x\le0\end{cases}$</p>
+  </li>
+  <li>
+    <p>GELU</p>
+
+    <p>$f(x)=x\cdot\Phi(x)$​</p>
+  </li>
+  <li>
+    <p>Maxout</p>
+
+    <p>$Maxout(x) = \max(w_1^Tx+b_1, w_2^Tx+b_2)$</p>
+  </li>
+</ul>
+
+<h2 id="4-损失函数-loss-function">4. 损失函数 (Loss Function)</h2>
+
+<p>损失函数反映了估计值与真实值之间的差距，即模型的估计效果和正确率，多用于反向传播，即通过损失函数的大小反向调整模型参数的大小。</p>
+
+<p>损失函数通常由两部分组成，<strong>规则化项</strong>和<strong>惩罚项</strong>，其中规则化项反映了模型对于样例的拟合水平，而规则化项则反映了模型的复杂程度。</p>
+
+<p>损失函数可以抽象的表示为：$L = \frac{1}{N}\sum_iL_i+\lambda R(W)$，其中 $L_i$ 为第 $i$ 个样本点的规则化损失，$N$ 为样本点总数，$R(W)$ 为正则化损失</p>
+
+<p>模型的目标是尽可能减小损失函数，即保障正确率且尽可能简单。</p>
+
+<h3 id="a-规则化项">a. 规则化项</h3>
+
+<h4 id="支持向量机-multiclass-support-vector-machine-svm">支持向量机 (Multiclass Support Vector Machine, SVM)</h4>
+
+<p>支持向量机是一种二分类模型，目标是将样本点尽可能的分成两类。在图片分类问题中，SVM 希望使正确类的估计值尽可能的高，错误类的估计值稳定在某个特定的范围 $\Delta$ 内。</p>
+
+<p>$SVM_loss = L_i = \sum_{j\not=y_i}\max{(0, s_j-s_{y_i}+\Delta)}$</p>
+
+<p>其中 $i$ 代表第 $i$ 个样本点，$y_i$ 是该样本点正确的类别，$j$ 代表所有可能的类别，$s_j$ 和 $s_{y_i}$ 分别代表模型对于第 $i$ 个样本点为 $j$ 类型和 $y_i$ 类型的估计值大小，$\Delta$ 为可接受范围。</p>
+
+<h4 id="softmax">Softmax</h4>
+
+<p>$Softmax_loss = L_i = -\log{(\frac{\exp^{f_{y_i}}}{\sum_j\exp^{f_j}})}-f_{y_j}+\log{\sum_j\exp^{f_j}}$，其中 $i$ 代表第 $i$ 个样本，$y_i$ 是该样本点正确的类别，$j$ 代表所有可能的类别，$s_j$ 和 $s_{y_i}$ 分别代表模型对于第 $i$ 个样本点为 $j$ 类型和 $y_i$ 类型的估计值大小，$\frac{e^{f_{y_j}}}{\sum_je^{f_j}}$ 相当于估计正确发生的标准化概论。</p>
+
+<blockquote>
+  <p>SVM vs Softmax</p>
+
+  <p>SVM 与样本点的各个类别的估计值大小有关，而 Softmax 只关系其相对大小关系。</p>
+
+  <p>SVM 相比于 Softmax 在计算上相对简单。</p>
+</blockquote>
+
+<h3 id="b-惩罚项">b. 惩罚项</h3>
+
+<p>模型的复杂程度应该控制在合理的范围内，过于简单的模型从理论上就无法解决复杂的问题，而过于复杂的网络又可能导致训练时间的延长或出现过拟合的情况，反而使得模型的准确度降低。我们追求的模型应当在保障正确性的同时尽可能的简单，惩罚项反映了模型的复杂程度，模型越复杂，惩罚项的取值就越大，是损失函数中的一部分。</p>
+
+<p>以下为两个常见的惩罚项的表达式，其中 $W$ 为权重矩阵，$W_{k,l}$ 为其中的元素</p>
+
+<h4 id="l1">L1</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>L1 是一个常见的惩罚项，它的值为 $R(W) = \sum_k\sum_l</td>
+      <td>W_{k,l}</td>
+      <td>$​​</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="l2">L2</h4>
+
+<p>L2 是一个常见的惩罚项，它的值为 $R(W) = \sum_k\sum_lW_{k,l}^2$​</p>
+
+<h2 id="5-优化-optimization">5. 优化 (optimization)</h2>
+
+<p>优化模型的目的是寻找适当的模型参数，使得损失函数最低。</p>
+
+<h3 id="梯度下降-gradient-descent">梯度下降 (gradient descent)</h3>
+
+<p>梯度下降是一种常用的优化方法，可以用来寻找局部最优点。它的思路是对现有模型的估计值计算梯度，找到下降最快的方向，根据损失函数 (loss function) 和学习率 (learning rate) 来决定参数的调整方向和大小，在一次次的迭代计算中找到模型参数的局部最优解。</p>
+
+<blockquote>
+  <p>梯度下降需要涉及到求偏导等数学计算，在实际应用中可以用到求导的链式法则。</p>
+</blockquote>
+
+<h2 id="6-反向传播-backpropagation">6. 反向传播 (backpropagation)</h2>
+
+<blockquote>
+  <p><strong>正向传播</strong>是获得输入，将输入通过构建的模型计算后得到输出。</p>
+</blockquote>
+
+<p>反向传播是根据模型的输出结果，根据计算出的损失函数去反向改变模型的参数，从而调整模型，使其更好的对样本进行拟合。</p>
+
+<h1 id="二图像分类">（二）图像分类</h1>
+
+<h2 id="1-输入">1. 输入</h2>
+
+<h3 id="图像"><strong>图像</strong></h3>
+
+<ul>
+  <li>
+    <p>像素 (pixel)</p>
+
+    <p>取值范围 0 ~ 255，0 表示黑色，255 表示白色</p>
+  </li>
+  <li>
+    <p>通道 (channel)</p>
+
+    <p>彩色图像通常用 3 通道表示，分别为红色 (R)，绿色 (G) 和蓝色 (B)，简称为 RGB</p>
+
+    <p>而黑白图像则只由单通道表示</p>
+  </li>
+</ul>
+
+<h2 id="2-输出">2. 输出</h2>
+
+<p>给出各类别的估计值</p>
+
+<h2 id="3-难点">3. 难点</h2>
+
+<p>图像识别对于多数人来说是极其自然的能力，但对于计算机而言却有着诸多困难，对于同一类物体而言，视角、尺度、形态的不同可能使其呈现完全不同的形态，此外，遮挡、光影等因素也会影响物体的呈现状态。另外，由于物体常常会在某个背景中出现，因此当物体与背景十分类似时，识别的困难也会增加。因此，图像处理对于计算机是较为复杂的工作。</p>
+
+<h2 id="4-步骤">4. 步骤</h2>
+
+<p>图像识别主要有三个步骤，如下：</p>
+
+<ol>
+  <li>
+    <p><strong>获取输入</strong></p>
+
+    <p>获取 N 个图片作为输入，每个图片分别对应一个类别，共 k 个类别，称上述输入为<strong>训练集</strong> (training set)</p>
+  </li>
+  <li>
+    <p><strong>学习训练集，训练模型</strong></p>
+  </li>
+  <li>
+    <p><strong>评估效果</strong></p>
+
+    <p>利用<strong>不属于</strong>训练集的数据（测试集，testing set）测试模型的准确率</p>
+  </li>
+</ol>
+
+<h2 id="5-方法">5. 方法</h2>
+
+<p>由于上述分析中提到的，图像识别对于计算机而言有着诸多困难，因此，不同于一般的算法问题，图片分类难以有固定的解法，在实际应用中常常采用<strong>数据驱动</strong>方法，即通过学习大量真实的样例对未知的图片进行分类。下文中将按照由简到繁的顺序介绍图像处理中应用到的各类方法。</p>
+
+<h3 id="a-最近邻分类">a. 最近邻分类</h3>
+
+<p>最近邻分类是解决图片分类问题中思路最为简单，也最为直观的方案。它在数据维度低的时候较为适宜，但由于图片普遍维度较高，尺寸较大，因此最近邻分类算法的准确度较低，在实际工程中也很少使用。此外，传统的最近邻分类器和 k-最近邻分类器虽然训练时间极短，但测试时间较长，与实际工程需求相悖。</p>
+
+<h4 id="i-最近邻分类器-nearest-neighbor-classifier">i. 最近邻分类器 (Nearest Neighbor Classifier)</h4>
+
+<h5 id="思想">思想</h5>
+
+<p>最近邻分类器首先获取并存储所有的训练数据，之后对应每一个待测试的数据，将其与存储的训练数据一一比较距离，距离最近的训练数据对应的类别则为最近邻分类器给出的该测试类的估计类别。</p>
+
+<h5 id="距离">距离</h5>
+
+<p>最近邻分类器以<strong>距离</strong>作为度量图片相似度的标准，常用的距离公式如下（其中 $I_1$​ 与 $I_2$​ 分别为训练集和测试集中的一张图片，$d$​​ 为两幅图片的距离）：</p>
+
+<h6 id="l1-距离-l1-distance">L1 距离 (L1 distance)</h6>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$d_1(I_1, I_2)=\sum_p{</td>
+      <td>I_1^p-I_2^p</td>
+      <td>}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>该距离算法算出两幅图片相同位置上像素值的差并将其取绝对值再求和，从而得到两幅图片之间的距离。</p>
+
+<h6 id="l2-距离-l2-distance">L2 距离 (L2 distance)</h6>
+
+<p>$d_2(I_1, I_2) = \sqrt{\sum_p{(I_1^p-I_2^p)^2}}$</p>
+
+<p>该距离算法算出两幅图片相同位置上像素值的差并将其求平方之后加和，在开根号作为两幅图片之间的距离</p>
+
+<blockquote>
+  <p><strong>L1</strong> 与 <strong>L2</strong> 距离的区别：</p>
+
+  <ul>
+    <li>极端数据对 L1 的影响程度小于 L2，因为 L2 会将数据进行平方运算。</li>
+    <li>计算复杂度：L2 &gt; L1，因为涉及到平方与根号运算</li>
+  </ul>
+</blockquote>
+
+<h5 id="优点-2">优点</h5>
+
+<p>最近邻分类器的训练时间短（仅仅需要保存数据），且思路简单，便于实现。</p>
+
+<h5 id="缺点-2">缺点</h5>
+
+<p>正确率较低，且测试时需要与全部训练数据进行匹配，耗时较长，因此在实际工程中几乎不使用。</p>
+
+<h4 id="ii-k-最近邻分类器-k-nearest-neighbor-classifier">ii. k-最近邻分类器 (k-Nearest Neighbor Classifier)</h4>
+
+<h5 id="思想-1">思想</h5>
+
+<p>由于最近邻分类器可能产生过拟合的现象，k-最近邻分类器[4]在上述分类器的基础上进行改进，选出与测试样例最接近的 k 个训练样本，并取在 k 个样本中数量最多的样本类型为最终分类结果</p>
+
+<h5 id="优点-3">优点</h5>
+
+<p>k-最近拥有最近邻分类器训练时间短且思路简单的优点，且能在传统最近邻分类器上做到对于部分噪声 (noise) 的忽略，因此可以取得比传统做法更优秀的正确率。</p>
+
+<h5 id="缺点-3">缺点</h5>
+
+<p>和传统做法一样，k-NN 的测试时间长，且与训练集的大小成正比，且相比于之后提到的分类算法，k-NN 的正确率依然较低。</p>
+
+<h5 id="超参数调试-hyperparameter-tuning">超参数调试 (Hyperparameter tuning)</h5>
+
+<p>由于在 k-最近邻分类器中 k 值属于变量，无法通过直观的方法决定 k 的最佳取值，因此引入超参数调试方法，将 k 作为<strong>超参数</strong> (hyperparameter)。</p>
+
+<p>超参数调试的思路是选取不同的参数取值，并测试每个参数的准确率。但需要注意的是，用测试集 (test set) 作为衡量参数正确性的标准是不合理的，测试集应当放在研究的最后阶段，理论上应当仅使用一次，用来衡量网络的效果。</p>
+
+<p>在网络形成过程中，为了更好的进行参数调试工作，从训练集 (training set) 中划分一部分作为验证集 (validation set)，在网络尚未完全搭建完成时利用验证集的完成情况进行超参数调试工作。</p>
+
+<h5 id="交叉验证-cross-validation">交叉验证 (Cross-validation)</h5>
+
+<p>考虑到验证集的规模可能导致对于准确率判断出现误差，因此不固定验证集，而是从训练集中随机或者按照一定的规模动态选择一部分作为训练集。</p>
+
+<p>一个可能的做法是，将训练集随机等分成 n 份，每次验证时候从训练集中按照从前往后的顺序循环取出一份作为验证集。(1, 2, …, n, 1, 2, …)</p>
+
+<blockquote>
+  <p>尽管交叉验证可以得到更加客观的模型正确性结果，但由于动态调整验证集耗费计算资源，在实际问题中，面对数量巨大的训练集，一般很少使用。</p>
+</blockquote>
+
+<h4 id="iii-近似最近邻分类器-approximate-nearest-neighbor">iii. 近似最近邻分类器 (Approximate Nearest Neighbor)</h4>
+
+<h5 id="树方法">树方法</h5>
+
+<ul>
+  <li>
+    <p>Kd-tree</p>
+
+    <p>划分空间维度，通过缩小检索范围加速检索速度</p>
+  </li>
+  <li>
+    <p>annoy</p>
+
+    <p>以二叉树为数据结构的近似最近邻搜索库</p>
+  </li>
+</ul>
+
+<h5 id="哈希方法">哈希方法</h5>
+
+<p>通过哈希函数将空间内的向量以 0，1 的二进制值进行编码</p>
+
+<ul>
+  <li>
+    <p>局部敏感哈希 (Local Sensitive Hashing)</p>
+
+    <p>通过哈希函数将所有样本点映射到不同桶中，将对于全体样本的比对搜索化简为对某一特定桶的比对搜索</p>
+  </li>
+</ul>
+
+<h5 id="矢量量化方法">矢量量化方法</h5>
+
+<p>将样本点分成若干类，每一类用其中心点表示。</p>
+
+<h5 id="近邻图方法">近邻图方法</h5>
+
+<p>建立图结构，图的顶点是样本点，边的权重为样本点之间的距离。利用图论算法在途中搜索得到最近邻</p>
+
+<h4 id="iv-快速最近邻分类器-fast-nearest-neighbor">iv. 快速最近邻分类器 (Fast Nearest Neighbor)</h4>
+
+<h3 id="b-主成分分析法-principal-component-analysis">b. 主成分分析法 (Principal Component Analysis)</h3>
+
+<p>与特征分析方法类似，主成分分析法[5]基于多元素特征值分析，是一种降维度的分析方法，将高维样本降维，只关注样本点的主要成分。</p>
+
+<p>主成分分析法的原则是在降低分析指标（维度）的同时保留样本点的基本信息，保障其差异性。</p>
+
+<p>坐标系的选择原则：</p>
+
+<ul>
+  <li>体现样本点之间的差异</li>
+  <li>相互垂直</li>
+</ul>
+
+<h3 id="c-近邻成分分析法-neighborhood-component-analysis">c. 近邻成分分析法 (Neighborhood Component Analysis)</h3>
+
+<p>邻近成分分析法属于受监督的机器学习方法，与 k-最近邻算法相类似，不同之处在于 NCA 会通过学习样本数数据确定适合的距离测度算法。</p>
+
+<h3 id="d-随机投射-random-projection">d. 随机投射 (Random Projection)</h3>
+
+<p>随即投射[6]的目的在于降低欧氏空间样本点的维度。通过随机生成的 $d\times k$​​ 矩阵将原有 $d$​​ 维数据投影到 $k$​​ 维空间内（注意：随机选择的矩阵各个行、列向量<strong>可以</strong>不满足正交关系，但需要经过归一化处理）。Johnson 的论文中用数学方法论证了随机投射方法的可行性。</p>
+
+<h3 id="e-线性分类器-linear-classification">e. 线性分类器 (Linear Classification)</h3>
+
+<p>线性分类器通过线性函数将样本点分类，它主要由两部分构成：</p>
+
+<ul>
+  <li>
+    <p><strong>评分函数</strong> (score function)</p>
+
+    <p>评分函数反映了各个因素的重要程度</p>
+
+    <p>$f(x_i, W, b) = Wx_i + b$</p>
+
+    <p>上式中，$x_i$ 为输入的图片样例（矩阵形式），$W$​​​​​ 为权重函数，意味着图片的各个部分在图片分类问题中的重要程度。</p>
+  </li>
+  <li>
+    <p><strong>损失函数</strong> (loss function)</p>
+
+    <p>损失函数是用来度量模型效果的函数，损失越小意味着模型越准确。</p>
+  </li>
+</ul>
+
+<p>线性分类器的目的在于寻找最佳的权重函数，使损失函数降到最低。</p>
+
+<h3 id="f-人工神经网络-artificial-neural-network">f. 人工神经网络 (Artificial Neural Network)</h3>
+
+<p>人工神经网络模仿动物神经网络，是一种常用的数学模型。神经网络包括输入层、隐藏层和输出层，其中，隐藏层可以有多层</p>
+
+<h1 id="三参考文献">（三）参考文献</h1>
+
+<p>[1] sigmoid 激活函数，https://en.wikipedia.org/wiki/Sigmoid_function</p>
+
+<p>[2] tanh 激活函数，https://en.wikipedia.org/wiki/Hyperbolic_functions</p>
+
+<p>[3] ReLU 激活函数，https://en.wikipedia.org/wiki/Rectifier_(neural_networks)</p>
+
+<p>[4]  Fix, Evelyn; Hodges, Joseph L. (1951). Discriminatory Analysis. Nonparametric Discrimination: Consistency Properties (PDF) (Report). USAF School of Aviation Medicine, Randolph Field, Texas.</p>
+
+<p>[5] Pearson, K. (1901). “On Lines and Planes of Closest Fit to Systems of Points in Space”. Philosophical Magazine. 2 (11): 559–572. doi:10.1080/14786440109462720.</p>
+
+<p>[6] Johnson, William B.; Lindenstrauss, Joram (1984). “Extensions of Lipschitz mappings into a Hilbert space”. Conference in Modern Analysis and Probability (New Haven, Conn., 1982). Contemporary Mathematics. 26. Providence, RI: American Mathematical Society. pp. 189–206. doi:10.1090/conm/026/737400. ISBN 9780821850305. MR 0737400</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="Discrete Mathematics">Discrete Mathematics</a><a class="next" href="/computerarchitecture/2021/12/22/Compiler.html" title="Compiler">Compiler</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html" title="Compiler">Machine Learning</a></li>
+<li><a class="post-link" href="/data/2022/01/07/Database.html" title="Compiler">Database</a></li>
+<li><a class="post-link" href="/data/2021/01/11/DataStructure.html" title="Compiler">Data Structure</a></li>
+<li><a class="post-link" href="/artificialintelligence/2021/09/14/ComputerVision.html" title="Compiler">Computer Vision</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>ericaaaaaaaa <span class="copyleft">©</span> 2019-2022 ericaaaaaaaa</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
