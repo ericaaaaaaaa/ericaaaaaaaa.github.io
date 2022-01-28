@@ -16,7 +16,7 @@
 #main-page a:hover {
   color: #808080;
 }
-#main-page:after {
+#main-page::after {
   content: "";
   background-image: url("../image/bgi.jpg");
   background-position: center center;
@@ -69,7 +69,8 @@
     align-items: center;
     justify-content: center;
     min-height: 100%;
-    font-family: 'Lato', sans-serif;
+/*font-family: 'Lato', sans-serif;*/
+    font-family: 'Times New Roman', serif;
   }
   #layout-menu {
     box-sizing: border-box;
@@ -408,7 +409,7 @@
   border: 1px solid #000;
 }
 #post table tbody tr:nth-child(odd) {
-  background: #d3d3d3;
+  background: #e8e8e8;
 }
 #post table tbody tr:nth-child(even) {
   background: #fff;
@@ -418,11 +419,11 @@
   float: right;
 }
 code {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Courier New', monospace;
   width: 100%;
   box-sizing: border-box;
-  background: #d3d3d3;
-  color: #1f2d3d;
+  background: #f0f0f0;
+  color: #000;
 }
 img {
   max-width: 100%;
