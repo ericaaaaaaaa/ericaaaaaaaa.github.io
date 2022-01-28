@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Compiler | Erica’s Blog</title>
-<meta name="generator" content="Jekyll v4.2.1">
-<meta property="og:title" content="Compiler">
-<meta name="author" content="ericaaaaaaaa">
-<meta property="og:locale" content="en_US">
-<meta name="description" content="编译实验课程设计文档">
-<meta property="og:description" content="编译实验课程设计文档">
-<link rel="canonical" href="http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html">
-<meta property="og:url" content="http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html">
-<meta property="og:site_name" content="Erica’s Blog">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2021-12-22T00:00:00+08:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Compiler">
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Compiler" />
+<meta name="author" content="ericaaaaaaaa" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="编译实验课程设计文档" />
+<meta property="og:description" content="编译实验课程设计文档" />
+<link rel="canonical" href="http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html" />
+<meta property="og:url" content="http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html" />
+<meta property="og:site_name" content="Erica’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-22T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Compiler" />
 <script type="application/ld+json">
 {"@type":"BlogPosting","url":"http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html","headline":"Compiler","dateModified":"2021-12-22T00:00:00+08:00","datePublished":"2021-12-22T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"编译实验课程设计文档","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -28,11 +25,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -120,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -249,23 +246,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
-  <img class="site-favicon" title="Erica's Blog" src="" onerror="this.style.display='none'">
-  Erica's Blog
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Erica&#39;s Blog" src="" onerror="this.style.display='none'">
+  Erica&#39;s Blog
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
+          <div class="trigger"><a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
 
 
 
@@ -417,10 +412,8 @@ function googleTranslateElementInit() {
 </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</span>
-</div>
-        </nav>
-</div>
+</span></div>
+        </nav></div>
   </div>
 </header>
 
@@ -807,10 +800,7 @@ function googleTranslateElementInit() {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 31 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#design-doc">#design-doc</a><a class="post-tag" href="/tags.html#system">#system</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#design-doc">#design-doc</a><a class="post-tag" href="/tags.html#system">#system</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -859,7 +849,7 @@ function googleTranslateElementInit() {
 
 <p>以字符为单位遍历输入程序，根据下图所示的流程图，将输入字符流逐一转化为相应 Token</p>
 
-<p><img src="/assets/images/post/resources/lexical_analysis.png" alt=""></p>
+<p><img src="/assets/images/post/resources/lexical_analysis.png" alt="" /></p>
 
 <h3 id="难点分析">难点分析</h3>
 
@@ -899,8 +889,7 @@ function googleTranslateElementInit() {
 
 <blockquote>
   <p>例：</p>
-  <div class="language-cpp highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Exp</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ASTNode</span> <span class="p">{</span> <span class="c1">// 表达式</span>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Exp</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ASTNode</span> <span class="p">{</span> <span class="c1">// 表达式</span>
 <span class="nl">public:</span>
  <span class="n">AddExp</span> <span class="o">*</span><span class="n">addExp</span><span class="p">;</span>
 
@@ -921,8 +910,8 @@ function googleTranslateElementInit() {
   <li>消除文法中的左递归
     <blockquote>
       <p>e.g.
-原文法：AddExp := MulExp | AddExp (’+’ | ‘-‘) MulExp
-消除左递归后的文法：AddExp := MulExp | MulExp (’+’ | ‘-‘) AddExp</p>
+原文法：AddExp := MulExp | AddExp (‘+’ | ‘-‘) MulExp
+消除左递归后的文法：AddExp := MulExp | MulExp (‘+’ | ‘-‘) AddExp</p>
     </blockquote>
   </li>
   <li>
@@ -935,8 +924,7 @@ function googleTranslateElementInit() {
 
     <blockquote>
       <p>例：</p>
-      <div class="language-cpp highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="n">Exp</span><span class="o">*</span> <span class="nf">parseExp</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 解析 Exp 类</span>
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Exp</span><span class="o">*</span> <span class="nf">parseExp</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 解析 Exp 类</span>
 <span class="k">auto</span> <span class="o">*</span><span class="n">exp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Exp</span><span class="p">(</span><span class="n">parseAddExp</span><span class="p">());</span> <span class="c1">// 调用 addExp 调用程序 (返回 * addExp)</span>
 <span class="n">ASTTree</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">exp</span><span class="p">);</span> <span class="c1">// 将 expression 结点加入树中</span>
 <span class="k">return</span> <span class="n">exp</span><span class="p">;</span>
@@ -1251,8 +1239,7 @@ function googleTranslateElementInit() {
     </tr>
     <tr>
       <td>f</td>
-      <td>无返回值的函数存在不匹配的 <code class="language-plaintext highlighter-rouge">return</code>
-</td>
+      <td>无返回值的函数存在不匹配的 <code class="language-plaintext highlighter-rouge">return</code></td>
       <td>在函数声明时，若函数的 returnType 为 VOIDTK，则获取函数块内最后一条语句，若其为 return 语句且不为 “return;”，则报错</td>
     </tr>
     <tr>
@@ -1282,9 +1269,8 @@ function googleTranslateElementInit() {
     </tr>
     <tr>
       <td>l</td>
-      <td>
-<code class="language-plaintext highlighter-rouge">printf</code> 中格式字符串与表达式个数不匹配</td>
-      <td>在语法分析的过程中，在遇到 Stmt -&gt; printf ‘(’ FormatString {, Exp} ‘)’ 时记录 Exp 的数量和 FormatString 中 ‘%d’ 的数量，将两者对比，若不同，则抛出 l 型错误</td>
+      <td><code class="language-plaintext highlighter-rouge">printf</code> 中格式字符串与表达式个数不匹配</td>
+      <td>在语法分析的过程中，在遇到 Stmt -&gt; printf ‘(‘ FormatString {, Exp} ‘)’ 时记录 Exp 的数量和 FormatString 中 ‘%d’ 的数量，将两者对比，若不同，则抛出 l 型错误</td>
     </tr>
     <tr>
       <td>m</td>
@@ -1399,40 +1385,24 @@ function googleTranslateElementInit() {
       <td><code class="language-plaintext highlighter-rouge">i32 $1</code></td>
     </tr>
     <tr>
-      <td>
-<code class="language-plaintext highlighter-rouge">INTGLOBAL</code> or <code class="language-plaintext highlighter-rouge">INTGLOBALCONST</code>
-</td>
-      <td>
-<code class="language-plaintext highlighter-rouge">i32 @{id}</code> or <code class="language-plaintext highlighter-rouge">[{size} * i32]* @{id}</code>
-</td>
-      <td>
-<code class="language-plaintext highlighter-rouge">i32 @0</code>, <code class="language-plaintext highlighter-rouge">[3 * i32] @4</code>
-</td>
+      <td><code class="language-plaintext highlighter-rouge">INTGLOBAL</code> or <code class="language-plaintext highlighter-rouge">INTGLOBALCONST</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32 @{id}</code> or <code class="language-plaintext highlighter-rouge">[{size} * i32]* @{id}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32 @0</code>, <code class="language-plaintext highlighter-rouge">[3 * i32] @4</code></td>
     </tr>
     <tr>
-      <td>
-<code class="language-plaintext highlighter-rouge">INTLOCAL</code> or <code class="language-plaintext highlighter-rouge">INTLOCALCONST</code>
-</td>
+      <td><code class="language-plaintext highlighter-rouge">INTLOCAL</code> or <code class="language-plaintext highlighter-rouge">INTLOCALCONST</code></td>
       <td><code class="language-plaintext highlighter-rouge">i32 %{id}</code></td>
       <td><code class="language-plaintext highlighter-rouge">i32 %5</code></td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">POINTER</code></td>
-      <td>
-<code class="language-plaintext highlighter-rouge">i32* %{id}</code> or <code class="language-plaintext highlighter-rouge">[size * i32]* %{id}</code>
-</td>
-      <td>
-<code class="language-plaintext highlighter-rouge">i32* %1</code> or <code class="language-plaintext highlighter-rouge">[2 * i32]* %5</code>
-</td>
+      <td><code class="language-plaintext highlighter-rouge">i32* %{id}</code> or <code class="language-plaintext highlighter-rouge">[size * i32]* %{id}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32* %1</code> or <code class="language-plaintext highlighter-rouge">[2 * i32]* %5</code></td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">LABEL</code></td>
-      <td>
-<code class="language-plaintext highlighter-rouge">label{id}</code> or <code class="language-plaintext highlighter-rouge">main</code>
-</td>
-      <td>
-<code class="language-plaintext highlighter-rouge">label1</code> or <code class="language-plaintext highlighter-rouge">main</code>
-</td>
+      <td><code class="language-plaintext highlighter-rouge">label{id}</code> or <code class="language-plaintext highlighter-rouge">main</code></td>
+      <td><code class="language-plaintext highlighter-rouge">label1</code> or <code class="language-plaintext highlighter-rouge">main</code></td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">FUNCTIONNAME</code></td>
@@ -1473,8 +1443,7 @@ function googleTranslateElementInit() {
     <ul>
       <li>无条件跳转 (<code class="language-plaintext highlighter-rouge">BR</code>)</li>
       <li>有条件跳转 (<code class="language-plaintext highlighter-rouge">BRTRUE</code>, <code class="language-plaintext highlighter-rouge">BRFALSE</code>)</li>
-      <li>跳转并移动栈指针（由于存在 <code class="language-plaintext highlighter-rouge">continue</code> 和 <code class="language-plaintext highlighter-rouge">break</code> 语句，在跳转时可能出现跳转前后栈指针不一致的情况，因此这种指令需要在跳转后将栈指针移动至正确的位置）<code class="language-plaintext highlighter-rouge">BRCHECK</code>
-</li>
+      <li>跳转并移动栈指针（由于存在 <code class="language-plaintext highlighter-rouge">continue</code> 和 <code class="language-plaintext highlighter-rouge">break</code> 语句，在跳转时可能出现跳转前后栈指针不一致的情况，因此这种指令需要在跳转后将栈指针移动至正确的位置）<code class="language-plaintext highlighter-rouge">BRCHECK</code></li>
     </ul>
   </li>
   <li>函数相关语句
@@ -1488,9 +1457,7 @@ function googleTranslateElementInit() {
   <li>mem2reg 相关语句 (<code class="language-plaintext highlighter-rouge">MEM2REGASSIGN</code>, <code class="language-plaintext highlighter-rouge">MEM2REGMOVE</code>)</li>
   <li>其它语句（用于标识程序中 Block 的开始和结尾，便于栈指针移动至正确位置）
     <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">LBRACEIR</code>, <code class="language-plaintext highlighter-rouge">RBRACEIR</code>, <code class="language-plaintext highlighter-rouge">LSHARPIR</code>, <code class="language-plaintext highlighter-rouge">RSHARPIR</code>
-</li>
+      <li><code class="language-plaintext highlighter-rouge">LBRACEIR</code>, <code class="language-plaintext highlighter-rouge">RBRACEIR</code>, <code class="language-plaintext highlighter-rouge">LSHARPIR</code>, <code class="language-plaintext highlighter-rouge">RSHARPIR</code></li>
     </ul>
   </li>
 </ul>
@@ -1514,7 +1481,7 @@ function googleTranslateElementInit() {
 
 <p>举例来说，下图中右面的代码就是插入了 phi 的代码。其中，语句 <code class="language-plaintext highlighter-rouge">&amp;4 = phi [&amp;2, label1] [&amp;3, label2]</code> 代表若从 label1 跳转至该基本块，则 <code class="language-plaintext highlighter-rouge">&amp;4</code> 取 <code class="language-plaintext highlighter-rouge">&amp;2</code> 的值，否则若从 label2 跳转至该基本块，<code class="language-plaintext highlighter-rouge">&amp;4</code> 取 <code class="language-plaintext highlighter-rouge">&amp;3</code> 的值。</p>
 
-<p><img src="/assets/images/post/mem2reg.png" alt=""></p>
+<p><img src="/assets/images/post/mem2reg.png" alt="" /></p>
 
 <h3 id="数据结构-5">数据结构</h3>
 
@@ -1687,7 +1654,7 @@ function googleTranslateElementInit() {
           <li>
             <p>否则，寻找上一个基本块中最后一条指令，并分类讨论</p>
 
-            <p><img src="/assets/images/post/branch.png" alt=""></p>
+            <p><img src="/assets/images/post/branch.png" alt="" /></p>
           </li>
         </ul>
       </li>
@@ -1710,25 +1677,17 @@ function googleTranslateElementInit() {
 <h6 id="前置概念参考链接1-参考链接2-">前置概念（<a href="https://buaa-se-compiling.github.io/miniSysY-tutorial/challenge/mem2reg/help.html">参考链接1</a>, <a href="https://www.cnblogs.com/ZeonfaiHo/p/6594642.html">参考链接2</a> ）</h6>
 
 <ul>
-  <li>
-<strong>定义</strong>：对变量进行初始化、赋值等改变变量的值的行为。</li>
-  <li>
-<strong>使用</strong>：在语句/指令中将变量的值作为参数的行为。</li>
-  <li>
-<strong>控制流图</strong>（Control Flow Graph, CFG）：一个程序中所有基本块执行的可能流向图，图中的每个节点代表一个基本块，有向边代表基本块间的跳转关系。</li>
-  <li>
-<strong>支配</strong>（dominate）：对于 CFG 中的节点 $n_1$ 和 $n_2$，$n_1$ 支配 $n_2$ 当且仅当所有从入口节点到 $n_2$ 的路径中都包含 $n_1$，即 $n_1$ 是从入口节点到 $n_2$ 的必经节点。需要特别注意的是，每个基本块都支配自身。</li>
-  <li>
-<strong>严格支配</strong>（strictly dominate）：$n_1$ 严格支配 $n_2$ 当且仅当 $n_1$ 支配 $n_2$ 且 $n_1\neq n_2$。</li>
-  <li>
-<strong>直接支配者</strong>（immediate dominator, idom）：节点 $n$ 的直接支配者严格支配 $n$，且不严格支配任何严格支配 $n$ 的节点的节点）. 入口节点以外的节点都有直接支配者. 节点之间的直接支配关系可以形成一棵<strong>支配树</strong>（dominator tree）。</li>
-  <li>
-<strong>必经点</strong>：若 $n_1$ 严格支配 $n_2$，则 $n_1$ 为 $n_2$ 的必经点</li>
-  <li>
-<strong>半必经点</strong>：对于一个节点 $n_2$，若存在某个点 $n_1$ 能够通过一系列点 $p_i$ （不包含 $n_1$ 和 $n_2$）到达且 $\forall p_i$ 都有 dfn[$p_i$] &gt; dfn[$n_2$]，则称 $n_1$ 是 $n_2$ 的半必经点，用 sdom 表示。</li>
+  <li><strong>定义</strong>：对变量进行初始化、赋值等改变变量的值的行为。</li>
+  <li><strong>使用</strong>：在语句/指令中将变量的值作为参数的行为。</li>
+  <li><strong>控制流图</strong>（Control Flow Graph, CFG）：一个程序中所有基本块执行的可能流向图，图中的每个节点代表一个基本块，有向边代表基本块间的跳转关系。</li>
+  <li><strong>支配</strong>（dominate）：对于 CFG 中的节点 $n_1$ 和 $n_2$，$n_1$ 支配 $n_2$ 当且仅当所有从入口节点到 $n_2$ 的路径中都包含 $n_1$，即 $n_1$ 是从入口节点到 $n_2$ 的必经节点。需要特别注意的是，每个基本块都支配自身。</li>
+  <li><strong>严格支配</strong>（strictly dominate）：$n_1$ 严格支配 $n_2$ 当且仅当 $n_1$ 支配 $n_2$ 且 $n_1\neq n_2$。</li>
+  <li><strong>直接支配者</strong>（immediate dominator, idom）：节点 $n$ 的直接支配者严格支配 $n$，且不严格支配任何严格支配 $n$ 的节点的节点）. 入口节点以外的节点都有直接支配者. 节点之间的直接支配关系可以形成一棵<strong>支配树</strong>（dominator tree）。</li>
+  <li><strong>必经点</strong>：若 $n_1$ 严格支配 $n_2$，则 $n_1$ 为 $n_2$ 的必经点</li>
+  <li><strong>半必经点</strong>：对于一个节点 $n_2$，若存在某个点 $n_1$ 能够通过一系列点 $p_i$ （不包含 $n_1$ 和 $n_2$）到达且 $\forall p_i$ 都有 dfn[$p_i$] &gt; dfn[$n_2$]，则称 $n_1$ 是 $n_2$ 的半必经点，用 sdom 表示。</li>
 </ul>
 
-<p><img src="/assets/images/post/cfg.png" alt=""></p>
+<p><img src="/assets/images/post/cfg.png" alt="" /></p>
 
 <h6 id="算法流程-6">算法流程</h6>
 
@@ -1760,7 +1719,7 @@ function googleTranslateElementInit() {
 
 <p>计算支配边界的算法如下：</p>
 
-<p><img src="https://buaa-se-compiling.github.io/miniSysY-tutorial/pic/algorithm_compute_DF.png" alt=""></p>
+<p><img src="https://buaa-se-compiling.github.io/miniSysY-tutorial/pic/algorithm_compute_DF.png" alt="" /></p>
 
 <h5 id="g-插入-phi-节点">g. 插入 phi 节点</h5>
 
@@ -1768,7 +1727,7 @@ function googleTranslateElementInit() {
 
 <p>插入 phi 节点需要计算出每个变量的定义、使用情况，其具体算法如下：</p>
 
-<p><img src="https://buaa-se-compiling.github.io/miniSysY-tutorial/pic/algorithm_insert_phi.png" alt=""></p>
+<p><img src="https://buaa-se-compiling.github.io/miniSysY-tutorial/pic/algorithm_insert_phi.png" alt="" /></p>
 
 <h5 id="h-变量重命名">h. 变量重命名</h5>
 
@@ -1778,7 +1737,7 @@ function googleTranslateElementInit() {
 
 <p>一个具体的例子如下：</p>
 
-<p><img src="/assets/images/post/phi.png" alt=""></p>
+<p><img src="/assets/images/post/phi.png" alt="" /></p>
 
 <p>通过上述一系列的操作，我们终于得到了含有 phi 语句，且符合 SSA 规范的程序了。</p>
 
@@ -1836,7 +1795,7 @@ function googleTranslateElementInit() {
 
 <p>将 <code class="language-plaintext highlighter-rouge">while</code> 语句改写为 <code class="language-plaintext highlighter-rouge">do-while</code> 形式，可以减少跳转次数。</p>
 
-<p><img src="/assets/images/post/dowhile.png" alt=""></p>
+<p><img src="/assets/images/post/dowhile.png" alt="" /></p>
 
 <h4 id="删除无用循环">删除无用循环</h4>
 
@@ -1907,7 +1866,7 @@ function googleTranslateElementInit() {
 
 <h4 id="register"><code class="language-plaintext highlighter-rouge">Register</code></h4>
 
-<p><img src="C:%5CUsers%5CEricaaaaaaaa%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211114221256460.png" alt="image-20211114221256460"></p>
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20211114221256460.png" alt="image-20211114221256460" /></p>
 
 <p>为了能够更好的调度寄存器和存储寄存器的使用情况，构建 <code class="language-plaintext highlighter-rouge">Register</code> 类，用于存储各个寄存器是否被使用，已经分配空寄存器。</p>
 
@@ -1935,7 +1894,7 @@ function googleTranslateElementInit() {
 
 <p>生成中间代码的主要算法流程用下图表示。</p>
 
-<p><img src="/assets/images/post/mips.png" alt=""></p>
+<p><img src="/assets/images/post/mips.png" alt="" /></p>
 
 <p>其中，需要特别注意的是在函数调用过程中的寄存器偏移和在退出基本块时的寄存器偏移。</p>
 
@@ -1988,11 +1947,11 @@ function googleTranslateElementInit() {
 
 <h4 id="无用跳转指令删除">无用跳转指令删除</h4>
 
-<p><img src="/assets/images/post/jump.png" alt=""></p>
+<p><img src="/assets/images/post/jump.png" alt="" /></p>
 
 <h4 id="无用-move-指令删除">无用 move 指令删除</h4>
 
-<p><img src="/assets/images/post/move.png" alt=""></p>
+<p><img src="/assets/images/post/move.png" alt="" /></p>
 
 <h2 id="结语">结语</h2>
 
@@ -2027,19 +1986,11 @@ function googleTranslateElementInit() {
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/artificialintelligence/2021/09/14/ComputerVision.html" title="Computer Vision">Computer Vision</a><a class="next" href="/artificialintelligence/2022/01/03/ArtificialIntelligence.html" title="Artificial Intelligence">Artificial Intelligence</a>
-</div>
-<div class="post-related">
+<div class="post-nav"><a class="previous" href="/artificialintelligence/2021/09/14/ComputerVision.html" title="Computer Vision">Computer Vision</a><a class="next" href="/artificialintelligence/2022/01/03/ArtificialIntelligence.html" title="Artificial Intelligence">Artificial Intelligence</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html" title="Artificial Intelligence">Machine Learning</a></li>
-<li><a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="Artificial Intelligence">Computer Organization</a></li>
-<li><a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="Artificial Intelligence">See Mips Run Linux</a></li>
-<li><a class="post-link" href="/algorithms/2022/01/11/Algorithm.html" title="Artificial Intelligence">Algorithm</a></li>
-</ul>
-    </div>
-<div class="post-comments"></div></section>
+        <li><a class="post-link" href="/artificialintelligence/2021/09/14/ComputerVision.html" title="Artificial Intelligence">Computer Vision</a></li><li><a class="post-link" href="/algorithms/2022/01/11/Algorithm.html" title="Artificial Intelligence">Algorithm</a></li><li><a class="post-link" href="/data/2021/01/11/DataStructure.html" title="Artificial Intelligence">Data Structure</a></li><li><a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="Artificial Intelligence">See Mips Run Linux</a></li></ul>
+    </div><div class="post-comments"></div></section>
 </div>
 
 
@@ -2175,13 +2126,11 @@ function googleTranslateElementInit() {
   <data class="u-url" href="/"></data>
 
   <div class="wrapper">
-    <div class="site-footer-inner">
-<div>ericaaaaaaaa <span class="copyleft">©</span> 2019-2022 ericaaaaaaaa</div>
+    <div class="site-footer-inner"><div>ericaaaaaaaa <span class="copyleft">&copy;</span> 2019-2022 ericaaaaaaaa</div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
-      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
-</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a></div>
     </div>
   </div>
 </footer>

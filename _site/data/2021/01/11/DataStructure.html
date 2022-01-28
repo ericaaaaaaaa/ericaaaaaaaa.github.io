@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Data Structure | Erica’s Blog</title>
-<meta name="generator" content="Jekyll v4.2.1">
-<meta property="og:title" content="Data Structure">
-<meta name="author" content="ericaaaaaaaa">
-<meta property="og:locale" content="en_US">
-<meta name="description" content="线性表">
-<meta property="og:description" content="线性表">
-<link rel="canonical" href="http://localhost:4000/data/2021/01/11/DataStructure.html">
-<meta property="og:url" content="http://localhost:4000/data/2021/01/11/DataStructure.html">
-<meta property="og:site_name" content="Erica’s Blog">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2021-01-11T00:00:00+08:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Data Structure">
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Data Structure" />
+<meta name="author" content="ericaaaaaaaa" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="线性表" />
+<meta property="og:description" content="线性表" />
+<link rel="canonical" href="http://localhost:4000/data/2021/01/11/DataStructure.html" />
+<meta property="og:url" content="http://localhost:4000/data/2021/01/11/DataStructure.html" />
+<meta property="og:site_name" content="Erica’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-11T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Structure" />
 <script type="application/ld+json">
 {"@type":"BlogPosting","url":"http://localhost:4000/data/2021/01/11/DataStructure.html","headline":"Data Structure","dateModified":"2021-01-11T00:00:00+08:00","datePublished":"2021-01-11T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/data/2021/01/11/DataStructure.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"线性表","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -28,11 +25,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -120,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -249,23 +246,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
-  <img class="site-favicon" title="Erica's Blog" src="" onerror="this.style.display='none'">
-  Erica's Blog
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Erica&#39;s Blog" src="" onerror="this.style.display='none'">
+  Erica&#39;s Blog
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
+          <div class="trigger"><a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
 
 
 
@@ -417,10 +412,8 @@ function googleTranslateElementInit() {
 </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</span>
-</div>
-        </nav>
-</div>
+</span></div>
+        </nav></div>
   </div>
 </header>
 
@@ -807,10 +800,7 @@ function googleTranslateElementInit() {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 hour 9 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#note">#note</a><a class="post-tag" href="/tags.html#data-structure">#data-structure</a><a class="post-tag" href="/tags.html#data">#data</a><a class="post-tag" href="/tags.html#algorithm">#algorithm</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#note">#note</a><a class="post-tag" href="/tags.html#data-structure">#data-structure</a><a class="post-tag" href="/tags.html#data">#data</a><a class="post-tag" href="/tags.html#algorithm">#algorithm</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -1002,15 +992,13 @@ function googleTranslateElementInit() {
 <p><strong>顺序表优缺点总结：</strong></p>
 
 <ul>
-  <li>
-<strong>优点</strong>：
+  <li><strong>优点</strong>：
     <ul>
       <li>O(1) 时间的（随机、直接的）按位置访问元素；</li>
       <li>元素在表里存储紧凑，除表中的存储区之外只需要 O(1) 空间存放少量的辅助信息</li>
     </ul>
   </li>
-  <li>
-<strong>缺点</strong>：
+  <li><strong>缺点</strong>：
     <ul>
       <li>需要连续的存储区存放表中的元素，若表很大，则需要大片连续的内存空间。</li>
       <li>一旦确定了存储块的大小，可容纳单元个数并不随着插入 /删除操作的进行而变化。如果很大的存储区只保存了少量的数据项，就会有大量空闲单元，造成表内的存储浪费。</li>
@@ -1033,22 +1021,17 @@ function googleTranslateElementInit() {
     <p>加入元素</p>
 
     <ul>
-      <li>尾端加入单一元素：<code class="language-plaintext highlighter-rouge">lst.append(x)</code>
-</li>
-      <li>将数据存入第 i 个单元：<code class="language-plaintext highlighter-rouge">lst.insert(i, x)</code>
-</li>
+      <li>尾端加入单一元素：<code class="language-plaintext highlighter-rouge">lst.append(x)</code></li>
+      <li>将数据存入第 i 个单元：<code class="language-plaintext highlighter-rouge">lst.insert(i, x)</code></li>
     </ul>
   </li>
   <li>
     <p>删除元素</p>
 
     <ul>
-      <li>删除尾端元素：<code class="language-plaintext highlighter-rouge">lst.pop()</code>
-</li>
-      <li>删除下标为 i 的元素：<code class="language-plaintext highlighter-rouge">lst.pop(i)</code>
-</li>
-      <li>删除第一个内容为 x 的元素：<code class="language-plaintext highlighter-rouge">lst.remove(x)</code>
-</li>
+      <li>删除尾端元素：<code class="language-plaintext highlighter-rouge">lst.pop()</code></li>
+      <li>删除下标为 i 的元素：<code class="language-plaintext highlighter-rouge">lst.pop(i)</code></li>
+      <li>删除第一个内容为 x 的元素：<code class="language-plaintext highlighter-rouge">lst.remove(x)</code></li>
     </ul>
   </li>
   <li>
@@ -1076,14 +1059,11 @@ function googleTranslateElementInit() {
     <p>将 list 中的元素排序</p>
 
     <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">sort</code>：会修改 list 本身，不会返回新的 list</li>
-      <li>
-<code class="language-plaintext highlighter-rouge">sorted</code>：不会修改 list 本身，会返回排序好的 list</li>
+      <li><code class="language-plaintext highlighter-rouge">sort</code>：会修改 list 本身，不会返回新的 list</li>
+      <li><code class="language-plaintext highlighter-rouge">sorted</code>：不会修改 list 本身，会返回排序好的 list</li>
     </ul>
 
-    <div class="language-python highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">.</span><span class="n">sort</span><span class="p">())</span>   <span class="c1"># None
 </span><span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>          <span class="c1"># [1,2,3,4,5]
 ######
@@ -1108,9 +1088,9 @@ function googleTranslateElementInit() {
 
 <h3 id="单向链接表单链表">单向链接表（单链表）</h3>
 
-<p><img src="/assets/images/post/image-20210103164334335.png" alt="image-20210103164334335"></p>
+<p><img src="/assets/images/post/image-20210103164334335.png" alt="image-20210103164334335" /></p>
 
-<p><img src="/assets/images/post/image-20210103164051115.png" alt="image-20210103164051115"></p>
+<p><img src="/assets/images/post/image-20210103164051115.png" alt="image-20210103164051115" /></p>
 
 <ul>
   <li>一个单链表由一些具体的表结点构成</li>
@@ -1149,8 +1129,7 @@ function googleTranslateElementInit() {
 
 <ol>
   <li>创建一个新结点并存入数据</li>
-  <li>把原链表首结点的链接存入新结点的链接域 <code class="language-plaintext highlighter-rouge">next</code>
-</li>
+  <li>把原链表首结点的链接存入新结点的链接域 <code class="language-plaintext highlighter-rouge">next</code></li>
   <li>修改表头变量，使之指向新结点</li>
 </ol>
 
@@ -1163,12 +1142,11 @@ function googleTranslateElementInit() {
 
 <ol>
   <li>创建一个新结点并存入数据</li>
-  <li>把 <code class="language-plaintext highlighter-rouge">pre</code> 所指结点的 <code class="language-plaintext highlighter-rouge">next</code> 域的值存入新结点的链接域 <code class="language-plaintext highlighter-rouge">next</code>
-</li>
+  <li>把 <code class="language-plaintext highlighter-rouge">pre</code> 所指结点的 <code class="language-plaintext highlighter-rouge">next</code> 域的值存入新结点的链接域 <code class="language-plaintext highlighter-rouge">next</code></li>
   <li>修改 <code class="language-plaintext highlighter-rouge">pre</code> 的 <code class="language-plaintext highlighter-rouge">next</code> 域，使之指向新结点</li>
 </ol>
 
-<p><img src="/assets/images/post/image-20210103170529842.png" alt="image-20210103170529842"></p>
+<p><img src="/assets/images/post/image-20210103170529842.png" alt="image-20210103170529842" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">q</span> <span class="o">=</span> <span class="n">LNode</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">q</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="nb">next</span>
@@ -1186,7 +1164,7 @@ function googleTranslateElementInit() {
 
 <h4 id="一般情况的元素删除">一般情况的元素删除</h4>
 
-<p><img src="/assets/images/post/image-20210103170904240.png" alt="image-20210103170904240"></p>
+<p><img src="/assets/images/post/image-20210103170904240.png" alt="image-20210103170904240" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pre</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="nb">next</span><span class="p">.</span><span class="nb">next</span>
 </code></pre></div></div>
@@ -1354,12 +1332,9 @@ function googleTranslateElementInit() {
 <p>采用 Python 的 <code class="language-plaintext highlighter-rouge">list</code> 数据结构</p>
 
 <ul>
-  <li>建立空栈：<code class="language-plaintext highlighter-rouge">lst = []</code>
-</li>
-  <li>压栈：<code class="language-plaintext highlighter-rouge">lst.append()</code>
-</li>
-  <li>弹栈：<code class="language-plaintext highlighter-rouge">lst.pop()</code>
-</li>
+  <li>建立空栈：<code class="language-plaintext highlighter-rouge">lst = []</code></li>
+  <li>压栈：<code class="language-plaintext highlighter-rouge">lst.append()</code></li>
+  <li>弹栈：<code class="language-plaintext highlighter-rouge">lst.pop()</code></li>
 </ul>
 
 <h3 id="栈的连接表实现">栈的连接表实现</h3>
@@ -1549,14 +1524,11 @@ function googleTranslateElementInit() {
 <h3 id="队列的顺序表实现">队列的顺序表实现</h3>
 
 <ul>
-  <li>初始化 <code class="language-plaintext highlighter-rouge">front = rear = 0</code>
-</li>
+  <li>初始化 <code class="language-plaintext highlighter-rouge">front = rear = 0</code></li>
   <li>入队：将新元素插入 <code class="language-plaintext highlighter-rouge">rear</code> 所指向的位置，然后 <code class="language-plaintext highlighter-rouge">rear</code> 加一</li>
   <li>出队：删去 <code class="language-plaintext highlighter-rouge">front</code> 所指的元素，然后加 1 并返回被删元素</li>
-  <li>队列为空：<code class="language-plaintext highlighter-rouge">front = rear</code>
-</li>
-  <li>队满：<code class="language-plaintext highlighter-rouge">rear = MAX_QUEUE_SIZE - 1 或 front = rear</code>
-</li>
+  <li>队列为空：<code class="language-plaintext highlighter-rouge">front = rear</code></li>
+  <li>队满：<code class="language-plaintext highlighter-rouge">rear = MAX_QUEUE_SIZE - 1 或 front = rear</code></li>
 </ul>
 
 <h4 id="基于顺序表实现队列的困难">基于顺序表实现队列的困难</h4>
@@ -1574,17 +1546,14 @@ function googleTranslateElementInit() {
 </blockquote>
 
 <ul>
-  <li>
-<code class="language-plaintext highlighter-rouge">q.elems</code> —— 始终指向表元素区开始</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">q.head</code> —— 对头变量，记录当前队列里第一个元素的位置</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">q.rear</code> —— 队尾变量，记录当前队列里最后元素之后的第一个空位</li>
+  <li><code class="language-plaintext highlighter-rouge">q.elems</code> —— 始终指向表元素区开始</li>
+  <li><code class="language-plaintext highlighter-rouge">q.head</code> —— 对头变量，记录当前队列里第一个元素的位置</li>
+  <li><code class="language-plaintext highlighter-rouge">q.rear</code> —— 队尾变量，记录当前队列里最后元素之后的第一个空位</li>
 </ul>
 
-<p><img src="/assets/images/post/image-20210103210448289.png" alt="image-20210103210448289"></p>
+<p><img src="/assets/images/post/image-20210103210448289.png" alt="image-20210103210448289" /></p>
 
-<p><img src="/assets/images/post/image-20210103210459953.png" alt="image-20210103210459953"></p>
+<p><img src="/assets/images/post/image-20210103210459953.png" alt="image-20210103210459953" /></p>
 
 <p>入队和出队分别需要更新变量 <code class="language-plaintext highlighter-rouge">q.head</code> 和 <code class="language-plaintext highlighter-rouge">q.rear</code></p>
 
@@ -1639,8 +1608,7 @@ function googleTranslateElementInit() {
 
 <h3 id="python-里的字符串">Python 里的字符串</h3>
 
-<h4 id="str-的操作">
-<code class="language-plaintext highlighter-rouge">str</code> 的操作</h4>
+<h4 id="str-的操作"><code class="language-plaintext highlighter-rouge">str</code> 的操作</h4>
 
 <ul>
   <li>
@@ -1651,8 +1619,7 @@ function googleTranslateElementInit() {
     <ul>
       <li>默认在<strong>空格处</strong>切分</li>
       <li>返回切分后的 <code class="language-plaintext highlighter-rouge">list</code>，其中每个元素<strong>不包含</strong> ‘x’</li>
-      <li>
-<strong>不改变</strong>原有字符串</li>
+      <li><strong>不改变</strong>原有字符串</li>
     </ul>
   </li>
   <li>
@@ -1663,8 +1630,7 @@ function googleTranslateElementInit() {
     <ul>
       <li>一次替换掉<strong>全部</strong>满足要求的元素</li>
       <li>返回替换后的结果</li>
-      <li>
-<strong>不改变</strong>原有字符串</li>
+      <li><strong>不改变</strong>原有字符串</li>
     </ul>
   </li>
   <li>
@@ -1678,8 +1644,7 @@ function googleTranslateElementInit() {
     <p><code class="language-plaintext highlighter-rouge">string.endswith('Ending')</code></p>
 
     <ul>
-      <li>返回 <code class="language-plaintext highlighter-rouge">Ture</code> 或 <code class="language-plaintext highlighter-rouge">False</code>
-</li>
+      <li>返回 <code class="language-plaintext highlighter-rouge">Ture</code> 或 <code class="language-plaintext highlighter-rouge">False</code></li>
     </ul>
   </li>
   <li>
@@ -1690,8 +1655,7 @@ function googleTranslateElementInit() {
     <p><code class="language-plaintext highlighter-rouge">string.index("substring", start(, end))</code></p>
 
     <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">index() </code>方法检测字符串中是否包含子字符串 <code class="language-plaintext highlighter-rouge">str</code> ，该方法与 python <code class="language-plaintext highlighter-rouge">find()</code>方法一样，只不过如果 <code class="language-plaintext highlighter-rouge">str</code> 不在 <code class="language-plaintext highlighter-rouge">string</code> 中<strong>会报一个异常</strong>。</li>
+      <li><code class="language-plaintext highlighter-rouge">index() </code>方法检测字符串中是否包含子字符串 <code class="language-plaintext highlighter-rouge">str</code> ，该方法与 python <code class="language-plaintext highlighter-rouge">find()</code>方法一样，只不过如果 <code class="language-plaintext highlighter-rouge">str</code> 不在 <code class="language-plaintext highlighter-rouge">string</code> 中<strong>会报一个异常</strong>。</li>
     </ul>
   </li>
 </ul>
@@ -1709,10 +1673,8 @@ function googleTranslateElementInit() {
 <p>在 $t$ 中查找与 $p$ 相同的子串</p>
 
 <ul>
-  <li>
-<strong>目标串</strong>：$t$</li>
-  <li>
-<strong>模式串</strong>：$p$</li>
+  <li><strong>目标串</strong>：$t$</li>
+  <li><strong>模式串</strong>：$p$</li>
 </ul>
 
 <blockquote>
@@ -1745,7 +1707,7 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 
 <h3 id="无回溯串匹配算法kmp-算法">无回溯串匹配算法（KMP 算法）</h3>
 
-<p><img src="/assets/images/post/image-20210103215911275.png" alt="image-20210103215911275"></p>
+<p><img src="/assets/images/post/image-20210103215911275.png" alt="image-20210103215911275" /></p>
 
 <h4 id="基本考虑">基本考虑</h4>
 
@@ -1781,7 +1743,7 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 
 <h4 id="递推计算最长相等前后缀的长度">递推计算最长相等前后缀的长度</h4>
 
-<p><img src="/assets/images/post/image-20210104143909921.png" alt="image-20210104143909921"></p>
+<p><img src="/assets/images/post/image-20210104143909921.png" alt="image-20210104143909921" /></p>
 
 <p>已知 <code class="language-plaintext highlighter-rouge">pnext[0] = -1</code> 和直至 <code class="language-plaintext highlighter-rouge">pnext[i-1]</code> 的已有值求 <code class="language-plaintext highlighter-rouge">pnext[i]</code> 的算法：</p>
 
@@ -1791,8 +1753,7 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
   <li>如果 $k$ 的值等于 -1（这个值一定是第 2 步而来自 <code class="language-plaintext highlighter-rouge">pnext</code>），那么 $p_0…p_i$ 的最长相同前后缀的长度就是 0，设置 <code class="language-plaintext highlighter-rouge">pnext[i] = 0</code>，将 $i$ 的值加 1 后继续递推。</li>
 </ol>
 
-<h4 id="pnext-生成算法的改进">
-<code class="language-plaintext highlighter-rouge">pnext</code> 生成算法的改进</h4>
+<h4 id="pnext-生成算法的改进"><code class="language-plaintext highlighter-rouge">pnext</code> 生成算法的改进</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">gen_pnext</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
     <span class="s">"""生成针对 p 中各位置 i 的下一个检查位置表，用于 KMP 算法，有稍许修改的优化版本"""</span>
@@ -1927,10 +1888,8 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
         <p>附设两个辅助向量<code class="language-plaintext highlighter-rouge">num[ ]</code>和<code class="language-plaintext highlighter-rouge">cpot[ ]</code> 。</p>
 
         <ul>
-          <li>
-<code class="language-plaintext highlighter-rouge">num[col]</code>：统计A中第<code class="language-plaintext highlighter-rouge">col</code>列中非0元素的个数；</li>
-          <li>
-<code class="language-plaintext highlighter-rouge">cpot[col] </code>：指示A中第一个非0元素在<code class="language-plaintext highlighter-rouge">b.data</code>中的恰当位置。</li>
+          <li><code class="language-plaintext highlighter-rouge">num[col]</code>：统计A中第<code class="language-plaintext highlighter-rouge">col</code>列中非0元素的个数；</li>
+          <li><code class="language-plaintext highlighter-rouge">cpot[col] </code>：指示A中第一个非0元素在<code class="language-plaintext highlighter-rouge">b.data</code>中的恰当位置。</li>
         </ul>
       </li>
     </ul>
@@ -1951,15 +1910,15 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 
 <p>矩阵非零元素结点所含有的域有：行、列、值、行指针（指向同一行的下一个非零元）、列指针（指向同一列的下一个非零元）</p>
 
-<p><img src="/assets/images/post/image-20210104151844343.png" alt="image-20210104151844343"></p>
+<p><img src="/assets/images/post/image-20210104151844343.png" alt="image-20210104151844343" /></p>
 
 <p>由定义知，稀疏矩阵中同一行的非0元素的由<code class="language-plaintext highlighter-rouge">right</code>指针域链接成一个行链表， 由<code class="language-plaintext highlighter-rouge">down</code>指针域链接成一个列链表。则每个非0元素既是某个行链表中的一个结点，同时又是某个列链表中的一个结点，所有的非0元素构成一个十字交叉的链表。称为<strong>十字链表</strong>。</p>
 
 <p>其次，十字交叉链表还有一个<strong>头结点</strong>，结点的结构如图所示。</p>
 
-<p><img src="/assets/images/post/image-20210104152456025.png" alt="image-20210104152456025"></p>
+<p><img src="/assets/images/post/image-20210104152456025.png" alt="image-20210104152456025" /></p>
 
-<p><img src="/assets/images/post/image-20210104154357153.png" alt="image-20210104154357153"></p>
+<p><img src="/assets/images/post/image-20210104154357153.png" alt="image-20210104154357153" /></p>
 
 <h3 id="广义表-list">广义表 List</h3>
 
@@ -2004,7 +1963,7 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
   </li>
 </ul>
 
-<p><img src="/assets/images/post/image-20210104161411826.png" alt="image-20210104161411826"></p>
+<p><img src="/assets/images/post/image-20210104161411826.png" alt="image-20210104161411826" /></p>
 
 <h1 id="树">树</h1>
 
@@ -2012,8 +1971,7 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 
 <ul>
   <li>一个结构如果不空，其中就存在着<strong>唯一</strong>的起始点，称为<strong>树根</strong>(root)</li>
-  <li>一个结点<strong>有且只有一个</strong>前驱，可以有 <strong>0 个或者多个后继</strong>
-</li>
+  <li>一个结点<strong>有且只有一个</strong>前驱，可以有 <strong>0 个或者多个后继</strong></li>
   <li>结构里的所有结点都在树根结点通过后继关系可达的结点集合里</li>
   <li>结点之间的联系<strong>不会</strong>构成循环关系</li>
   <li>从任意俩能够不同的结点出发，通过后继关系可达的两个结点的集合，或者互不相交，或者一个为另一个的子集。</li>
@@ -2044,23 +2002,21 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 <h4 id="满二叉树扩充二叉树">满二叉树、扩充二叉树</h4>
 
 <ul>
-  <li>
-<strong>满二叉树</strong>：二叉树中所有分支结点的度数都是 2</li>
-  <li>
-<strong>扩充二叉树</strong>：将二叉树扩充为满二叉树，新增加的结点称为<strong>外部结点</strong>，原有结点称为<strong>内部结点</strong>。</li>
+  <li><strong>满二叉树</strong>：二叉树中所有分支结点的度数都是 2</li>
+  <li><strong>扩充二叉树</strong>：将二叉树扩充为满二叉树，新增加的结点称为<strong>外部结点</strong>，原有结点称为<strong>内部结点</strong>。</li>
 </ul>
 
 <h4 id="完全二叉树">完全二叉树</h4>
 
 <p>对于一棵高为 $h$ 的二叉树，如果其第 $0$ 层到第 $h-1$ 层的结点都满，最下一层的结点不满，且所有结点在最左边联系排列，空位都在右边。</p>
 
-<p><img src="/assets/images/post/image-20210104163949799.png" alt="image-20210104163949799"></p>
+<p><img src="/assets/images/post/image-20210104163949799.png" alt="image-20210104163949799" /></p>
 
 <h3 id="抽象数据类型">抽象数据类型</h3>
 
 <h3 id="遍历二叉树">遍历二叉树</h3>
 
-<p><img src="/assets/images/post/image-20210104165302639.png" alt="image-20210104165302639"></p>
+<p><img src="/assets/images/post/image-20210104165302639.png" alt="image-20210104165302639" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">A B C D E F G None H None I J K</code></p>
 
@@ -2112,17 +2068,14 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
     <p>非空二叉树用包含桑元素的表<code class="language-plaintext highlighter-rouge">[d, l, r]</code> 表示，其中：</p>
 
     <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">d</code> 表示存在根节点的元素</li>
-      <li>
-<code class="language-plaintext highlighter-rouge">l</code> 和 <code class="language-plaintext highlighter-rouge">r</code> 是两棵子树</li>
+      <li><code class="language-plaintext highlighter-rouge">d</code> 表示存在根节点的元素</li>
+      <li><code class="language-plaintext highlighter-rouge">l</code> 和 <code class="language-plaintext highlighter-rouge">r</code> 是两棵子树</li>
     </ul>
   </li>
   <li>
     <p>表示样例：</p>
 
-    <div class="language-python highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="p">[</span><span class="s">'B'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="p">[</span><span class="s">'B'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
       <span class="p">[</span><span class="s">'C'</span><span class="p">,</span> <span class="p">[</span><span class="s">'D'</span><span class="p">,</span> <span class="p">[</span><span class="s">'F'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
                   <span class="p">[</span><span class="s">'G'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
              <span class="s">'E'</span><span class="p">,</span> <span class="p">[</span><span class="s">'H'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
@@ -2329,10 +2282,8 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 <h3 id="概念与性质">概念与性质</h3>
 
 <ul>
-  <li>
-<strong>完全图</strong>：任意两个顶点之间都有边的图</li>
-  <li>
-<strong>度</strong>：一个顶点的度就是与它邻接边的条数。
+  <li><strong>完全图</strong>：任意两个顶点之间都有边的图</li>
+  <li><strong>度</strong>：一个顶点的度就是与它邻接边的条数。
     <ul>
       <li>入度</li>
       <li>出度</li>
@@ -2345,22 +2296,17 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 <ul>
   <li>路径的长度：该路径上边的条数</li>
   <li><strong>回路</strong></li>
-  <li>
-<strong>简单回路</strong>：一个环路，除起点和终点外其它顶点均不相同</li>
-  <li>
-<strong>简单路径</strong>：内部不包含回路的路径</li>
-  <li>
-<strong>有根图</strong>：在有向图里存在一个顶点 v，到其它每个顶点均有路径</li>
+  <li><strong>简单回路</strong>：一个环路，除起点和终点外其它顶点均不相同</li>
+  <li><strong>简单路径</strong>：内部不包含回路的路径</li>
+  <li><strong>有根图</strong>：在有向图里存在一个顶点 v，到其它每个顶点均有路径</li>
 </ul>
 
 <h4 id="连通图">连通图</h4>
 
 <ul>
   <li><strong>连通</strong></li>
-  <li>
-<strong>连通无向图</strong>：任意两个顶点之间都连通</li>
-  <li>
-<strong><em>强</em></strong> <strong>连通有向图</strong>：任意两个顶点之间都有路径（要求两个方向的路径都存在）</li>
+  <li><strong>连通无向图</strong>：任意两个顶点之间都连通</li>
+  <li><strong><em>强</em></strong> <strong>连通有向图</strong>：任意两个顶点之间都有路径（要求两个方向的路径都存在）</li>
 </ul>
 
 <h4 id="子图连通子图">子图、连通子图</h4>
@@ -2391,7 +2337,7 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
   <p>对图的每个顶点建立一个单链表，存储该顶点所有邻接顶点及其相关信息。每一个单链表设一个表头结点。</p>
 </blockquote>
 
-<p><img src="/assets/images/post/image-20210105165157110.png" alt="image-20210105165157110"></p>
+<p><img src="/assets/images/post/image-20210105165157110.png" alt="image-20210105165157110" /></p>
 
 <h2 id="图的-python-实现">图的 Python 实现</h2>
 
@@ -2515,9 +2461,9 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 
 <h3 id="求单原点最短路径的-dijikstra-算法">求单原点最短路径的 Dijikstra 算法</h3>
 
-<p><img src="https://wiki.mbalib.com/w/images/6/65/Dijkstra%E7%AE%97%E6%B3%95%E5%9B%BE.jpg" alt="See the source image"></p>
+<p><img src="https://wiki.mbalib.com/w/images/6/65/Dijkstra%E7%AE%97%E6%B3%95%E5%9B%BE.jpg" alt="See the source image" /></p>
 
-<p><img src="/assets/images/post/image-20210105185331340.png" alt=""></p>
+<p><img src="/assets/images/post/image-20210105185331340.png" alt="" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># FindPath
 </span><span class="n">Path</span><span class="p">[</span><span class="n">Start</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Start</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
@@ -2634,8 +2580,7 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
   <p>抽象来看，AOE 网是一种无环带权有向图，其中：</p>
 
   <ul>
-    <li>顶点表示<strong>事件</strong>，有向边表示<strong>活动</strong>，边上的权值表示活动的<strong>持续时间</strong>
-</li>
+    <li>顶点表示<strong>事件</strong>，有向边表示<strong>活动</strong>，边上的权值表示活动的<strong>持续时间</strong></li>
     <li>图中一个顶点表示的事件，也就是它的入边所表示的活动<strong>都已完成</strong>，它的出边活动<strong>可以开始</strong>的那个状态。</li>
     <li>AOE 网中描述的活动可以<strong>并行</strong>地执行。</li>
   </ul>
@@ -2650,16 +2595,14 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
 <ul>
   <li>事件 $v_j$ 最早可能发生时间 $ee[j]$
     <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">ee[0] = 0</code>（初始时间总是在 0 时刻发生）</li>
+      <li><code class="language-plaintext highlighter-rouge">ee[0] = 0</code>（初始时间总是在 0 时刻发生）</li>
       <li><code class="language-plaintext highlighter-rouge">ee[j] = max{ee[i] + w[i, j]}</code></li>
     </ul>
   </li>
   <li>事件 $v_j$ 最迟允许发生时间 $le[j]$
     <ul>
       <li>根据已知 <code class="language-plaintext highlighter-rouge">ee[j]</code> 反向推算</li>
-      <li>
-<code class="language-plaintext highlighter-rouge">le[n - 1] = ee[n - 1]</code> （最后一个事件绝不能再延迟）</li>
+      <li><code class="language-plaintext highlighter-rouge">le[n - 1] = ee[n - 1]</code> （最后一个事件绝不能再延迟）</li>
       <li><code class="language-plaintext highlighter-rouge">le[i] = min{le[j] + w[i, j]}</code></li>
     </ul>
   </li>
@@ -2861,18 +2804,18 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
   <li>
     <p>LL</p>
 
-    <p><img src="/assets/images/post/image-20210109104205737.png" alt="image-20210109104205737"></p>
+    <p><img src="/assets/images/post/image-20210109104205737.png" alt="image-20210109104205737" /></p>
 
-    <p><img src="https://img-blog.csdnimg.cn/20191109203211331.gif" alt="在这里插入图片描述"></p>
+    <p><img src="https://img-blog.csdnimg.cn/20191109203211331.gif" alt="在这里插入图片描述" /></p>
   </li>
   <li>
     <p>RR</p>
 
-    <p><img src="/assets/images/post/image-20210109104640685.png" alt="image-20210109104640685"></p>
+    <p><img src="/assets/images/post/image-20210109104640685.png" alt="image-20210109104640685" /></p>
   </li>
 </ul>
 
-<p><img src="https://img-blog.csdnimg.cn/2019110920332691.gif" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/2019110920332691.gif" alt="在这里插入图片描述" /></p>
 
 <h4 id="lrrl-失衡和调整">LR(RL) 失衡和调整</h4>
 
@@ -2880,12 +2823,12 @@ acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
   <li>
     <p>LR</p>
 
-    <p><img src="/assets/images/post/image-20210109111448478.png" alt="image-20210109111448478"></p>
+    <p><img src="/assets/images/post/image-20210109111448478.png" alt="image-20210109111448478" /></p>
   </li>
   <li>
     <p>RL</p>
 
-    <p><img src="/assets/images/post/image-20210111155857041.png" alt="image-20210111155857041"></p>
+    <p><img src="/assets/images/post/image-20210111155857041.png" alt="image-20210111155857041" /></p>
   </li>
 </ul>
 
@@ -3202,15 +3145,13 @@ Created on Sat Jan  9 19:45:52 2021
   <li>任何算法的<strong>时间复杂度</strong>都不可能优于 $O(n\log{n})$</li>
   <li>算法的性质
     <ul>
-      <li>
-<strong>稳定性</strong>：
+      <li><strong>稳定性</strong>：
         <ul>
           <li>对于待排序序列里的任一对排序码相同的记录 $R_i$ 和 $R_j$，在排序后的序列里 $R_i$ 和 $R_j$ 的前后顺序不变</li>
           <li>稳定性是一个具体算法的性质，而不是排序方法的性质</li>
         </ul>
       </li>
-      <li>
-<strong>适应性</strong>：
+      <li><strong>适应性</strong>：
         <ul>
           <li>如果一个排序算法对接近有序的序列工作的更快，就称这种算法具有适应性</li>
         </ul>
@@ -3248,12 +3189,9 @@ Created on Sat Jan  9 19:45:52 2021
 <h4 id="复杂度分析">复杂度分析</h4>
 
 <ul>
-  <li>
-<strong>平均时间复杂度</strong>： $O(n^2)$</li>
-  <li>
-<strong>最坏时间复杂度</strong>：$O(n^2)$</li>
-  <li>
-<strong>空间复杂度</strong>：$O(1)$</li>
+  <li><strong>平均时间复杂度</strong>： $O(n^2)$</li>
+  <li><strong>最坏时间复杂度</strong>：$O(n^2)$</li>
+  <li><strong>空间复杂度</strong>：$O(1)$</li>
 </ul>
 
 <h4 id="算法特性分析">算法特性分析</h4>
@@ -3302,12 +3240,9 @@ Created on Sat Jan  9 19:45:52 2021
 <h4 id="复杂度分析-1">复杂度分析</h4>
 
 <ul>
-  <li>
-<strong>平均时间复杂度</strong>： $O(n^2)$</li>
-  <li>
-<strong>最坏时间复杂度</strong>：$O(n^2)$</li>
-  <li>
-<strong>空间复杂度</strong>：$O(1)$</li>
+  <li><strong>平均时间复杂度</strong>： $O(n^2)$</li>
+  <li><strong>最坏时间复杂度</strong>：$O(n^2)$</li>
+  <li><strong>空间复杂度</strong>：$O(1)$</li>
 </ul>
 
 <h4 id="算法特性分析-1">算法特性分析</h4>
@@ -3336,13 +3271,10 @@ Created on Sat Jan  9 19:45:52 2021
 
 <ul>
   <li>采用<strong>树形结构</strong>实现<strong>优先队列</strong>的一种有效技术称为堆。</li>
-  <li>从结构上看，堆就是结点里存储数据的<strong>完全二叉树</strong>
-</li>
-  <li>
-<strong>堆序</strong>：任意一个结点里存储的数据的优先级<strong>先于（或等于）</strong>其子节点里的数据
+  <li>从结构上看，堆就是结点里存储数据的<strong>完全二叉树</strong></li>
+  <li><strong>堆序</strong>：任意一个结点里存储的数据的优先级<strong>先于（或等于）</strong>其子节点里的数据
     <ul>
-      <li>堆中优先级最高的元素必在<strong>堆顶</strong>
-</li>
+      <li>堆中优先级最高的元素必在<strong>堆顶</strong></li>
       <li>大顶堆 &amp; 小顶堆</li>
     </ul>
   </li>
@@ -3419,12 +3351,9 @@ Created on Sat Jan  9 19:45:52 2021
 <h4 id="复杂度分析-3">复杂度分析</h4>
 
 <ul>
-  <li>
-<strong>平均时间复杂度</strong>： $O(n^2)$</li>
-  <li>
-<strong>最坏时间复杂度</strong>：$O(n^2)$</li>
-  <li>
-<strong>空间复杂度</strong>：$O(1)$</li>
+  <li><strong>平均时间复杂度</strong>： $O(n^2)$</li>
+  <li><strong>最坏时间复杂度</strong>：$O(n^2)$</li>
+  <li><strong>空间复杂度</strong>：$O(1)$</li>
 </ul>
 
 <h4 id="算法特性分析-3">算法特性分析</h4>
@@ -3481,10 +3410,8 @@ Created on Sat Jan  9 19:45:52 2021
 <h4 id="复杂度分析-4">复杂度分析</h4>
 
 <ul>
-  <li>
-<strong>平均</strong>时间复杂度： $O(n\log{n})$</li>
-  <li>
-<strong>最坏</strong>时间复杂度：$O(n)$</li>
+  <li><strong>平均</strong>时间复杂度： $O(n\log{n})$</li>
+  <li><strong>最坏</strong>时间复杂度：$O(n)$</li>
   <li>空间复杂度：$O(\log{n})$</li>
 </ul>
 
@@ -3618,9 +3545,9 @@ Created on Sat Jan  9 19:45:52 2021
   <li>取新的增量d2&lt;d1，重复 1 的分组和排序操作；直至所取的增量di=1为止，即所有记录放进一个组中排序为止。</li>
 </ol>
 
-<p><img src="/assets/images/post/image-20210106192442516.png" alt="image-20210106192442516"></p>
+<p><img src="/assets/images/post/image-20210106192442516.png" alt="image-20210106192442516" /></p>
 
-<p><img src="/assets/images/post/image-20210106193116456.png" alt="image-20210106193116456"></p>
+<p><img src="/assets/images/post/image-20210106193116456.png" alt="image-20210106193116456" /></p>
 
 <h1 id="外部排序">外部排序</h1>
 
@@ -3649,9 +3576,9 @@ Created on Sat Jan  9 19:45:52 2021
   <p><strong>ISAM</strong>(Indexed Sequential Access Method，<strong>顺序索引存取方法</strong>)，是专为<strong>磁盘</strong>存取设计的一种文件组织方式，采用<strong>静态</strong>索引结构，是一种三级索引结构的顺序文件。</p>
 </blockquote>
 
-<p><img src="/assets/images/post/image-20210106203126494.png" alt="image-20210106203126494"></p>
+<p><img src="/assets/images/post/image-20210106203126494.png" alt="image-20210106203126494" /></p>
 
-<p><img src="/assets/images/post/image-20210106203143277.png" alt="image-20210106203143277"></p>
+<p><img src="/assets/images/post/image-20210106203143277.png" alt="image-20210106203143277" /></p>
 
 <h3 id="vsam">VSAM</h3>
 
@@ -3659,7 +3586,7 @@ Created on Sat Jan  9 19:45:52 2021
   <p><strong>VSAM</strong>(Virtual Storage Access Method，<strong>虚拟存取方法</strong>)，也是一种索引顺序文件组织方式，利用OS的虚拟存储器功能，采用的是基于B+树的动态索引结构。</p>
 </blockquote>
 
-<p><img src="/assets/images/post/image-20210106203231777.png" alt="image-20210106203231777"><img src="/assets/images/post/image-20210106203249607.png" alt="image-20210106203249607"></p>
+<p><img src="/assets/images/post/image-20210106203231777.png" alt="image-20210106203231777" /><img src="/assets/images/post/image-20210106203249607.png" alt="image-20210106203249607" /></p>
 
 <h3 id="散列文件">散列文件</h3>
 
@@ -3715,19 +3642,11 @@ Created on Sat Jan  9 19:45:52 2021
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="Computer Organization">Computer Organization</a><a class="next" href="/computerarchitecture/2021/06/10/OperatingSystem.html" title="Operating System">Operating System</a>
-</div>
-<div class="post-related">
+<div class="post-nav"><a class="previous" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="Computer Organization">Computer Organization</a><a class="next" href="/computerarchitecture/2021/06/10/OperatingSystem.html" title="Operating System">Operating System</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="Operating System">Discrete Mathematics</a></li>
-<li><a class="post-link" href="/artificialintelligence/2021/09/14/ComputerVision.html" title="Operating System">Computer Vision</a></li>
-<li><a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="Operating System">Computer Organization</a></li>
-<li><a class="post-link" href="/data/2022/01/07/Database.html" title="Operating System">Database</a></li>
-</ul>
-    </div>
-<div class="post-comments"></div></section>
+        <li><a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="Operating System">Computer Organization</a></li><li><a class="post-link" href="/algorithms/2022/01/11/Algorithm.html" title="Operating System">Algorithm</a></li><li><a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html" title="Operating System">Compiler</a></li><li><a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="Operating System">Discrete Mathematics</a></li></ul>
+    </div><div class="post-comments"></div></section>
 </div>
 
 
@@ -3863,13 +3782,11 @@ Created on Sat Jan  9 19:45:52 2021
   <data class="u-url" href="/"></data>
 
   <div class="wrapper">
-    <div class="site-footer-inner">
-<div>ericaaaaaaaa <span class="copyleft">©</span> 2019-2022 ericaaaaaaaa</div>
+    <div class="site-footer-inner"><div>ericaaaaaaaa <span class="copyleft">&copy;</span> 2019-2022 ericaaaaaaaa</div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
-      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
-</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a></div>
     </div>
   </div>
 </footer>
