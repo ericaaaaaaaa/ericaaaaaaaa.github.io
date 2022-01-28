@@ -1,0 +1,3279 @@
+I"��<h1 id="图论">图论</h1>
+
+<h2 id="基本概念">基本概念</h2>
+
+<h3 id="绘图程序">绘图程序</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="n">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="k">def</span> <span class="nf">drawgraph</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
+<span class="c1">#    G = nx.Graph() # 无向图
+</span>    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">()</span> <span class="c1"># 有向图
+</span>    <span class="n">G</span><span class="p">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+    <span class="n">nx</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="s">'k'</span><span class="p">,</span> 
+            <span class="n">with_lables</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">font_color</span> <span class="o">=</span> <span class="s">'w'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span>
+
+<span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">}</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">),</span> <span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">),</span> <span class="p">(</span><span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">),</span> <span class="p">(</span><span class="s">'b'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">),</span> <span class="p">(</span><span class="s">'b'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">),</span> <span class="p">(</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">),</span>
+     <span class="p">(</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">),</span> <span class="p">(</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">),</span> <span class="p">(</span><span class="s">'f'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">)]</span>
+<span class="n">drawgraph</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/post/image-20210528102258319.png" alt="image-20210528102258319" /></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210528102310190.png" alt="image-20210528102310190" /></p>
+
+<h3 id="基本概念-1">基本概念</h3>
+
+<h4 id="无序偶和有序偶">无序偶和有序偶</h4>
+
+<h5 id="无序偶">无序偶</h5>
+
+<p>$V$ 是非空集合，$x\in V$ 并且 $y\in V$，称 $(x,y)$ 是无序偶</p>
+
+<h5 id="有序偶">有序偶</h5>
+
+<p>$V$ 是非空集合，$x\in V$ 并且 $y\in V$，称 $&lt;x,y&gt;$ 是有序偶</p>
+
+<h4 id="有向图和无向图">有向图和无向图</h4>
+
+<h5 id="无向图">无向图</h5>
+
+<p>无向图是由无序偶构成的边的集合</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">Cartesianproduct</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span> <span class="c1"># 笛卡尔乘积
+</span>    <span class="n">XY</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">:</span>
+            <span class="n">XY</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">XY</span>
+
+<span class="k">def</span> <span class="nf">creategraph</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="c1"># 随机生成 m 点, n 边图
+</span>    <span class="k">global</span> <span class="n">V</span><span class="p">,</span> <span class="n">XY</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">XY</span> <span class="o">=</span> <span class="n">Cartesianproduct</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h5 id="有向图">有向图</h5>
+
+<p>有向图是由有序偶构成的边的集合</p>
+
+<h4 id="带权图">带权图</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">Cartesianproductweight</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span> <span class="c1"># 带权笛卡尔乘积
+</span>    <span class="n">XY</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">:</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+            <span class="n">XY</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">weight</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">XY</span>
+
+<span class="k">def</span> <span class="nf">weightedgraph</span><span class="p">(</span><span class="n">V0</span><span class="p">,</span> <span class="n">E0</span><span class="p">,</span> <span class="n">W0</span><span class="p">):</span> <span class="c1"># 随机生成带权图
+</span>    <span class="n">V</span> <span class="o">=</span> <span class="n">V0</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E0</span><span class="p">:</span>
+        <span class="n">w</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">W0</span><span class="p">)</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">|</span> <span class="p">{(</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="图判断">图判断</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span> <span class="c1"># 是否为图
+</span>    <span class="n">tv</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="n">tv</span> <span class="o">=</span> <span class="n">tv</span> <span class="ow">and</span> <span class="p">(</span><span class="n">u</span> <span class="ow">in</span> <span class="n">V</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">in</span> <span class="n">V</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tv</span>
+</code></pre></div></div>
+
+<h3 id="基本结构">基本结构</h3>
+
+<h4 id="关系">关系</h4>
+
+<p><strong>图的基本结构</strong>是指图和顶点之间，边之间以及边与顶点之间的连接关系</p>
+
+<ul>
+  <li><strong>邻接关系</strong>：顶点之间</li>
+  <li><strong>关联关系</strong>：顶点与边之间</li>
+  <li><strong>相邻关系</strong>：边与边之间</li>
+</ul>
+
+<h4 id="度">度</h4>
+
+<h5 id="入度-diu">入度 $di(u)$</h5>
+
+<p>以 $u$ 为终点的边数称为点 $u$ 的入度。</p>
+
+<h5 id="出度-dou">出度 $do(u)$</h5>
+
+<p>以 $u$ 为起点的边数称为点 $u$ 的入度。</p>
+
+<h5 id="度-degu">度 $deg(u)$</h5>
+
+<h6 id="顶点的度">顶点的度</h6>
+
+<p>$deg(u) = di(u) + do(u)$</p>
+
+<h6 id="图的度">图的度</h6>
+
+<p>$deg(V) = \sum_{u\in V}deg(u)$</p>
+
+<h4 id="握手定理">握手定理</h4>
+
+<p>设 $G = &lt;V, E&gt;$ 是 $(n, m)$ 图，则 $\sum_{u\in V}d(u) = 2m$</p>
+
+<h4 id="同构-isomorphism">同构 (isomorphism)</h4>
+
+<p>设无向图 $G = &lt;V, E&gt;$ 和 $G’ = &lt;V’, E’&gt;$, 如果存在<strong>双射函数</strong> $f: v\rightarrow v’$, 并且当且仅当 $e = (u_i, u_j)\in E$, 有 $e’ = (f(u_i), f(u_j))\in E’$, 则称 $G$ 和 $G’$ <strong>同构</strong></p>
+
+<h3 id="子图及算法">子图及算法</h3>
+
+<h4 id="子图-subgraph">子图 (subgraph)</h4>
+
+<h5 id="定义">定义</h5>
+
+<p>设 $G = &lt;V, E&gt;$ 和 $G_s = &lt;V_s, E_s&gt;$ 是两个图，若</p>
+
+<ul>
+  <li>$V_s \subseteq V$</li>
+  <li>$E_s \subseteq E$</li>
+</ul>
+
+<p>则称 $G_s$ 为 $G$ 的子图，记为 $G_s \subseteq G$</p>
+
+<h5 id="判断子图算法">判断子图算法</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">issubgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">Es</span><span class="p">):</span>
+    <span class="n">tv</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">&lt;=</span> <span class="n">V</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Es</span> <span class="o">&lt;=</span> <span class="n">E</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tv</span>
+</code></pre></div></div>
+
+<h4 id="真子图-proper-subgraph">真子图 (proper subgraph)</h4>
+
+<h5 id="定义-1">定义</h5>
+
+<ul>
+  <li>$G_s \subseteq G$</li>
+  <li>$V_s \subset V$</li>
+  <li><strong>或</strong></li>
+  <li>$E_s \subset E$</li>
+</ul>
+
+<p>则称 $G_s$ 为 $G$ 的真子图，记为 $G_s \subset G$</p>
+
+<h5 id="判断真子图算法">判断真子图算法</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">ispropersubgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">Es</span><span class="p">):</span>
+    <span class="n">tv</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">&lt;=</span> <span class="n">V</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Es</span> <span class="o">&lt;=</span> <span class="n">E</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">Vs</span> <span class="o">&lt;</span> <span class="n">V</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Es</span> <span class="o">&lt;</span> <span class="n">E</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">tv</span>
+</code></pre></div></div>
+
+<h4 id="生成子图-spanning-subgraph">生成子图 (spanning subgraph)</h4>
+
+<h5 id="定义-2">定义</h5>
+
+<ul>
+  <li>$G_s \subseteq G$</li>
+  <li>$V_s = V$</li>
+</ul>
+
+<p>则称 $G_s$ 为 $G$ 的生成子图</p>
+
+<h5 id="判断生成子图算法">判断生成子图算法</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isspanningsubgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">Es</span><span class="p">):</span>
+    <span class="n">tv</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">&lt;=</span> <span class="n">V</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Es</span> <span class="o">&lt;=</span> <span class="n">E</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">Vs</span> <span class="o">==</span> <span class="n">V</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Es</span> <span class="o">&lt;=</span> <span class="n">E</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">tv</span>
+</code></pre></div></div>
+
+<h4 id="导出子图-induced-subgraph">导出子图 (induced subgraph)</h4>
+
+<h5 id="定义-3">定义</h5>
+
+<ul>
+  <li>$G_s \subseteq G$</li>
+  <li><code class="language-plaintext highlighter-rouge">\forall (v; v in V_s; \forall (u; u in V_s; (u, v) in E ==&gt; (u, v) in E_s))</code></li>
+</ul>
+
+<p>则称 $G_s$ 为 $G$ 的导出子图</p>
+
+<h5 id="判断导出子图算法">判断导出子图算法</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isinducedsubgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">Es</span><span class="p">):</span>
+    <span class="n">tv</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">&lt;=</span> <span class="n">V</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Es</span> <span class="o">&lt;=</span> <span class="n">E</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="n">tv</span> <span class="o">=</span> <span class="n">tv</span> <span class="ow">and</span> <span class="p">((</span><span class="ow">not</span><span class="p">((</span><span class="n">u</span> <span class="ow">in</span> <span class="n">Vs</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">in</span> <span class="n">Vs</span><span class="p">)))</span> <span class="ow">or</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">Es</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">tv</span>
+</code></pre></div></div>
+
+<h3 id="特殊图及算法">特殊图及算法</h3>
+
+<h4 id="补图">补图</h4>
+
+<p>设 $G = &lt;V, E&gt;$ 是 $n$ 阶无向简单图</p>
+
+<ul>
+  <li>以 $V$ 为顶点</li>
+  <li>以所有使 $G$ 称为 <strong>完全图</strong> $K_n$ 的添加边所组成的集合为边</li>
+</ul>
+
+<p>的图称为 $G$ 的子图，记为 $\sim G$</p>
+
+<h4 id="相对补图">相对补图</h4>
+
+<p>$G_1$ 是 $G_2$ 相对于 $G$ 的补图</p>
+
+<h2 id="连通问题">连通问题</h2>
+
+<h3 id="连通问题-1">连通问题</h3>
+
+<h4 id="通路-path">通路 (path)</h4>
+
+<p>若 $u_k\in V, (u_k, u_{k+1}) \in E, k = 0, 1,…,n-1$，则顶点 $u_0$ 与顶点 $u_{n-1}$ 之间存在通路，记为 $u_0\Rightarrow u_{n-1}$</p>
+
+<h4 id="简单通路-simple-path">==简单==通路 (simple path)</h4>
+
+<p>每条 <strong>边</strong> 的出现不超过一次</p>
+
+<h4 id="基本通路-basic-path">==基本==通路 (basic path)</h4>
+
+<p>每个 <strong>顶点</strong> 的出现不超过一次</p>
+
+<h4 id="回路-circuit">回路 (circuit)</h4>
+
+<p>设有向图 $D = &lt;V,A&gt;$，若 $u\in V$，从 $u$ 出发并返回 $u$ 的通路，称为回路，记为 $u\Rightarrow u$</p>
+
+<h4 id="简单回路-simple-circuit">简单回路 (simple circuit)</h4>
+
+<p>每条 <strong>边</strong> 的出现不超过一次</p>
+
+<h4 id="基本回路-basic-circuit">基本回路 (basic circuit)</h4>
+
+<p>每个 <strong>顶点</strong> 的出现不超过一次</p>
+
+<h4 id="圈-acyclic">圈 (acyclic)</h4>
+
+<h4 id="定理">定理</h4>
+
+<p>设 $G = &lt;V, E&gt;$ 是 $n$ 阶图，若顶点 $u, v$ 存在通路，则存在小于等于 $n-1$ 的通路</p>
+
+<h3 id="通路算法">通路算法</h3>
+
+<h5 id="初始通路">初始通路</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$path0 = {(u0, v)</td>
+      <td>(u0, v)\in E\or (v, u0)\in E}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pathset0</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">u0</span><span class="p">):</span>
+    <span class="c1"># 找到所有从 u0 出发的路径
+</span>    <span class="n">path1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">u</span> <span class="o">==</span> <span class="n">u0</span><span class="p">):</span>
+            <span class="n">path1</span> <span class="o">=</span> <span class="n">path1</span> <span class="o">|</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="n">path1</span>
+</code></pre></div></div>
+
+<p>$(\omega, x, y) \in path(n) \rightarrow (\omega,x,y,v)\in path(n+1)$</p>
+
+<ul>
+  <li>$u == y\and v\ not\ in\ path(n) \rightarrow(\omega, x,y,v)\in path(n+1) $</li>
+  <li>$v == y\and v\ not\ in\ path(n) \rightarrow(\omega, x,y,u)\in path(n+1) $</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pathset</span><span class="p">(</span><span class="n">path0</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">p0</span> <span class="ow">in</span> <span class="n">path0</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">p0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p0</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">u</span> <span class="o">==</span> <span class="n">y</span><span class="p">):</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">v</span><span class="p">])</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">|</span> <span class="p">{</span><span class="n">p</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">basicpathset</span><span class="p">(</span><span class="n">path0</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">pk</span> <span class="ow">in</span> <span class="n">path0</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">pk</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pk</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">u</span> <span class="o">==</span> <span class="n">x</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pk</span><span class="p">)):</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">v</span><span class="p">])</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">|</span> <span class="p">{</span><span class="n">p</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div></div>
+
+<h3 id="连通图">连通图</h3>
+
+<h4 id="连通图的构建">连通图的构建</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">connectedgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">V0</span><span class="p">,</span> <span class="n">E0</span><span class="p">):</span>
+    <span class="c1"># 连通图
+</span>    <span class="n">Vc</span> <span class="o">=</span> <span class="n">V0</span>
+    <span class="n">Ec</span> <span class="o">=</span> <span class="n">E0</span>
+    <span class="k">while</span> <span class="n">E</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">({}):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Ec</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Ec</span> <span class="ow">and</span> <span class="p">(</span><span class="n">u</span> <span class="ow">in</span> <span class="n">Vc</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Vc</span><span class="p">):</span>
+                <span class="n">Vc</span> <span class="o">=</span> <span class="n">Vc</span> <span class="o">|</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+                <span class="n">Ec</span> <span class="o">=</span> <span class="n">Ec</span> <span class="o">|</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Ec</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Vc</span><span class="p">,</span> <span class="n">Ec</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="连通图判断">连通图判断</h4>
+
+<p>[Vc, Ec] 是图 G = &lt;V, E&gt; 的连通子图，若 Ec == E，则 G 为连通图，否则不然</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isconnectedgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+    <span class="c1"># 判断是否为连通图
+</span>    <span class="n">V</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">V0</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+    <span class="n">E0</span> <span class="o">=</span> <span class="p">{(</span><span class="n">U</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+    <span class="p">[</span><span class="n">Vc</span><span class="p">,</span> <span class="n">Ec</span><span class="p">]</span> <span class="o">=</span> <span class="n">connectedgraph</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">V0</span><span class="p">,</span> <span class="n">E0</span><span class="p">)</span>
+    <span class="n">tv</span> <span class="o">=</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">Vc</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">Ec</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">E</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">tv</span>
+</code></pre></div></div>
+
+<h2 id="图的矩阵表示">图的矩阵表示</h2>
+
+<h3 id="邻接矩阵">邻接矩阵</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>设$G=&lt;V,E&gt;$是简单图，$</td>
+      <td>V</td>
+      <td>=n$，矩阵$An\times n=[ai,j]$，若边$(vi,vj)\in E$，则$a_{i,j}=1$，否则，$a_{i,j}=0$，称矩阵$An\times n$是邻接矩阵。</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">graph2array</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s">'int'</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">A</span>
+</code></pre></div></div>
+
+<h3 id="多重边图邻接矩阵">多重边图邻接矩阵</h3>
+
+<p>邻接矩阵$An×n=[ai,j]$，也可以表示有自环以及有多重边的图，其中，$a_{i,j}$表示顶点$v_i$和$v_j$邻接的边数目。</p>
+
+<h3 id="有向图邻接矩阵">有向图邻接矩阵</h3>
+
+<p>邻接矩阵也可以表示有向图。矩阵$An×n=[a_{i,j}]$，若边$&lt;v_i,v_j&gt;\in E$，则$a_{i,j}=1$，否则，$a_{i,j}=0$。</p>
+
+<h3 id="无向图关联矩阵">无向图关联矩阵</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>设$G=&lt;V,E&gt;$是简单无向图，$</td>
+      <td>V</td>
+      <td>=n$，$</td>
+      <td>E</td>
+      <td>=m$，矩阵$An×m=[a_{i,j}]$，若顶点$v_i\in V$，$e_j\in E$，$e_j=(v_i,u)$或$e_j=(u,v_i)$，则$a_{i,j}=1$，否则，$a_{i,j}=0$，称矩阵$A_n×m$是关联矩阵。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="有向图的关联矩阵">有向图的关联矩阵</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>设$G=&lt;V,E&gt;$是简单有向图，$</td>
+      <td>V</td>
+      <td>=n$，$</td>
+      <td>E</td>
+      <td>=m$，矩阵$A_n×m=[a_{i,j}]$，顶点$u_i\in V$，$e_j\in E$，若$e_j=&lt;u_i,v&gt;$则$a_{i,j}=1$，若$e_j=&lt;v,u_i&gt;$，则$a_{i,j}=-1$，否则，$a_{i,j}=0$，称矩阵$A_n×m$是关联矩阵。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="可达矩阵">可达矩阵</h3>
+
+<p>设A是相邻矩阵，I是单位矩阵，B是布尔矩阵，R是可达矩阵，则$R=B(I+A+A^2+…+A^{n-1})=B[(I+A)^{n-1}]$</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">reachabilityarray</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="c1"># 可达矩阵
+</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s">'int'</span><span class="p">))</span> <span class="c1"># 自身可达
+</span>    <span class="n">Ai</span> <span class="o">=</span> <span class="n">I</span> <span class="o">+</span> <span class="n">A</span>
+    <span class="n">An</span> <span class="o">=</span> <span class="n">Ai</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span> <span class="p">,</span><span class="n">m</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s">'int'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">An</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">R</span>
+</code></pre></div></div>
+
+<h2 id="穿程问题">穿程问题</h2>
+
+<h3 id="欧拉图">欧拉图</h3>
+
+<h4 id="欧拉链">欧拉链</h4>
+
+<p>（欧拉链、欧拉圈、欧拉图）：设G＝&lt;V,E&gt;是连通无向图，经过G中每条<strong>边</strong>一次且仅一次的非闭合链称为欧拉链（通路）</p>
+
+<h4 id="欧拉圈">欧拉圈</h4>
+
+<p>经过G中每条边一次且仅一次的闭合链称为欧拉圈</p>
+
+<h4 id="欧拉图-1">欧拉图</h4>
+
+<p>具有欧拉圈的图称为欧拉图</p>
+
+<h4 id="判定定理">判定定理</h4>
+
+<h5 id="定理1">定理1</h5>
+
+<p>设G是无向连通图，则如下三个命题等价</p>
+
+<ul>
+  <li>G是欧拉图。</li>
+  <li>G中所有顶点的度数是偶数。</li>
+  <li>G是若干不重边圈的并。</li>
+</ul>
+
+<h5 id="定理2">定理2</h5>
+
+<p>无向图G为欧拉图，当且仅当G是连通图，并且G的每一个顶点都是偶顶点。</p>
+
+<h4 id="图的度入度出度">图的度、入度、出度</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">degreeset</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+    <span class="c1"># 获得图的度，入度，出度
+</span>    <span class="n">V</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span>  <span class="c1"># 度
+</span>    <span class="n">di</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span> <span class="c1"># 入度
+</span>    <span class="n">do</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span> <span class="c1"># 出度
+</span>    <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">di</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">do</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">d</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">do</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="欧拉通路">欧拉通路</h4>
+
+<p>无向图G中有连接$u_i$和$u_j$的欧拉通路，当且仅当G是连通图，并且G中只有$u_i$和$u_j$ 是奇顶点。</p>
+
+<h4 id="欧拉图的构建方法">欧拉图的构建方法</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 欧拉图的构建算法
+</span><span class="k">def</span> <span class="nf">subEulercircuit</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">v0</span><span class="p">):</span>
+    <span class="c1"># 返回边 E 中以 v0 作为起点和终点的回路 circuit
+</span>    <span class="c1"># 返回回路中所经过的点集 S
+</span>    <span class="n">circuit</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">v0</span><span class="p">])</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">circuit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">u</span> <span class="o">==</span> <span class="n">y</span><span class="p">):</span>
+                <span class="n">circuit</span> <span class="o">=</span> <span class="n">circuit</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">v</span><span class="p">])</span>
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+                <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">|</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">circuit</span><span class="p">,</span> <span class="n">S</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">set2V</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
+    <span class="c1"># edges to vertexes
+</span>    <span class="n">V</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">V</span> <span class="o">|</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">V</span>
+
+<span class="k">def</span> <span class="nf">Eulercircuit</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">v0</span><span class="p">):</span>
+    <span class="p">[</span><span class="n">circuit</span><span class="p">,</span> <span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="n">subEulercircuit</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">v0</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="n">S</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">E</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">({})):</span>
+        <span class="n">V1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+        <span class="n">V2</span> <span class="o">=</span> <span class="n">set2V</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+        <span class="n">V1V2</span> <span class="o">=</span> <span class="n">V1</span> <span class="o">&amp;</span> <span class="n">V2</span>
+        <span class="k">for</span> <span class="n">v0</span> <span class="ow">in</span> <span class="n">V1V2</span><span class="p">:</span>
+            <span class="p">[</span><span class="n">subcircuit</span><span class="p">,</span> <span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="n">subEulercircuit</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">v0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">S</span> <span class="o">==</span> <span class="nb">set</span><span class="p">({}):</span>
+                <span class="c1"># 在现有边集 E 中无法找到 v0 开头的回路
+</span>                <span class="k">continue</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">v0</span><span class="p">)</span>
+            <span class="c1"># 将找到的回路添加到原回路的适当位置
+</span>            <span class="n">circuit</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">subcircuit</span> <span class="o">+</span> <span class="n">circuit</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="n">S</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">circuit</span>
+</code></pre></div></div>
+
+<h4 id="一笔画问题格雷码">一笔画问题（格雷码）</h4>
+
+<h4 id="构建偶数度顶点图">构建偶数度顶点图</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 构建偶数度顶点图
+# 对于圈图，任取顶点 [u0, v0]，用 v0 替换 u0，并且 V = V - {u0}
+# 重复 n 次
+</span><span class="k">def</span> <span class="nf">replacevertex</span><span class="p">(</span><span class="n">V0</span><span class="p">,</span><span class="n">E0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">V0</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="p">[</span><span class="n">u0</span><span class="p">,</span> <span class="n">v0</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">V</span> <span class="o">-</span> <span class="p">{</span><span class="n">u0</span><span class="p">}</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">u0</span><span class="p">:</span>
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">|</span> <span class="p">{(</span><span class="n">v0</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+            <span class="k">elif</span> <span class="n">v</span> <span class="o">==</span> <span class="n">u0</span><span class="p">:</span>
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">|</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v0</span><span class="p">)}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">|</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+        <span class="n">E0</span> <span class="o">=</span> <span class="n">E</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="哈密尔顿图">哈密尔顿图</h3>
+
+<h4 id="哈密尔顿图-1">哈密尔顿图</h4>
+
+<p>无向图G中穿过每个<strong>顶点</strong>一次且仅一次的圈，称为哈密顿圈,具有哈密顿圈的图称为哈密顿图。</p>
+
+<h4 id="哈密尔顿通路">哈密尔顿通路</h4>
+
+<p>无向图G中穿过每个顶点一次且仅一次的非闭合链，称为哈密顿链. 有向图D中穿过每个顶点一次且仅一次的非闭合通路，称为哈密顿通路。</p>
+
+<h4 id="定理-1">定理</h4>
+
+<ul>
+  <li>设G是具有n个顶点的连通无向图。若G中每一对顶点的次数之和大于或等于n-1，则G中存在一条哈密顿链。</li>
+  <li>若G中每一对顶点的次数之和大于或等于n，则G中存在一条哈密顿圈。</li>
+  <li>在一个有向完全图中必存在一条哈密顿通路。</li>
+</ul>
+
+<h4 id="构建邻接表">构建邻接表</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">adjacentlist</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">):</span>
+    <span class="c1"># 返回与美国顶点直接相连的点集
+</span>    <span class="n">Ea</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+        <span class="n">e0</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="p">]</span>
+        <span class="n">e1</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">w</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">e1</span><span class="p">):</span>
+                <span class="n">e1</span> <span class="o">=</span> <span class="n">e1</span> <span class="o">+</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">w</span> <span class="ow">and</span> <span class="p">(</span><span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">e1</span><span class="p">):</span>
+                <span class="n">e1</span> <span class="o">=</span> <span class="n">e1</span> <span class="o">+</span> <span class="p">[</span><span class="n">u</span><span class="p">]</span>
+        <span class="n">e0</span> <span class="o">=</span> <span class="n">e0</span> <span class="o">+</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">e1</span><span class="p">)]</span>
+        <span class="n">Ea</span> <span class="o">=</span> <span class="n">Ea</span> <span class="o">+</span> <span class="p">[</span><span class="n">e0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Ea</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="哈密尔顿图周游算法">哈密尔顿图周游算法</h4>
+
+<p><strong>程序tourpath0算法：</strong>
+（1）取路径path的末尾顶点path[-1]为w。
+（2）取顶点w的邻接表E2。
+（3）若邻接表E2中顶点u不在path上，则u加入path，否则，返回。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tourpath0</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">while</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">E1</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">E2</span> <span class="o">=</span> <span class="n">E1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">E2</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">):</span>
+                <span class="n">path</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div></div>
+
+<p><strong>程序tourpath1算法：</strong>
+（1）取路径path的末尾顶点v=path.pop( )为v。
+（2）若 path非空，取路径path的末尾顶点path[-1]为u。
+（3）从顶点u的邻接表从顶点v以后依次检查k=E2.index(v)。
+（4）若v=E2[k]不在path，则v为path的新末尾顶点，直至邻接表结束。
+（5）若path有新顶点，则结束，否则，path弹出末尾顶点。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tourpath1</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span> <span class="p">)</span>
+    <span class="k">while</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">E1</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">E2</span> <span class="o">=</span> <span class="n">E1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">E2</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">E2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">E2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">):</span>
+                <span class="n">path</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">u</span> <span class="o">!=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">break</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div></div>
+
+<p><strong>程序tourpath算法：</strong>
+（1）若len(path) == m，则求新的周游通路，即tourpath1(V,E,path,m)。
+（2）若len(path) != 0，依次迭代执行tourpath0与tourpath1。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tourpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="n">m</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">tourpath1</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">while</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">tourpath0</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="n">m</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">tourpath1</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span>
+</code></pre></div></div>
+
+<h4 id="哈密尔顿图算法">哈密尔顿图算法</h4>
+
+<ul>
+  <li>构建邻接表</li>
+  <li>设置初始顶点 v0</li>
+  <li>搜寻一条路径</li>
+  <li>若 <code class="language-plaintext highlighter-rouge">len(path) == len(V)</code>，则搜寻下一条路径</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">Hamiltonpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">v0</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">Ea</span><span class="p">,</span> <span class="n">paths</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">Ea</span> <span class="o">=</span> <span class="n">adjacentlist</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">v0</span><span class="p">]</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">tourpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Ea</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="n">paths</span> <span class="o">|</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">path</span><span class="p">)}</span>
+    <span class="k">while</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="n">m</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">tourpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Ea</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="n">paths</span> <span class="o">|</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">path</span><span class="p">)}</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">paths</span>
+</code></pre></div></div>
+
+<h4 id="彼得森图-pertersen-graph">彼得森图 (Pertersen Graph)</h4>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210617090501213.png" alt="image-20210617090501213" /></p>
+
+<h4 id="完全图哈密尔顿圈">完全图哈密尔顿圈</h4>
+
+<blockquote>
+  <p>完全图G=&lt;V,E&gt;非重复边的哈密尔顿圈数为多少？</p>
+</blockquote>
+
+<h3 id="骑士周游问题">骑士周游问题</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">Knighttouregraph</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">P8</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="n">n</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="n">P8</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">|</span> <span class="p">{(</span><span class="n">k</span><span class="p">,(</span><span class="n">i</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">v</span><span class="p">))}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">]</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>骑士周游图是欧拉图吗？</p>
+</blockquote>
+
+<h3 id="完全图哈密尔顿圈-1">完全图哈密尔顿圈</h3>
+
+<ul>
+  <li>完全图有哈密尔顿圈</li>
+  <li>寻找不重复的哈密尔顿圈</li>
+  <li>完全图的哈密尔顿圈数为 <code class="language-plaintext highlighter-rouge">int(len(v)/2)</code></li>
+</ul>
+
+<h3 id="旅行商问题">旅行商问题</h3>
+
+<h2 id="通路问题">通路问题</h2>
+
+<h3 id="最短路径">最短路径</h3>
+
+<p>在带权有向图G中，给定一个称为始点的顶点u和一个称为终点的顶点v，如果P是从u到v的通路中<strong>权值最小的通路</strong>，则称P为从u到v的最短通路。</p>
+
+<h4 id="djikstra-最短通路算法">Djikstra 最短通路算法</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">shortpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">Hx</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">zn</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">Pm</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">vn</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">vn</span> <span class="o">==</span> <span class="n">zn</span><span class="p">:</span>
+            <span class="n">Pm</span> <span class="o">=</span> <span class="n">Pm</span> <span class="o">+</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">di</span><span class="p">[</span><span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">vn</span><span class="p">)]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">Pm</span> <span class="o">=</span> <span class="n">Pm</span> <span class="o">+</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">vn</span><span class="p">:</span>
+                <span class="n">kv</span> <span class="o">=</span> <span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">di</span><span class="p">[</span><span class="n">kv</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">di</span><span class="p">[</span><span class="n">kv</span><span class="p">]</span> <span class="o">=</span> <span class="n">di</span><span class="p">[</span><span class="n">kv</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">vw</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span>
+                <span class="k">if</span> <span class="n">vw</span> <span class="o">&lt;=</span> <span class="n">Hx</span><span class="p">[</span><span class="n">kv</span><span class="p">]:</span>
+                    <span class="n">Hx</span><span class="p">[</span><span class="n">kv</span><span class="p">]</span> <span class="o">=</span> <span class="n">vw</span>
+                    <span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="n">vw</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+                    <span class="n">Pm</span> <span class="o">=</span> <span class="n">Pm</span> <span class="o">+</span><span class="p">[</span><span class="n">e</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">di</span><span class="p">,</span> <span class="n">Hx</span><span class="p">,</span> <span class="n">Pm</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">shortestpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">vn</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">d</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">do</span><span class="p">]</span> <span class="o">=</span> <span class="n">degreesetw</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
+    <span class="n">Pm0</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Pm</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="n">v0</span><span class="p">]]</span>
+    <span class="n">inf</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">Hx</span> <span class="o">=</span> <span class="p">[</span><span class="n">inf</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">))]</span>
+    <span class="n">Hx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">Pm0</span> <span class="o">!=</span> <span class="n">Pm</span><span class="p">:</span>
+        <span class="n">Pm0</span> <span class="o">=</span> <span class="n">Pm</span>
+        <span class="p">[</span><span class="n">di</span><span class="p">,</span> <span class="n">Hx</span><span class="p">,</span> <span class="n">Pm</span><span class="p">]</span> <span class="o">=</span> <span class="n">shortpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">Hx</span><span class="p">,</span> <span class="n">Pm0</span><span class="p">,</span> <span class="n">vn</span><span class="p">)</span>
+    <span class="n">Pm</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Pm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Hx</span><span class="p">,</span> <span class="n">Pm</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="关键路径">关键路径</h3>
+
+<h4 id="最早完成时间算法">最早完成时间算法</h4>
+
+<h4 id="最晚完成时间算法">最晚完成时间算法</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 入度为 0
+</span><span class="k">def</span> <span class="nf">stepu0v</span><span class="p">(</span><span class="n">di0</span><span class="p">,</span><span class="n">E</span><span class="p">):</span>
+    <span class="n">S</span><span class="o">=</span><span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">u0</span> <span class="ow">in</span> <span class="n">di0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">u0</span><span class="p">:</span>
+                <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="o">|</span><span class="p">{(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="n">S</span>
+
+<span class="c1"># 出度为 0
+</span><span class="k">def</span> <span class="nf">stepuv0</span><span class="p">(</span><span class="n">do0</span><span class="p">,</span><span class="n">E</span><span class="p">):</span>
+    <span class="n">S</span><span class="o">=</span><span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">v0</span> <span class="ow">in</span> <span class="n">do0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">v0</span><span class="p">:</span>
+                <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="o">|</span><span class="p">{(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="n">S</span>
+
+<span class="c1"># 最早时间路径
+</span><span class="k">def</span> <span class="nf">TEpath</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">Hx</span><span class="p">,</span><span class="n">di</span><span class="p">):</span>
+    <span class="n">di0</span><span class="o">=</span><span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Hx</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Hx</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">:</span>
+            <span class="n">Hx</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">=</span><span class="n">Hx</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+</span><span class="n">w</span>
+        <span class="k">if</span> <span class="n">di</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">di</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">=</span><span class="n">di</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">di</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">di0</span><span class="o">=</span><span class="n">di0</span> <span class="o">|</span> <span class="p">{</span><span class="n">v</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Hx</span><span class="p">,</span><span class="n">di</span><span class="p">,</span><span class="n">di0</span><span class="p">]</span>
+
+<span class="c1"># 最晚时间路径
+</span><span class="k">def</span> <span class="nf">TLpath</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">Hy</span><span class="p">,</span><span class="n">do</span><span class="p">):</span>
+    <span class="n">do0</span><span class="o">=</span><span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Hy</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Hy</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">-</span><span class="n">w</span><span class="p">:</span>
+            <span class="n">Hy</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">Hy</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">-</span><span class="n">w</span>
+        <span class="k">if</span> <span class="n">do</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">do</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">do</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">do</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">do0</span><span class="o">=</span><span class="n">do0</span> <span class="o">|</span> <span class="p">{</span><span class="n">u</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Hy</span><span class="p">,</span><span class="n">do</span><span class="p">,</span><span class="n">do0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">craticalTE</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">vn</span><span class="p">):</span>
+    <span class="n">Hx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+
+    <span class="n">di0</span> <span class="o">=</span> <span class="p">{</span><span class="n">v0</span><span class="p">}</span>
+    <span class="k">while</span> <span class="n">vn</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">di0</span><span class="p">:</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">stepu0v</span><span class="p">(</span><span class="n">di0</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">Hx</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">di0</span><span class="p">]</span> <span class="o">=</span> <span class="n">TEpath</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">Hx</span><span class="p">,</span> <span class="n">di</span><span class="p">)</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="n">S</span>
+    <span class="k">return</span> <span class="n">Hx</span>
+
+<span class="k">def</span> <span class="nf">craticalTL</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">do</span><span class="p">,</span><span class="n">Hn</span><span class="p">,</span><span class="n">v0</span><span class="p">,</span><span class="n">vn</span><span class="p">):</span>
+    <span class="n">Hy</span><span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">Hy</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">Hn</span>
+    <span class="n">do0</span><span class="o">=</span><span class="p">{</span><span class="n">vn</span><span class="p">}</span>
+    <span class="k">while</span> <span class="n">v0</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">do0</span><span class="p">:</span>
+        <span class="n">S</span><span class="o">=</span><span class="n">stepuv0</span><span class="p">(</span><span class="n">do0</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">Hy</span><span class="p">,</span><span class="n">do</span><span class="p">,</span><span class="n">do0</span><span class="p">]</span><span class="o">=</span><span class="n">TLpath</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">Hy</span><span class="p">,</span><span class="n">do</span><span class="p">)</span>
+        <span class="n">E</span><span class="o">=</span><span class="n">E</span><span class="o">-</span><span class="n">S</span>
+    <span class="k">return</span> <span class="n">Hy</span>
+</code></pre></div></div>
+
+<h4 id="关键路径算法">关键路径算法</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 关键通路
+</span><span class="k">def</span> <span class="nf">craticalpath</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">di</span><span class="p">,</span><span class="n">do</span><span class="p">,</span><span class="n">v0</span><span class="p">,</span><span class="n">vn</span><span class="p">):</span>
+    <span class="n">Hx</span><span class="o">=</span><span class="n">craticalTE</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">di</span><span class="p">,</span><span class="n">v0</span><span class="p">,</span><span class="n">vn</span><span class="p">)</span>
+    <span class="n">Hn</span><span class="o">=</span><span class="n">Hx</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">Hy</span><span class="o">=</span><span class="n">craticalTL</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">do</span><span class="p">,</span><span class="n">Hn</span><span class="p">,</span><span class="n">v0</span><span class="p">,</span><span class="n">vn</span><span class="p">)</span>
+    <span class="n">V</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">C</span><span class="o">=</span><span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Hx</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">Hy</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+            <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">|</span><span class="p">{</span><span class="n">V</span><span class="p">[</span><span class="n">k</span><span class="p">]}</span>
+    <span class="n">Pc</span><span class="o">=</span><span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">C</span> <span class="ow">and</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">C</span><span class="p">:</span>
+            <span class="n">Pc</span><span class="o">=</span><span class="n">Pc</span><span class="o">|</span><span class="p">{(</span><span class="n">w</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="n">Pc</span>
+</code></pre></div></div>
+
+<h2 id="树">树</h2>
+
+<h3 id="引论">引论</h3>
+
+<h3 id="树概念">树概念</h3>
+
+<h4 id="树的定义">树的定义</h4>
+
+<p>设G=&lt;V, E&gt;是无向图，若G 连通且无圈，则称为树，记为GT=&lt;V, E&gt;。</p>
+
+<h4 id="定理-2">定理</h4>
+
+<ul>
+  <li>设 T 是树，则在 T 的任何两个不同顶点之间存在唯一的一条基本链。若在 T 的两个不相邻顶点之间加上一条边 e，则图 T+e 仅有一个圈</li>
+  <li>设树 T 是一个 (n, m) 图，则 m = n - 1</li>
+  <li>非平凡树 T 中至少存在两个次数为 1 的顶点</li>
+  <li>设 T 是非平凡 (n, m) 无向图，则下面五个命题等价
+    <ul>
+      <li>T 是树</li>
+      <li>T 连通且无圈</li>
+      <li>T 的每一对顶点之间有唯一的一条基本链</li>
+      <li>T 连通且 m = n - 1</li>
+      <li>T 无圈且 m = n - 1</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="树的构建">树的构建</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">graph2tree</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Vt</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+    <span class="n">Et</span> <span class="o">=</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Et</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Vt</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">u</span> <span class="ow">in</span> <span class="n">Vt</span> <span class="ow">and</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="p">(</span><span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Vt</span> <span class="ow">and</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">)):</span>
+                <span class="n">Vt</span> <span class="o">=</span> <span class="n">Vt</span> <span class="o">|</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+                <span class="n">Et</span> <span class="o">=</span> <span class="n">Et</span> <span class="o">|</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="n">Et</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">Vt</span><span class="p">)):</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Vt</span><span class="p">,</span> <span class="n">Et</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="树的判断">树的判断</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">istree</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+    <span class="n">tv</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Vt</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">-</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+    <span class="n">Et</span> <span class="o">=</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">E</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">({})):</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">u</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">):</span>
+                <span class="n">tv</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">u</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">))</span> <span class="ow">or</span> <span class="p">((</span><span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">in</span> <span class="n">Vt</span><span class="p">)):</span>
+                <span class="n">Vt</span> <span class="o">=</span> <span class="n">Vt</span> <span class="o">|</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+                <span class="n">Et</span> <span class="o">=</span> <span class="n">Et</span> <span class="o">|</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tv</span> <span class="o">==</span> <span class="bp">False</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">Vt</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Et</span><span class="p">)):</span>
+        <span class="n">tv</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="n">tv</span>
+</code></pre></div></div>
+
+<h3 id="各类树">各类树</h3>
+
+<h4 id="根树">根树</h4>
+
+<p>若一个<strong>有向树</strong>有一个引入次数为0的顶点，而所有其他顶点的引入次数都为1，则称该有向树为<strong>根树</strong>。引入次数为0的顶点称为<strong>树根</strong>。</p>
+
+<h4 id="m-元树">m 元树</h4>
+
+<p>若根树中的每个顶点的引出次数都<strong>小于或等于</strong> m，则称这种根树为 m 元树。</p>
+
+<h5 id="完全-m-元树">完全 m 元树</h5>
+
+<p>每个顶点的引出次数等于 m 或 0</p>
+
+<h5 id="位置-m-元树">位置 m 元树</h5>
+
+<p>任何顶点的 m 个子结点都有位置</p>
+
+<h5 id="二叉树">二叉树</h5>
+
+<p>m = 2</p>
+
+<h4 id="有序树">有序树</h4>
+
+<p>设T=&lt;V,E&gt;是根树，并且每个顶点的子顶点是<strong>有序</strong>的，则称为有序树。</p>
+
+<p>&lt;u,v,k&gt;表示u的第k个子</p>
+
+<h3 id="二叉树-1">二叉树</h3>
+
+<h4 id="定义-4">定义</h4>
+
+<p>设T=&lt;V,E&gt;是有序树，并且每个顶点的最多有2个子顶点，则称为二叉树。</p>
+
+<h4 id="递归定义">递归定义</h4>
+
+<p>定义：设 $T = &lt;V, E&gt;$</p>
+
+<ol>
+  <li>$[\ ]$ 是二叉树。</li>
+  <li>$a\in V$，$[a]$是二叉树。</li>
+  <li>若$a\in V$，$R_t$ 和 $L_t$ 是二叉树，则 $[a,L_t, R_t]$ 是二叉树。</li>
+</ol>
+
+<h4 id="二叉树构建算法-set-list-结构">二叉树构建算法 (set, list 结构)</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">createbitree</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">nodes</span> <span class="o">-</span> <span class="p">{</span><span class="n">a</span><span class="p">}</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Lnodes</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">Lnodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">Lnodes</span><span class="p">)</span>
+    <span class="n">Rnodes</span> <span class="o">=</span> <span class="n">nodes</span> <span class="o">-</span> <span class="n">Lnodes</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">createbitree</span><span class="p">(</span><span class="n">Lnodes</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">createbitree</span><span class="p">(</span><span class="n">Rnodes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">bitree</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">nodes</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">Lnodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">Rnodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">k</span><span class="p">:]</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">bitree</span><span class="p">(</span><span class="n">Lnodes</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">bitree</span><span class="p">(</span><span class="n">Rnodes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="二叉树与图">二叉树与图</h4>
+
+<h5 id="从树结构变换为图结构">从树结构变换为图结构</h5>
+
+<ol>
+  <li>若<code class="language-plaintext highlighter-rouge">len(tree)=0</code>或<code class="language-plaintext highlighter-rouge">len(tree)=1</code>，则为空集。</li>
+  <li>tree有左子树，则<code class="language-plaintext highlighter-rouge">L=tree2graph(tree[1])</code>, <code class="language-plaintext highlighter-rouge">gtree=gtree | {(tree[0],tree[1][0])} | L</code></li>
+  <li>tree有右子树，则<code class="language-plaintext highlighter-rouge">R=tree2graph(tree[2])</code>, <code class="language-plaintext highlighter-rouge">gtree=gtree | {(tree[0],tree[2][0])} | R</code></li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tree2graph</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+    <span class="n">gtree</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">|</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gtree</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="n">tree2graph</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">gtree</span> <span class="o">=</span> <span class="n">gtree</span> <span class="o">|</span> <span class="p">{(</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])}</span> <span class="o">|</span> <span class="n">L</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">tree2graph</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">gtree</span> <span class="o">=</span> <span class="n">gtree</span> <span class="o">|</span> <span class="p">{(</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])}</span> <span class="o">|</span> <span class="n">R</span>
+    <span class="k">return</span> <span class="n">gtree</span>
+</code></pre></div></div>
+
+<h4 id="二叉树结构">二叉树结构</h4>
+
+<p>从有序树生成二叉树</p>
+
+<h4 id="遍历">遍历</h4>
+
+<p>设G=&lt;E,V&gt;是二叉树，访问G的每个顶点的过程称为遍历。</p>
+
+<p>设 $G=&lt;E,V&gt;$ 是二叉树，$r$ 根顶点，若 $V={r}$ ，则 $r$ 是前序遍历，否则，若 $T_1$ 和 $T_2$ 是 $r$ 的左右子树，则先访问顶点 $r$，而后分别前序遍历子树 $T_1$ 和 $T_2$ 。</p>
+
+<h5 id="前序遍历">前序遍历</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">preordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">preordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">preordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h5 id="中序遍历">中序遍历</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">inordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">preordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">preordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h5 id="后序遍历">后序遍历</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">postordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">preordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">preordertraversal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<h4 id="表达式树">表达式树</h4>
+
+<h3 id="霍夫曼编码">霍夫曼编码</h3>
+
+<h4 id="二元前缀码">二元前缀码</h4>
+
+<p>用0-1字符串作为代码表示字符，要求<strong>任何字符的代码都不能作为其他字符代码的前缀</strong>；</p>
+
+<p>对于位置二叉树，可以采用二元前缀编码，使得每一个顶点都与唯一的一个取自字符表 {0,1} 的字符串对应</p>
+
+<ol>
+  <li>树根对应空串</li>
+  <li>字符串为 a 的顶点，左子结点的为 0，右子节点为 1</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>位置字符串的前缀编码 = {a</td>
+          <td>a 的树叶对应的字符串}</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<h4 id="霍夫曼编码-1">霍夫曼编码</h4>
+
+<ol>
+  <li>假设顶点集合为 $S$, $u_1$ 和 $u_2$ 是权值最低的两个顶点</li>
+  <li>构造一个新的顶点 $w$，令 $w$ 的左侧子结点为 $u_1$，右侧子结点为 $u_2$，权值为 $u_1$, $u_2$ 之和</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$S\leftarrow(S-{u_1,u_2})\cup{w}$, 返回步骤 1，直至 $</td>
+          <td>S</td>
+          <td>= 1$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<h4 id="霍夫曼树的构建与编码熵">霍夫曼树的构建与编码熵</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">codingentropy</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="c1"># 求得编码熵
+</span>    <span class="n">r0</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)):</span>
+        <span class="n">r0</span> <span class="o">-=</span> <span class="n">W</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">log2</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">r</span> <span class="o">+=</span> <span class="n">W</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">((</span><span class="n">r0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">((</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">r0</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">Huffmantree</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+    <span class="c1"># 构建霍夫曼树
+</span>    <span class="n">W0</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">]</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+        <span class="n">W0</span> <span class="o">=</span> <span class="n">W0</span> <span class="o">+</span> <span class="p">[[</span><span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="p">]]</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">W0</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10000</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="p">[[</span><span class="n">w</span><span class="p">,</span> <span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">Huffmantree2graph</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+    <span class="n">gtree</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gtree</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">Huffmantree2graph</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">Huffmantree2graph</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10000</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10000</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10000</span>
+    <span class="n">gtree</span> <span class="o">=</span> <span class="p">{(</span><span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">)}</span> <span class="o">|</span> <span class="p">{(</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)}</span> <span class="o">|</span> <span class="n">L</span> <span class="o">|</span> <span class="n">R</span>
+    <span class="k">return</span> <span class="n">gtree</span>
+
+
+<span class="k">def</span> <span class="nf">htree2graph</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">V</span> <span class="o">|</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">}</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">V</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>
+    <span class="k">for</span> <span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">|</span> <span class="p">{(</span><span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">V</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">v</span><span class="p">))}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">E</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">huffmancoding</span><span class="p">(</span><span class="n">subtree</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subtree</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="n">subtree</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">code</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">node0</span> <span class="o">=</span> <span class="n">subtree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">node1</span> <span class="o">=</span> <span class="n">subtree</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">huffmancoding</span><span class="p">(</span><span class="n">node0</span><span class="p">,</span> <span class="n">code</span> <span class="o">+</span> <span class="s">'0'</span><span class="p">)</span> <span class="o">+</span> <span class="n">huffmancoding</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">code</span> <span class="o">+</span> <span class="s">'1'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">code</span>
+
+
+<span class="k">def</span> <span class="nf">HuffmanCoding</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+    <span class="n">code0</span> <span class="o">=</span> <span class="n">huffmancoding</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">'0'</span><span class="p">)</span>
+    <span class="n">code1</span> <span class="o">=</span> <span class="n">huffmancoding</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">'1'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">code0</span> <span class="o">+</span> <span class="n">code1</span>
+</code></pre></div></div>
+
+<h3 id="生成树">生成树</h3>
+
+<h4 id="生成树-spanning-trees">生成树 (Spanning Trees)</h4>
+
+<p>如果无向图 G 的一个生成子图 T 是树，则称 T 是图 G 的一个生成树</p>
+
+<h4 id="最小生成树-minimum-spanning-trees-mst">最小生成树 (Minimum Spanning Trees, MST)</h4>
+
+<p>对于一个<strong>带权无向连通</strong>图，最小生成树是其生成树中边的权重之和最小的那个</p>
+
+<p><strong>最小生成树可能不唯一</strong></p>
+
+<h4 id="安全边-save-edge">安全边 (save edge)</h4>
+
+<p>对于边的集合 $A\subseteq T$, 其中 $T$ 是一棵最小生成树，如果集合 $A\cup{(u, v)}$ 同样属于 $T$，则 $(u,v)$ 是集合 $A$ 的安全边</p>
+
+<blockquote>
+  <p>若每一步都向集合中增加一条安全边，就可以找到图 G 的最小生成树</p>
+</blockquote>
+
+<h4 id="分割-cut">分割 (Cut)</h4>
+
+<p>表示为 $(S, V-S)$ 是图 $(V, E)$ 的一个划分，划分之和，一部分节点 $\in S$，其他节点 $\not\in S \Rightarrow \in {V-S}$</p>
+
+<h4 id="横跨-cross">横跨 (Cross)</h4>
+
+<p>如果边 $(u, v)\in E$ 的一个端点在集合 $S$ 中，另一个端点在集合 $(V-S)$ 中，则称边 $(u,v)$ 是分割的横跨边</p>
+
+<h4 id="尊重-respect">尊重 (Respect)</h4>
+
+<p>如果集合 A 中不存在横跨该分割的边，则称该分割 <strong>尊重</strong> 集合 $A$</p>
+
+<h4 id="轻边-light-edge">轻边 (Light Edge)</h4>
+
+<p>在横跨一个分割的所有边中，权重最小的边，称为 <strong>轻边</strong></p>
+
+<h4 id="定理寻找安全边">定理（寻找安全边）</h4>
+
+<ol>
+  <li>对于 <strong>带权无向连通图</strong> $G(V, E, W)$</li>
+  <li>假设边的集合 $A$ 为一棵最小生成树的子集</li>
+  <li>$(S, V-S)$ 为任意尊重 $A$ 的分割</li>
+  <li>$(u,v)$ 是横跨分割 $(S, V-S)$ 的轻边</li>
+</ol>
+
+<p>那么，边 $(u, v)$ 是 $A$ 的一条安全边</p>
+
+<h4 id="kruskal-算法">Kruskal 算法</h4>
+
+<h5 id="算法思路">算法思路</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">将图看作离散的点和一堆边</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="n">num</span><span class="p">(</span><span class="n">边</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">从未选择的边中找到满足</span><span class="err">：</span><span class="o">&lt;</span><span class="n">m</span> <span class="p">,</span><span class="n">n</span><span class="o">&gt;</span>
+    <span class="mf">1.</span> <span class="n">权重最小</span>
+    <span class="mf">2.</span> <span class="n">两个端点不同时出现在已连接的点中</span>
+    <span class="n">dot</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">dot</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">将边从未选择中删除</span>
+    <span class="n">num</span><span class="p">(</span><span class="n">边</span><span class="p">)</span> <span class="o">++</span>
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-2656ffcd5cdb097d.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-8392698e3388fece.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="prim-算法">Prim 算法</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-4491cf0d977af08c.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-ac654c5400c4a97e.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="平面图及着色">平面图及着色</h3>
+
+<h4 id="平面图">平面图</h4>
+
+<p>所有边在顶点以外没有任何交叉的图称为 <strong>平面图</strong></p>
+
+<h4 id="非平面图">非平面图</h4>
+
+<h5 id="k_33">$K_{3,3}$</h5>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619181532731.png" alt="image-20210619181532731" /></p>
+
+<ul>
+  <li>$k_{3,3}$ 是边数最少的非平面图</li>
+</ul>
+
+<h5 id="k_5">$k_{5}$</h5>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619181621676.png" alt="image-20210619181621676" /></p>
+
+<ul>
+  <li>$k_5$ 是顶点数最少的非平面图</li>
+</ul>
+
+<p>$k_{3,3}$ 和 $k_{5}$ 删除任意一条边就是平面图</p>
+
+<h4 id="平面图的面">平面图的面</h4>
+
+<p>当把一个连通平面图 G 画在平面上，使它的边在顶点之外没有任何交叉时，G 的边把平面分割成许多区域，这样的一个区域称为图 G 的面。</p>
+
+<h5 id="有限面">有限面</h5>
+
+<p>平面图内部的各个有限区域</p>
+
+<h5 id="无限面">无限面</h5>
+
+<p>平面图外部的无限区域</p>
+
+<h4 id="周界">周界</h4>
+
+<p>围成一个面的各边构成的闭合链，称为 <strong>周界</strong></p>
+
+<h4 id="次数">次数</h4>
+
+<p>一个平面图所有面的次数之和等于边的数量的两倍</p>
+
+<h4 id="欧拉公式">==欧拉公式==</h4>
+
+<p>具有 $n$ 个顶点，$m$ 条边， $k$ 个面的 $(m,n)$ 连通平面图 $G$，等式（欧拉公式）恒成立：$n-m+k=2$</p>
+
+<h4 id="极大平面图">极大平面图</h4>
+
+<p>设图 G 是一个平面图，如果连接 G 的任意两个不邻接顶点 $u$ 和 $v$ ，都会使 $G+(u,v)$ 变成非平面图，则称图 $G$ 是极大平面图</p>
+
+<h5 id="定理-3">定理</h5>
+
+<p>设 G 是具有至少三个顶点的极大平面图，则 G 的任何一个面都是 $k_3$，$3k=2m$</p>
+
+<h5 id="极大平面图的欧拉公式">极大平面图的欧拉公式</h5>
+
+<ul>
+  <li>若一个图的极大平面图，则 $m = 3n-6$</li>
+  <li>若一个图是平面图，则 $m\le 3n-6$，尚可加边</li>
+</ul>
+
+<h4 id="同胚">同胚</h4>
+
+<p>反复插入和（或）除去次数为 2 的顶点，它们能变成同构的图</p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619202100986.png" alt="image-20210619202100986" /></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619202104794.png" alt="image-20210619202104794" /></p>
+
+<h5 id="库拉图斯基-kuratowski-定理">库拉图斯基 (Kuratowski) 定理</h5>
+
+<p>图 G 是平面图，当且仅当它不包含同胚于 $k_{3,3}$ 或 $k_5$ 的子图</p>
+
+<h4 id="着色问题">着色问题</h4>
+
+<p>给定一个无向图 $G(V, E)$，其中 $V$ 为顶点集合，$E$ 为边集合。图着色问题为：将 $V$ 分成 $K$ 个颜色组，没有相邻顶点同色，取最小的 $K$ 值</p>
+
+<h4 id="对偶图">对偶图</h4>
+
+<p>设 $G$ 是一个平面图，有 $k$ 个面，记为 $F_1, F_2, …, F_k$，其中包括无限面，按如下方式构造的图 $G^*$ 称为图 $G$ 的对偶图：</p>
+
+<ul>
+  <li>将每个面 $F_i$ 作为 $G^*$ 的一个顶点 $f_j$</li>
+  <li>对于两个面 $F_i$ 和 $F_j$ 的公共边，对应图 $G^*$ 中的边 $(f_i, f_j)$</li>
+  <li>对于仅属于一个面的边（如悬挂边和桥边），则对应图 $G^*$ 中的自环</li>
+</ul>
+
+<p><em>对偶图将地图的着色问题转换为一般图的顶点着色问题</em></p>
+
+<h4 id="平面图的着色">平面图的着色</h4>
+
+<ul>
+  <li>对给定的无向图 G 的顶点进行涂色，如果每个顶点只涂一种颜色并且任何两个邻接的顶点颜色不同，则称为图的一个正常着色。正常着色所需要的最少颜色数，称为图 G 的 <strong>着色数</strong>，记为 $\chi(G)$</li>
+  <li>对于不是零图的无向图 G，以下三个说法等价：
+    <ul>
+      <li>图 G 的着色数 $\chi(G) = 2$</li>
+      <li>图 G 是二分图</li>
+      <li>图 G 的所有圈的长度都是偶数</li>
+    </ul>
+  </li>
+  <li>对以下图的着色数容易计算
+    <ul>
+      <li>对于 <strong>零图</strong>，$\chi(G) = 1$</li>
+      <li>对于具有 n 个顶点的完全图 $K_N$，着色数 $\chi(G) = n$</li>
+      <li>对于两个或两个以上节点的树 $T$，着色数 $\chi(G) = 2$</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="韦尔奇-鲍威尔算法">韦尔奇-鲍威尔算法</h4>
+
+<ul>
+  <li>将图 G 的顶点按次数递减的顺序排序</li>
+  <li>用一种颜色涂染序列中的第一个顶点，以及与该顶点不相邻的每一个顶点</li>
+  <li>余下的节点重新排序，按照上述方法重新着色</li>
+</ul>
+
+<blockquote>
+  <p>此算法不保证能用最少色数</p>
+</blockquote>
+
+<h4 id="五色定理">五色定理</h4>
+
+<p>对任意一个平面图 G，都有 $\chi(G) \le 5$</p>
+
+<h5 id="证明">证明</h5>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619204950520.png" alt="image-20210619204950520" /></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619204955910.png" alt="image-20210619204955910" /></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619205224413.png" alt="image-20210619205224413" /></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619205229157.png" alt="image-20210619205229157" /><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619205244631.png" alt="image-20210619205244631" /><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619205233370.png" alt="image-20210619205233370" /></p>
+
+<h3 id="二分图与匹配">二分图与匹配</h3>
+
+<h4 id="二分图">二分图</h4>
+
+<p>设 $G = &lt;V, E&gt;$ 是一个无向图，如果可以把 $V$ 划分成两个子集 $X$ 和 $Y$，使得同一个子集中的任何两个顶点都不邻接，则称图 $G$ 为 <strong>二分图</strong>。$X$ 和 $Y$ 称为 $G$ 的互补顶点子集</p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619205612678.png" alt="image-20210619205612678" /></p>
+
+<h4 id="完全二分图">完全二分图</h4>
+
+<p>$X$ 中的每个顶点都与 $Y$ 中的所有顶点邻接。若 $#X=p, #Y = q$，则将其记为 $K_{p,q}$</p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619205800704.png" alt="image-20210619205800704" /></p>
+
+<h4 id="定理-4">定理</h4>
+
+<ul>
+  <li>$G$ 是一个二分图，当且仅当非平凡无向图 $G$ 的所有圈的长度都是偶数</li>
+</ul>
+
+<h4 id="二分图匹配">二分图匹配</h4>
+
+<h5 id="匹配">匹配</h5>
+
+<p>设  $G = &lt;V, E&gt;$ 是一个二分图，如果 $E$ 的一个子集 $M$ 中的任何两条边都不相邻，则称 $M$ 为二分图 $G$ 的一个匹配</p>
+
+<h5 id="饱和顶点--非饱和顶点">饱和顶点 &amp; 非饱和顶点</h5>
+
+<p>此时，$M$ 中的边所关联的顶点称为 $M$ 的 <strong>饱和顶点</strong>，而 $G$ 的其他顶点为 <strong>非饱和顶点</strong></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619210401708.png" alt="image-20210619210401708" /></p>
+
+<h5 id="最大匹配">最大匹配</h5>
+
+<p>在二分图 $G$ 的所有匹配中， <strong>边数</strong> 最多的匹配称为 $G$ 的 <strong>最大匹配</strong></p>
+
+<h5 id="交错链">交错链</h5>
+
+<p>设 $M$ 是二分图 $G$ 的一个匹配。如果 $G$ 中有这样一条基本链， <strong>链中任何相邻的两条边中恰好有一条属于 $M$</strong>，则称这样的链为关于 $M$ 的 <strong>交错链</strong></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619210708537.png" alt="image-20210619210708537" /></p>
+
+<h5 id="可扩充链">可扩充链</h5>
+
+<p>若一条交错链的两个端点是 $M$ 的非饱和顶点，则称该交错链为关于 $M$ 的 <strong>可扩充链</strong> (M-augmenting path)</p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619210919683.png" alt="image-20210619210919683" /></p>
+
+<h5 id="最大匹配相关定理">最大匹配相关定理</h5>
+
+<p>设 $M$ 是二分图 $G$ 的一个匹配，当且仅当 $G$ 中不存在关于 $M$ 的可扩充链时，$M$ 是 $G$ 的最大匹配</p>
+
+<h5 id="匈牙利算法">匈牙利算法</h5>
+
+<ol>
+  <li>任取一个匹配 $M$ （可以冲空集或一条边开始）</li>
+  <li>令 $S$ 是非饱和顶点（尚未匹配的点）的集合</li>
+  <li>若 $S=\empty$，则 $M$ 已经是最大匹配</li>
+  <li>否则，从 $S$ 中取出一个非饱和顶点 $u_0$ 作为起点，从 $u_0$ 开始找到交错链 $P$</li>
+  <li>如 $P$ 是可扩充链，则令 $M = (M\cup P)-(M\cap P)$</li>
+  <li>如 $P$ 不是可扩充链，则去掉 $u_0$，回到第 3 步</li>
+</ol>
+
+<h5 id="从-x-到-y-的匹配">从 $X$ 到 $Y$ 的匹配</h5>
+
+<p>如有二分图 $G$ 的匹配 $M$，使得 $X$ 的每一个顶点都是饱和的，则称 $M$ 为从 $X$ 到 $Y$ 的匹配</p>
+
+<ul>
+  <li>若存在从 $X$ 到 $Y$ 的匹配，则应该满足 $#X\le#Y$</li>
+  <li>若 $M$ 为从 $X$ 到 $Y$ 的匹配，则 $M$ 是二分图 $G$ 的最大匹配</li>
+</ul>
+
+<p><strong>判断从 $X$ 到 $Y$ 的匹配定理</strong></p>
+
+<p>设 $G$ 是一个具有互补顶点子集 $X$ 和 $Y$ 的二分图。当且仅当对于 $X$ 的任意子集 $U$，$#\Gamma(U)\ge#U$ 被满足时，存在 $G$ 的从 $X$ 到 $Y$ 的匹配</p>
+
+<p>其中，$U$ 表示 $X$ 的子集，$\Gamma(U)$ 表示 $U$ 的邻域，即与 $U$ 中顶点邻接的所有顶点的集合，$\Gamma(U)\subseteq Y$</p>
+
+<h6 id="相异性条件">相异性条件</h6>
+
+<p>上述条件被称为 <strong>相异性条件</strong></p>
+
+<h6 id="从-x-到-y-匹配的算法">从 $X$ 到 $Y$ 匹配的算法</h6>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619213305111.png" alt="" /></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619213331044.png" alt="" /></p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210619213337469.png" alt="image-20210619213337469" /></p>
+
+<h6 id="t-条件">t 条件</h6>
+
+<p>设 $G$ 是具有互补顶点子集 $X$ 和 $Y$ 的二分图，如果能找到一个正整数 t，使得对 $X$ 中的任意顶点 $x$ 有 $d(x)\ge t$，对 $Y$ 的任意顶点有 $d(y)\le t$，则图 $G$ 存在从 $X$ 到 $Y$ 的匹配。定理中的条件称为 “t 条件”</p>
+
+<h5 id="二分图的稳定匹配问题">二分图的稳定匹配问题</h5>
+
+<h6 id="问题定义--描述">问题定义 &amp; 描述</h6>
+
+<h6 id="gale-shapley-算法">Gale-Shapley 算法</h6>
+
+<h1 id="代数系统">代数系统</h1>
+
+<h2 id="知识回顾">知识回顾</h2>
+
+<h3 id="集合">集合</h3>
+
+<h4 id="集合-1">集合</h4>
+
+<p>集合是一些能够<strong>明确区分</strong>的对象构成的整体，集合一般用<em>大写英文字母</em>表示</p>
+
+<ul>
+  <li>集合是一组无序对象</li>
+  <li>在集合中没有重复出现的元素</li>
+</ul>
+
+<h4 id="元素">元素</h4>
+
+<p>如果对象a在集合A中，则称a是A的<strong>元素</strong></p>
+
+<h4 id="集合与元素的关系">集合与元素的关系</h4>
+
+<ul>
+  <li>$a属于A, 记为a\in A$</li>
+  <li>$a不属于A, 记为a\notin A$</li>
+  <li>在数理逻辑中，属于关系$\in$看作是一个谓词：$a\in A, \neg(a\in A$)</li>
+</ul>
+
+<h4 id="集合示例">集合示例</h4>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$N={x</td>
+          <td>x是自然数}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$I={x</td>
+          <td>x是整数}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$Q={x</td>
+          <td>x是有理数}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h4 id="集合运算">集合运算</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>运算名称</th>
+      <th>集合表示</th>
+      <th>内涵定义</th>
+      <th>谓词逻辑表示</th>
+      <th>python文字描述</th>
+      <th>python表示</th>
+      <th>python 意义</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>并运算</td>
+      <td>$A\cup B$</td>
+      <td>${x</td>
+      <td>x\in A\vee x\in B}$</td>
+      <td>$\forall x(x\in A\cap B\leftrightarrow x\in A\wedge x\in B$)</td>
+      <td>A.union(B)</td>
+      <td>A$</td>
+      <td>$B</td>
+      <td>x in A$</td>
+      <td>$B==(x in A) or (x in B)</td>
+    </tr>
+    <tr>
+      <td>交运算</td>
+      <td>$A\cap B$</td>
+      <td>${x</td>
+      <td>x\in A\wedge x\in B}$</td>
+      <td>$\forall x(x\in A\cup B\leftrightarrow x\in A\vee x\in B$)</td>
+      <td>A.intersection(B)</td>
+      <td>A&amp;B</td>
+      <td>x in A&amp;B==x in A and x in B</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>差运算</td>
+      <td>$A-B$</td>
+      <td>${x</td>
+      <td>x\in A\wedge x\notin B}$</td>
+      <td>$\forall x(x\in A-B\leftrightarrow x\in A\wedge\neg x\in B$)</td>
+      <td>A.difference(B)</td>
+      <td>A-B</td>
+      <td>x in A-B==x in A and not(x in B)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>对称差运算</td>
+      <td>$A\oplus B$</td>
+      <td>${x</td>
+      <td>x\in A\oplus x\in B}$</td>
+      <td>$\forall x(x\in A\oplus B\leftrightarrow x\in A\oplus x\in B$)</td>
+      <td>A.symmetric_difference(B)</td>
+      <td>A^B</td>
+      <td>x in A^B==x in A$\oplus$x in B</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>补运算</td>
+      <td>~$A$</td>
+      <td>{$x</td>
+      <td>x\notin A$}</td>
+      <td>$\forall x(x\in$~$A\leftrightarrow x\notin A)$</td>
+      <td>U.differnce(A)</td>
+      <td>U-A</td>
+      <td>x in ~A==not x in A</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="集合之间的关系">集合之间的关系</h4>
+
+<h5 id="包含关系子集">包含关系（子集）</h5>
+
+<h6 id="定义-5">定义</h6>
+
+<p>若集合A的元素都是集合B的元素，则称A是B的子集，也称A包含于B，或者B包含A，记为A$\subseteq$B</p>
+
+<h6 id="谓词逻辑表示">谓词逻辑表示</h6>
+
+<ul>
+  <li>$A\subseteq B\Leftrightarrow\forall x(x\in A\rightarrow x\in B$)</li>
+  <li>$A\subset B\Leftrightarrow\forall x(x\in A\rightarrow x\in B$)$\wedge\exists x(x\in B\wedge x\notin A$)</li>
+  <li>$A\subset B\Leftrightarrow\forall x(x\in A\rightarrow x\in B$)$\wedge A\cap B\neq\varnothing$</li>
+  <li>$A\not\subseteq B\Leftrightarrow\exists x(x\in A\wedge x\notin B$)</li>
+</ul>
+
+<h5 id="相等关系">相等关系</h5>
+
+<h6 id="定义外延性公理">定义(外延性公理)：</h6>
+
+<p>如果集合A和B含有相同的元素，则称A和B相等，记为A=B</p>
+
+<h6 id="谓词逻辑表示-1">谓词逻辑表示</h6>
+
+<ul>
+  <li>$A=B\Leftrightarrow\forall x(x\in A\leftrightarrow x\in B$)</li>
+  <li>$A=B\Leftrightarrow\forall x(x\in A\leftrightarrow x\in B$)$\wedge\forall x(x\in B\rightarrow x\in A$)</li>
+</ul>
+
+<h4 id="集合运算性质">集合运算性质</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>定律</th>
+      <th>描述1</th>
+      <th>描述2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>结合律</td>
+      <td>($A\cup B)\cup C=A\cup(B\cup C$)</td>
+      <td>($A\cap B)\cap C=A\cap(B\cap C$)</td>
+    </tr>
+    <tr>
+      <td>交换律</td>
+      <td>$A\cup B=B\cup A$</td>
+      <td>$A\cap B=B\cap A$</td>
+    </tr>
+    <tr>
+      <td>分配律</td>
+      <td>$A\cup(B\cap C$)=($A\cup B)\cap(A\cup C$)</td>
+      <td>$A\cap(B\cup C$)=($A\cap B)\cup(A\cap C$)</td>
+    </tr>
+    <tr>
+      <td>德·摩根律</td>
+      <td>$\neg(A\cup B)=$$(\neg A)\cap(\neg B)$</td>
+      <td>$\neg (A\cap B)=$$(\neg A)\cup (\neg B)$</td>
+    </tr>
+    <tr>
+      <td>幂等律</td>
+      <td>$A\cup A=A$</td>
+      <td>$A\cap A=A$</td>
+    </tr>
+    <tr>
+      <td>吸收率</td>
+      <td>$A\cup(A\cap B$)$=A$</td>
+      <td>$A\cap(A\cup B$)$=A$</td>
+    </tr>
+    <tr>
+      <td>对合律</td>
+      <td>~~$A=A$</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="函数">函数</h3>
+
+<h4 id="满射单射和双射">满射、单射和双射</h4>
+
+<p>$设函数f:X\rightarrow Y$</p>
+
+<h5 id="满射">满射</h5>
+
+<p>若对于每个 y$\in$Y，都存在 x$\in$X使得 f (x) = y，则称f为满射，即</p>
+
+<ul>
+  <li>$\forall y(y\in Y\rightarrow\exists x(x\in X\wedge f(x$$)=y))$</li>
+</ul>
+
+<h5 id="单射">单射</h5>
+
+<p>若对于任意 x1$\in$X, x2$\in$X， 若 f (x$_1$) = f (x$_2$)则x1=x2，称 f 为单射，即</p>
+
+<ul>
+  <li>$\forall x_1\forall x_2(x_1\in X\wedge x_2\in X\wedge f(x_1$$)=f(x_2$$)\rightarrow x_1=x_2$</li>
+</ul>
+
+<h5 id="双射">双射</h5>
+
+<p>$f$既是单射又是满射，则$f$是双射函数。</p>
+
+<p><img src="C:\Users\Ericaaaaaaaa\AppData\Roaming\Typora\typora-user-images\image-20210628124603445.png" alt="image-20210628124603445" /></p>
+
+<h3 id="关系-1">关系</h3>
+
+<h4 id="关系的定义">关系的定义</h4>
+
+<p>设X,Y是集合，若R$\subseteq$X × Y, 则称R为从X到Y的关系，简称为关系R</p>
+
+<ul>
+  <li>将&lt;x,y&gt;$\in$R表示为x$R$y, 读作“x和y有关系R”</li>
+  <li>将&lt;x,y&gt;$\not\in$R表示为x$\underline{R}$y, 读作“x和y没有关系R”</li>
+</ul>
+
+<p>若R是从X到Y的关系，就是集合X中元素与集合Y中元素之间的对应</p>
+
+<ul>
+  <li>从集合X中选择一个元素x, 对应地再集合Y中选择一个元素y</li>
+  <li>x和y组成一个有序偶(x,y)</li>
+  <li>有序偶(x,y)$\in$R</li>
+</ul>
+
+<h4 id="定义域和值域">定义域和值域</h4>
+
+<h5 id="定义域">定义域</h5>
+
+<p>关系R中所有有序偶的第一元组成的集合称为R的定义域，记为<strong>dom(R)</strong></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>dom(R)={x</td>
+      <td>$\exists$y(&lt;x,y$\in$R&gt;)}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="值域">值域</h5>
+
+<p>关系R中所有有序偶的第二元组成的集合称为R的值域，记为<strong>ran(R)</strong></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ran(R)={y</td>
+      <td>$\exists$x(&lt;x,y&gt;$\in$R)}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="特殊关系">特殊关系</h4>
+
+<h5 id="空关系varnothing">空关系$\varnothing$</h5>
+
+<h5 id="恒等关系">恒等关系</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$I_x={&lt;x,x&gt;</td>
+      <td>x\in X}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="全域关系">全域关系</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$U_x={&lt;x,y&gt;</td>
+      <td>x\in X\wedge y\in X}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>$\varnothing\subseteq I_x\subseteq U_x$</p>
+
+<h4 id="关系的集合运算">关系的集合运算</h4>
+
+<p>设关系$R$和$S$是从$X$到$Y$的两个关系，则运算为$R\cap S,R\cup S,R-S,R$^$S,$~$R$</p>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$R\cap S={(x,y)</td>
+          <td>(x,y)\in R\wedge&lt;x,y&gt;\in S}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$R\cup S={(x,y)</td>
+          <td>(x,y)\in R\vee&lt;x,y&gt;\in S}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$R-S={(x,y)</td>
+          <td>(x,y)\in R\wedge&lt;x,y&gt;\not\in S}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$R$^$S={(x,y)</td>
+          <td>(x,y)\in R\oplus&lt;x,y&gt;\in S}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>~$R={(x,y)</td>
+          <td>(x,y)\not\in R}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>python运算符
+    <ul>
+      <li>&amp; 交
+* | 并</li>
+      <li>$-$ 差</li>
+      <li>^ 对称差</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="复合运算">复合运算</h4>
+
+<p>关系$R\subseteq X×Y$和关系$S\subseteq Y×Z$的复合</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$R\circ S={&lt;x,z&gt;</td>
+      <td>\exists y(&lt;x,y&gt;\in R\wedge&lt;y,z&gt;\in S$$)}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="逆运算">逆运算</h4>
+
+<p>定义$R\subseteq X×Y$的逆关系</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$R^-$$^1={&lt;y,x&gt;</td>
+      <td>&lt;x,y&gt;\in R}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>将R中每个有序偶的第一元与第二元对调就得到$R$的逆关系$R^-$$^1$</p>
+
+<h4 id="幂运算">幂运算</h4>
+
+<p>设$R$是$X$上关系，$n$是自然数，$R^n$定义如下:</p>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$R^0=I_x\qquad\qquad\</td>
+          <td>X</td>
+          <td>=m$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>$R^n$$^+$$^1=R^n\circ R\qquad R^m$$^+$$^1=?$</li>
+</ul>
+
+<h4 id="关系运算性质">关系运算性质</h4>
+
+<p>若R和S都是从X到Y的关系，则$R\cap S,R\cup S,R-S,R+S,$~$R$仍然是从X到Y的关系</p>
+
+<ul>
+  <li>$R\subseteq X×Y,\ S\subseteq X×Y\vDash R\cap\ S\subset X×Y$</li>
+  <li>$R\subseteq X×Y,\ S\subseteq X×Y\vDash R\cup\ S\subset X×Y$</li>
+  <li>$R\subseteq X×Y,\ S\subseteq X×Y\vDash R-S \subset X×Y$</li>
+  <li>$R\subseteq X×Y,\ S\subseteq X×Y\vDash R+S \subset X×Y$</li>
+  <li>$R\subseteq X×Y\vDash$~$R\subseteq X×Y$</li>
+</ul>
+
+<h4 id="复合性质">复合性质</h4>
+
+<p>若$R$是从$X$到$Y$的关系，$S$是从$Y$到$Z$的关系，则$R\circ S\subseteq X×Z$</p>
+
+<p>即$R\subseteq X×Y,\ S\subseteq Y×Z \vDash R\circ S\subseteq X×Z$</p>
+
+<ul>
+  <li>$(R_1\circ R_2$$)\circ R_3=R_1\circ(R_2\circ R_3$)</li>
+  <li>$R\circ I_A=I_A\circ R=R$</li>
+  <li>$(R_1\cap R_2$$)\circ R_3\subseteq R_1\circ R_3\cap R_2\circ R_3$</li>
+  <li>$R_1\circ($$R_2\cap R_3)\subseteq R_1\circ R_2\cap R_1\circ R_3$</li>
+  <li>$(R_1\cup R_2$$)\circ R_3\subseteq R_1\circ R_3\cup R_2\circ R_3$</li>
+  <li>$R_1\circ($$R_2\cup R_3)\subseteq R_1\circ R_2\cup R_1\circ R_3$</li>
+  <li>
+    <font color="red">注意：一般不满足交换律</font>
+  </li>
+</ul>
+
+<h4 id="逆运算性质">逆运算性质</h4>
+
+<ul>
+  <li>($R_1\cup R_2$)$^-$$^1$$=R_1$$^-$$^1$$\cup\ R_2$$^-$$^1$</li>
+  <li>($R_1\cap R_2$)$^-$$^1$$=R_1$$^-$$^1$$\cap\ R_2$$^-$$^1$</li>
+  <li>($R_1-R_2$)$^-$$^1$$=R_1$$^-$$^1$$-R_2$$^-$$^1$</li>
+  <li>(~$\ R_1$)$^-$$^1$$=$$\ $~$\ R_1$$^-$$^1$</li>
+  <li>
+    <font color="red">($R_1\circ R_2$)$^-\$\$^1\$\$=R_2$$^-\$\$^1\$\$\circ\\ R_1\$\$^-\$\$^1$</font>
+  </li>
+</ul>
+
+<h4 id="幂运算性质">幂运算性质</h4>
+
+<ul>
+  <li>$R^mR^n=R^m$$^+$$^n$</li>
+  <li>($R^m$)$^n=R^m$$^n$</li>
+</ul>
+
+<h4 id="关系特性">关系特性</h4>
+
+<ul>
+  <li>集合X上的有一些重要的关系R
+    <ul>
+      <li>自反的($reflexive$)
+        <ul>
+          <li>矩阵的主对角线均为1，关系图中每个节点都有自环</li>
+        </ul>
+      </li>
+      <li>反自反的($irreflexive$)
+        <ul>
+          <li>矩阵的主对角线均为0，关系图中每个节点都没有自环</li>
+        </ul>
+      </li>
+      <li>对称的($symmetric$)
+        <ul>
+          <li>矩阵的所有元素关于主对角线对称，关系图中任意两个节点间或者没有边或者是双向边</li>
+        </ul>
+      </li>
+      <li>反对称的($antisymmetric$)
+        <ul>
+          <li>矩阵关于主对角线对称位置至多有一个为1，关系图中任意两个节点间或者没有边或者单边。</li>
+        </ul>
+      </li>
+      <li>传递的($transitive$)
+        <ul>
+          <li>任意两个节点间有路径，节点间一定有边。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>构建特性关系
+    <ul>
+      <li>自反关系</li>
+      <li>对称关系</li>
+      <li>传递关系</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="自反">自反</h4>
+
+<ul>
+  <li>定义设R是集合X上的关系</li>
+  <li>若对于每个x$\in X$都有$&lt;x,x&gt;\in R$, 则称R为自然的，即</li>
+  <li>$\forall x(x\in X\rightarrow&lt;x,x&gt;\in R$)</li>
+</ul>
+
+<h4 id="反自反">反自反</h4>
+
+<ul>
+  <li>定义设R是集合X上的关系</li>
+  <li>若对于每个$x\in X$都有$&lt;x,x&gt;\not\in R$, 则称R为反自反的，即</li>
+  <li>$\forall x($$x\in X\rightarrow&lt;x,x&gt;\not\in R)$</li>
+  <li>$\forall x($$x\in X\rightarrow\neg&lt;x,x&gt;\in R)$</li>
+</ul>
+
+<h4 id="对称">对称</h4>
+
+<ul>
+  <li>定义设$R$是集合$X$上的关系</li>
+  <li>若对于$x,y\in X$, 以及($x,y$)$\in R$, 就称R是对称的, 即</li>
+  <li>$\forall x\forall y(x\in X\wedge y\in X\wedge(x,y$)$\in\rightarrow(y,x$)$\in R)$</li>
+</ul>
+
+<h4 id="反对称">反对称</h4>
+
+<ul>
+  <li>定义设R是集合X上的关系</li>
+  <li>若对于每个$x,y\in X$, 以及$(x,y)\in R$, 且$(y,x)\in R$, 则有$x=y$, 就称$R$是反对称的，即</li>
+  <li>$\forall x\forall y(x\in X\wedge y\in X\wedge (x,y$$)\in R\wedge(y,x$$)\in R\rightarrow x=y$</li>
+</ul>
+
+<h4 id="传递">传递</h4>
+
+<ul>
+  <li>定义设$R是集合X$上的关系</li>
+  <li>若对于每个$x,y,x\in X$, 以及$(x,y)\in R$且$&lt;y,z&gt;\in R$, 则有$&lt;x,z&gt;\in R$, 就称$R$是传递的，即</li>
+  <li>$\forall x\forall y\forall z(x\in X\wedge y\in X\wedge z\in X\wedge(x,y)\in R\wedge&lt;y,z&gt;\in R\rightarrow&lt;x,z&gt;\in R)$</li>
+</ul>
+
+<h4 id="构造特征关系">构造特征关系</h4>
+
+<ul>
+  <li>自反
+    <ul>
+      <li>设 R是集合 X 上的关系，则 R’ 是自反的，其中 $R’=R\cup I_x$</li>
+    </ul>
+  </li>
+  <li>反自反
+    <ul>
+      <li>设 R是集合 X 上的关系，则 R’ 是反自反的，其中 $R’=R-I_x$</li>
+    </ul>
+  </li>
+  <li>对称
+    <ul>
+      <li>设 R是集合 X 上的关系，则 R’ 是对称的，其中 $R’=R\cup R^-$$^1$</li>
+    </ul>
+  </li>
+  <li>反对称
+    <ul>
+      <li>设 R是集合 X 上的关系，则 R’是反对称的，其中 $R’=(R-(R\cap R^-$$^1))\cup R\cap I_x$</li>
+    </ul>
+  </li>
+  <li>传递
+* 设 R是集合 X 上的关系，|X|=m，则 R’是传递的，其中，$R’=\cup_n$$_=$$_1$$_,$$_m$$R^n$</li>
+</ul>
+
+<h4 id="关系特性的性质">关系特性的性质</h4>
+
+<h5 id="定理-5">定理：</h5>
+
+<p>设R是集合X上的关系</p>
+
+<ul>
+  <li>$R是自反的当且仅当R=I_x\cup R$</li>
+  <li>$R的反自反的当且仅当I_x\cap R=\varnothing$</li>
+  <li>$R是对称的当且仅当R^-$$^1=R$</li>
+  <li>$R是反对称的当且仅当R\cap R^-$$^1\subseteq I_x$</li>
+  <li>$R是传递的当且仅当R\circ R\subseteq R$</li>
+</ul>
+
+<h5 id="关系特性与集合运算的性质探究">关系特性与集合运算的性质探究</h5>
+
+<p>设$R_1, R_2\subseteq X×X$, 若$R_1, R_2$是自反的, 则$R_1\cup R_2$是自反的</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>\</th>
+      <th>$R_1\cup R_2$</th>
+      <th>$R_1\cap R_2$</th>
+      <th>$R_1-$$R_2$</th>
+      <th>~$R_1$</th>
+      <th>$R_1\circ R_2$</th>
+      <th>$R_1^-$$^1$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>自反性</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>-</td>
+      <td>-</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td>反自反性</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>-</td>
+      <td>-</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td>对称性</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>-</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td>反对称性</td>
+      <td>-</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>-</td>
+      <td>-</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td>传递性</td>
+      <td>-</td>
+      <td>$\surd$</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>$\surd$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="代数系统-1">代数系统</h2>
+
+<h3 id="代数运算">代数运算</h3>
+
+<h4 id="概念">概念</h4>
+
+<p>设 $X$ 是一个集合，$\psi$ 是 $X\times X\rightarrow X$ 的映射，则称 $\psi$ 是 $X$ 的一个 <strong>代数运算</strong></p>
+
+<p>在集合 $X$ 中，任意两个有次序的元素 $a$ 与 $b$，依据一个法则，都有<strong>唯一确定</strong>的元素 $d$ 与它们对应，则称这个法则是集合 $X$ 的一个代数运算，称集合 $X$ 关于运算 $\psi$ 是<strong>封闭的</strong>。可记为 $a\circ b=d$</p>
+
+<p><strong>特点</strong></p>
+
+<ul>
+  <li>唯一性</li>
+  <li>封闭性</li>
+</ul>
+
+<h4 id="代数运算实例">代数运算实例</h4>
+
+<p>$\N,\ \Z,\ \Q,\ \R$ 分别为自然数、整数、有理数、实数集</p>
+
+<p>$M_n(\R)$ 为 $n$ 阶实矩阵（实数矩阵）集合，$n\ge 2$</p>
+
+<p>$P(B)$ 为幂集</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$X^X$ 为从 $X$ 到 $X$ 的函数集, $</td>
+      <td>X</td>
+      <td>\ge 2$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>集合</th>
+      <th>运算</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$\N,\ \Z,\ \Q,\ \R$</td>
+      <td>$+,\ \times$</td>
+    </tr>
+    <tr>
+      <td>$M_n(\R)$</td>
+      <td>$+$(矩阵加法)$,\ \times$(矩阵乘法)</td>
+    </tr>
+    <tr>
+      <td>$P(B)$</td>
+      <td>$\cup,\ \cap$</td>
+    </tr>
+    <tr>
+      <td>${0,1}$</td>
+      <td>$\and,\ \or$</td>
+    </tr>
+    <tr>
+      <td>$X^X$</td>
+      <td>$\circ$(函数复合)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>$N_n$ 是有穷自然数集合</p>
+
+<ul>
+  <li>$&lt;N_n, \oplus&gt;$
+    <ul>
+      <li>$N_n = {0, 1,…,n-1}$</li>
+      <li>$x\oplus y = (x+y) \mod{n}$</li>
+    </ul>
+  </li>
+  <li>$&lt;N_n,\otimes&gt;$
+    <ul>
+      <li>$N_n = {1, …,n}$</li>
+      <li>$x\otimes y = (x\times y)\mod{n}$</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="运算表">运算表</h4>
+
+<p>表示有穷集上的一元运算和二元运算</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>$\circ$</th>
+      <th>$a_1$</th>
+      <th>$a_2$</th>
+      <th>…</th>
+      <th>$a_n$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$a_1$</td>
+      <td>$a_1\circ a_1$</td>
+      <td>$a_1\circ a_2$</td>
+      <td>…</td>
+      <td>$a_1\circ a_n$</td>
+    </tr>
+    <tr>
+      <td>$a_2$</td>
+      <td>$a_2\circ a_1$</td>
+      <td>$a_2\circ a_2$</td>
+      <td>…</td>
+      <td>$a_2\circ a_n$</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td> </td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <td>$a_n$</td>
+      <td>$a_n\circ a_1$</td>
+      <td>$a_n\circ a_2$</td>
+      <td>…</td>
+      <td>$a_n\circ a_n$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="结合律交换律分配律">结合律、交换律、分配律</h3>
+
+<h4 id="结合律">结合律</h4>
+
+<p>设 $X$ 是集合，$X$ 上有代数运算 $\circ$，如果对 $X$ 中任意元素 $x,y,z$ 都有 $x\circ(y\circ z)=(x\circ y)\circ z$</p>
+
+<h4 id="交换律">交换律</h4>
+
+<p>$x\circ y=y\circ x$</p>
+
+<h4 id="分配律">分配律</h4>
+
+<p>$x\circ (y\oplus z) = (x\circ y)\oplus (x\circ z)$</p>
+
+<h3 id="幂等律吸收律">幂等律、吸收律</h3>
+
+<h4 id="幂等律">==幂等律==</h4>
+
+<p>设X是集合，$X$上有代数运算$\circ$，$e$是$X$上的单位元，如果对$X$中任意元素$x$都有 $x\circ x = e$，则称运算在$X$上满足<strong>幂等律</strong></p>
+
+<h4 id="吸收律">==吸收律==</h4>
+
+<p>设$X$是集合，$X$上有代数运算$\circ$，如果对$X$中任意元素$x$都有 $x\circ x=x$，则称运算在$X$上满足<strong>吸收律</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>集合</th>
+      <th>运算</th>
+      <th>交换律</th>
+      <th>结合律</th>
+      <th>幂等律</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$\N, \Z,\Q,\R$</td>
+      <td>$+$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\times$</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>$\times$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\times$</td>
+    </tr>
+    <tr>
+      <td>$M_n(R)$</td>
+      <td>$+$(矩阵加法)</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\times$</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>$\times$(矩阵乘法)</td>
+      <td>$\times$</td>
+      <td>$\surd$</td>
+      <td>$\times$</td>
+    </tr>
+    <tr>
+      <td>$P(S)$</td>
+      <td>$\cup$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>$\cap$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td>${0,1}$</td>
+      <td>$\and$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>$\or$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+      <td>$\surd$</td>
+    </tr>
+    <tr>
+      <td>$X^X$</td>
+      <td>$\circ$ （函数复合）</td>
+      <td>$\times$</td>
+      <td>$\surd$</td>
+      <td>$\times$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="克莱恩-klein-四元集合及运算">克莱恩 (Klein) 四元集合及运算</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>$\circ$</th>
+      <th>e</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>e</td>
+      <td>e</td>
+      <td>a</td>
+      <td>b</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>a</td>
+      <td>e</td>
+      <td>c</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td>b</td>
+      <td>c</td>
+      <td>e</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td>c</td>
+      <td>b</td>
+      <td>a</td>
+      <td>e</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="特殊元">特殊元</h3>
+
+<h4 id="单位元">单位元</h4>
+
+<p>设$\circ$为$X$上的二元运算,如果存在$e\in X$，使得对任意 $x\in X$ 都有 $e\circ x = x$，则称 $e$ 是 $X$ 中关于$\circ$运算的左单位元。（同理定义右单位元）</p>
+
+<blockquote>
+  <p>$e$ 既为左单位元又为右单位元 $\Rightarrow$ $e$ 为 $X$ 上关于 $\circ$ 运算的单位元</p>
+</blockquote>
+
+<h4 id="零元">零元</h4>
+
+<p>设$\circ$为$X$上的二元运算,如果存在$0\in X$，使得对任意 $x\in X$ 都有 $0\circ x = 0$，则称 $0$ 是 $X$ 中关于$\circ$运算的左零元。（同理定义右零元）</p>
+
+<blockquote>
+  <p>$0$ 既为左零元又为右零元 $\Rightarrow$ $0$ 为 $X$ 上关于 $\circ$ 运算的单位元</p>
+</blockquote>
+
+<h4 id="逆元">逆元</h4>
+
+<p>关于 $\circ$ 运算，若 $y\in X$ 既是 $x$ 的左逆元又是 $x$ 的右逆元则称 $y$ 为 $x$ 的逆元，表示为 $x^{-1}$ 。</p>
+
+<blockquote>
+  <p>如果 $x$ 的逆元存在，就称 $x$ 是可逆的。</p>
+</blockquote>
+
+<h4 id="幂等元">幂等元</h4>
+
+<p>设 $\circ$ 为X上的二元运算,若 $x\in X$ 且 $x \circ x=x$，则称 $x$ 是 $X$ 中关于运算 $\circ$ 的幂等元。</p>
+
+<p><strong>特殊元实例</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>集合</th>
+      <th>运算</th>
+      <th>单位元</th>
+      <th>零元</th>
+      <th>逆元</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$\N,\ \Z,\ \Q,\ \R$</td>
+      <td>$+$</td>
+      <td>$0$</td>
+      <td>$\times$</td>
+      <td>$-x$</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>$\times$</td>
+      <td>$1$</td>
+      <td>$0$</td>
+      <td>$x^{-1}$</td>
+    </tr>
+    <tr>
+      <td>$M_n(\R)$</td>
+      <td>$+$ (矩阵加法)</td>
+      <td>$0$ 矩阵</td>
+      <td>$\times$</td>
+      <td>$-X$</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>$\times$ (矩阵乘法)</td>
+      <td>单位矩阵</td>
+      <td>$0$ 矩阵</td>
+      <td>$X^{-1}$</td>
+    </tr>
+    <tr>
+      <td>$P(S)$</td>
+      <td>$\cup$</td>
+      <td>$\empty$</td>
+      <td>$S$</td>
+      <td>$\empty$ 的逆元为 $\empty$</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>$\cap$</td>
+      <td>$S$</td>
+      <td>$\empty$</td>
+      <td>$S$ 的逆元为 $S$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="代数系统-2">代数系统</h2>
+
+<p>设 $X$ 是非空集合，$X$上有 $m$ 个代数运算 $\psi_1, \psi_2, …, \psi_m$，集合 $X$ 及其代数运算组成的系统称为一个代数系统，简称代数，记为 $&lt;X, {\psi_1,\psi_2,…,\psi_m}&gt;$，其中，$m&gt;0$。</p>
+
+<p>在代数中，对象是抽象的而不是具体的，对象上的运算也是抽象的，其含义由一组给定公理规定。</p>
+
+<h3 id="公理">公理</h3>
+
+<p>代数运算所具有的性质作为公理，并用方程的形式表示出来。如：结合律、交换律</p>
+
+<h3 id="代数常量">代数常量</h3>
+
+<p>特殊元素：如单位元、零元等等</p>
+
+<h3 id="代数系统实例">代数系统实例</h3>
+
+<p>&lt;对象集合、运算集合、常量集合&gt;</p>
+
+<p>&lt;$\N$，+，*，0，1&gt;</p>
+
+<p>$\forall a,b,c\in \N$</p>
+
+<ul>
+  <li>(a+b)+c = a+(b+c), (a*b)*c = a*(b*c)</li>
+  <li>a+b =b +a , a*b=b*a</li>
+  <li>a+0 =0+a =a, a+(-a)=0, a*1 =1*a =a</li>
+  <li>(a+b)*c = a*c+b*c</li>
+</ul>
+
+<h3 id="同态">同态</h3>
+
+<h4 id="定义-6">定义</h4>
+
+<p>设集合 $X$ 与 $Y$ 各有代数运算 $\circ$ 及 $\bullet$ ，且 $\psi$ 是 $X$ 到 $Y$ 的一个映射，如果 $\psi$ 满足以下条件：在 $\psi$ 之下：$\psi(a\circ b)=\psi(a)\bullet\psi(b)$，称 $\psi$ 为代数系统 $&lt;X,\circ&gt;$ 与 $&lt;Y,\bullet&gt;$ <strong>同态</strong>。记为 $&lt;X,\circ&gt;\sim&lt;Y,\bullet&gt;$</p>
+
+<p>若 $\psi$ 是满射，则 $\psi$ 称为代数系统 $&lt;X,\circ&gt;$ 到 $&lt;Y,\bullet&gt;$ 的同态满射。简称 $&lt;X,\circ&gt;$ 与 $&lt;Y,\bullet&gt;$ <strong>满同态</strong></p>
+
+<h4 id="性质">性质</h4>
+
+<ul>
+  <li>若代数系统 $&lt;X,\circ&gt;$ 与 $&lt;Y,\bullet&gt;$ 满同态，则对代数运算 $\circ$ 及 $\bullet$
+    <ul>
+      <li>若 $\circ$ 满足结合律，则 $\bullet$ 也满足结合律</li>
+      <li>若 $\circ$ 满足交换律，则 $\bullet$ 也满足交换律</li>
+    </ul>
+  </li>
+  <li>若代数系统 $&lt;X, {\circ,\oplus }&gt;$，$&lt;Y, {\bullet,\otimes }&gt;$ 满同态，若代数运算 $\circ, \oplus$ 满足分配律，则 $\bullet,\otimes$ 也满足分配律</li>
+</ul>
+
+<h3 id="同构">同构</h3>
+
+<h4 id="定义-7">定义</h4>
+
+<p>设集合 $X$ 与 $Y$ 各有代数运算 $\circ$ 及 $\bullet$，且 $\psi$ 是 $X$ 到 $Y$ 的一个一一映射，如果 $\psi$ 满足以下条件：$\psi(a\circ b)=\psi(a)\bullet\psi(b)$，称 $\psi$ 为代数系统 $&lt;X, \circ&gt;$ 到 $&lt;Y,\bullet&gt;$ 的一个 <strong>同构映射</strong>，简称 $&lt;X, \circ&gt;$ 与 $&lt;Y,\bullet&gt;$ <strong>同构</strong>。记为  $&lt;X, \circ&gt;\cong&lt;Y,\bullet&gt;$</p>
+
+<h4 id="性质-1">性质</h4>
+
+<ul>
+  <li>保持运算的所有性质</li>
+  <li>从抽象角度，两个代数系统完全相同</li>
+</ul>
+
+<h3 id="子代数">子代数</h3>
+
+<h4 id="定义-8">定义</h4>
+
+<p>设 $A=&lt;X,\bullet&gt;$ 是一个代数系统，若 $Y\not=\empty$ , $Y\in X$，并且对于代数 $A$ 的运算 $\bullet$ 封闭，则称代数系统 $A_s=&lt;Y,\bullet&gt;$ 是代数系统 $A$ 的子代数</p>
+
+<h4 id="性质-2">性质</h4>
+
+<p>子代数保留原来代数系统中相关运算性质</p>
+
+<h3 id="商代数">商代数</h3>
+
+<h4 id="定义-9">定义</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>设 $R$ 是 $X$ 上的等价关系，$A=&lt;X,\bullet&gt;$ 是一代数系统，则 $A_q=&lt;X/\R,\circ&gt;$ 是一代数系统，称为 $A$ 的<strong>商代数</strong>。其中，$X/R={[x]_\R</td>
+      <td>x\in X}$ ，$\circ$ 定义为对任意的 $[x]<em>\R,\ [y]</em>\R\in X/\R,\ [x]<em>\R\circ[y]</em>\R=[x\bullet y]_\R$</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>等价关系定义为：设R是非空集合A上的二元关系，若R是自反的、对称的、传递的，则称R是A上的等价关系。</p>
+</blockquote>
+
+<h4 id="性质-3">性质</h4>
+
+<ul>
+  <li>一个代数系统 $&lt;X, \bullet&gt;$ 与其商代数 $&lt;Y, \circ&gt;$ 满同态。</li>
+  <li>商代数保留原代数系统的运算性质</li>
+</ul>
+
+<h3 id="积代数">积代数</h3>
+
+<h4 id="定义-10">定义</h4>
+
+<p>代数系统 $&lt;X, \bullet&gt;$ , $&lt;X, \circ&gt;$ 的积代数定义为 $&lt;X\times Y,\otimes&gt;$ ，其中 $\times$ 为笛卡尔积，运算 $\otimes$ 定义为：</p>
+
+<p>对任意 $(x_1, y_1)$, $(x_2, y_2)\in X\times Y,\ (x_1,y_1)\otimes(x_2,y_2)=((x_1\bullet x_2),\ (y_1\circ y_2))$</p>
+
+<h4 id="性质-4">性质</h4>
+
+<p>积代数保持两个代数运算共有的运算性质</p>
+
+<h2 id="半群">半群</h2>
+
+<h3 id="半群-1">半群</h3>
+
+<h4 id="定义-11">定义</h4>
+
+<p>对代数系统 $&lt;S,\circ&gt;$ ，若对任意 $a,b,c\in S$，有 $(a\circ b)\circ c=a\circ(b\circ c)$，则称 $&lt;S,\circ&gt;$ 为<strong>半群</strong></p>
+
+<h4 id="性质-5">性质</h4>
+
+<ul>
+  <li>$&lt;S, \circ&gt;$ 为半群，若 $S$ 有限，则必有 $a\in S$ 使得 $a\circ a=a$</li>
+  <li><strong>半群导出定理</strong>：设 $&lt;S,*&gt;$ 是半群，$&lt;T,\odot&gt;$ 是一个代数系统，若有一同态满射 $\psi:S\rightarrow T$，则 $&lt;T,\odot&gt;$ 也是半群</li>
+  <li>设 $&lt;S,<em>&gt;$ , $&lt;T,\odot&gt;$ 是半群满同态，若 $&lt;S,</em>&gt;$ 是幺半群，则 $&lt;T,\odot&gt;$ 也是幺半群，满同态映射作用于 $S$ 的单位元的象是 $T$ 的单位元</li>
+  <li>设 $\psi$ 是半群 $(S,\circ)$ 到 $(T,\odot)$ 的同态，$\mu$ 是半群 $(T,\odot)$ 到 $(U,*)$ 的同态，则 $\mu$ 到 $\psi$ 的复合映射 $\mu\cdot\psi$ 是一个 $(S,\circ)$ 到 $(T,\odot)$ 的同态</li>
+</ul>
+
+<h3 id="交换半群">交换半群</h3>
+
+<p>对代数系统 $&lt;S,\circ&gt;$ ，若对任意 $a,b,c\in S$，有 $(a\circ b)\circ = a\circ (b\circ c)$ 且 $a\circ b=b\circ a$ ，则称 $&lt;S,\circ&gt;$ 为<strong>交换半群</strong></p>
+
+<h3 id="独异点--幺半群">独异点 | 幺半群</h3>
+
+<h4 id="定义-12">定义</h4>
+
+<p>若 $&lt;S, \circ&gt;$ 为半群，并且存在一个单位元 $e\in S$，对任意 $a\in S$ ，有 $a\circ e=e\circ a$ ，则 $&lt;S,\circ,e&gt;$ 为 <strong>独异点</strong> 或称 <strong>幺半群</strong></p>
+
+<h4 id="定理-6">定理</h4>
+
+<ul>
+  <li>$&lt;S,\circ, e&gt;$ 为独异点或幺半群，则关于 $\circ$ 运算的运算表中，任何两行或两列都不相同</li>
+  <li>$&lt;S,\circ, e&gt;$ 为独异点或幺半群，若对任意 $a,b\in S$ ，都有逆元，则
+    <ul>
+      <li>$(a^{-1})^{-1}=a$</li>
+      <li>$a\circ b$ 有逆元且 $(a\circ b)^{-1}=b^{-1}\circ a^{-1}$</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="循环独异点--循环幺半群">循环独异点 | 循环幺半群</h3>
+
+<h4 id="定义-13">定义</h4>
+
+<p>一个独异点 $&lt;S,\circ, e&gt;$ 称为 <strong>循环独异点</strong> 或 <strong>循环幺半群</strong>，若存在一个元素 $a\in S$ ，使得 $S$ 中每个元素 $b$ 都可以表示为：$a=a\circ a\circ a…\circ a=a^n,\ a^0=e$</p>
+
+<p>也称 $&lt;S,\circ&gt;$ 是由元素 $a$ 生成的，$a$ 称为 $&lt;S,\circ, e&gt;$ 的生成元</p>
+
+<h4 id="性质-6">性质</h4>
+
+<p>对循环独异点 $&lt;S,\circ,e&gt;,\ &lt;S,\circ&gt;$ 为交换半群</p>
+
+<h3 id="子半群">子半群</h3>
+
+<h4 id="定义-14">定义</h4>
+
+<p>设 $&lt;S,\circ&gt;$ 为一个半群，若</p>
+
+<ul>
+  <li>$S^{‘}\subseteq S$</li>
+  <li>$&lt;S^{‘},\circ&gt;$ 是半群</li>
+</ul>
+
+<p>则称 $&lt;S^{‘},\circ&gt;$ 是 $&lt;S,\circ$ 的 <strong>子半群</strong></p>
+
+<h4 id="定理-7">定理</h4>
+
+<p>$&lt;S,\circ&gt;$ 是一个半群，若 $S^{‘}\subseteq S$，且 $S^{‘}$ 关于 $\circ$ 运算封闭，则 $&lt;S^{‘},\circ&gt;$ 是 $&lt;S,\circ&gt;$ 的子半群</p>
+
+<h3 id="半群同态和同构">半群同态和同构</h3>
+
+<h4 id="定义-15">定义</h4>
+
+<p>设 $&lt;S,<em>&gt;$, $&lt;T,\odot&gt;$ 是半群，若存在一个映射 $\Psi:S\rightarrow T$，对任意 $a,b\in S$，都有 $\Psi(a</em>b)=\Psi(a)\odot\Psi(b)$，则称 $\Psi$ 为 <strong>半群同态</strong></p>
+
+<p>若 $\Psi$ 是满射，则称 $\Psi$ 是 <strong>半群满同态</strong></p>
+
+<p>若 $\Psi$ 是一一映射，则称 $\Psi$ 是 <strong>半群同构</strong></p>
+
+<p>若 $S$, $T$ 相同，则称 $\Psi$ 为 <strong>自同态/自同构</strong></p>
+
+<h3 id="商半群">商半群</h3>
+
+<h4 id="定义-16">定义</h4>
+
+<p>对半群 $&lt;S,<em>&gt;$，若 $R$ 是 $S$ 上的等价关系，则称 $&lt;S/R,\oplus&gt;$  为 $&lt;S,</em>&gt;$ 的商半群，运算 $\oplus$ 为 $*/R$</p>
+
+<h4 id="定理-8">定理</h4>
+
+<p>半群和它的商半群满同态</p>
+
+<h3 id="半群直积">半群直积</h3>
+
+<h4 id="定义-17">定义</h4>
+
+<p>设 $&lt;S,<em>&gt;$ , $&lt;T,\odot&gt;$ 是两个半群，其上的代数系统直积 $&lt;S\times T,\otimes&gt;$，其中 $\times$ 为 $S, T$ 的笛卡尔积，$\otimes$ 定义为对任意 $A_1,a_2\in S$, $b_1,b_2\in T$, $(a_1, b_1)\otimes (a_2,b_2)=((a_1</em>a_2),(b_1\odot b_2))$ 称为半群直积</p>
+
+<h4 id="定理-9">定理</h4>
+
+<ul>
+  <li>半群直积也称为半群</li>
+  <li>交换半群的直积也是交换半群</li>
+  <li>幺半群的直积也是幺半群，并且其独异点（单位元） 是两个半群单位元的笛卡尔积</li>
+  <li>有零元的半群直积的零元是两个半群零元的笛卡尔积</li>
+  <li>有逆元的半群直积的逆元是两个半群逆元的笛卡尔积</li>
+</ul>
+
+<h2 id="群">群</h2>
+
+<h3 id="群-1">群</h3>
+
+<h4 id="定义-18">定义</h4>
+
+<p>设 $G$ 是一个非空集合， $\times$ 是儿园代数运算，如果满足以下条件：</p>
+
+<ul>
+  <li>代数运算 $\times$ 满足结合律，即对 $G$ 中的任意元素 $a,b,c$ 都有 $(a\times b)\times c=a\times(b\times c)$</li>
+  <li>$G$ 中有 <strong>左</strong> 单位元 $e$，对于 $G$ 中的每个元素 $a$ 都有 $e\times a=a\times e=a$</li>
+  <li>对 $G$ 中每个元素 $a$，都有 <strong>左</strong> 逆元 $a^{-1}$，使得 $a^{-1}\times a=a\times a^{-1}=e$</li>
+</ul>
+
+<p>则称 $G$ 对代数运算 $\times$ 作成一个 <strong>群</strong></p>
+
+<blockquote>
+  <p>群 $\subseteq$ 独异点 $\subseteq$ 半群 $\subseteq$ 代数系统</p>
+</blockquote>
+
+<h4 id="公理-1">公理</h4>
+
+<p>群理论可以采用数理逻辑方法表示，它有三条公理</p>
+
+<ul>
+  <li>
+    <p>满足结合律</p>
+
+    <p>$\forall x\in G,y\in G,z\in G$，有 $\forall x\forall y\forall z ((x\times y)\times z=x\times (y\times z))$</p>
+  </li>
+  <li>
+    <p>有单位元</p>
+
+    <p>$\forall x\in G$，有 $\forall x(e\times x=x\times e = x)$</p>
+  </li>
+  <li>
+    <p>有逆元</p>
+
+    <p>$\forall x\in G$，存在元素 $y\in G$ 使得 $\forall x\exists y(y\times x=x\times y=e)$</p>
+  </li>
+</ul>
+
+<h4 id="性质-7">性质</h4>
+
+<ul>
+  <li>群 $&lt;G,\times&gt;$ 的左单位元也是有单位元，单位元唯一</li>
+  <li>群 $&lt;G,\times&gt;$ 中元素的左逆元也是右逆元，逆元唯一</li>
+  <li>群 $&lt;G,\times&gt;$ 无零元</li>
+  <li><strong>消去律</strong>：群 $&lt;G,\times&gt;$ 的运算 $\times$ 满足
+    <ul>
+      <li>如果 $a\times x=a\times x^{‘}$，则 $x=x^{‘}$</li>
+      <li>如果 $x\times a=x^{‘}\times a$，则 $a=x^{‘}$</li>
+    </ul>
+  </li>
+  <li><strong>唯一解</strong>： 群 $&lt;G,\times&gt;$ ，$\forall a,b\in G$，必存在唯一的一个 $x\in G$，使得 $a\times x=b$，$x\times a=b$</li>
+  <li>群 $&lt;G,\times&gt;$ 中只有单位元是幂等元</li>
+  <li>群中运算满足消去律
+    <ul>
+      <li>$a\circ b=a\circ c\rightarrow b=c$</li>
+      <li>$a\circ c=b\circ c\rightarrow a=b$</li>
+    </ul>
+  </li>
+  <li>群的每一行每一列都是群元素的双射</li>
+  <li>群 $G$，对任意 $a,b\in G$，都有：
+    <ul>
+      <li>$(a^{-1})^{-1}=a$</li>
+      <li>$(ab)^{-1}=b^{-1}a^{-1}$</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="元素幂的性质">元素幂的性质</h4>
+
+<p>设 $G$ 为群，对于任意 $a,b\in G，有</p>
+
+<ul>
+  <li>$a^ma^n=a^{m+n}$</li>
+  <li>$(a^m)^n=a^{mn}$</li>
+</ul>
+
+<h4 id="元素的阶">元素的阶</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>a</td>
+      <td>=k$，使得 $a^k=e$ 成立的最小正整数 $k$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>有限群元素的阶一定是有限阶，且是群的阶的因子</p>
+
+<h4 id="群的阶">群的阶</h4>
+
+<p>一般情况下，群 $G$ 的阶 = 其因子的个数</p>
+
+<p>当群 $G$ 为循环群时，群 $G$ 的阶为其生成元的阶</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>设有限群 $G$ 的阶是 $</td>
+      <td>G</td>
+      <td>$，任意元素 $a\in G$，$a$ 的阶是 $</td>
+      <td>a</td>
+      <td>$，则 $</td>
+      <td>a</td>
+      <td>$ 整除 $</td>
+      <td>G</td>
+      <td>$，即 $</td>
+      <td>a</td>
+      <td>\</td>
+      <td>\</td>
+      <td>G</td>
+      <td>$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="特殊群">特殊群</h3>
+
+<h4 id="有限群">有限群</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>给定群 $&lt;G,\times&gt;$ ，若 $G$ 是有限集，则称 $&lt;G,\times&gt;$ 是 <strong>有限群</strong>。元素个数称为群的阶，表示为 $</td>
+      <td>G</td>
+      <td>$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="无穷群">无穷群</h4>
+
+<p>若集合 $G$ 是无穷的，则称 $&lt;G,\times&gt;$ 为 <strong>无穷群</strong>；阶无穷大</p>
+
+<h4 id="平凡群">平凡群</h4>
+
+<p>只含单位元的群称为 <strong>平凡群</strong></p>
+
+<h4 id="可交换群-abel-群">可交换群 (Abel 群)</h4>
+
+<p>给定群 $&lt;G,\times&gt;$ ，若 $\times$ 满足交换律，则称 $&lt;G,\times&gt;$ 是 <strong>可交换群</strong> 或 <strong>Abel 群</strong></p>
+
+<h4 id="克莱恩-klein-四元集">克莱恩 (Klein) 四元集</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">**$\circ$**</th>
+      <th style="text-align: center">e</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">**e**</td>
+      <td style="text-align: center">e</td>
+      <td style="text-align: center">a</td>
+      <td style="text-align: center">b</td>
+      <td style="text-align: center">c</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**a**</td>
+      <td style="text-align: center">a</td>
+      <td style="text-align: center">e</td>
+      <td style="text-align: center">c</td>
+      <td style="text-align: center">b</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**b**</td>
+      <td style="text-align: center">b</td>
+      <td style="text-align: center">c</td>
+      <td style="text-align: center">e</td>
+      <td style="text-align: center">a</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**c**</td>
+      <td style="text-align: center">c</td>
+      <td style="text-align: center">b</td>
+      <td style="text-align: center">a</td>
+      <td style="text-align: center">e</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="模-n-集">模 N 集</h4>
+
+<p>$&lt;I_N,\oplus&gt;$ 称为模 N 整数加群，其中，$x\oplus y=(x+y)\mod{N}$</p>
+
+<h4 id="交换群-abel-群">交换群 (Abel 群)</h4>
+
+<h5 id="定义-19">定义</h5>
+
+<p>若群 $G$ 的运算满足交换律，则称群 $G$ 为<strong>交换群</strong>，又称<strong>阿贝尔群</strong></p>
+
+<h5 id="定理-10">定理</h5>
+
+<ul>
+  <li>群 $G$ 是阿贝尔群 $\Leftrightarrow$ 对任意元素 $a,b\in G$，有 $(ab)^2=a^2b^2$</li>
+</ul>
+
+<h4 id="循环群">循环群</h4>
+
+<h5 id="定义-20">定义</h5>
+
+<p>群 $G$，存在一个 $a\in G$，使得群中任意元素可以表示为 $a$ 的幂，则群 $G$ 称为 <strong>循环群</strong>，$a$ 称为 $G$ 的生成元，记为 $G=(a)$</p>
+
+<h5 id="循环群的阶">循环群的阶</h5>
+
+<ul>
+  <li>生成元的阶是无限的，则 $G$ 是无限循环群</li>
+  <li>生成元的阶是 $n$，则 $G$ 为 $n$ 阶群</li>
+</ul>
+
+<h5 id="性质-8">性质</h5>
+
+<ul>
+  <li>循环群的生成元不一定是唯一的</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>有限群 $G=(a)$，若 $</td>
+          <td>G</td>
+          <td>=n$，则 $a^n=e$ 且 $G={a,a^2,…,a^n=e}$，其中 $e$ 是群 $G$ 的单位元</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h5 id="定理-11">定理</h5>
+
+<ul>
+  <li>任何一个循环群必是交换群</li>
+  <li>群 $G=(a)$
+    <ul>
+      <li>若 $G$ 是无限循环群，则 $G$ 的生成元是 $a$ 或 $a^{-1}$</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>若 $</td>
+              <td>G</td>
+              <td>=n$，则 $G$ 有 $\phi(n)$ 个生成元，$\phi(n)$ 为 <strong>欧拉函数</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>在群 $G$ 中，$</td>
+          <td>a</td>
+          <td>=n$，则 $</td>
+          <td>a^k</td>
+          <td>=\frac{n}{(n,k)}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>任何一个循环群的子群也是循环群</li>
+  <li>无限循环群 $G$ 的子群除 ${e}$ 之外也是无限的</li>
+  <li>有限循环群 $G$，其子群的阶是群 $G$ 的因子，且 $G$ 有且仅有一个子群，其阶为该因子</li>
+</ul>
+
+<h4 id="变换群">变换群</h4>
+
+<h5 id="定义-21">定义</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$A$ 为非空集合，$F(A)={f</td>
+      <td>f:A\rightarrow A 上的双射}$，关于函数复合构成的群称为 <strong>变换群</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="性质-9">性质</h5>
+
+<p>任何群 $G$ 都和一个变换群 $S$ 同构</p>
+
+<h4 id="置换群">置换群</h4>
+
+<h5 id="定义-22">定义</h5>
+
+<p>有限群的变换群称为 <strong>置换群</strong></p>
+
+<h5 id="定理-12">定理</h5>
+
+<p>每一个有限群都和一个置换群同构</p>
+
+<h3 id="置换与变换">置换与变换</h3>
+
+<h4 id="置换">置换</h4>
+
+<h5 id="定义-23">定义</h5>
+
+<p>置换 $\sigma$ 把 $a_1$ 变成 $\sigma(a_1)$，把 $a_2$ 变成 $\sigma(a_2)$，…，是一个一对一映射</p>
+
+<h5 id="表示方式">表示方式</h5>
+
+<p>$\begin{pmatrix}1 &amp; 2&amp;…&amp;n\ \sigma(1)&amp;\sigma(2)&amp;…&amp;\sigma(n)\end{pmatrix}$</p>
+
+<h4 id="轮换">轮换</h4>
+
+<p>置换 $\begin{pmatrix}i_1 &amp; i_2&amp;…&amp;i_{k-1}&amp;i_k&amp;i_{k+1}&amp;…&amp;i_n\ i_2&amp;i_3&amp;…&amp;i_k&amp;i_1&amp;i_{k+1}&amp;…&amp;i_n\end{pmatrix}$ 称为 <strong>k-轮换</strong></p>
+
+<h4 id="恒等变换">恒等变换</h4>
+
+<p>k = 1 的 k-轮换称为 <strong>恒等变换</strong></p>
+
+<h4 id="对换">对换</h4>
+
+<p>k = 2 的 k-轮换称为 <strong>对换</strong></p>
+
+<h4 id="定理-13">定理</h4>
+
+<ul>
+  <li>有限置换可表示为不相交的轮换积</li>
+  <li>不相交轮换可以表示为对换积</li>
+</ul>
+
+<h3 id="陪集">陪集</h3>
+
+<h4 id="定义-24">定义</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>设 $H$ 是群 $G$ 的子群，$a\in G$，有 $aH={ax</td>
+      <td>x\in G},\ Ha={xa</td>
+      <td>x\in G}$ 则 $aH,Ha$ 分别称为群 $G$ 关于子群 $H$ 的一个左陪集，右陪集</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="性质-10">性质</h4>
+
+<ul>
+  <li>$a\in aH$</li>
+  <li>$a\in H\Leftrightarrow aH=H$</li>
+  <li>$b\in aH\Leftrightarrow aH=bH$</li>
+  <li>$aH=bH\Leftrightarrow a^{-1}b\in H$ 或 $b^{-1}a\in H$</li>
+  <li>$b\in aH\Leftrightarrow aH=bH\Leftrightarrow a^{-1}b\in H$ 或 $b^{-1}a\in H$</li>
+  <li>若 $aH\cap bH\not=\empty$，则 $aH=bH$</li>
+  <li>群 $G$ 上全体不同的左陪集构成群 $G$ 的元素分类，对任意 $a,b$ 若同属一类，当且仅当 $a^{-1}b\in H$ （或 $b^{-1}a\in H$）</li>
+  <li>对于右陪集，上条同理</li>
+</ul>
+
+<h4 id="定理-14">定理</h4>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$H$ 是 $G$ 的子群，则 $R={&lt;a,b&gt;</td>
+          <td>a\in G,b\in G 且 a^{-1}b\in H}$ 是 $G$ 中一个等价关系，对于 $a\in G$，记为 $[a]_R={x</td>
+          <td>x\in G 且 &lt;a,x&gt;\in R}$，则有 $[a]_R=aH$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>一个子群 $H$ 的所有陪集都与 $H$ 等势</p>
+
+    <blockquote>
+      <p>等势是数学术语，集合里的等势是指两个集合之间一一对应。</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>拉格朗日定理</strong>：$H$ 是 $G$ 的子群，若 $G$ 是有限群，$</td>
+          <td>G</td>
+          <td>=n,\</td>
+          <td>H</td>
+          <td>=m,\ (G:H)=k$，则 $n=km$</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>群 $G$ 的阶为质数，则群 $G$ 无非平凡子群 / 真子群</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>群 $</td>
+          <td>G</td>
+          <td>=n$ ，对于任意 $a\in G,</td>
+          <td>a</td>
+          <td>$ 是 $n$ 的因子，且必有 $a$，$a^n=e$。若 $n$ 是质数，则群 $G$ 是循环群。</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h4 id="指数">指数</h4>
+
+<p>群 $G$ 的子群 $H$ 的所有不同左陪集（右陪集）的个数称为 $H$ 在 $G$ 里的指数，可表示为 $(G:H)$</p>
+
+<h3 id="不变子群">不变子群</h3>
+
+<h4 id="定义-25">定义</h4>
+
+<p>$G$ 的子群 $N$，若对于任意 $a\in G$，都有 $aN=Na$，则称 $N$ 为<strong>不变子群</strong>或正规子群。记为 $N\trianglelefteq G$，若 $N\not= G$，则记为 $N\triangleleft G$</p>
+
+<h4 id="定理-15">定理</h4>
+
+<p>若对任意 $a\in G$，$a^{-1}Na=aNa^{-1}=N$，则 $N\trianglelefteq G$</p>
+
+<h3 id="半群与群">半群与群</h3>
+
+<ul>
+  <li>对半群 $G$，若对任意 $a,b\in G$， 方程 $a x = b，x a = b$ 在 $G$ 中有解，则 $G$ 为群。</li>
+  <li>对有限半群 $G$ 无零元，若满足消去律，则 $G$ 为群</li>
+</ul>
+
+<h3 id="子群">子群</h3>
+
+<h4 id="定义-26">定义</h4>
+
+<p>$&lt;S,\times&gt;$ 称为群 $&lt;G,\times&gt;$ 的子群，若</p>
+
+<ul>
+  <li>$S\subseteq G$</li>
+  <li>$&lt;S,\times&gt;$ 是一个群</li>
+</ul>
+
+<p>记为 $S\le G$</p>
+
+<h4 id="性质-11">性质</h4>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>若 $</td>
+          <td>G</td>
+          <td>\gt1$ ，则群 $&lt;G,\times&gt;$ 至少有两个子群：</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>$&lt;{e},\times&gt;$</li>
+      <li>$&lt;G,\times&gt;$</li>
+    </ul>
+
+    <p>称为 $G$ 的 <strong>平凡子群</strong>，其他子群称为 <strong>真子群 / 非平凡子群</strong>，记为 $S\lt G$</p>
+  </li>
+  <li>$&lt;S, \times&gt;$ 是群 $&lt;G, \times &gt;$ 的非空子群，则群 $S$ 的单位元就是群 $G$ 的单位元，$S$ 中任意元素 $a$ 的逆元也是 $a$ 在群 $G$ 中的逆元。</li>
+</ul>
+
+<h4 id="定理-16">定理</h4>
+
+<ul>
+  <li>群 $G$ 的非空子集 $S$ 构成子群的充要条件是
+    <ul>
+      <li>若 $a,b\in S$，则 $ab\in S$</li>
+      <li>若 $a\in S$，则 $a$ 在 $G$ 中逆元 $a^{-1}\in G$</li>
+    </ul>
+  </li>
+  <li>群 $G$ 的非空子集 $S$ 构成子群的充要条件是
+    <ul>
+      <li>若 $a,b\in S$，则 $ab^{-1}\in S$</li>
+    </ul>
+  </li>
+  <li>群 $G$ 的非空 <strong>有限</strong> 子集 $S$ 构成子群的充要条件是
+    <ul>
+      <li>若 $a,b\in S$，则 $ab\in S$</li>
+    </ul>
+  </li>
+</ul>
+
+:ET

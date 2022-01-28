@@ -1,0 +1,396 @@
+I"�)<h1 id="loss-function">Loss Function</h1>
+
+<h2 id="regularization-add-term-to-loss">Regularization: Add term to loss</h2>
+
+<p>$L=\frac{1}{N}\sum_{i=1}^{N}\sum_{j\not= y_i}\max(0, f(x_i;W)<em>j-f(x_i;W)</em>{y_i}+1)+\lambda R(W)$</p>
+
+<p>In common use:</p>
+
+<p><img src="/assets/images/post/reg.png" alt="" /></p>
+
+<h3 id="dropout">Dropout</h3>
+
+<p>In each forward pass, randomly set some neurons to zero</p>
+
+<p>Probability of dropping is a hyperparameter; 0.5 is common</p>
+
+<p><img src="/assets/images/post/drop.png" alt="" /></p>
+
+<h3 id="data-augmentation">Data Augmentation</h3>
+
+<ul>
+  <li>Horizontal Flipping 水平翻转</li>
+  <li>Random Cropping 随机裁剪</li>
+  <li>Random Scaling 随机放缩</li>
+  <li>Color Jittering 颜色抖动</li>
+  <li>Random Translation 随机平移</li>
+  <li>Random Shearing 随机剪切</li>
+</ul>
+
+<h2 id="regression">Regression</h2>
+
+<h3 id="l1-loss">L1 Loss</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$L(y, \hat{y})=w(\theta)</td>
+      <td>\hat{y}-y</td>
+      <td>$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="l2-loss">L2 Loss</h3>
+
+<p>$L(y, \hat{y})=w(\theta)(\hat{y}-y)^2$</p>
+
+<h2 id="classification">Classification</h2>
+
+<h3 id="hinge-loss-function-铰链损失函数">Hinge Loss Function 铰链损失函数</h3>
+
+<p>$L(y, \hat{y}) = \max{(0, 1-\hat{y}y)}$</p>
+
+<p>$y\in{-1, 1}$</p>
+
+<h3 id="cross-entropy-loss-function-交叉熵损失函数">Cross-Entropy Loss Function 交叉熵损失函数</h3>
+
+<p>In binary classification, $L(y, \hat{y}) = -y\log{(\hat{y})}-(1-y)\log{(1-\hat{y})}$</p>
+
+<p>In multiclass classification (class number = M), $L(y) = -\sum_{c=1}^My_o, c\log{(p_o, c)}$</p>
+
+<blockquote>
+  <ul>
+    <li>M - number of classes (dog, cat, fish)</li>
+    <li>log - the natural log</li>
+    <li>y - binary indicator (0 or 1) if class label cc is the correct classification for observation $o$</li>
+    <li>p - predicted probability observation $o$ is of class $c$</li>
+  </ul>
+</blockquote>
+
+<h3 id="exponential-loss-function-指数损失函数">Exponential Loss Function 指数损失函数</h3>
+
+<p>$L(y,\hat{y}) = \exp{(-y\hat{y})}$</p>
+
+<h2 id="sgd-stochastic-gradient-descent-随机梯度下降">SGD, Stochastic Gradient Descent 随机梯度下降</h2>
+
+<p>在梯度下降时，为了加快收敛速度，通常使用一些优化方法。</p>
+
+<p><img src="/assets/images/post/sgd.png" alt="" /></p>
+
+<p>SGD每次都会在当前位置上沿着负梯度方向更新（下降，沿着正梯度则为上升），并不考虑之前的方向梯度大小等等。而动量（moment）通过引入一个新的变量 v去积累之前的梯度（通过指数衰减平均得到），得到加速学习过程的目的。</p>
+
+<blockquote>
+  <p>最直观的理解就是，若当前的梯度方向与累积的历史梯度方向一致，则当前的梯度会被加强，从而这一步下降的幅度更大。若当前的梯度方向与累积的梯度方向不一致，则会减弱当前下降的梯度幅度。</p>
+</blockquote>
+
+<h3 id="nesterov-momentum">Nesterov Momentum</h3>
+
+<p><img src="https://img-blog.csdn.net/20180518154303163" alt="" /></p>
+
+<h3 id="ada-grad-adaptive-gradient">Ada Grad (Adaptive Gradient)</h3>
+
+<p>通常，我们在每一次更新参数时，对于所有的参数使用相同的学习率。而AdaGrad算法的思想是：每一次更新参数时（一次迭代），不同的参数使用不同的学习率。</p>
+
+<p>Added element-wise scaling of the gradient based on the historical sum of squares in each dimension.</p>
+
+<p><img src="/assets/images/post/ada.png" alt="" /></p>
+
+<h3 id="rmsprop-leaky-adagrad">RMSProp: “Leaky AdaGrad”</h3>
+
+<p><img src="/assets/images/post/rms.png" alt="" /></p>
+
+<h3 id="adam">Adam</h3>
+
+<p><img src="/assets/images/post/adam.png" alt="" /></p>
+
+<p>Adam with beta1 = 0.9, beta2 = 0.999, and learning_rate = 1e-3 or 5e-4 is a great starting point for many models</p>
+
+<h1 id="gradient-descent">Gradient Descent</h1>
+
+<h2 id="1-dimension">1 Dimension</h2>
+
+<ol>
+  <li>Randomly pick an initial value $w^0$</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Compute $\frac{\partial L}{\partial w}</td>
+          <td>_{w=w^0}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$w^1\gets w^0-\eta\frac{\partial L}{\partial w}</td>
+          <td>_{w=w^0}$, where $\eta$ stands for <strong>learning rate</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<h2 id="2-dimension">2 Dimension</h2>
+
+<p>$y=wx_1+b$</p>
+
+<ol>
+  <li>Randomly pick an initial value $w^0, b^0$</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Compute $\frac{\partial L}{\partial w}</td>
+          <td>_{w=w^0}$, $\frac{\partial L}{\partial b}</td>
+          <td>_{w=w^0, b=b^0}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Update $w$ and $b$ iteratively: $w^1\gets w^0-\eta\frac{\partial L}{\partial w}</td>
+          <td>_{w=w^0}$, $b^1\gets b^0-\eta\frac{\partial L}{\partial b}</td>
+          <td>_{w=w^0, b=b^0}$, where $\eta$ stands for <strong>learning rate</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<h2 id="learning-rate-decay">Learning rate decay</h2>
+
+<h3 id="step">Step</h3>
+
+<p>Reduce learning rate at a few fixed points. E.g. for ResNets, multiply LR by 0.1 after epochs 30, 60, and 90</p>
+
+<h3 id="cosine">Cosine</h3>
+
+<p>$\alpha_t=\frac{1}{2}\alpha_0(1+\cos (t\pi/T))$</p>
+
+<ul>
+  <li>$\alpha_0$: initial learning rate</li>
+  <li>$\alpha_t$: learning rate at epoch t</li>
+  <li>$T$: total number of epochs</li>
+</ul>
+
+<h3 id="linear">Linear</h3>
+
+<p>$\alpha_t=\alpha_0(1-t/T)$</p>
+
+<h3 id="inverse-sqrt">Inverse Sqrt</h3>
+
+<p>$\alpha_t = \alpha_1/\sqrt{t}$</p>
+
+<h2 id="looking-at-learning-curves">Looking at learning curves</h2>
+
+<p>Losses may be noisy, use a scatter plot and also plot moving average to see trends better.</p>
+
+<h1 id="activation-function">Activation Function</h1>
+
+<blockquote>
+  <p>introduce non-linear properties to the network</p>
+</blockquote>
+
+<p><img src="/assets/images/post/activationFunction.png" alt="" /></p>
+
+<h2 id="sigmoid">Sigmoid</h2>
+
+<h3 id="formula">Formula</h3>
+
+<p>$$
+\sigma(x) = \frac{1}{1+e^{-x}}
+$$</p>
+
+<h3 id="features">Features</h3>
+
+<ul>
+  <li>Squashes numbers to range <strong>[0, 1]</strong></li>
+</ul>
+
+<h3 id="problems">Problems</h3>
+
+<ul>
+  <li>
+    <p>Saturated neurons <strong>“kill” the gradients</strong></p>
+  </li>
+  <li>
+    <p>Sigmoid outputs are <strong>not zero-centered</strong></p>
+
+    <blockquote>
+      <p>The gradient on $w$ is always all positive or negative, so the gradient can upgrade in only one direction.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>A bit <strong>compute expensive</strong></p>
+  </li>
+</ul>
+
+<h2 id="tanh">Tanh</h2>
+
+<h3 id="formula-1">Formula</h3>
+
+<p>$$
+\tanh(x) = \frac{\sinh(x)}{\cosh(x)}=\frac{e^x-e^{-x}}{e^x+e^{-x}}
+$$</p>
+
+<h3 id="features-1">Features</h3>
+
+<ul>
+  <li>Squashes number to range <strong>[-1, 1]</strong></li>
+  <li><strong>Zero centered</strong></li>
+</ul>
+
+<h3 id="problems-1">Problems</h3>
+
+<ul>
+  <li>Saturated neurons <strong>“kill” the gradients</strong></li>
+</ul>
+
+<h2 id="relu">ReLU</h2>
+
+<h3 id="formula-2">Formula</h3>
+
+<p>$$
+f(x) = \max(0, x)
+$$</p>
+
+<h3 id="features-2">Features</h3>
+
+<ul>
+  <li><strong>Does not saturate</strong> (in &gt;0 region)</li>
+  <li>Very <strong>computationally efficient</strong></li>
+  <li>Converges much <strong>faster</strong></li>
+  <li>More biologically plausible</li>
+</ul>
+
+<h3 id="problems-2">Problems</h3>
+
+<ul>
+  <li><strong>Not zero-centered</strong></li>
+  <li><strong>“kill” the gradients</strong> (in $\le$ 0 region), what we called the <em>“dead ReLU”</em></li>
+</ul>
+
+<h2 id="leaky-relu">Leaky ReLU</h2>
+
+<h3 id="formula-3">Formula</h3>
+
+<p>$$
+f(x) = \max(0.01x, x)
+$$</p>
+
+<h3 id="features-3">Features</h3>
+
+<ul>
+  <li>Does <strong>not saturate</strong> (in &gt;0 region)</li>
+  <li>Vary <strong>computationally efficient</strong></li>
+  <li>Converges much <strong>faster</strong></li>
+  <li>Will <strong>not “die”</strong></li>
+</ul>
+
+<h3 id="references">References</h3>
+
+<h4 id="parametric-rectifier-prelu">Parametric Rectifier (PReLU)</h4>
+
+<p>$$
+f(x) = \max(\alpha x, x)
+$$</p>
+
+<h2 id="elu">ELU</h2>
+
+<h3 id="formula-4">Formula</h3>
+
+<p>$$
+f(x) = \left{ \begin{array}{lc} x &amp; if\ x &gt; 0\\alpha(\exp{(x)}-1) &amp; if\ x \le 0\end{array}\right.
+$$</p>
+
+<h3 id="features-4">Features</h3>
+
+<ul>
+  <li><strong>All</strong> benefits of ReLU</li>
+  <li>Closer to zero mean outputs</li>
+  <li>Negative saturation regime compared with Leaky ReLU adds some robustness to noise</li>
+</ul>
+
+<h3 id="problems-3">Problems</h3>
+
+<ul>
+  <li>Computation requires exp()</li>
+</ul>
+
+<h2 id="maxout">Maxout</h2>
+
+<blockquote>
+  <p>There is also another popular variant called <em>maxout</em> which is the generalized form above relu and leaky relu.</p>
+</blockquote>
+
+<h3 id="formula-5">Formula</h3>
+
+<p>$$
+\max(w_1^T x+b_1, w_2^T x+b_2)
+$$</p>
+
+<h3 id="features-5">Features</h3>
+
+<ul>
+  <li><strong>Generalizes</strong> ReLU and Leaky ReLU</li>
+  <li>Does <strong>not saturate</strong></li>
+  <li>Does <strong>not die</strong></li>
+</ul>
+
+<h3 id="problems-4">Problems</h3>
+
+<ul>
+  <li>Doubles the number of parameters / neuron</li>
+</ul>
+
+<h1 id="layers">Layers</h1>
+
+<h2 id="fully-connected-layer">Fully Connected Layer</h2>
+
+<p>dot product</p>
+
+<p><img src="/assets/images/post/q1.png" alt="" /></p>
+
+<h2 id="convolution-layer">Convolution Layer</h2>
+
+<p><img src="/assets/images/post/cnn.png" alt="" /></p>
+
+<p>Number of parameters in the layer: $K\times (F^2\times C + 1)$</p>
+
+<blockquote>
+  <p>$+1$ for bias</p>
+</blockquote>
+
+<h1 id="gans-generative-adversarial-network-生成对抗网络">GANS, Generative Adversarial Network 生成对抗网络</h1>
+
+<p><img src="/assets/images/post/gan.png" alt="" /></p>
+
+<h2 id="generative-model-g-生成器">Generative Model G 生成器</h2>
+
+<p>Captures data distribution and generate samples close to real distribution</p>
+
+<h2 id="discriminative-model-d-判别器">Discriminative Model D 判别器</h2>
+
+<p>Estimates the probability that a sample came from the training data rather than G</p>
+
+<p><img src="/assets/images/post/q0.png" alt="" /></p>
+
+<p><img src="/assets/images/post/q2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/q3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/t0.png" alt="" /></p>
+
+<p><img src="/assets/images/post/t1.png" alt="" /></p>
+
+<p><img src="/assets/images/post/t2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/t3.png" alt="" /></p>
+:ET

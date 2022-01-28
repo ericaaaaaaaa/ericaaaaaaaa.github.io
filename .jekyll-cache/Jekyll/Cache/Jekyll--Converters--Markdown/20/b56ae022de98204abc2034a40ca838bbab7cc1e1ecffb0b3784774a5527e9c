@@ -1,0 +1,2 @@
+I"&<p>在 parse 函数遇到 <code class="language-plaintext highlighter-rouge">auto *rbrack = new Rbrack(*(iter++));</code> 时将其替换为先检查当前 iter 的 Token 类是否为 RBRACK，若是，则重复之前的操作，若不是，则自动补全右中括号并抛出 k 型错误</p>
+:ET

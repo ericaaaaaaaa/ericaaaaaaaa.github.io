@@ -1,0 +1,25 @@
+I"<center><h1>Machine Learning</h1></center>
+
+<blockquote>
+  <p>Tutor: $\mathscr{Andrew Ng}$</p>
+
+  <p>Author of the notebook: $\mathscr{ericaaaaaaaa}$</p>
+</blockquote>
+
+<div style="background-color: #D6EAF8;"><b><h4>Machine Learning</h4></b></div>
+<div>A computer program is said to <i>learn</i> from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.</div>
+<div>Category<ul><li>Supervised Learning</li><li>Unsupervised Learning</li></ul></div>
+
+<div style="background-color: #D6EAF8;"><b><h4>Supervised Learning</h4></b></div>
+<div>"right answers" given</div>
+
+<div style="background-color: #D6EAF8;"><b><h4>Regression Problem</h4></b></div>
+<div>Predict <b>continuous</b> valued output.</div>
+
+<div style="background-color: #D6EAF8;"><b><h4>Classification Problem</h4></b></div>
+<div>Predict <b>discrete</b> valued output.</div>
+
+<div style="background-color: #D6EAF8;"><b><h4>Unsupervised Learning</h4></b></div>
+<div>no "right answers" given</div>
+
+:ET

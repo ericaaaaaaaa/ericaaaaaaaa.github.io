@@ -1,0 +1,2833 @@
+I"u@<h1 id="线性表">线性表</h1>
+
+<h2 id="线性表的概念和表抽象数据类型">线性表的概念和表抽象数据类型</h2>
+
+<h3 id="表的概念和性质">表的概念和性质</h3>
+
+<ul>
+  <li>
+    <p>线性表</p>
+
+    <blockquote>
+      <p>一个（有穷或无穷）的基本元素集合 E, E 中一组有穷个元素排列成的序列 $L = (e_0, e_1, e_2, …,e_{n-1})$</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>下标</p>
+  </li>
+  <li>
+    <p>空表</p>
+  </li>
+  <li>
+    <p>长度</p>
+  </li>
+  <li>
+    <p>首元素 &amp; 尾元素</p>
+
+    <p>唯一</p>
+  </li>
+  <li>
+    <p>前驱元素</p>
+  </li>
+  <li>
+    <p>后继元素</p>
+  </li>
+</ul>
+
+<h3 id="表抽象数据类型">表抽象数据类型</h3>
+
+<h4 id="线性表的操作">线性表的操作</h4>
+
+<h4 id="表抽象数据类型-1">表抽象数据类型</h4>
+
+<h3 id="线性表的实现基本考虑">线性表的实现：基本考虑</h3>
+
+<ol>
+  <li>空间（计算机内存）</li>
+  <li>时间（各种重要操作的效率）</li>
+</ol>
+
+<h2 id="顺序表的实现">顺序表的实现</h2>
+
+<blockquote>
+  <p><strong>顺序表</strong>——表中元素顺序存放在一片足够大的连续存储区内，首元素存入存储区开始位置，其余元素依次顺序存放，元素之间的逻辑顺序关系通过元素在存储区域里的物理位置表示。</p>
+</blockquote>
+
+<h3 id="基本实现方式">基本实现方式</h3>
+
+<p>若顺序表中存储的元素类型相同，则：</p>
+
+<ul>
+  <li>存取操作可以在 O(1) 的时间内完成。</li>
+  <li>元素访问是 O(1) 复杂度的操作</li>
+</ul>
+
+<p>若顺序表中元素大小不统一，则</p>
+
+<ul>
+  <li>可以将实际数据元素另行存储，在顺序表里各单元位置保存相应元素的引用信息（链接/索引）。</li>
+</ul>
+
+<h3 id="顺序表基本操作的实现">顺序表基本操作的实现</h3>
+
+<h4 id="创建和访问操作">创建和访问操作</h4>
+
+<ul>
+  <li>
+    <p>创建空表`</p>
+
+    <blockquote>
+      <p>创建新表的存储区后，应立即将两个表信息域(max 与 num) 设置好，保证这个表处于合法状态</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>简单判断操作 O(1)</p>
+
+    <ul>
+      <li>空表：num == 0</li>
+      <li>表满：num == max</li>
+    </ul>
+  </li>
+  <li>
+    <p>访问给定下标 i 的元素 O(1)</p>
+  </li>
+  <li>
+    <p>遍历操作 O(n)</p>
+  </li>
+  <li>
+    <p>查找给定元素 d 的（第一次出现的）位置 O(n)</p>
+  </li>
+  <li>
+    <p>查找给定元素 d 在位置 k 后第一次出现的位置 O(n)</p>
+  </li>
+</ul>
+
+<h4 id="变动操作加入元素">变动操作：加入元素</h4>
+
+<ul>
+  <li>
+    <p>尾端加入新数据项 O(1)</p>
+  </li>
+  <li>
+    <p>新数据存入元素存储区的第 i 个单元</p>
+
+    <ul>
+      <li>
+        <p>不要求维持原有元素的相对位置：O(1)</p>
+
+        <blockquote>
+          <p>将原有第 i 个单元的元素放入 num，再将新元素写入第 i 个单元</p>
+        </blockquote>
+      </li>
+      <li>
+        <p>要求保持原有元素的相对位置： O(n)</p>
+
+        <blockquote>
+          <p>把包括第 i 个单元的所有单元向后平移一位，再将新元素写入第 i 个单元</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="变动操作删除元素">变动操作：删除元素</h4>
+
+<ul>
+  <li>
+    <p>尾端删除数据 O(1)</p>
+  </li>
+  <li>
+    <p>删除位置 i 的数据</p>
+
+    <ul>
+      <li>
+        <p>软删除</p>
+
+        <blockquote>
+          <p>添加合法下标，再删除元素时将合法下标改为非法</p>
+        </blockquote>
+      </li>
+      <li>
+        <p>硬删除</p>
+
+        <ul>
+          <li>
+            <p>不需要保持原有顺序 O(1)</p>
+
+            <blockquote>
+              <p>将 num - 1 填入 i，再尾端删除</p>
+            </blockquote>
+          </li>
+          <li>
+            <p>需要保持原有顺序 O(n)</p>
+
+            <blockquote>
+              <p>将第 i 个删除，再将其后面的每个元素前移一位</p>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>基于条件的删除 O(n)</p>
+
+    <blockquote>
+      <p><strong>基于条件</strong>：不直接给出删除元素的位置，而是给出需要删除数据项的条件</p>
+
+      <p>需要通过循环实现，循环中逐个检查元素，查找到后将其删除。</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="顺序表及其操作的性质">顺序表及其操作的性质</h3>
+
+<p><strong>顺序表优缺点总结：</strong></p>
+
+<ul>
+  <li><strong>优点</strong>：
+    <ul>
+      <li>O(1) 时间的（随机、直接的）按位置访问元素；</li>
+      <li>元素在表里存储紧凑，除表中的存储区之外只需要 O(1) 空间存放少量的辅助信息</li>
+    </ul>
+  </li>
+  <li><strong>缺点</strong>：
+    <ul>
+      <li>需要连续的存储区存放表中的元素，若表很大，则需要大片连续的内存空间。</li>
+      <li>一旦确定了存储块的大小，可容纳单元个数并不随着插入 /删除操作的进行而变化。如果很大的存储区只保存了少量的数据项，就会有大量空闲单元，造成表内的存储浪费。</li>
+      <li>另外，在执行加入或删除操作时，通常需要移动许多元素，效率低。</li>
+      <li>最后，建立表需要考虑元素存储区大小，而实际需求通常很难事先估计。</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="python-的-list">Python 的 list</h3>
+
+<ul>
+  <li>
+    <p>创建线性表</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">lst = []</code></p>
+  </li>
+  <li>
+    <p>加入元素</p>
+
+    <ul>
+      <li>尾端加入单一元素：<code class="language-plaintext highlighter-rouge">lst.append(x)</code></li>
+      <li>将数据存入第 i 个单元：<code class="language-plaintext highlighter-rouge">lst.insert(i, x)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>删除元素</p>
+
+    <ul>
+      <li>删除尾端元素：<code class="language-plaintext highlighter-rouge">lst.pop()</code></li>
+      <li>删除下标为 i 的元素：<code class="language-plaintext highlighter-rouge">lst.pop(i)</code></li>
+      <li>删除第一个内容为 x 的元素：<code class="language-plaintext highlighter-rouge">lst.remove(x)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>求表长</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">len(lst)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>清除 list 中的所有元素</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">lst.clear()</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>将 list 中的元素倒置</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">lst.reverse()</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>将 list 中的元素排序</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">sort</code>：会修改 list 本身，不会返回新的 list</li>
+      <li><code class="language-plaintext highlighter-rouge">sorted</code>：不会修改 list 本身，会返回排序好的 list</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">.</span><span class="n">sort</span><span class="p">())</span>   <span class="c1"># None
+</span><span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>          <span class="c1"># [1,2,3,4,5]
+######
+</span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> 
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>  <span class="c1"># [1,2,3,4,5]
+</span><span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>          <span class="c1"># [3,4,5,1,2]
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="链接表链表">链接表（链表）</h2>
+
+<h3 id="线性表的基本需要和链接表">线性表的基本需要和链接表</h3>
+
+<p>链接表的基本思路：</p>
+
+<ul>
+  <li>把表中的元素分别存储在一批独立的存储块（称为表的结点）里</li>
+  <li>保证从组成表结构中的任一个节点可找到于其相关的下一个结点</li>
+  <li>在前一结点里用链接的方式显式地记录与下一个结点的关联</li>
+</ul>
+
+<h3 id="单向链接表单链表">单向链接表（单链表）</h3>
+
+<p><img src="/assets/images/post/image-20210103164334335.png" alt="image-20210103164334335" /></p>
+
+<p><img src="/assets/images/post/image-20210103164051115.png" alt="image-20210103164051115" /></p>
+
+<ul>
+  <li>一个单链表由一些具体的表结点构成</li>
+  <li>每个结点是一个对象，由自己的标识，下面也常称其为该节点的链接</li>
+  <li>结点之间通过结点链接建立其单向顺序联系</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 定义一个简单的表结点类
+</span><span class="k">class</span> <span class="nc">LNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">next_</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">elem</span> <span class="o">=</span> <span class="n">elem</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">next_</span> <span class="c1"># 为了避免与 python 标准函数 next 重名
+</span></code></pre></div></div>
+
+<h3 id="基本链表操作">基本链表操作</h3>
+
+<h4 id="创建空链表">创建空链表</h4>
+
+<p>把相应的表头变量设置为空连接</p>
+
+<h4 id="删除链表">删除链表</h4>
+
+<p>将表指针赋值为 <code class="language-plaintext highlighter-rouge">None</code></p>
+
+<h4 id="判断表是否为空">判断表是否为空</h4>
+
+<p>检查表头指针是否为 <code class="language-plaintext highlighter-rouge">None</code></p>
+
+<h4 id="判断表是否满">判断表是否满</h4>
+
+<p>一般链表不会满</p>
+
+<h3 id="加入元素">加入元素</h3>
+
+<h4 id="表首端插入">表首端插入</h4>
+
+<ol>
+  <li>创建一个新结点并存入数据</li>
+  <li>把原链表首结点的链接存入新结点的链接域 <code class="language-plaintext highlighter-rouge">next</code></li>
+  <li>修改表头变量，使之指向新结点</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">q</span> <span class="o">=</span> <span class="n">LNode</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">q</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">head</span>
+<span class="n">head</span> <span class="o">=</span> <span class="n">q</span>
+</code></pre></div></div>
+
+<h4 id="一般情况的元素插入">一般情况的元素插入</h4>
+
+<ol>
+  <li>创建一个新结点并存入数据</li>
+  <li>把 <code class="language-plaintext highlighter-rouge">pre</code> 所指结点的 <code class="language-plaintext highlighter-rouge">next</code> 域的值存入新结点的链接域 <code class="language-plaintext highlighter-rouge">next</code></li>
+  <li>修改 <code class="language-plaintext highlighter-rouge">pre</code> 的 <code class="language-plaintext highlighter-rouge">next</code> 域，使之指向新结点</li>
+</ol>
+
+<p><img src="/assets/images/post/image-20210103170529842.png" alt="image-20210103170529842" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">q</span> <span class="o">=</span> <span class="n">LNode</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">q</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="nb">next</span>
+<span class="n">pre</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">q</span>
+</code></pre></div></div>
+
+<h3 id="删除元素">删除元素</h3>
+
+<h4 id="删除表首元素">删除表首元素</h4>
+
+<p>修改表头指针，令其指向表中的第二个结点</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<h4 id="一般情况的元素删除">一般情况的元素删除</h4>
+
+<p><img src="/assets/images/post/image-20210103170904240.png" alt="image-20210103170904240" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pre</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="nb">next</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<h3 id="扫描定位和遍历">扫描、定位和遍历</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="n">head</span>
+<span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">还需要继续的其它条件</span><span class="p">:</span>
+    <span class="n">对</span> <span class="n">p</span> <span class="n">所指结点里的数据做所需操作</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<h4 id="按下标定位">按下标定位</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="n">head</span>
+<span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<h4 id="按元素定位">按元素定位</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="n">head</span>
+<span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pred</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">elem</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<h4 id="遍历">遍历</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="n">head</span>
+<span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<h3 id="链表操作的复杂度">链表操作的复杂度</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">操作</th>
+      <th style="text-align: center">具体说明</th>
+      <th style="text-align: center">复杂度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">创建空表</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">O(1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">删除表</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">O(1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">判断空表</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">O(1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">加入元素</td>
+      <td style="text-align: center">首端加入元素</td>
+      <td style="text-align: center">O(1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">尾端加入元素</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">定位加入元素</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">删除元素</td>
+      <td style="text-align: center">首端删除元素</td>
+      <td style="text-align: center">O(1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">尾端删除元素</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">定位删除元素</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">其它删除：通常需要扫描一整个表或者一部分</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="求表的长度-on">求表的长度 O(n)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">head</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+    <span class="k">return</span> <span class="n">n</span>
+</code></pre></div></div>
+
+<h2 id="链表的变形和操作">链表的变形和操作</h2>
+
+<h3 id="单链表的简单变形">单链表的简单变形</h3>
+
+<p>在表对象中加入一个表尾引用域</p>
+
+<h3 id="循环单链表循环链表">循环单链表（循环链表）</h3>
+
+<p>最后一个结点的 <code class="language-plaintext highlighter-rouge">next</code> 域不用 <code class="language-plaintext highlighter-rouge">None</code>，而是指向表的第一个结点。</p>
+
+<h3 id="双向链接表双链表">双向链接表（双链表）</h3>
+
+<p>节点之间由双向链接: <code class="language-plaintext highlighter-rouge">prev</code>, <code class="language-plaintext highlighter-rouge">next</code></p>
+
+<h3 id="循环双链表">循环双链表</h3>
+
+<h3 id="链表的排序">链表的排序</h3>
+
+<p>排序操作见后文“内部排序”</p>
+
+<h1 id="栈和队列">栈和队列</h1>
+
+<h2 id="概述">概述</h2>
+
+<h3 id="栈队列和数据使用顺序">栈、队列和数据使用顺序</h3>
+
+<h4 id="栈-stack">栈 Stack</h4>
+
+<p>栈是保证元素<strong>后进先出</strong>（后存入先使用， Lat In First Out, LIFO） 关系的结构，简称 LIFO 结构。</p>
+
+<h4 id="队列-queue">队列 Queue</h4>
+
+<p>队列是保证元素<strong>先进先出</strong>（先存入者先使用，First In First Out, FIFO）关系的结构，简称 FIFO 结构。</p>
+
+<h3 id="应用环境">应用环境</h3>
+
+<ul>
+  <li>计算过程分为一些顺序执行的步骤</li>
+  <li>计算中执行的某些步骤会不断产生一些后面可能需要的中间数据</li>
+  <li>产生的数据中有些不能立即使用，但又需要在将来使用</li>
+  <li>需要保存的数据项数不能事先确定</li>
+</ul>
+
+<h2 id="栈概念和实现">栈：概念和实现</h2>
+
+<h3 id="栈抽象数据类型">栈抽象数据类型</h3>
+
+<h4 id="栈的线性表实现">栈的线性表实现</h4>
+
+<ul>
+  <li>对于<strong>顺序表</strong>，<strong>后端</strong>插入和删除都是 O(1) 操作，应该用这一端作为栈项（采用顺序表实现）</li>
+  <li>对于<strong>连接表</strong>，<strong>前端</strong>插入和删除都是 O(1) 操作，应该用这端作为栈项</li>
+</ul>
+
+<h3 id="栈的顺序表实现">栈的顺序表实现</h3>
+
+<p>采用 Python 的 <code class="language-plaintext highlighter-rouge">list</code> 数据结构</p>
+
+<ul>
+  <li>建立空栈：<code class="language-plaintext highlighter-rouge">lst = []</code></li>
+  <li>压栈：<code class="language-plaintext highlighter-rouge">lst.append()</code></li>
+  <li>弹栈：<code class="language-plaintext highlighter-rouge">lst.pop()</code></li>
+</ul>
+
+<h3 id="栈的连接表实现">栈的连接表实现</h3>
+
+<p>见前文连接表</p>
+
+<h2 id="栈的应用">栈的应用</h2>
+
+<h3 id="数值转换">数值转换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">Conversion</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span> <span class="c1"># 十进制数 n 转化为 d 进制数
+</span>    <span class="n">st</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">//=</span> <span class="n">d</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">st</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">(),</span> <span class="n">end</span> <span class="o">=</span> <span class="s">""</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+    
+<span class="c1"># 试着运行一下
+</span><span class="n">Conversion</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="括号匹配问题">括号匹配问题</h3>
+
+<h4 id="处理思路">处理思路</h4>
+
+<ul>
+  <li>顺序扫描被检查正文（一个字符串）中的每一个字符</li>
+  <li>检查中跳过无关字符（非括号字符）</li>
+  <li>遇到开括号”(“时将其压入栈</li>
+  <li>遇到闭括号时弹出当前的栈顶元素与之匹配</li>
+  <li>如果匹配成功则继续，发现不匹配时检查以失败结束</li>
+</ul>
+
+<h4 id="具体实现">具体实现</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_parens</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="s">"""括号匹配检查函数，text 是被检查的正文串"""</span>
+    <span class="n">parens</span> <span class="o">=</span> <span class="s">"()[]{}"</span> <span class="c1"># 所有括号字符
+</span>    <span class="n">open_parens</span> <span class="o">=</span> <span class="s">"([{"</span> <span class="c1"># 开括号字符
+</span>    <span class="n">opposite</span> <span class="o">=</span> <span class="p">{</span><span class="s">")"</span><span class="p">:</span><span class="s">"("</span><span class="p">,</span> <span class="s">"]"</span><span class="p">:</span><span class="s">"["</span><span class="p">,</span> <span class="s">"}"</span><span class="p">:</span><span class="s">"{"</span><span class="p">}</span> <span class="c1"># 表示匹配关系的字典
+</span>    
+    <span class="k">def</span> <span class="nf">parentheses</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="s">"""括号生成器，每次调用返回 text 里下一个括号及其位置"""</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">text_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">text_len</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parens</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">text_len</span><span class="p">:</span>
+                <span class="k">return</span> 
+            <span class="k">yield</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+    <span class="n">st</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 保存括号的栈
+</span>    <span class="k">for</span> <span class="n">pr</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">parentheses</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> <span class="c1"># 对 text 里各括号和位置迭代
+</span>        <span class="k">if</span> <span class="n">pr</span> <span class="ow">in</span> <span class="n">open_parens</span><span class="p">:</span> <span class="c1"># 开括号，压栈并继续
+</span>            <span class="n">st</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">st</span> <span class="o">==</span> <span class="p">[]:</span> <span class="c1"># 无法再弹栈
+</span>            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">elif</span> <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">!=</span> <span class="n">opposite</span><span class="p">[</span><span class="n">pr</span><span class="p">]:</span> <span class="c1"># 不匹配就是失败，退出
+</span>            <span class="k">return</span> <span class="bp">False</span>
+        <span class="c1"># else: 这是依次成功匹配，什么也不做，继续，因为上一步已经弹栈了
+</span>    <span class="k">if</span> <span class="n">st</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="c1"># 应用一下试试看
+</span><span class="n">re</span> <span class="o">=</span> <span class="n">check_parens</span><span class="p">(</span><span class="s">"{(]"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">re</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"All parentheses are correctly matched."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Parentheses mismatched."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="表达式的表示计算和变换">表达式的表示，计算和变换</h3>
+
+<h4 id="表达式和计算的描述">表达式和计算的描述</h4>
+
+<ul>
+  <li>
+    <p>中缀形式：<code class="language-plaintext highlighter-rouge">(3 - 5) * (6 + 17 * 4) / 3</code></p>
+
+    <blockquote>
+      <p>中缀表达式表达能力最弱，只有在添加括号后才可达到相同的表达能力</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>前缀形式：<code class="language-plaintext highlighter-rouge">/ * - 3 5 + 6 * 17 4 3</code></p>
+  </li>
+  <li>
+    <p>后缀形式：<code class="language-plaintext highlighter-rouge">3 5 - 6 17 4 * + * 3 /</code></p>
+  </li>
+</ul>
+
+<h4 id="后缀表达式的计算">后缀表达式的计算</h4>
+
+<h5 id="算法思路">算法思路</h5>
+
+<ul>
+  <li>遇到运算对象是，应该记录它以便后续使用</li>
+  <li>遇到运算符时，应该根据其元数（假定都是二元运算符），取得前面最近遇到的几个运算对象或已完成运算的结果，应用这个运算符计算，并保存其结果</li>
+</ul>
+
+<h5 id="注意事项">注意事项</h5>
+
+<ul>
+  <li>需要记录的是已经掌握的数据</li>
+  <li>每次处理运算符，应使用的是此前最后记录的几个结果</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 实现的伪代码如下：
+# 假定 st 是一个栈，算法的核心是下面的循环
+</span><span class="k">while</span> <span class="n">还有输入</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">nextItem</span><span class="p">()</span> <span class="c1"># 获取下一个输入
+</span>    <span class="k">if</span> <span class="n">is_opend</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="c1"># 如果是运算对象
+</span>        <span class="n">st</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># 如果是运算符
+</span>        <span class="n">b</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># 第二个运算对象 ################################## 特别注意，先弹出来的是第二个运算数
+</span>        <span class="n">a</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># 第一个运算对象 ################################## 特别注意，后弹出来的是第一个运算数
+</span>        <span class="n">根据运算符对</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="n">进行运算</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1">#计算结果压入栈
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="n">formula</span><span class="p">):</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">formula</span><span class="p">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 栈
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">:</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">isdigit</span><span class="p">()):</span> <span class="c1"># 若为数字
+</span>            <span class="n">st</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="c1"># 只支持整形运算
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># 第二个运算数 ################################## 特别注意，先弹出来的是第二个运算数
+</span>            <span class="n">a</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># 第一个运算数 ################################## 特别注意，后弹出来的是第一个运算数
+</span>            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="s">'+'</span><span class="p">):</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+            <span class="k">elif</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="s">'-'</span><span class="p">):</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+            <span class="k">elif</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="s">'*'</span><span class="p">):</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+            <span class="k">elif</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="s">'/'</span><span class="p">):</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"Illegal operator"</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="n">st</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">st</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="c1"># 试着运算看看
+</span><span class="k">print</span><span class="p">(</span><span class="n">calculate</span><span class="p">(</span><span class="s">"3 5 - 6 17 4 * + * 3 /"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="中缀表达式到后缀表达式的转换">中缀表达式到后缀表达式的转换</h4>
+
+<ul>
+  <li>扫描中遇到一个运算符不能将其输出，只要看到下一个运算符的优先级<strong>不高于</strong>本运算符的时候，才能够取做本运算符要求的计算</li>
+  <li>应该用一个栈保存尚未处理的运算符</li>
+  <li>需要处理括号问题</li>
+  <li>在扫描完成后，栈里可能剩下一些运算符，应将其一一弹出并送到后缀表达式。</li>
+</ul>
+
+<h4 id="中缀表达式的求值">中缀表达式的求值</h4>
+
+<h3 id="栈与递归">栈与递归</h3>
+
+<h4 id="阶乘函数的递归计算">阶乘函数的递归计算</h4>
+
+<h4 id="栈与递归--函数调用">栈与递归 / 函数调用</h4>
+
+<p>为了支持递归定义函数的实现，需要一个栈（运行栈）保存递归函数执行时每层调用的局部信息</p>
+
+<h2 id="队列">队列</h2>
+
+<h3 id="队列抽象数据类型">队列抽象数据类型</h3>
+
+<p><strong>先进先出</strong>（First In First Out, FIFO）结构</p>
+
+<ul>
+  <li>入队（enqueue）</li>
+  <li>出队（dequeue）</li>
+</ul>
+
+<h3 id="队列的链接表实现">队列的链接表实现</h3>
+
+<p>需要使用<strong>尾端指针</strong></p>
+
+<h3 id="队列的顺序表实现">队列的顺序表实现</h3>
+
+<ul>
+  <li>初始化 <code class="language-plaintext highlighter-rouge">front = rear = 0</code></li>
+  <li>入队：将新元素插入 <code class="language-plaintext highlighter-rouge">rear</code> 所指向的位置，然后 <code class="language-plaintext highlighter-rouge">rear</code> 加一</li>
+  <li>出队：删去 <code class="language-plaintext highlighter-rouge">front</code> 所指的元素，然后加 1 并返回被删元素</li>
+  <li>队列为空：<code class="language-plaintext highlighter-rouge">front = rear</code></li>
+  <li>队满：<code class="language-plaintext highlighter-rouge">rear = MAX_QUEUE_SIZE - 1 或 front = rear</code></li>
+</ul>
+
+<h4 id="基于顺序表实现队列的困难">基于顺序表实现队列的困难</h4>
+
+<p>假溢出</p>
+
+<blockquote>
+  <p>在入队和出队操作中，头、尾指针只增加不减小，致使被删除元素的空间永远无法重新利用。因此，尽管队列中实际元素个数可能远远小于数组大小，但可能由于尾指针巳超出向量空间的上界而不能做入队操作。</p>
+</blockquote>
+
+<h4 id="循环顺序表循环队列">循环顺序表（循环队列）</h4>
+
+<blockquote>
+  <p>为循环队列所分配的空间可以被充分利用，除非向量空间真的被队列元素全部占用，否则不会上溢。</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">q.elems</code> —— 始终指向表元素区开始</li>
+  <li><code class="language-plaintext highlighter-rouge">q.head</code> —— 对头变量，记录当前队列里第一个元素的位置</li>
+  <li><code class="language-plaintext highlighter-rouge">q.rear</code> —— 队尾变量，记录当前队列里最后元素之后的第一个空位</li>
+</ul>
+
+<p><img src="/assets/images/post/image-20210103210448289.png" alt="image-20210103210448289" /></p>
+
+<p><img src="/assets/images/post/image-20210103210459953.png" alt="image-20210103210459953" /></p>
+
+<p>入队和出队分别需要更新变量 <code class="language-plaintext highlighter-rouge">q.head</code> 和 <code class="language-plaintext highlighter-rouge">q.rear</code></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">q.head = (q.head + 1) % q.len</code></li>
+  <li><code class="language-plaintext highlighter-rouge">q.rear = (q.rear + 1) % q.len</code></li>
+</ul>
+
+<h3 id="队列的应用">队列的应用</h3>
+
+<p>BFS</p>
+
+<h1 id="串">串</h1>
+
+<h2 id="字符集字符串和字符串操作">字符集、字符串和字符串操作</h2>
+
+<h3 id="字符串的相关概念">字符串的相关概念</h3>
+
+<ul>
+  <li>
+    <p>字符串<strong>长度</strong></p>
+  </li>
+  <li>
+    <p>字符在字符串中的位置</p>
+  </li>
+  <li>
+    <p>字符串<strong>相等</strong></p>
+  </li>
+  <li>
+    <p><strong>字典序</strong></p>
+  </li>
+  <li>
+    <p>字符串<strong>拼接</strong></p>
+  </li>
+  <li>
+    <p><strong>子串</strong>关系</p>
+
+    <p>任何字符串也是该串自身的子串</p>
+  </li>
+  <li>
+    <p><strong>前缀</strong>，<strong>后缀</strong></p>
+  </li>
+</ul>
+
+<h3 id="字符串抽象数据类型">字符串抽象数据类型</h3>
+
+<h2 id="字符串的实现">字符串的实现</h2>
+
+<h3 id="基本实现问题和技术">基本实现问题和技术</h3>
+
+<h3 id="实际语言里的字符串">实际语言里的字符串</h3>
+
+<h3 id="python-里的字符串">Python 里的字符串</h3>
+
+<h4 id="str-的操作"><code class="language-plaintext highlighter-rouge">str</code> 的操作</h4>
+
+<ul>
+  <li>
+    <p>切分操作 <code class="language-plaintext highlighter-rouge">split</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">string.split('x')</code></p>
+
+    <ul>
+      <li>默认在<strong>空格处</strong>切分</li>
+      <li>返回切分后的 <code class="language-plaintext highlighter-rouge">list</code>，其中每个元素<strong>不包含</strong> ‘x’</li>
+      <li><strong>不改变</strong>原有字符串</li>
+    </ul>
+  </li>
+  <li>
+    <p>替换操作 <code class="language-plaintext highlighter-rouge">replace</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">string.replace('a', 'b')</code></p>
+
+    <ul>
+      <li>一次替换掉<strong>全部</strong>满足要求的元素</li>
+      <li>返回替换后的结果</li>
+      <li><strong>不改变</strong>原有字符串</li>
+    </ul>
+  </li>
+  <li>
+    <p>检查子串出现的次数 <code class="language-plaintext highlighter-rouge">count</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">TimesOccured = string.count('x', start(, end))</code></p>
+  </li>
+  <li>
+    <p>检查后缀 <code class="language-plaintext highlighter-rouge">endswith</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">string.endswith('Ending')</code></p>
+
+    <ul>
+      <li>返回 <code class="language-plaintext highlighter-rouge">Ture</code> 或 <code class="language-plaintext highlighter-rouge">False</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>找子串的位置 <code class="language-plaintext highlighter-rouge">find/index</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">string.find("substring", start(, end))</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">string.index("substring", start(, end))</code></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">index() </code>方法检测字符串中是否包含子字符串 <code class="language-plaintext highlighter-rouge">str</code> ，该方法与 python <code class="language-plaintext highlighter-rouge">find()</code>方法一样，只不过如果 <code class="language-plaintext highlighter-rouge">str</code> 不在 <code class="language-plaintext highlighter-rouge">string</code> 中<strong>会报一个异常</strong>。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="字符串匹配子串查找string-matching">字符串匹配（子串查找）string matching</h2>
+
+<h3 id="字符串匹配">字符串匹配</h3>
+
+<p>假设有两个串（其中 $t_i, p_i$ 是字符）</p>
+
+<p>$t = t_0t_1t_2…t_{n-1}$</p>
+
+<p>$p = p_0p_1p_2…p_{m-1}$</p>
+
+<p>在 $t$ 中查找与 $p$ 相同的子串</p>
+
+<ul>
+  <li><strong>目标串</strong>：$t$</li>
+  <li><strong>模式串</strong>：$p$</li>
+</ul>
+
+<blockquote>
+  <p>通常有 m « n, 即模式串长度远小于目标串长度</p>
+</blockquote>
+
+<h4 id="实际的串匹配问题">实际的串匹配问题</h4>
+
+<h3 id="串匹配和朴素匹配算法">串匹配和朴素匹配算法</h3>
+
+<h4 id="串匹配算法">串匹配算法</h4>
+
+<h4 id="朴素的串匹配算法-brute-force">朴素的串匹配算法 Brute Force</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
+dsh
+acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
+ dsh
+acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
+  dsh
+acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
+   dsh
+acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
+    dsh
+acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
+     dsh
+acdsgsdshvdncxmcudiwdnskxjzxjkxnvzbcshdiquso
+      dsh
+</code></pre></div></div>
+
+<h3 id="无回溯串匹配算法kmp-算法">无回溯串匹配算法（KMP 算法）</h3>
+
+<p><img src="/assets/images/post/image-20210103215911275.png" alt="image-20210103215911275" /></p>
+
+<h4 id="基本考虑">基本考虑</h4>
+
+<h4 id="问题分析">问题分析</h4>
+
+<p>当 $p_i$ 匹配失败时，所有的 $p_k(0\le k &lt; i)$ 都已经匹配成功 。因此，只需要根据模式串 $p$ 本身即可决定匹配失败时如何前移。</p>
+
+<p>对 $p$ 中的每个 $i$，都有与之对应的下标 $k_i$，与之匹配的目标串无关。（$k_i$ 课通过对于模式串 $p$ 的预分析得到）假设模式串 $p$ 的长度为 $m$，则需要对每个 $i(0\le i&lt;m)$ 计算出对应的 $k_i$ 并将其保存起来，以便在匹配中使用。为此可以考虑一个长为 $m$ 的表 <code class="language-plaintext highlighter-rouge">pnext</code>，用表元素 <code class="language-plaintext highlighter-rouge">pnext[i]</code> 记录与 $i$ 对应的 $k_i$ 值。</p>
+
+<h4 id="kmp-算法-on">KMP 算法 O(n)</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">matching_KMP</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">pnext</span><span class="p">):</span>
+    <span class="s">"""KMP 串匹配，主函数"""</span>
+    <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">:</span> <span class="c1"># i == m 说明找到了匹配
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="c1"># 考虑 p 中下一个字符
+</span>            <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># 失败！考虑 pnext 决定的下一字符
+</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">pnext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span> <span class="c1"># 找到匹配，返回其下标
+</span>        <span class="k">return</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># 无匹配，返回特殊值
+</span></code></pre></div></div>
+
+<h4 id="构造-pnext-表分析">构造 <code class="language-plaintext highlighter-rouge">pnext</code> 表：分析</h4>
+
+<ul>
+  <li>模式串移动之后，作为下一个用于匹配的字符的新位置，其前缀子串应该与匹配失败的字符串之前同样长度的子串相同。</li>
+  <li>如果匹配在模式串的位置 i 失败时，二位置 i 的前缀子串中满足上述条件的位置不止一处，那么只可能做最短的移动，将模式串移到最近的那个满足上述条件的位置，以保证不遗漏可能的匹配。</li>
+  <li>如果 $p_0…p_{i-1}$ 的最长相等前后缀的长度为 $k(0\le k&lt;i-1)$，在 $p_i\not=t_j$ 时，模式串就应该右移 $i-k$ 位，即应把 <code class="language-plaintext highlighter-rouge">pnext[i]</code> 设置为 $k$</li>
+</ul>
+
+<h4 id="递推计算最长相等前后缀的长度">递推计算最长相等前后缀的长度</h4>
+
+<p><img src="/assets/images/post/image-20210104143909921.png" alt="image-20210104143909921" /></p>
+
+<p>已知 <code class="language-plaintext highlighter-rouge">pnext[0] = -1</code> 和直至 <code class="language-plaintext highlighter-rouge">pnext[i-1]</code> 的已有值求 <code class="language-plaintext highlighter-rouge">pnext[i]</code> 的算法：</p>
+
+<ol>
+  <li>假设 <code class="language-plaintext highlighter-rouge">pnext[i-1] = k-1</code>。如果 $p_i = p_k$，那么 $p_0…p_i$ 的<strong>最长相等前后缀</strong>的长度就是 $k$，将其计入 <code class="language-plaintext highlighter-rouge">pnext[i]</code>，将 $i$ 的值加一后继续递推（循环）</li>
+  <li>如果 $p_i\not=p_k$，就将 $k$ 设置为 <code class="language-plaintext highlighter-rouge">pnext[k]</code> 的值</li>
+  <li>如果 $k$ 的值等于 -1（这个值一定是第 2 步而来自 <code class="language-plaintext highlighter-rouge">pnext</code>），那么 $p_0…p_i$ 的最长相同前后缀的长度就是 0，设置 <code class="language-plaintext highlighter-rouge">pnext[i] = 0</code>，将 $i$ 的值加 1 后继续递推。</li>
+</ol>
+
+<h4 id="pnext-生成算法的改进"><code class="language-plaintext highlighter-rouge">pnext</code> 生成算法的改进</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">gen_pnext</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="s">"""生成针对 p 中各位置 i 的下一个检查位置表，用于 KMP 算法，有稍许修改的优化版本"""</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">pnext</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># 生成下一个 pnext 元素
+</span>        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">pnext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pnext</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pnext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">pnext</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pnext</span>
+</code></pre></div></div>
+
+<h4 id="kmp-算法的时间复杂性及其它">KMP 算法的时间复杂性及其它</h4>
+
+<ul>
+  <li>构造 <code class="language-plaintext highlighter-rouge">pnext</code> O(m)</li>
+  <li>实际匹配 O(n)</li>
+  <li>综上： O(m+n)</li>
+</ul>
+
+<h1 id="数组">数组</h1>
+
+<h3 id="数组-1">数组</h3>
+
+<h4 id="数组的定义">数组的定义</h4>
+
+<h4 id="数组的抽象数据类型定义">数组的抽象数据类型定义</h4>
+
+<h4 id="数组的顺序表示和实现">数组的顺序表示和实现</h4>
+
+<p>一般采用<strong>顺序存储</strong>的方法来表示数组</p>
+
+<h5 id="行优先顺序row-major-order">行优先顺序（Row Major Order）</h5>
+
+<p>$a_{11}\ a_{12}\ …\ a_{1n}\ a_{21}\ a_{22}\ …\ a_{2n}\ …\ a_{m1}\ a_{m2}\ …\ a_{mn}$</p>
+
+<h5 id="列优先顺序column-major-order">列优先顺序（Column Major Order）</h5>
+
+<p>$a_{11}\ a_{21}\ …\ a_{m1}\ a_{12}\ a_{22}\ …\ a_{m2}\ …\ a_{1n}\ a_{2n}\ …\ a_{mn}$</p>
+
+<h5 id="不同存储方式的地址计算">不同存储方式的地址计算</h5>
+
+<h3 id="矩阵的压缩存储">矩阵的压缩存储</h3>
+
+<p>对于高阶矩阵，若其中非零元素呈某种规律分布或者矩阵中有大量的零元素，则考虑压缩存储</p>
+
+<ul>
+  <li>多个相同的非零元素只分配一个存储空间</li>
+  <li>零元素不分配空间</li>
+</ul>
+
+<h4 id="特殊矩阵">特殊矩阵</h4>
+
+<p>是指非零元素或零元素的分布有一定规律的矩阵。</p>
+
+<h5 id="对称矩阵">对称矩阵</h5>
+
+<blockquote>
+  <p>对称矩阵中的元素关于主对角线对称，因此，让每一对对称元素$a_{ij}$和$a_{ji}, (i\not=j)$分配一个存储空间，则$n^2$个元素压缩存储到$n(n+1)\over2$个存储空间，能节约近一半的存储空间。</p>
+</blockquote>
+
+<h5 id="三角矩阵">三角矩阵</h5>
+
+<blockquote>
+  <p>三角矩阵中的重复元素c可共享一个存储空间，其余的元素正好有$n(n+1)\over2$个，因此，三角矩阵可压缩存储到向量sa[$0…{n(n+1)\over2}$]中，其中c存放在向量的第1个分量中。</p>
+</blockquote>
+
+<h5 id="对角矩阵">对角矩阵</h5>
+
+<blockquote>
+  <p>矩阵中，除了主对角线和主对角线上或下方若干条对角线上的元素之外，其余元素皆为零。</p>
+
+  <p>对角矩阵可按行优先顺序或对角线顺序，将其压缩存储到一个向量中，并且也能找到每个非零元素和向量下标的对应关系。</p>
+</blockquote>
+
+<h4 id="稀疏矩阵-sparse-matrix">稀疏矩阵 Sparse Matrix</h4>
+
+<h5 id="稀疏矩阵的压缩存储">稀疏矩阵的压缩存储</h5>
+
+<p>对于稀疏矩阵，采用压缩存储方法时，只存储非0元素。必须存储非0元素的行下标值、列下标值、元素值。因此，一个三元组$(i,\ j,\ a_{ij})$唯一确定稀疏矩阵的一个非零元素。</p>
+
+<h5 id="三元组顺序表">三元组顺序表</h5>
+
+<blockquote>
+  <p>若以行序为主序，稀疏矩阵中所有非0元素的三元组，就可以得构成该稀疏矩阵的一个三元组顺序表。</p>
+</blockquote>
+
+<h5 id="求转置矩阵">求转置矩阵</h5>
+
+<ol>
+  <li>将矩阵的行、列下标值交换。即将三元组表中的行、列位置值i 、j相互交换；</li>
+  <li>重排三元组表中元素的顺序。即交换后仍然是<strong>按行优先顺序</strong>排序的。</li>
+</ol>
+
+<ul>
+  <li>
+    <p>方法一：</p>
+
+    <ul>
+      <li>
+        <p>算法思想：</p>
+
+        <p>按稀疏矩阵A的三元组表<code class="language-plaintext highlighter-rouge">a.data</code>中的列次序依次找到相应的三元组存入<code class="language-plaintext highlighter-rouge">b.data</code>中。</p>
+      </li>
+      <li>
+        <p>算法分析：</p>
+
+        <p>时间复杂度为$O(c_n\times t_n)$，即矩阵的列数和非0元素的个数的乘积成正比。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>方法二：（快速转置）</p>
+
+    <ul>
+      <li>
+        <p>算法思想：</p>
+
+        <p>直接按照稀疏矩阵A的三元组表<code class="language-plaintext highlighter-rouge">a.data</code>的次序依次顺序转换，并将转换后的三元组放置于三元组表<code class="language-plaintext highlighter-rouge">b.data</code>的恰当位置。</p>
+      </li>
+      <li>
+        <p>前提：</p>
+
+        <p>若能预先确定原矩阵A中每一列的(即B中每一行)第一个非0元素在<code class="language-plaintext highlighter-rouge">b.data</code>中应有的位置，则在作转置时就可直接放在<code class="language-plaintext highlighter-rouge">b.data</code>中恰当的位置。因此，应先求得A中每一列的非0元素个数。</p>
+      </li>
+      <li>
+        <p>附设两个辅助向量<code class="language-plaintext highlighter-rouge">num[ ]</code>和<code class="language-plaintext highlighter-rouge">cpot[ ]</code> 。</p>
+
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">num[col]</code>：统计A中第<code class="language-plaintext highlighter-rouge">col</code>列中非0元素的个数；</li>
+          <li><code class="language-plaintext highlighter-rouge">cpot[col] </code>：指示A中第一个非0元素在<code class="language-plaintext highlighter-rouge">b.data</code>中的恰当位置。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="稀疏矩阵的乘法">稀疏矩阵的乘法</h5>
+
+<ul>
+  <li>
+    <p>算法思想：</p>
+
+    <p>对于A中的每个元素<code class="language-plaintext highlighter-rouge">a.data[p](p=1, 2, … , a.tn)</code>，找到B中所有满足条件：<code class="language-plaintext highlighter-rouge">a.data[p].col=b.data[q].row</code> 的元素<code class="language-plaintext highlighter-rouge">b.data[q]</code>，求得<code class="language-plaintext highlighter-rouge">a.data[p].value * b.data[q].value</code>，该乘积是$c_{ij}$中的一部分。求得所有这样的乘积并累加求和就能得到$c_{ij}$。</p>
+  </li>
+</ul>
+
+<h3 id="十字链表">十字链表</h3>
+
+<p>矩阵非零元素结点所含有的域有：行、列、值、行指针（指向同一行的下一个非零元）、列指针（指向同一列的下一个非零元）</p>
+
+<p><img src="/assets/images/post/image-20210104151844343.png" alt="image-20210104151844343" /></p>
+
+<p>由定义知，稀疏矩阵中同一行的非0元素的由<code class="language-plaintext highlighter-rouge">right</code>指针域链接成一个行链表， 由<code class="language-plaintext highlighter-rouge">down</code>指针域链接成一个列链表。则每个非0元素既是某个行链表中的一个结点，同时又是某个列链表中的一个结点，所有的非0元素构成一个十字交叉的链表。称为<strong>十字链表</strong>。</p>
+
+<p>其次，十字交叉链表还有一个<strong>头结点</strong>，结点的结构如图所示。</p>
+
+<p><img src="/assets/images/post/image-20210104152456025.png" alt="image-20210104152456025" /></p>
+
+<p><img src="/assets/images/post/image-20210104154357153.png" alt="image-20210104154357153" /></p>
+
+<h3 id="广义表-list">广义表 List</h3>
+
+<p>广义表是线性表的推广和扩充</p>
+
+<h4 id="广义表的概念">广义表的概念</h4>
+
+<p><strong>广义表</strong>是由 $n(n\ge 0)$ 个元素组成的有穷序列：$Lst = (a_1, a_2, … a_n)$</p>
+
+<p>其中 $a_i$ 或者是原子项（不可再分），或者是一个广义表</p>
+
+<ul>
+  <li>
+    <p>表头</p>
+  </li>
+  <li>
+    <p>表尾</p>
+  </li>
+  <li>
+    <p>表深</p>
+
+    <blockquote>
+      <p>括号的最大层数</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="广义表的存储结构">广义表的存储结构</h4>
+
+<p>由于广义表中的数据元素具有不同的结构，通常用<strong>链式</strong>存储结构表示，每个数据元素用一个结点表示。因此，广义表中就有两类结点：</p>
+
+<ul>
+  <li>
+    <p>表结点：</p>
+
+    <p>用来表示广义表项，由标志域，表头指针域，表尾指针域组成</p>
+  </li>
+  <li>
+    <p>原子结点：</p>
+
+    <p>用来表示原子项，由标志域，原子的值域组成</p>
+  </li>
+</ul>
+
+<p><img src="/assets/images/post/image-20210104161411826.png" alt="image-20210104161411826" /></p>
+
+<h1 id="树">树</h1>
+
+<p><strong>树形结构</strong>是由结点（结构中的逻辑单元，可用于保存数据）和结点之间的连接关系（一种后继关系）构成，其结构域线性结构（表）不同，主要特征有：</p>
+
+<ul>
+  <li>一个结构如果不空，其中就存在着<strong>唯一</strong>的起始点，称为<strong>树根</strong>(root)</li>
+  <li>一个结点<strong>有且只有一个</strong>前驱，可以有 <strong>0 个或者多个后继</strong></li>
+  <li>结构里的所有结点都在树根结点通过后继关系可达的结点集合里</li>
+  <li>结点之间的联系<strong>不会</strong>构成循环关系</li>
+  <li>从任意俩能够不同的结点出发，通过后继关系可达的两个结点的集合，或者互不相交，或者一个为另一个的子集。</li>
+</ul>
+
+<h2 id="二叉树概念和性质">二叉树：概念和性质</h2>
+
+<h3 id="概念和性质">概念和性质</h3>
+
+<h4 id="定义和图示">定义和图示</h4>
+
+<ul>
+  <li>二叉树</li>
+  <li>左子树</li>
+  <li>右子树</li>
+  <li>空树</li>
+  <li>单点树</li>
+  <li>子节点</li>
+  <li>父节点</li>
+  <li>树叶</li>
+  <li>度数——一个结点的子节点个数</li>
+</ul>
+
+<h4 id="路径结点的层和树的高度">路径、结点的层和树的高度</h4>
+
+<h4 id="二叉树的性质">二叉树的性质</h4>
+
+<h4 id="满二叉树扩充二叉树">满二叉树、扩充二叉树</h4>
+
+<ul>
+  <li><strong>满二叉树</strong>：二叉树中所有分支结点的度数都是 2</li>
+  <li><strong>扩充二叉树</strong>：将二叉树扩充为满二叉树，新增加的结点称为<strong>外部结点</strong>，原有结点称为<strong>内部结点</strong>。</li>
+</ul>
+
+<h4 id="完全二叉树">完全二叉树</h4>
+
+<p>对于一棵高为 $h$ 的二叉树，如果其第 $0$ 层到第 $h-1$ 层的结点都满，最下一层的结点不满，且所有结点在最左边联系排列，空位都在右边。</p>
+
+<p><img src="/assets/images/post/image-20210104163949799.png" alt="image-20210104163949799" /></p>
+
+<h3 id="抽象数据类型">抽象数据类型</h3>
+
+<h3 id="遍历二叉树">遍历二叉树</h3>
+
+<p><img src="/assets/images/post/image-20210104165302639.png" alt="image-20210104165302639" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">A B C D E F G None H None I J K</code></p>
+
+<h4 id="深度优先遍历-dfs">深度优先遍历 (DFS)</h4>
+
+<ul>
+  <li>
+    <p><strong>先根序</strong>遍历（DLR）$\rightarrow$ 先根序列</p>
+
+    <blockquote>
+      <p>A B D H E I C F J K G</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>中根序</strong>遍历（LDR），也称对称序 $\rightarrow$ 中根序列</p>
+
+    <blockquote>
+      <p>D H B E I A J F K C G</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>后根序</strong>遍历（LRD）$\rightarrow$  后根序列</p>
+
+    <blockquote>
+      <p>H D I E B J K F G C A</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="宽度优先遍历-bfs">宽度优先遍历 (BFS)</h4>
+
+<p><strong>按层次</strong>顺序遍历</p>
+
+<blockquote>
+  <p>A B C D E F G H I J K</p>
+</blockquote>
+
+<h4 id="遍历与搜索">遍历与搜索</h4>
+
+<h2 id="二叉树的-list-实现">二叉树的 <code class="language-plaintext highlighter-rouge">list</code> 实现</h2>
+
+<h3 id="设计和实现">设计和实现</h3>
+
+<ul>
+  <li>
+    <p>空树用 <code class="language-plaintext highlighter-rouge">None</code> 表示</p>
+  </li>
+  <li>
+    <p>非空二叉树用包含桑元素的表<code class="language-plaintext highlighter-rouge">[d, l, r]</code> 表示，其中：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">d</code> 表示存在根节点的元素</li>
+      <li><code class="language-plaintext highlighter-rouge">l</code> 和 <code class="language-plaintext highlighter-rouge">r</code> 是两棵子树</li>
+    </ul>
+  </li>
+  <li>
+    <p>表示样例：</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="p">[</span><span class="s">'B'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+      <span class="p">[</span><span class="s">'C'</span><span class="p">,</span> <span class="p">[</span><span class="s">'D'</span><span class="p">,</span> <span class="p">[</span><span class="s">'F'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+                  <span class="p">[</span><span class="s">'G'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+             <span class="s">'E'</span><span class="p">,</span> <span class="p">[</span><span class="s">'H'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+                  <span class="p">[</span><span class="s">'I'</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]]]]</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="二叉树的-class-实现与遍历">二叉树的 <code class="language-plaintext highlighter-rouge">class</code> 实现与遍历</h2>
+
+<h3 id="树类型定义">树类型定义</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<h3 id="根据层序输入生成树">根据层序输入生成树</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">CreateTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+    <span class="s">"""根据层序输入生成树"""</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">i</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">t</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">queue</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">t</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">t</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<h3 id="递归遍历">递归遍历</h3>
+
+<h4 id="递归前序遍历">递归前序遍历</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">presearch</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="s">"""递归——前序遍历"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span> <span class="ow">or</span> <span class="n">root</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">" "</span><span class="p">)</span>
+        <span class="n">presearch</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="n">presearch</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="递归中序遍历">递归中序遍历</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">midsearch</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="s">"""递归——中序遍历"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>        
+        <span class="n">midsearch</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span> <span class="ow">or</span> <span class="n">root</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">" "</span><span class="p">)</span>
+        <span class="n">midsearch</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="递归后序遍历">递归后序遍历</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">postsearch</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="s">"""递归——后序遍历"""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>        
+        <span class="n">postsearch</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>        
+        <span class="n">postsearch</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span> <span class="ow">or</span> <span class="n">root</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">" "</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="非递归遍历">非递归遍历</h3>
+
+<h4 id="非递归前序遍历">非递归前序遍历</h4>
+
+<h5 id="代码">代码</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">nonrec_presearch</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="s">"""非递归——前序遍历"""</span>
+    <span class="n">dlr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stk</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 栈空间
+</span>    <span class="n">now</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="k">while</span> <span class="ow">not</span><span class="p">(</span><span class="n">now</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="k">elif</span> <span class="n">now</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">:</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dlr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">stk</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">left</span>  
+    <span class="c1"># 打印出遍历结果
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">dlr</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="算法思想">算法思想</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="n">当前结点不为空</span> <span class="ow">or</span> <span class="n">栈空间不为空时</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">当前结点为空</span><span class="p">:</span>
+        <span class="n">当前结点</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="mf">1.</span> <span class="n">先访问当前结点</span><span class="err">（</span><span class="n">根节点</span><span class="err">）</span>
+        <span class="mf">2.</span> <span class="n">右子节点进栈</span>
+        <span class="mf">3.</span> <span class="n">当前结点设置为左子节点</span>
+</code></pre></div></div>
+
+<h4 id="非递归中序遍历">非递归中序遍历</h4>
+
+<h5 id="代码-1">代码</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">nonrec_midsearch</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="s">"""非递归——中序遍历"""</span>
+    <span class="n">ldr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stk</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 栈空间
+</span>    <span class="n">now</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="p">((</span><span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">:</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">ldr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">right</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stk</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">left</span>
+    <span class="c1"># 打印出遍历结果
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">ldr</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="算法思想-1">算法思想</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="n">当前结点不为空</span> <span class="ow">or</span> <span class="n">栈空间不为空时</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">当前结点为空</span><span class="p">:</span>
+        <span class="n">当前结点</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">访问当前节点</span>
+        <span class="n">当前结点设置为右子节点</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">当前节点</span><span class="p">)</span>
+        <span class="n">当前结点设置为左子节点</span>
+</code></pre></div></div>
+
+<h4 id="非递归后序遍历">非递归后序遍历</h4>
+
+<h5 id="代码-2">代码</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">nonrec_postsearch</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="s">"""非递归——后序遍历"""</span>
+    <span class="n">lrd</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stk</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 栈空间
+</span>    <span class="n">now</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="p">((</span><span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span> <span class="ow">or</span> <span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span> <span class="ow">or</span> <span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">now</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">now</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">stk</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="p">[</span><span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">left</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">now</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">stk</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="p">[</span><span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">right</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">stk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">lrd</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lrd</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">now</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># 打印出遍历结果
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">lrd</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="算法思想-2">算法思想</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">需要引入</span><span class="s">"计数"</span><span class="err">，</span><span class="n">即是否可以访问根节点</span>
+<span class="n">计数为</span> <span class="mi">0</span><span class="p">:</span> <span class="n">now</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">left</span>
+   <span class="n">为</span> <span class="mi">1</span><span class="p">:</span> <span class="n">now</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">right</span>
+   <span class="n">为</span> <span class="mi">2</span><span class="p">:</span> <span class="n">访问当前结点</span>
+</code></pre></div></div>
+
+<h2 id="树的存储">树的存储</h2>
+
+<h2 id="树森林与二叉树的转换">树、森林与二叉树的转换</h2>
+
+<h2 id="霍夫曼树的构造">霍夫曼树的构造</h2>
+
+<blockquote>
+  <p>设有实数集 $W = {w_0, w_1, …, w_{m-1}},\ T$ 是一棵扩充二叉树，其 m 个外部节点分别以 $w_i(i = 1,2,…,n-1)$ 为权，且 T 的带权外部路径长度 WPL 在所有这样的扩充二叉树中达到最小，则称 T 为 W 的最优二叉树或哈夫曼树。</p>
+</blockquote>
+
+<h1 id="图">图</h1>
+
+<h2 id="概念性质与实现">概念、性质与实现</h2>
+
+<h3 id="定义与图示">定义与图示</h3>
+
+<ul>
+  <li>有向图</li>
+  <li>无向图</li>
+</ul>
+
+<h3 id="概念与性质">概念与性质</h3>
+
+<ul>
+  <li><strong>完全图</strong>：任意两个顶点之间都有边的图</li>
+  <li><strong>度</strong>：一个顶点的度就是与它邻接边的条数。
+    <ul>
+      <li>入度</li>
+      <li>出度</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="路径的相关性质">路径的相关性质</h4>
+
+<ul>
+  <li>路径的长度：该路径上边的条数</li>
+  <li><strong>回路</strong></li>
+  <li><strong>简单回路</strong>：一个环路，除起点和终点外其它顶点均不相同</li>
+  <li><strong>简单路径</strong>：内部不包含回路的路径</li>
+  <li><strong>有根图</strong>：在有向图里存在一个顶点 v，到其它每个顶点均有路径</li>
+</ul>
+
+<h4 id="连通图">连通图</h4>
+
+<ul>
+  <li><strong>连通</strong></li>
+  <li><strong>连通无向图</strong>：任意两个顶点之间都连通</li>
+  <li><strong><em>强</em></strong> <strong>连通有向图</strong>：任意两个顶点之间都有路径（要求两个方向的路径都存在）</li>
+</ul>
+
+<h4 id="子图连通子图">子图、连通子图</h4>
+
+<ul>
+  <li><strong>极大连通子图</strong></li>
+  <li><strong>极大强连通子图</strong></li>
+</ul>
+
+<h4 id="带权图和网络">带权图和网络</h4>
+
+<ul>
+  <li><strong>带权图</strong></li>
+  <li><strong>网络</strong></li>
+</ul>
+
+<h3 id="图抽象数据类型">图抽象数据类型</h3>
+
+<h3 id="图的表示和实现">图的表示和实现</h3>
+
+<h4 id="邻接矩阵">邻接矩阵</h4>
+
+<p>$A_{ij} = \left{ \begin{array}{lr} 1, 如果顶点 v_i 到 v_j 有边 \ 0，如果顶点 v_i 到 v_j 无边\end{array}\right.$</p>
+
+<h4 id="图的邻接表表示">图的邻接表表示</h4>
+
+<blockquote>
+  <p>对图的每个顶点建立一个单链表，存储该顶点所有邻接顶点及其相关信息。每一个单链表设一个表头结点。</p>
+</blockquote>
+
+<p><img src="/assets/images/post/image-20210105165157110.png" alt="image-20210105165157110" /></p>
+
+<h2 id="图的-python-实现">图的 Python 实现</h2>
+
+<p>用字典实现</p>
+
+<ul>
+  <li>
+    <p>字典的声明：</p>
+
+    <p><code class="language-plaintext highlighter-rouge">Graph = dict()</code></p>
+  </li>
+  <li>
+    <p>使用：</p>
+
+    <p><code class="language-plaintext highlighter-rouge">Graph[key] = value</code></p>
+  </li>
+</ul>
+
+<h3 id="由输入构造树">由输入构造树</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># get input
+</span><span class="n">NodeNum</span><span class="p">,</span> <span class="n">PathNum</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span> <span class="o">=</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()</span>
+<span class="n">NodeNum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">NodeNum</span><span class="p">)</span>
+<span class="n">PathNum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">PathNum</span><span class="p">)</span>
+<span class="n">Start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Start</span><span class="p">)</span>
+<span class="n">End</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">End</span><span class="p">)</span>
+<span class="c1"># Create Graph
+</span><span class="n">Graph</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NodeNum</span><span class="p">):</span>
+    <span class="n">Graph</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">PathNum</span><span class="p">):</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">Graph</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])][</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="图的遍历">图的遍历</h3>
+
+<h4 id="深度优先遍历">深度优先遍历</h4>
+
+<h4 id="宽度优先遍历">宽度优先遍历</h4>
+
+<h3 id="生成树">生成树</h3>
+
+<blockquote>
+  <p>条件：<strong>连通无向图</strong> 或 <strong>强连通有向图</strong></p>
+</blockquote>
+
+<blockquote>
+  <p>如果图 G 有 n 个顶点，必然可以找到 G 中的一个包含 n-1 条边的集合，这个集合里包含了从 $v_0$ 到其它所有点的路径。</p>
+</blockquote>
+
+<h4 id="遍历和生成树">遍历和生成树</h4>
+
+<h5 id="构造-dfs-生成树">构造 DFS 生成树</h5>
+
+<h5 id="构造-bfs-生成树">构造 BFS 生成树</h5>
+
+<h2 id="最小生成树">最小生成树</h2>
+
+<h3 id="最小生成树问题">最小生成树问题</h3>
+
+<p>最小生成树 —— 带权树中权值最小的生成树</p>
+
+<h3 id="kruskal-算法">Kruskal 算法</h3>
+
+<h5 id="算法思路-1">算法思路</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">将图看作离散的点和一堆边</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="n">num</span><span class="p">(</span><span class="n">边</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">从未选择的边中找到满足</span><span class="err">：</span><span class="o">&lt;</span><span class="n">m</span> <span class="p">,</span><span class="n">n</span><span class="o">&gt;</span>
+    <span class="mf">1.</span> <span class="n">权重最小</span>
+    <span class="mf">2.</span> <span class="n">两个端点不同时出现在已连接的点中</span>
+    <span class="n">dot</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">dot</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">将边从未选择中删除</span>
+    <span class="n">num</span><span class="p">(</span><span class="n">边</span><span class="p">)</span> <span class="o">++</span>
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-2656ffcd5cdb097d.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-8392698e3388fece.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="prim-算法">Prim 算法</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-4491cf0d977af08c.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>![img](https://upload-images.jianshu.io/upload_images/3755117-ac654c5400c4a97e.png?imageMogr2/auto-orient/strip</td>
+      <td>imageView2/2/w/1200/format/webp)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="最短路径">最短路径</h2>
+
+<h3 id="最短路径问题">最短路径问题</h3>
+
+<h3 id="求单原点最短路径的-dijikstra-算法">求单原点最短路径的 Dijikstra 算法</h3>
+
+<p><img src="https://wiki.mbalib.com/w/images/6/65/Dijkstra%E7%AE%97%E6%B3%95%E5%9B%BE.jpg" alt="See the source image" /></p>
+
+<p><img src="/assets/images/post/image-20210105185331340.png" alt="" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># FindPath
+</span><span class="n">Path</span><span class="p">[</span><span class="n">Start</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Start</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Graph</span><span class="p">[</span><span class="n">Start</span><span class="p">]:</span>
+    <span class="n">CanReach</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">Graph</span><span class="p">[</span><span class="n">Start</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">i</span><span class="p">,</span><span class="n">Start</span><span class="p">))</span>
+<span class="k">while</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Arrive</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">NodeNum</span><span class="p">):</span>
+    <span class="n">CanReach</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">CanReach</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">CanReach</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">Arrive</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">at</span> <span class="o">=</span> <span class="n">CanReach</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">CanReach</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Arrive</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+    <span class="n">Path</span><span class="p">[</span><span class="n">at</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">CanReach</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">CanReach</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">Graph</span><span class="p">[</span><span class="n">at</span><span class="p">]:</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Arrive</span><span class="p">):</span>
+            <span class="n">CanReach</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">length</span> <span class="o">+</span> <span class="n">Graph</span><span class="p">[</span><span class="n">at</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">j</span><span class="p">,</span><span class="n">at</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="求任意顶点间的最短路径的-floyd-算法">求任意顶点间的最短路径的 Floyd 算法</h3>
+
+<p>基于图的邻接矩阵表示</p>
+
+<ol>
+  <li>若不允许经过任何中间点，则最短路径就是邻接矩阵</li>
+  <li>允许经过第一个顶点，与邻接矩阵比较，算出最小值</li>
+  <li>允许经过第一个和第二个顶点，…</li>
+  <li>…</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">Floyd</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span> <span class="c1"># pass point i
+</span>        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span> <span class="c1">#&lt;m, n&gt;
+</span>                <span class="n">old</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">new</span> <span class="o">&lt;</span> <span class="n">old</span><span class="p">):</span>
+                    <span class="n">graph</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
+    <span class="k">return</span> <span class="n">graph</span>
+
+<span class="n">inf</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">Graph</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">inf</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="n">inf</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="n">inf</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Floyd</span><span class="p">(</span><span class="n">Graph</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="aov--aoe-网及其算法">AOV / AOE 网及其算法</h2>
+
+<blockquote>
+  <p><strong>AOV 网</strong>，又称顶点活动网(activity on vertex network)，表示各项活动之间的先后顺序关系</p>
+</blockquote>
+
+<h3 id="aov-网拓扑排序和拓扑序列">AOV 网、拓扑排序和拓扑序列</h3>
+
+<h4 id="拓扑排序和拓扑序列">拓扑排序和拓扑序列</h4>
+
+<blockquote>
+  <p><strong>拓扑排序</strong> $S$：如果 $N$ 中存在顶点 $v_i$ 到 $v_j$ 的路径，那么 $S$ 里 $v_i$ 就排在 $v_j$ 之前</p>
+</blockquote>
+
+<p>拓扑序列<strong>不唯一</strong></p>
+
+<p>拓扑序列<strong>不包含</strong>回路</p>
+
+<h3 id="拓扑排序算法">拓扑排序算法</h3>
+
+<h4 id="算法思路-2">算法思路</h4>
+
+<ol>
+  <li>从 $N$ 中选出一个入度为 0 的顶点作为序列的下一顶点</li>
+  <li>从 $N$ 网中删除所选顶点及其所有的出边</li>
+  <li>反复执行上述步骤，直至已经选出了所有图中的顶点</li>
+</ol>
+
+<h4 id="代码-3">代码</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># get input
+</span><span class="n">temp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()</span>
+<span class="n">NodeNum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">PathNum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">End</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Create Graph
+</span><span class="n">Graph</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">ReGraph</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">From</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">EE</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">LE</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">Topology</span> <span class="o">=</span> <span class="p">[</span><span class="n">Start</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NodeNum</span><span class="p">):</span>
+    <span class="n">Graph</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ReGraph</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="c1"># Find Topology Order
+</span><span class="n">now</span> <span class="o">=</span> <span class="n">Start</span>
+<span class="k">while</span> <span class="ow">not</span><span class="p">(</span><span class="n">now</span> <span class="o">==</span> <span class="n">End</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">From</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">now</span> <span class="ow">in</span> <span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">remove</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">Topology</span><span class="p">)):</span>
+            <span class="n">Next</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">Topology</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">Next</span><span class="p">)</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">Next</span>
+</code></pre></div></div>
+
+<h3 id="aoe-网和关键路径">AOE 网和关键路径</h3>
+
+<blockquote>
+  <p><strong>AOE 网</strong> (Activity On Edge Network) 是另一类带权有向图</p>
+
+  <p>抽象来看，AOE 网是一种无环带权有向图，其中：</p>
+
+  <ul>
+    <li>顶点表示<strong>事件</strong>，有向边表示<strong>活动</strong>，边上的权值表示活动的<strong>持续时间</strong></li>
+    <li>图中一个顶点表示的事件，也就是它的入边所表示的活动<strong>都已完成</strong>，它的出边活动<strong>可以开始</strong>的那个状态。</li>
+    <li>AOE 网中描述的活动可以<strong>并行</strong>地执行。</li>
+  </ul>
+
+  <p><strong>关键路径</strong>：完成整个工程所需的最短时间，就是从开始顶点到完成顶点的最长路径的长度。</p>
+</blockquote>
+
+<h3 id="关键路径算法">关键路径算法</h3>
+
+<h4 id="定义变量">定义变量</h4>
+
+<ul>
+  <li>事件 $v_j$ 最早可能发生时间 $ee[j]$
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ee[0] = 0</code>（初始时间总是在 0 时刻发生）</li>
+      <li><code class="language-plaintext highlighter-rouge">ee[j] = max{ee[i] + w[i, j]}</code></li>
+    </ul>
+  </li>
+  <li>事件 $v_j$ 最迟允许发生时间 $le[j]$
+    <ul>
+      <li>根据已知 <code class="language-plaintext highlighter-rouge">ee[j]</code> 反向推算</li>
+      <li><code class="language-plaintext highlighter-rouge">le[n - 1] = ee[n - 1]</code> （最后一个事件绝不能再延迟）</li>
+      <li><code class="language-plaintext highlighter-rouge">le[i] = min{le[j] + w[i, j]}</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="定义概念">定义概念</h4>
+
+<ul>
+  <li>关键活动
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ee[j] == le[j]</code></li>
+    </ul>
+  </li>
+  <li>时间余量
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">t[j] = le[j] - ee[j]</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="关键路径算法-1">关键路径：算法</h4>
+
+<ol>
+  <li>生成 AOE 网的一个拓扑序列</li>
+  <li>按照拓扑正序，生成 <code class="language-plaintext highlighter-rouge">ee</code> 表的值</li>
+  <li>按照拓扑逆序，生成 <code class="language-plaintext highlighter-rouge">le</code> 表的值</li>
+  <li>将 <code class="language-plaintext highlighter-rouge">e</code> 与 <code class="language-plaintext highlighter-rouge">l</code> 一起计算，得到关键路径</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">copy</span>
+<span class="k">def</span> <span class="nf">DFS</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Critical</span><span class="p">,</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">End</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">now</span> <span class="o">==</span> <span class="n">End</span><span class="p">):</span>
+        <span class="n">Result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Graph</span><span class="p">[</span><span class="n">now</span><span class="p">]:</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">i</span> <span class="ow">in</span> <span class="n">Critical</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Graph</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">EE</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">EE</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])):</span>
+            <span class="n">path</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">DFS</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+            <span class="n">path</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="c1"># get input
+</span><span class="n">temp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()</span>
+<span class="n">NodeNum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">PathNum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">End</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Create Graph
+</span><span class="n">Graph</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">ReGraph</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">From</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">EE</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">LE</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">Topology</span> <span class="o">=</span> <span class="p">[</span><span class="n">Start</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NodeNum</span><span class="p">):</span>
+    <span class="n">Graph</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ReGraph</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">PathNum</span><span class="p">):</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">Graph</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])][</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">From</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])].</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">ReGraph</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])][</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Graph</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">From</span><span class="p">)</span>
+<span class="c1"># Find Topology Order
+</span><span class="n">now</span> <span class="o">=</span> <span class="n">Start</span>
+<span class="k">while</span> <span class="ow">not</span><span class="p">(</span><span class="n">now</span> <span class="o">==</span> <span class="n">End</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">From</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">now</span> <span class="ow">in</span> <span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">remove</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">From</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">Topology</span><span class="p">)):</span>
+            <span class="n">Next</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">Topology</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">Next</span><span class="p">)</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">Next</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Topology</span><span class="p">)</span>
+<span class="c1"># Find Critical Path
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Topology</span><span class="p">:</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">Start</span><span class="p">):</span>
+        <span class="n">EE</span><span class="p">[</span><span class="n">Start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">can</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">ReGraph</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">can</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">EE</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">ReGraph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">EE</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">can</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">EE</span><span class="p">)</span>
+<span class="n">Topology</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Topology</span><span class="p">:</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">End</span><span class="p">):</span>
+        <span class="n">LE</span><span class="p">[</span><span class="n">End</span><span class="p">]</span> <span class="o">=</span> <span class="n">EE</span><span class="p">[</span><span class="n">End</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">can</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">Graph</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">can</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">LE</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">Graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">LE</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">can</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">LE</span><span class="p">)</span>
+<span class="c1"># Critical Path
+</span><span class="n">Critical</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Graph</span><span class="p">:</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">EE</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">LE</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+        <span class="n">Critical</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">Result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">Start</span><span class="p">]</span>
+<span class="n">DFS</span><span class="p">(</span><span class="n">Start</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">Result</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="查找">查找</h1>
+
+<h2 id="顺序查找">顺序查找</h2>
+
+<blockquote>
+  <p>从表的一端开始逐个将记录的关键字和给定K值进行比较，若某个记录的关键字和给定K值相等，查找成功；否则，若扫描完整个表，仍然没有找到相应的记录，则查找失败。</p>
+</blockquote>
+
+<h2 id="折半查找">折半查找</h2>
+
+<blockquote>
+  <p>折半查找又称为二分查找，是一种效率较高的查找方法。
+前提条件：查找表中的所有记录是按关键字有序(升序或降序) 。
+查找过程中，先确定待查找记录在表中的范围，然后逐步缩小范围(每次将待查记录所在区间缩小一半)，直到找到或找不到记录为止。</p>
+</blockquote>
+
+<h2 id="索引查找">索引查找</h2>
+
+<blockquote>
+  <p>分块查找(Blocking Search)又称索引顺序查找，是前面两种查找方法的综合。</p>
+</blockquote>
+
+<h3 id="索引树">索引树</h3>
+
+<h3 id="b_树">B_树</h3>
+
+<blockquote>
+  <p>一棵 m 阶 B 树或者为空，或者具有下面特征：</p>
+
+  <ul>
+    <li>树中分支结点至多有 m-1 个排序存放的关键码。根结点至少有一个关键码，其他结点至少有 $\lfloor (m-1)/2\rfloor$ 个关键码</li>
+    <li>如果一个分支节点有 j 个关键码，它就有 j + 1 棵子树，这一结点中保存的是一个序列 $&lt;p_0, k_0, p_1, k_1, …, p_{j-1}, k_{j-1}, p_j&gt;$, 其中 $k_j$ 为关键码，$p_j$ 为子结点引用，而且 $k_i$ 大于 $p_i$ 所引子树里所有的关键码，小于 $p_{i+1}$ 所引子树里所有的关键码</li>
+  </ul>
+</blockquote>
+
+<p><a href="https://blog.csdn.net/sinat_36118365/article/details/103648782">B_ 树图文详解</a></p>
+
+<h3 id="b树">B+树</h3>
+
+<p><a href="https://blog.csdn.net/qq_26222859/article/details/80631121">B+ 树图文详解</a></p>
+
+<h2 id="平衡二叉树-avl">平衡二叉树 AVL</h2>
+
+<h3 id="定义和性质">定义和性质</h3>
+
+<blockquote>
+  <p><strong>平衡二叉排序树</strong>是一类特殊的二叉排序树，它或为孔数，或者其左右子树都是平衡二叉排序树，而且其左右子树的<strong>高度之差的绝对值不超过 1</strong>。</p>
+</blockquote>
+
+<p><strong>平衡因子 BF</strong>（Balance Factor）：该结点的左子树高度减去右子树高度之差，可能的取指只有 1, -1, 0</p>
+
+<h3 id="avl-树类">AVL 树类</h3>
+
+<blockquote>
+  <p>如果能维持平衡二叉树的结构，检索操作就能在 $O(\log{n})$ 时间内完成</p>
+</blockquote>
+
+<h4 id="基本定义">基本定义</h4>
+
+<p>为了实现 AVL 树，每个结点里需要增加一个平衡因子记录</p>
+
+<h3 id="插入操作">插入操作</h3>
+
+<h4 id="插入后的失衡与调整">插入后的失衡与调整</h4>
+
+<ul>
+  <li>不失衡的情况
+    <ul>
+      <li>若在检索树的过程中，所有途径的结点 BF 均为 0，那么实际上插入结点也不会导致失衡</li>
+    </ul>
+  </li>
+  <li>失衡的情况
+    <ul>
+      <li>若失衡，则一定存在一棵包含实际插入点的<strong>最小非平衡子树</strong>，即包含新结点插入位置的、其根节点的 BF 非零的最小子树。如果插入新结点后这颗子树仍保持平衡，而且其高度不变，那么整棵二叉排序树也将保持平衡（由于该子树的高度不变，在它外面的树的结点的 BF 值都不变）。进一步说，如果插入新结点后的结构调整和 BF 值修改都能在子树内部的一条路径上完成，插入的复杂度将不超过 $O(\log{n})$</li>
+      <li>类型
+        <ul>
+          <li>$LL$ 型调整【a 的左子树较高，新结点插入在 a 的左子树的左子树】</li>
+          <li>$LR$ 型调整【a 的左子树较高，新结点插入在 a 的左子树的右子树】</li>
+          <li>$RR$ 型调整【a 的右子树较高，新结点插入在 a 的左子树的右子树】</li>
+          <li>$RL$ 型调整【a 的右子树较高，新结点插入在 a 的左子树的左子树】</li>
+        </ul>
+      </li>
+      <li>在插入新结点并完成调整之后，这棵子树与插入之前这个位置上的子<strong>树高度相同</strong>，其结构变化对子树之外的部分<strong>无影响</strong>。</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="llrr-失衡与调整">LL(RR) 失衡与调整</h4>
+
+<ul>
+  <li>
+    <p>LL</p>
+
+    <p><img src="/assets/images/post/image-20210109104205737.png" alt="image-20210109104205737" /></p>
+
+    <p><img src="https://img-blog.csdnimg.cn/20191109203211331.gif" alt="在这里插入图片描述" /></p>
+  </li>
+  <li>
+    <p>RR</p>
+
+    <p><img src="/assets/images/post/image-20210109104640685.png" alt="image-20210109104640685" /></p>
+  </li>
+</ul>
+
+<p><img src="https://img-blog.csdnimg.cn/2019110920332691.gif" alt="在这里插入图片描述" /></p>
+
+<h4 id="lrrl-失衡和调整">LR(RL) 失衡和调整</h4>
+
+<ul>
+  <li>
+    <p>LR</p>
+
+    <p><img src="/assets/images/post/image-20210109111448478.png" alt="image-20210109111448478" /></p>
+  </li>
+  <li>
+    <p>RL</p>
+
+    <p><img src="/assets/images/post/image-20210111155857041.png" alt="image-20210111155857041" /></p>
+  </li>
+</ul>
+
+<h4 id="插入操作的实现">插入操作的实现</h4>
+
+<ol>
+  <li>查找新结点的插入位置，并在查找过程中记录遇到的最小不平衡子树的根
+    <ul>
+      <li>用一个变量 a 记录距插入位置最近的平衡因子非零的结点，由于可能需要修改这棵子树，在此过程中用另一变量 pa 记录 a 的父结点</li>
+      <li>如果不存在这种结点，需要考虑的 a 就是树根</li>
+      <li>如果在新结点插入后出现失衡，a 就是平衡位置</li>
+      <li>实际插入新结点</li>
+    </ul>
+  </li>
+  <li>修改从 a 的子结点到新结点的路径上各结点的平衡因子
+    <ul>
+      <li>由于 a 的定义，这段结点原来都有 BF = 0</li>
+      <li>插入后用一个扫描变量 p 从 a 的子结点开始遍历，如果新结点插入在 p 的左子树，就把 p 的平衡因子改为 1，否则改为 -1</li>
+    </ul>
+  </li>
+  <li>检查以 a 为根的子树是否失衡，失衡时做出调整
+    <ul>
+      <li>如果 a.bf == 0，插入后不会失衡，简单修改平衡因子并结束</li>
+      <li>如果 a.bf == 1，而且新结点插入其左子树，就出现了失衡
+        <ul>
+          <li>新结点在 a 的左子节点的左子树时做 LL 调整</li>
+          <li>新结点在 a 的右子节点的左子树时做 LR 调整</li>
+        </ul>
+      </li>
+      <li>如果 a.bf == -1，而且新结点插入其右子树，就出现了失衡
+        <ul>
+          <li>新结点在 a 的左子节点的左子树时做 RL 调整</li>
+          <li>新结点在 a 的右子节点的左子树时做 RR 调整</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>连接好调整后的子树，它可能作为整棵树的根，或作为 a 原来的父节点的相应方向的子结点（左子结点或右子结点）</li>
+</ol>
+
+<h4 id="代码实现">代码实现</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AVLNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bf</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">bf</span>
+
+<span class="k">def</span> <span class="nf">LL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="c1"># LL 型调整
+</span>    <span class="n">a</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">right</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">RR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="c1"># RR 型调整
+</span>    <span class="n">a</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">left</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">LR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="c1"># LR 型调整
+</span>    <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">right</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">left</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+    <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># c 本身就是插入结点
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span><span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span><span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 新结点在 c 的左子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># 新结点在 c 的右子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+<span class="k">def</span> <span class="nf">RL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="c1"># RL 型调整
+</span>    <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">left</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+    <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># c 本身就是新结点
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 新结点在 c 的左子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># 新结点在 c 的右子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">c</span>
+        
+<span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="c1"># 若是一棵空树
+</span>        <span class="n">root</span> <span class="o">=</span> <span class="n">AVLNode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">pa</span> <span class="o">=</span> <span class="n">q</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1"># 维持 pa, q 为 a, p 的父节点
+</span>    <span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span><span class="p">.</span><span class="n">bf</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">pa</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span> <span class="c1"># 已知最小非平衡子树
+</span>        <span class="n">q</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">left</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">right</span>
+    <span class="c1"># q 是插入点的父节点, pa, a记录最小非平衡子树
+</span>    <span class="n">node</span> <span class="o">=</span> <span class="n">AVLNode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">node</span> <span class="c1"># 作为左子结点
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">node</span> <span class="c1"># 作为右子结点
+</span>    <span class="c1"># 新结点已插入，a 是最小不平衡子树
+</span>    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">:</span> <span class="c1"># 新结点在 a 的左子树
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">left</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">right</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1"># 修改 b 到新结点路径上各结点的 bf 值, b 为 a 的子结点
+</span>    <span class="k">while</span> <span class="n">p</span> <span class="o">!=</span> <span class="n">node</span><span class="p">:</span> <span class="c1"># node 一定存在，不用判断 b 空
+</span>        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">value</span><span class="p">:</span> <span class="c1"># p 的左子树增高
+</span>            <span class="n">p</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span>  <span class="mi">1</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">left</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">right</span>
+    <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># a 的原 bf 为 0，不会失衡
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="o">-</span><span class="n">d</span><span class="p">:</span> <span class="c1"># 新结点在较低子树里
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+    <span class="c1"># 新结点在较高子树，失衡，必须调整
+</span>    <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 新结点在 a 的左子树
+</span>        <span class="k">if</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">LL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># LL
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">LR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># RL
+</span>    <span class="k">else</span><span class="p">:</span> <span class="c1"># 新结点在 a 的右子树
+</span>        <span class="k">if</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">RR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># RR 调整
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">RL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># RL 调整
+</span>    <span class="k">if</span> <span class="n">pa</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="c1"># 原 a 为树根，修改 root
+</span>        <span class="n">root</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pa</span><span class="p">.</span><span class="n">left</span> <span class="o">==</span> <span class="n">a</span><span class="p">:</span>
+            <span class="n">pa</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">b</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pa</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">b</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 以下为加入一些遍历与输入操作后的代码
+# -*- coding: utf-8 -*-
+</span><span class="s">"""
+Created on Sat Jan  9 19:45:52 2021
+
+@author: Ericaaaaaaaa
+"""</span>
+
+<span class="k">class</span> <span class="nc">AVLNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bf</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">bf</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"[AVLNode value: {0} bf: {1}]"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">bf</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">AVLNode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">pa</span> <span class="o">=</span> <span class="n">q</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1"># 维持 pa, q 为 a, p 的父节点
+</span>    <span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span><span class="p">.</span><span class="n">bf</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">pa</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span> <span class="c1"># 已知最小非平衡子树
+</span>        <span class="n">q</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">left</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">right</span>
+    <span class="c1"># q 是插入点的父节点, pa, a记录最小非平衡子树
+</span>    <span class="n">node</span> <span class="o">=</span> <span class="n">AVLNode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">node</span> <span class="c1"># 作为左子结点
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">node</span> <span class="c1"># 作为右子结点
+</span>    <span class="c1"># 新结点已插入，a 是最小不平衡子树
+</span>    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">:</span> <span class="c1"># 新结点在 a 的左子树
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">left</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">right</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1"># 修改 b 到新结点路径上各结点的 bf 值, b 为 a 的子结点
+</span>    <span class="k">while</span> <span class="n">p</span> <span class="o">!=</span> <span class="n">node</span><span class="p">:</span> <span class="c1"># node 一定存在，不用判断 b 空
+</span>        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">value</span><span class="p">:</span> <span class="c1"># p 的左子树增高
+</span>            <span class="n">p</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span>  <span class="mi">1</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">left</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">right</span>
+    <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># a 的原 bf 为 0，不会失衡
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="o">-</span><span class="n">d</span><span class="p">:</span> <span class="c1"># 新结点在较低子树里
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+    <span class="c1"># 新结点在较高子树，失衡，必须调整
+</span>    <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 新结点在 a 的左子树
+</span>        <span class="k">if</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">LL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># LL
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">LR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># RL
+</span>    <span class="k">else</span><span class="p">:</span> <span class="c1"># 新结点在 a 的右子树
+</span>        <span class="k">if</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">RR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># RR 调整
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">RL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># RL 调整
+</span>    <span class="k">if</span> <span class="n">pa</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="c1"># 原 a 为树根，修改 root
+</span>        <span class="n">root</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pa</span><span class="p">.</span><span class="n">left</span> <span class="o">==</span> <span class="n">a</span><span class="p">:</span>
+            <span class="n">pa</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">b</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pa</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">b</span>
+    
+<span class="k">def</span> <span class="nf">LL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">right</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">RR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">left</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">LR</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">right</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">left</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+    <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># c 本身就是插入结点
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span><span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">bf</span><span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 新结点在 c 的左子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># 新结点在 c 的右子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+<span class="k">def</span> <span class="nf">RL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">left</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+    <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># c 本身就是新结点
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 新结点在 c 的左子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># 新结点在 c 的右子树
+</span>        <span class="n">a</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">b</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">bf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+<span class="k">def</span> <span class="nf">print_tree</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="k">while</span> <span class="ow">not</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">now</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">now</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">)):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">left</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">right</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">left</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">left</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">):</span>
+            <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">right</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">right</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">right</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="s">"None"</span><span class="p">):</span>
+            <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+<span class="n">initial</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">AVLNode</span><span class="p">(</span><span class="n">initial</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="s">"finish"</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+        <span class="n">print_tree</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="内部排序问题和性质">内部排序问题和性质</h1>
+
+<h3 id="问题定义">问题定义</h3>
+
+<h3 id="排序算法">排序算法</h3>
+
+<h4 id="基于比较的排序">基于比较的排序</h4>
+
+<h4 id="基本操作性质和评价">基本操作、性质和评价</h4>
+
+<p>在讨论各个算法时，总是以被排序序列的长度（即序列中元素的个数）作为问题的规模参数 n</p>
+
+<ul>
+  <li>任何算法的<strong>时间复杂度</strong>都不可能优于 $O(n\log{n})$</li>
+  <li>算法的性质
+    <ul>
+      <li><strong>稳定性</strong>：
+        <ul>
+          <li>对于待排序序列里的任一对排序码相同的记录 $R_i$ 和 $R_j$，在排序后的序列里 $R_i$ 和 $R_j$ 的前后顺序不变</li>
+          <li>稳定性是一个具体算法的性质，而不是排序方法的性质</li>
+        </ul>
+      </li>
+      <li><strong>适应性</strong>：
+        <ul>
+          <li>如果一个排序算法对接近有序的序列工作的更快，就称这种算法具有适应性</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="简单排序算法">简单排序算法</h2>
+
+<h3 id="插入排序">插入排序</h3>
+
+<h4 id="算法的思路">算法的思路</h4>
+
+<ol>
+  <li>从一个没有元素的列表开始</li>
+  <li>选择一个未排序的元素</li>
+  <li>将所选元素与列表中的元素一一比较，并插入到正确的位置</li>
+  <li>重复 2、3 直至所有元素都被插入到列表中为止。</li>
+</ol>
+
+<h4 id="代码-4">代码</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">insert_sort</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)):</span> <span class="c1"># 开始时片段 [lst[0]] 已排序
+</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># 选择元素
+</span>        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">:</span> <span class="c1"># 逐一向前比较
+</span>            <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 反序逐个后移元素，决定插入位置
+</span>            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">lst</span> <span class="c1"># 有没有都行，因为 python 其实已经改变了原有的 lst 了
+</span></code></pre></div></div>
+
+<h4 id="复杂度分析">复杂度分析</h4>
+
+<ul>
+  <li><strong>平均时间复杂度</strong>： $O(n^2)$</li>
+  <li><strong>最坏时间复杂度</strong>：$O(n^2)$</li>
+  <li><strong>空间复杂度</strong>：$O(1)$</li>
+</ul>
+
+<h4 id="算法特性分析">算法特性分析</h4>
+
+<ul>
+  <li>
+    <p>有稳定性</p>
+
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">lst[j-1] &gt; x</code></p>
+    </blockquote>
+  </li>
+  <li>
+    <p>有适应性</p>
+  </li>
+</ul>
+
+<h4 id="改进">改进</h4>
+
+<p>采用<strong>二分法</strong>检索插入位置</p>
+
+<h3 id="选择排序">选择排序</h3>
+
+<h4 id="算法思路-3">算法思路</h4>
+
+<ol>
+  <li>顺序扫描未排序序列中的元素，记住遇到的最小的元素</li>
+  <li>将最小元素于未排序的第一位交换</li>
+  <li>重复 1、2，直至序列排序完毕</li>
+</ol>
+
+<h4 id="代码-5">代码</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">select_sort</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="s">"""选择排序"""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="c1"># 只需循环 len(lst) - 1 次
+</span>        <span class="n">k</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)):</span> <span class="c1"># k 是已知最小元素的位置
+</span>            <span class="k">if</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lst</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">k</span><span class="p">:</span> <span class="c1"># lst[k] 是已知确定最小的元素，检查是否需要交换
+</span>            <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># 交换
+</span>    <span class="k">return</span> <span class="n">lst</span> <span class="c1"># 有没有都行，因为 python 其实已经改变了原有的 lst 了
+</span></code></pre></div></div>
+
+<h4 id="复杂度分析-1">复杂度分析</h4>
+
+<ul>
+  <li><strong>平均时间复杂度</strong>： $O(n^2)$</li>
+  <li><strong>最坏时间复杂度</strong>：$O(n^2)$</li>
+  <li><strong>空间复杂度</strong>：$O(1)$</li>
+</ul>
+
+<h4 id="算法特性分析-1">算法特性分析</h4>
+
+<ul>
+  <li>
+    <p>没有适应性</p>
+
+    <blockquote>
+      <p>任何情况下的时间复杂度都是 $O(n^2)$</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="堆排序">堆排序</h3>
+
+<h4 id="补充知识">补充知识</h4>
+
+<h5 id="优先队列">优先队列</h5>
+
+<p>优先队列是一种<strong>缓存结构</strong>，保证在任何时候访问或弹出的，总是当时这个结构里保存的所有元素里<strong>优先级最高的</strong>（在存数数据时会同时存入优先级）</p>
+
+<h5 id="树形结构和堆">树形结构和堆</h5>
+
+<h6 id="堆及其性质">堆及其性质</h6>
+
+<ul>
+  <li>采用<strong>树形结构</strong>实现<strong>优先队列</strong>的一种有效技术称为堆。</li>
+  <li>从结构上看，堆就是结点里存储数据的<strong>完全二叉树</strong></li>
+  <li><strong>堆序</strong>：任意一个结点里存储的数据的优先级<strong>先于（或等于）</strong>其子节点里的数据
+    <ul>
+      <li>堆中优先级最高的元素必在<strong>堆顶</strong></li>
+      <li>大顶堆 &amp; 小顶堆</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="优先队列的堆实现">优先队列的堆实现</h5>
+
+<h6 id="插入元素和向上筛选">插入元素和向上筛选</h6>
+
+<h6 id="弹出元素和向下筛选">弹出元素和向下筛选</h6>
+
+<h4 id="算法思路-4">算法思路</h4>
+
+<h4 id="代码-6">代码</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">heap_sort</span><span class="p">(</span><span class="n">elems</span><span class="p">):</span> <span class="c1"># 堆排序
+</span>    <span class="s">"""
+    堆排序：
+    采用小顶堆，因此输出顺序为从大到小
+    若希望得到从小到大的输入，只需要将 ① 与 ② 处改为 "&gt;" 即可
+    """</span>
+    <span class="k">def</span> <span class="nf">siftdown</span><span class="p">(</span><span class="n">elems</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span> <span class="c1"># elems 按层序方式存储的堆，e 为要插入的元素（向下筛选），begin, end 为已有堆的 begin, end 下标
+</span>        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">begin</span><span class="p">,</span> <span class="n">begin</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span> <span class="c1"># j 为 i 的左子结点
+</span>        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span> <span class="c1"># invariant: j == 2 *i + 1
+</span>            <span class="k">if</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="ow">and</span> <span class="n">elems</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">elems</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="c1"># ① # 使得 j 为 i 子结点中最小的结点的下标
+</span>                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># elems[j] 小于等于其兄弟结点的数据
+</span>            <span class="k">if</span> <span class="n">e</span> <span class="o">&lt;</span> <span class="n">elems</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="c1"># e 在三者中最小 ②
+</span>                <span class="k">break</span>
+            <span class="n">elems</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">elems</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="c1"># elems[j] 最小，上移
+</span>            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span> <span class="c1"># i 下移， j 为 i 的左子结点
+</span>        <span class="n">elems</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span> <span class="c1"># 将 e 放入合适的位置（i 处的元素已经被移走）
+</span>        
+    <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span>
+    <span class="c1"># 循环建堆
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">end</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 从最下层开始，逐步向上使得序列满足小顶堆条件
+</span>        <span class="n">siftdown</span><span class="p">(</span><span class="n">elems</span><span class="p">,</span> <span class="n">elems</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="c1"># 循环逐个取出最小元素，将其积累在表的最后，放一个退一步
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">end</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">elems</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">elems</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">elems</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">siftdown</span><span class="p">(</span><span class="n">elems</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="复杂度分析-2">复杂度分析</h4>
+
+<ul>
+  <li>时间复杂度：$O(n\log{n})$</li>
+  <li>空间复杂度：$O(1)$</li>
+</ul>
+
+<h4 id="算法特性分析-2">算法特性分析</h4>
+
+<h3 id="交换排序冒泡排序">交换排序（冒泡排序）</h3>
+
+<h4 id="算法思路-5">算法思路</h4>
+
+<p>通过交换元素<strong>消除逆序</strong></p>
+
+<h4 id="代码-7">代码</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="s">"""冒泡排序"""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)):</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="c1"># 找到逆序
+</span>                <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">found</span> <span class="o">=</span><span class="bp">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span> <span class="c1"># 如果序列中已经没有逆序了
+</span>            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">lst</span> <span class="c1"># 有没有都行，因为 python 其实已经改变了原有的 lst 了
+</span></code></pre></div></div>
+
+<h4 id="复杂度分析-3">复杂度分析</h4>
+
+<ul>
+  <li><strong>平均时间复杂度</strong>： $O(n^2)$</li>
+  <li><strong>最坏时间复杂度</strong>：$O(n^2)$</li>
+  <li><strong>空间复杂度</strong>：$O(1)$</li>
+</ul>
+
+<h4 id="算法特性分析-3">算法特性分析</h4>
+
+<ul>
+  <li>
+    <p>有稳定性</p>
+  </li>
+  <li>
+    <p>有适应性</p>
+
+    <p><code class="language-plaintext highlighter-rouge">if not found:</code></p>
+  </li>
+</ul>
+
+<h2 id="快速排序">快速排序</h2>
+
+<h4 id="算法思路-6">算法思路</h4>
+
+<ol>
+  <li>若序列长度为 0 或 1，证明已经完成排序，返回，若不然，执行 2</li>
+  <li>取待排序序列中的任意一个元素（通常是第一个）作为标准</li>
+  <li>将其他元素与之比较，并分成【比标准小】、【比标准大】两部分</li>
+  <li>将分好的两部分视为新的未排序序列，递归执行 2 操作</li>
+</ol>
+
+<h4 id="代码-8">代码</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">qsort_rec</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">return</span> <span class="c1"># 分段无记录或只有一个记录
+</span>    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># lst[i] 是初始空位
+</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span> <span class="c1"># 找 pivot 的最终位置
+</span>        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span> <span class="c1"># 用 j 向左扫描找小于 pivot 的记录
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># 小记录移到左边
+</span>        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># 用 i 向右扫描找大于 pivot 的记录
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span> <span class="c1"># 大记录移到右边
+</span>    <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pivot</span> <span class="c1"># 将 pivot 存入其最终位置
+</span>    <span class="n">qsort_rec</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 递归处理左半区间
+</span>    <span class="n">qsort_rec</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="c1"># 递归处理右半区间
+</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">qsort_rec</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="复杂度分析-4">复杂度分析</h4>
+
+<ul>
+  <li><strong>平均</strong>时间复杂度： $O(n\log{n})$</li>
+  <li><strong>最坏</strong>时间复杂度：$O(n)$</li>
+  <li>空间复杂度：$O(\log{n})$</li>
+</ul>
+
+<h4 id="算法特性分析-4">算法特性分析</h4>
+
+<ul>
+  <li>不稳定</li>
+  <li>不具有适应性</li>
+</ul>
+
+<h2 id="归并排序">归并排序</h2>
+
+<h4 id="算法思路-7">算法思路</h4>
+
+<ol>
+  <li>开始时，将每个记录看成单独的有序序列，则 n 个待排序的记录就是 n 个长度为 1 的有序子序列</li>
+  <li>对所有有序子序列进行两两归并，得到 n/2 个长度为 2 或 1 的有序子序列——一趟归并</li>
+  <li>重复 2，直到得到长度为 n 的有序序列为止。</li>
+</ol>
+
+<h4 id="代码-9">代码</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">lfrom</span><span class="p">,</span> <span class="n">lto</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="s">"""
+    归并排序最下层函数
+    实现表中相邻的一对有序序列的归并工作，将归并的结果存入另一个顺序表里的相同位置
+    需要归并的两有序段分别为：lfrom[low:mid] 和 lfrom[mid:high]
+    归并结果应存入 lto[low:high]
+    """</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">low</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">low</span> <span class="c1"># i, j 遍历两个有序子序列，k 写入结果序列
+</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mid</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">:</span> <span class="c1"># 反复赋值两分段首最小的
+</span>        <span class="k">if</span> <span class="n">lfrom</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lfrom</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">lto</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">lfrom</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lto</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">lfrom</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="p">:</span> <span class="c1"># 复制第一段剩余记录
+</span>        <span class="n">lto</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">lfrom</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">:</span> <span class="c1"># 复制第二段剩余记录
+</span>        <span class="n">lto</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">lfrom</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+<span class="k">def</span> <span class="nf">merge_pass</span><span class="p">(</span><span class="n">lfrom</span><span class="p">,</span> <span class="n">lto</span><span class="p">,</span> <span class="n">llen</span><span class="p">,</span> <span class="n">slen</span><span class="p">):</span>
+    <span class="s">"""
+    归并排序中间层函数
+    实现对整个表里顺序各对有序序列的归并，完成一遍归并，
+    各对序列的归并结果顺序存入另一顺序表里的同位置分段
+    slen: 需要归并的每小段长度
+    llen: 序列总长度
+    """</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">slen</span> <span class="o">&lt;</span> <span class="n">llen</span><span class="p">:</span> <span class="c1"># 归并长 slen 的两段
+</span>        <span class="n">merge</span><span class="p">(</span><span class="n">lfrom</span><span class="p">,</span> <span class="n">lto</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">slen</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">slen</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">slen</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">slen</span> <span class="o">&lt;</span> <span class="n">llen</span><span class="p">:</span> <span class="c1"># 剩下两端，后段长度小于 slen
+</span>        <span class="n">merge</span><span class="p">(</span><span class="n">lfrom</span><span class="p">,</span> <span class="n">lto</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">slen</span><span class="p">,</span> <span class="n">llen</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># 只剩下一段，复制给表 lto
+</span>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">llen</span><span class="p">):</span>
+            <span class="n">lto</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lfrom</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            
+<span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="s">"""
+    归并排序主函数（最顶层函数）
+    在两个顺序表中往复执行中间层操作，直至排序全部完成
+    """</span>
+    <span class="n">slen</span><span class="p">,</span> <span class="n">llen</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+    <span class="n">templst</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">llen</span>
+    <span class="k">while</span> <span class="n">slen</span> <span class="o">&lt;</span> <span class="n">llen</span><span class="p">:</span> <span class="c1"># 未形成长度为总长度的顺序序列
+</span>        <span class="n">merge_pass</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">templst</span><span class="p">,</span> <span class="n">llen</span><span class="p">,</span> <span class="n">slen</span><span class="p">)</span>
+        <span class="n">slen</span> <span class="o">*=</span> <span class="mi">2</span>
+        <span class="c1"># 排序完成时，结果可能存放在 templst 中，无论如何，再执行一次下一步，将结果存回 lst 中
+</span>        <span class="n">merge_pass</span><span class="p">(</span><span class="n">templst</span><span class="p">,</span> <span class="n">lst</span><span class="p">,</span> <span class="n">llen</span><span class="p">,</span> <span class="n">slen</span><span class="p">)</span> <span class="c1"># 结果存回原位
+</span>        <span class="n">slen</span> <span class="o">*=</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<h4 id="复杂度分析-5">复杂度分析</h4>
+
+<ul>
+  <li>时间复杂度：$O(n\log{n})$</li>
+  <li>空间复杂度：$O(n)$</li>
+</ul>
+
+<h4 id="算法特性分析-5">算法特性分析</h4>
+
+<ul>
+  <li>有稳定性</li>
+  <li>无适应性</li>
+</ul>
+
+<h2 id="其他排序方法">其他排序方法</h2>
+
+<h3 id="分配排序和基数排序">分配排序和基数排序</h3>
+
+<h4 id="算法思路-8">算法思路</h4>
+
+<p>如果关键码只有很少几个不同的值，</p>
+
+<ol>
+  <li>为每个关键码设置一个桶</li>
+  <li>遍历序列，根据关键码把记录放在不同的桶中</li>
+  <li>顺序手机各个桶的记录，得到排序的序列</li>
+</ol>
+
+<h4 id="复杂度分析-6">复杂度分析</h4>
+
+<ul>
+  <li>时间复杂度：$O(n)$</li>
+  <li>空间复杂度：$O(n)$</li>
+</ul>
+
+<h3 id="多轮分配和排序">多轮分配和排序</h3>
+
+<h4 id="算法思路-9">算法思路</h4>
+
+<ul>
+  <li>高位优先（Most Significant Digit first, MSD）</li>
+  <li>低位优先（Least Significant Digit first, LSD）</li>
+</ul>
+
+<h3 id="希尔排序-shell-sort">希尔排序 Shell Sort</h3>
+
+<h4 id="算法思路-10">算法思路</h4>
+
+<ol>
+  <li>先取一个正整数d1(d1&lt;n)作为第一个增量，将全部n个记录分成d1组，把所有相隔d1的记录放在一组中，即对于每个k(k=1, 2,  … d1)，R[k], R[d1+k], R[2d1+k] , …分在同一组中，在各组内进行直接插入排序。这样一次分组和排序过程称为一趟希尔排序；</li>
+  <li>取新的增量d2&lt;d1，重复 1 的分组和排序操作；直至所取的增量di=1为止，即所有记录放进一个组中排序为止。</li>
+</ol>
+
+<p><img src="/assets/images/post/image-20210106192442516.png" alt="image-20210106192442516" /></p>
+
+<p><img src="/assets/images/post/image-20210106193116456.png" alt="image-20210106193116456" /></p>
+
+<h1 id="外部排序">外部排序</h1>
+
+<h2 id="文件">文件</h2>
+
+<h3 id="文件的组织方式">文件的组织方式</h3>
+
+<h4 id="顺序文件">顺序文件</h4>
+
+<h4 id="索引文件">索引文件</h4>
+
+<p>索引结构(称为索引文件)由<strong>索引表</strong>和数据表两部分</p>
+
+<ul>
+  <li>数据表：存储实际的数据记录</li>
+  <li>索引表：存储记录的关键字和记录(存储)地址之间的对照表，每个元素称为一个索引项</li>
+</ul>
+
+<h5 id="稠密索引">稠密索引</h5>
+
+<h5 id="非稠密索引">非稠密索引</h5>
+
+<h3 id="isam">ISAM</h3>
+
+<blockquote>
+  <p><strong>ISAM</strong>(Indexed Sequential Access Method，<strong>顺序索引存取方法</strong>)，是专为<strong>磁盘</strong>存取设计的一种文件组织方式，采用<strong>静态</strong>索引结构，是一种三级索引结构的顺序文件。</p>
+</blockquote>
+
+<p><img src="/assets/images/post/image-20210106203126494.png" alt="image-20210106203126494" /></p>
+
+<p><img src="/assets/images/post/image-20210106203143277.png" alt="image-20210106203143277" /></p>
+
+<h3 id="vsam">VSAM</h3>
+
+<blockquote>
+  <p><strong>VSAM</strong>(Virtual Storage Access Method，<strong>虚拟存取方法</strong>)，也是一种索引顺序文件组织方式，利用OS的虚拟存储器功能，采用的是基于B+树的动态索引结构。</p>
+</blockquote>
+
+<p><img src="/assets/images/post/image-20210106203231777.png" alt="image-20210106203231777" /><img src="/assets/images/post/image-20210106203249607.png" alt="image-20210106203249607" /></p>
+
+<h3 id="散列文件">散列文件</h3>
+
+<blockquote>
+  <p><strong>散列文件</strong>(直接存取文件) ：利用散列存储方式组织的文件。类似散列表，即根据文件中记录关键字的特点，设计一个散列函数和冲突处理方法，将记录散列到存储介质上。</p>
+</blockquote>
+
+<h3 id="多关键字文件">多关键字文件</h3>
+
+<h3 id="多重表文件">多重表文件</h3>
+
+<blockquote>
+  <p><strong>多重表文件</strong>(Multilist Files)的特点是：记录按主关键字的顺序构成一个串联文件(物理上的) ，并建立主关键字索引(称为主索引)；对每个次关键字都建立次关键字索引(称为次索引)，所有具有同一次关键字值的记录构成一个链表(逻辑上的)。</p>
+</blockquote>
+
+<h3 id="倒排文件">倒排文件</h3>
+
+<blockquote>
+  <p><strong>倒排文件</strong>又称逆转表文件。与多重表文件类似，可以处理多关键字查询。</p>
+</blockquote>
+
+<h2 id="外部排序-1">外部排序</h2>
+
+<blockquote>
+  <p>外部排序最基本的方法是归并。这种方法是由两个相对独立的阶段组成：
+① 按内存(缓冲区)的大小，将n个记录的数据文件分成若干个长度为l的段或子文件，依次读入内存并选择有效的内部排序方法进行排序；然后将排好序的有序子文件重新写入到外存。子文件称为归并段或顺串。
+② 采用归并的办法对归并段进行逐趟归并，使归并段的长度逐渐增大，直到最后合并成只有一个归并段的文件—排好序的文件。</p>
+</blockquote>
+
+<h2 id="内存管理">内存管理</h2>
+
+<h3 id="兄弟伙伴算法">兄弟伙伴算法</h3>
+
+<blockquote>
+  <p><strong>伙伴系统</strong>是一种<strong>非顺序</strong>内存管理方法，不是以顺序片段来分配内存，是把内存分为两个部分，只要有可能，这两部分就可以合并在一起; 且这两部分从来不是自由的，程序可以使用伙伴系统中的一部分或者两部分都不使用。与边界标识法类似，所不同是：无论占用块或空闲块，其大小均为2的k次幂。</p>
+</blockquote>
+
+<blockquote>
+  <p>当程序释放所占用的块时，系统将该新的空闲块插入到可利用空闲表中，需要考虑合并成大块问题。在伙伴系统中，只有“互为伙伴”的两个子块均空闲时才合并；即使有两个相邻且大小相同的空闲块，如果不是“互为伙伴” (从同一个大块中分裂出来的)也不合并。</p>
+</blockquote>
+
+<blockquote>
+  <p>设要回收的空闲块的首地址是p，其大小为2k的，算法思想是：
+⑴ 判断其 “互为伙伴”的两个空闲块是否为空：
+若不为空，仅将要回收的空闲块直接插入到相应的子表中；否则转⑵；
+⑵  按以下步骤进行空闲块的合并：
+◆ 在相应子表中找到其伙伴并删除之；
+◆ 合并两个空闲块；
+⑶ 重复⑵，直到合并后的空闲块的伙伴不是空闲块为止。6</p>
+</blockquote>
+:ET

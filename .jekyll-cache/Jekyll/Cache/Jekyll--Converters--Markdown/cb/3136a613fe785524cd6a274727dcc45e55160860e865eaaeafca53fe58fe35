@@ -1,0 +1,2 @@
+I"�<p>(global pointer 全局指针)；一些运行系统维护这个指针以便存取 <code class="language-plaintext highlighter-rouge">static</code> 和 <code class="language-plaintext highlighter-rouge">extern</code> 变量</p>
+:ET

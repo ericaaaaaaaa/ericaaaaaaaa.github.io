@@ -1,0 +1,1598 @@
+I"e�<h1 id="introduction">Introduction</h1>
+
+<h2 id="definition">Definition</h2>
+
+<h3 id="problem-instance">Problem Instance</h3>
+
+<p>A problem instance is any valid input to the problem.</p>
+
+<h3 id="algorithm">Algorithm</h3>
+
+<p>An <strong>algorithm</strong> is a well defined <strong>computational procedure</strong> that transforms inputs into outputs, achieving the desired input-output relationship.</p>
+
+<h3 id="correct-algorithm">Correct Algorithm</h3>
+
+<p>A <strong>correct algorithm</strong> <strong>halts</strong> with the correct output for every input instance. We can then say that the algorithm <strong>solves</strong> the problem.</p>
+
+<h2 id="analyzing-algorithms">Analyzing Algorithms</h2>
+
+<h4 id="predict-resource-utilization">Predict Resource Utilization</h4>
+
+<ul>
+  <li>
+    <p><strong>Memory</strong> (space complexity)</p>
+  </li>
+  <li>
+    <p><strong>Running time</strong> (time complexity)</p>
+
+    <ul>
+      <li>depends on the speed of the computer</li>
+      <li>depends on the implementation details</li>
+      <li>depends on the input, especially on the size of the input</li>
+    </ul>
+
+    <p>Measure the running time as the number of <strong>primitive operations</strong> used by the algorithm. (mathematically elegant and machine-independent)</p>
+
+    <p>Measure the running time as <strong>a function of the input size</strong>. Let <code class="language-plaintext highlighter-rouge">n</code> denote the input size and let <code class="language-plaintext highlighter-rouge">T(n)</code> denote the running time for input of size n.</p>
+  </li>
+</ul>
+
+<h3 id="three-kinds-of-analysis">Three Kinds of Analysis</h3>
+
+<h4 id="worst-case">Worst Case</h4>
+
+<p>Commonly used</p>
+
+<ul>
+  <li>Running time guarantee</li>
+  <li>Fair comparison</li>
+</ul>
+
+<h4 id="average-case">Average Case</h4>
+
+<p>Used sometimes</p>
+
+<ul>
+  <li>Need to assume distribution</li>
+  <li>Analysis is complicated</li>
+</ul>
+
+<h4 id="best-case">Best Case</h4>
+
+<p>useless</p>
+
+<h3 id="comparing-time-complexity">Comparing Time Complexity</h3>
+
+<h4 id="o-notation-upper-bounds">$O$-notation (Upper bounds)</h4>
+
+<p>$f(n)=O(g(n))$: There exists constant $c&gt;0$ and $n_0$ such that $f(n)\le c\cdot g(n)$ for $n\ge n_0$</p>
+
+<h4 id="omega-notation-lower-bounds">$\Omega$-notation (Lower bounds)</h4>
+
+<p>$f(n)=\Omega(g(n))$: There exists constant $c&gt;0$ and $n_0$ such that $f(n)\ge c\cdot g(n)$ for $n\ge n_0$</p>
+
+<h4 id="theta-notation-tight-bounds">$\Theta$-notation (Tight bounds)</h4>
+
+<p>$f(n)=\Theta(g(n))$: $f(n)=O(g(n))$ and $f(n)=\Omega(g(n))$</p>
+
+<h4 id="examples">Examples</h4>
+
+<ul>
+  <li>$\sum_{i=1}^{n}i = \frac{n(n+1)}{2}$</li>
+  <li>$\sum_{i=1}^{n}i^2 = \frac{n(n+1)(2n+1)}{6}$</li>
+  <li>$\sum_{i=1}^{n}\frac{1}{n}=O(\log n)$ (Harmonic Series，调和级数)</li>
+  <li>$\log(n!)=\log(n) + \log(n-1) + …+\log(1)=O(n\log n)$</li>
+</ul>
+
+<h3 id="递归分析主定理法">递归分析：主定理法</h3>
+
+<p>$$
+T(n) = 
+\left{
+\begin{array}{l}
+\Theta(f(n)) &amp; if\ f(n)=\Omega(n^{\log_ba+\varepsilon})<br />
+\Theta(n^{\log_ba}\log n) &amp; if\ f(n)=\Theta(n^{\log_b a}) <br />
+\Theta(n^{\log_ba}) &amp; if\ f(n)=O(n^{\log_ba-\varepsilon})
+\end{array}
+\right.
+$$</p>
+
+<h1 id="divide-and-conquer-algorithms">Divide and Conquer Algorithms</h1>
+
+<h2 id="step">Step</h2>
+
+<p><strong>分而治之</strong></p>
+
+<ol>
+  <li><strong>分解</strong>原问题</li>
+  <li><strong>解决</strong>子问题</li>
+  <li><strong>合并</strong>问题解</li>
+</ol>
+
+<h2 id="merge-sort-归并排序">Merge Sort 归并排序</h2>
+
+<p>归并排序：分解数组，递归求解，合并排序</p>
+
+<h3 id="算法流程">算法流程</h3>
+
+<ol>
+  <li>将数组 A[1, n] 排序问题<strong>分解</strong>为 A[1, [n/2]] 和 A[[n/2]+1, n] 排序问题</li>
+  <li><strong>递归解决</strong>子问题得到两个有序的子数组</li>
+  <li>将两个有序子数组<strong>合并</strong>为一个有序数组</li>
+</ol>
+
+<h3 id="伪代码">伪代码</h3>
+
+<p><img src="/assets/images/post/merge_sort.png" alt="" /></p>
+
+<p><img src="/assets/images/post/merge.png" alt="" /></p>
+
+<h3 id="复杂度分析">复杂度分析</h3>
+
+<p>$T(n) = O(n\log n)$</p>
+
+<h2 id="maximum-contiguous-subarray-problem-最大子数组">Maximum Contiguous Subarray Problem 最大子数组</h2>
+
+<h3 id="伪代码-1">伪代码</h3>
+
+<p><img src="/assets/images/post/MCS.png" alt="" /></p>
+
+<p><img src="/assets/images/post/find_max.png" alt="" /></p>
+
+<h3 id="复杂度">复杂度</h3>
+
+<p>$f(n)=O(n\log n)$</p>
+
+<h2 id="counting-inversions-逆序计数">Counting Inversions 逆序计数</h2>
+
+<h3 id="问题介绍">问题介绍</h3>
+
+<p>The total number of inversions in $\sum_{1\le i\le j\le n}$, namely
+$$
+X_{i, j} = 
+\left{
+\begin{array}{rcl}
+1 &amp; A[i]&gt;A[j]<br />
+0 &amp; A[i]\le A[j]
+\end{array}
+\right.
+$$</p>
+
+<h3 id="伪代码-2">伪代码</h3>
+
+<p><img src="/assets/images/post/merge_count.png" alt="" /></p>
+
+<p><img src="/assets/images/post/sort_count.png" alt="" /></p>
+
+<h3 id="复杂度-1">复杂度</h3>
+
+<p>$T(n)=n\log n$</p>
+
+<h2 id="polynomial-multiplication-多项式乘法">Polynomial Multiplication 多项式乘法</h2>
+
+<h3 id="description">Description</h3>
+
+<p><img src="/assets/images/post/def.png" alt="" /></p>
+
+<ul>
+  <li><strong>Input</strong>: Assume that the coefficients a$_i$ and b$_i$ are stored in arrays A[0…n] and B[0…m]</li>
+</ul>
+
+<h3 id="伪代码-3">伪代码</h3>
+
+<p><img src="/assets/images/post/poly_mult1.png" alt="" /></p>
+
+<p><img src="/assets/images/post/poly_mult2.png" alt="" /></p>
+
+<h2 id="quicksort-and-partition-快速排序与划分">QuickSort and Partition 快速排序与划分</h2>
+
+<h3 id="算法思路">算法思路</h3>
+
+<ol>
+  <li>选取固定位置主元 x （如尾元素）</li>
+  <li>维护两个部分的右端点变量 i, j</li>
+  <li>考察数组 A[j]，只和主元比较
+    <ul>
+      <li>若 A[j] ≤ x，则交换 A[j] 和 A[i+1]，i, j 右移</li>
+      <li>若 A[j] &gt; x，则 j 右移</li>
+    </ul>
+  </li>
+  <li>把主元放在中间作分界线</li>
+</ol>
+
+<p><img src="/assets/images/post/t.png" alt="" /></p>
+
+<p><img src="/assets/images/post/p.png" alt="" /></p>
+
+<h3 id="伪代码-4">伪代码</h3>
+
+<p><img src="/assets/images/post/partition.png" alt="" /></p>
+
+<p><img src="/assets/images/post/quick_sort.png" alt="" /></p>
+
+<h3 id="复杂度-2">复杂度</h3>
+
+<ul>
+  <li>最好情况：$O(n\log n)$</li>
+  <li>最坏情况：$O(n^2)$</li>
+</ul>
+
+<h3 id="优化随机选择主元">优化——随机选择主元</h3>
+
+<p><img src="/assets/images/post/random_partition.png" alt="" /></p>
+
+<h4 id="期望时间复杂度">期望时间复杂度</h4>
+
+<p>$O(n\log n)$</p>
+
+<h2 id="randomized-selection-随机化选择">Randomized Selection 随机化选择</h2>
+
+<h3 id="次序选择问题">次序选择问题</h3>
+
+<h4 id="形式化定义">形式化定义</h4>
+
+<p><img src="/assets/images/post/k_min.png" alt="" /></p>
+
+<h4 id="算法思想">算法思想</h4>
+
+<ul>
+  <li>选取固定位置主元，小于主元的元素个数 q-p
+    <ul>
+      <li>情况 1：k = q - p + 1，A[q] 为数组第 k 小元素</li>
+      <li>情况 2：k &lt; q - p + 1，在 A[p .. q - 1] 中寻找第 k 小元素</li>
+      <li>情况 3：k &gt; q - p + 1，在 A[q + 1 .. r] 中寻找第 k - (q - p + 1) 小元素</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="伪代码-5">伪代码</h4>
+
+<p><img src="/assets/images/post/partition.png" alt="" /></p>
+
+<p><img src="/assets/images/post/selection.png" alt="" /></p>
+
+<h4 id="复杂度-3">复杂度</h4>
+
+<ul>
+  <li>最好情况：$T(n) = O(n)$</li>
+  <li>最差情况：$T(n) = O(n^2)$</li>
+</ul>
+
+<h4 id="优化算法随机选择主元">优化算法——随机选择主元</h4>
+
+<p><img src="/assets/images/post/rp.png" alt="" /></p>
+
+<p><img src="/assets/images/post/rs.png" alt="" /></p>
+
+<p>期望时间复杂度：$O(n)$</p>
+
+<h2 id="supplement-topic-of-sorting-排序问题补充主题">Supplement Topic of Sorting 排序问题补充主题</h2>
+
+<h3 id="heapsort-堆排序">Heapsort 堆排序</h3>
+
+<h4 id="heap">Heap</h4>
+
+<h5 id="definition-1">Definition</h5>
+
+<p>Heaps are “almost complete binary trees”</p>
+
+<ul>
+  <li>All levels are full except possibly the lowest level</li>
+  <li>If the lowest level is not full, then nodes must packed to the left</li>
+  <li>The values of the node is at least the value of its parent. <code class="language-plaintext highlighter-rouge">A[Parent(i)] &lt;= A[i]</code></li>
+</ul>
+
+<h5 id="operation">Operation</h5>
+
+<ul>
+  <li><strong>Insert</strong> in $O(\log n)$ time</li>
+  <li><strong>Extract-Min</strong> in $O(\log n)$ time</li>
+</ul>
+
+<h5 id="properties">Properties</h5>
+
+<ul>
+  <li>A heap of height h has between $2^h$ to $2^{h+1}-1$ nodes. Thus, an n-element heap has height $\Theta(\log n)$</li>
+  <li>The structure is so regular, it can be represented in an array and no links are necessary</li>
+</ul>
+
+<h5 id="array-implementation-of-heap">Array Implementation of Heap</h5>
+
+<ul>
+  <li>The root is in array position 1</li>
+  <li>For any element in array position i
+    <ul>
+      <li>The left child is in position 2i</li>
+      <li>The right child is in position 2i+1</li>
+      <li>The parent is in position [i/2]</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="heapsort">Heapsort</h4>
+
+<ul>
+  <li>Build a binary heap of n elements
+    <ul>
+      <li>the minimum element is at the top of the heap</li>
+      <li>insert n elements one by one</li>
+    </ul>
+  </li>
+  <li>Perform n Extract-Min operations
+    <ul>
+      <li>the elements are extracted in sorted order</li>
+      <li>each Extract-Min operation takes $O(\log n)$ time</li>
+    </ul>
+  </li>
+  <li>Total time complexity: $O(n\log n)$</li>
+</ul>
+
+<h3 id="lower-bound-for-sorting-基于比较的排序下界">Lower Bound for Sorting 基于比较的排序下界</h3>
+
+<p>Any comparison-based sorting algorithm requires $\Omega(n\log n)$ comparisons.</p>
+
+<h4 id="counting-sort">Counting-Sort</h4>
+
+<p><img src="/assets/images/post/counting_sort.png" alt="" /></p>
+
+<h3 id="sorting-in-linear-time-线性时间排序">Sorting in Linear Time 线性时间排序</h3>
+
+<h1 id="dynamic-programming-algorithms">Dynamic Programming Algorithms</h1>
+
+<h3 id="动态规划算法">动态规划算法</h3>
+
+<ul>
+  <li>
+    <p><strong>问题结构分析</strong></p>
+
+    <p>给出问题表示，明确原始问题</p>
+  </li>
+  <li>
+    <p><strong>递推关系建立</strong></p>
+
+    <p>分析最优结构，构造递推公式</p>
+  </li>
+  <li>
+    <p><strong>自底向上计算</strong></p>
+
+    <p>确定计算顺序，依次求解问题</p>
+  </li>
+  <li>
+    <p><strong>最优方案追踪</strong></p>
+
+    <p>记录决策过程，输出最优方案</p>
+  </li>
+</ul>
+
+<h3 id="0-1-knapsack-0-1-背包问题">0-1 Knapsack 0-1 背包问题</h3>
+
+<h4 id="输入">输入</h4>
+
+<ul>
+  <li>n 个商品组成集合 0，每个商品有两个属性 $v_i$ 和 $p_i$，分别表示体积和价格</li>
+  <li>背包容量为 $C$</li>
+</ul>
+
+<h4 id="输出">输出</h4>
+
+<p>求解一个商品子集 $S\subseteq 0$，</p>
+
+<ul>
+  <li><strong>优化目标</strong>：令 $\max \sum_{i\in S}p_i$</li>
+  <li><strong>约束条件</strong>：$\sum_{i\in S}v_i\le C$</li>
+</ul>
+
+<h4 id="递归函数">递归函数</h4>
+
+<p>$$
+KnapsackSR(h, i, c)=\\ \max{KnapsackSR(h, i-1, c-v_i)+p_i, KnapsackSR(h, i-1, c)}
+$$</p>
+
+<h4 id="算法复杂度">算法复杂度</h4>
+
+<p><img src="/assets/images/post/0-1knap.png" alt="" /></p>
+
+<h4 id="计算顺序">计算顺序</h4>
+
+<p><img src="/assets/images/post/seq.png" alt="" /></p>
+
+<p><img src="/assets/images/post/rec.png" alt="" /></p>
+
+<h4 id="伪代码-6">伪代码</h4>
+
+<p><img src="/assets/images/post/knap.png" alt="" /></p>
+
+<p><img src="/assets/images/post/knapdp.png" alt="" /></p>
+
+<p><img src="/assets/images/post/knapdp1.png" alt="" /></p>
+
+<h4 id="时间复杂度">时间复杂度</h4>
+
+<p>$O(n\cdot C)$</p>
+
+<h3 id="maximum-contiguous-subarray-ii-最大连续数组-ii">Maximum Contiguous Subarray II 最大连续数组 II</h3>
+
+<h4 id="问题定义">问题定义</h4>
+
+<p><img src="/assets/images/post/qq1.png" alt="" /></p>
+
+<h4 id="问题结构分析">问题结构分析</h4>
+
+<p>$D[i]$：以 $X[i]$ 开头的最大子数组和</p>
+
+<p>原始问题：$S_{max}=\max_{1\le i\le n}{D[i]}$</p>
+
+<h4 id="递推关系建立">递推关系建立</h4>
+
+<p>$$
+D[i] = 
+\left{
+\begin{array}{l}
+X[i] + D[i+1] &amp; if\ D[i+1] &gt; 0<br />
+X[i] &amp; if\ D[i+1] \le 0
+\end{array}
+\right.
+$$</p>
+
+<p>构造追踪数组 $Rec[1..n]$</p>
+
+<h4 id="伪代码-7">伪代码</h4>
+
+<p><img src="/assets/images/post/mcsdp.png" alt="" /></p>
+
+<p><img src="/assets/images/post/mcsdp1.png" alt="" /></p>
+
+<h4 id="时间复杂度-1">时间复杂度</h4>
+
+<p>$T(n) = O(n)$</p>
+
+<h3 id="longest-common-subsequences-最长公共子序列">Longest Common Subsequences 最长公共子序列</h3>
+
+<h4 id="问题描述">问题描述</h4>
+
+<p><img src="/assets/images/post/lcs.png" alt="" /></p>
+
+<h4 id="问题表示">问题表示</h4>
+
+<p>$C[i, j]$：$X[1..i]$ 和 $Y[1..j]$ 的最长公共子序列长度</p>
+
+<h4 id="递推关系建立-1">递推关系建立</h4>
+
+<p>$$
+C[i,j]=
+\left{
+\begin{array}{l}
+\max{C[i-1,j], C[i,j-1]} &amp; x_i\not= y_j<br />
+C[i-1,j-1]+1 &amp; x_i=y_j
+\end{array}
+\right.
+$$</p>
+
+<p><img src="/assets/images/post/cls2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/rec1.png" alt="" /></p>
+
+<h4 id="伪代码-8">伪代码</h4>
+
+<p><img src="/assets/images/post/lcs1.png" alt="" /></p>
+
+<p><img src="/assets/images/post/lcs2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/plcs.png" alt="" /></p>
+
+<h4 id="时间复杂度-2">时间复杂度</h4>
+
+<p>$O(n\cdot m)$</p>
+
+<h3 id="longest-common-substrings-最长公共子串">Longest Common Substrings 最长公共子串</h3>
+
+<h4 id="问题描述-1">问题描述</h4>
+
+<p><img src="/assets/images/post/lss.png" alt="" /></p>
+
+<h4 id="问题表示-1">问题表示</h4>
+
+<p>$C[i,j]$：在 $X[1..i]$ 和 $Y[1..j]$ 中，以 $x_i$ 和 $y_j$ 结尾的最长公共子串 $Z[1..l]$ 的长度</p>
+
+<h4 id="递推关系建立-2">递推关系建立</h4>
+
+<p>$$
+C[i,j]=
+\left{
+\begin{array}{l}
+0 &amp; x_i\not=y_j<br />
+C[i-1,j-1]+1&amp;x_i=y_j
+\end{array}
+\right.
+$$</p>
+
+<p><img src="/assets/images/post/sll1.png" alt="" /></p>
+
+<h4 id="伪代码-9">伪代码</h4>
+
+<p><img src="/assets/images/post/sll2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/sll3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/sll4.png" alt="" /></p>
+
+<h4 id="时间复杂度-3">时间复杂度</h4>
+
+<p>$O(n\cdot m)$</p>
+
+<h3 id="minimum-edit-distance-最小编辑距离">Minimum Edit Distance 最小编辑距离</h3>
+
+<h4 id="问题描述-2">问题描述</h4>
+
+<p>编辑操作</p>
+
+<ul>
+  <li>删除</li>
+  <li>插入</li>
+  <li>替换</li>
+</ul>
+
+<p><img src="/assets/images/post/med1.png" alt="" /></p>
+
+<h4 id="问题表示-2">问题表示</h4>
+
+<p>$D[i,j]$：字符串 $s[1..i]$ 变成 $t[1..j]$ 的最小编辑距离
+$$
+D[i,j]=\min
+\left{
+\begin{array}{l}
+D[i-1,j]+1 &amp; 删除<br />
+D[i,j-1]+1 &amp; 插入<br />
+D[i-1,j-1]+
+\left{
+\begin{array}{l}
+0 &amp; if\ s[i] = t[j]<br />
+1 &amp; if\ s[i]\not= t[j]
+\end{array}
+\right.
+\end{array}
+\right.
+$$</p>
+
+<h4 id="递推关系建立-3">递推关系建立</h4>
+
+<p><img src="/assets/images/post/med2.png" alt="" /></p>
+
+<h4 id="伪代码-10">伪代码</h4>
+
+<p><img src="/assets/images/post/med3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/med4.png" alt="" /></p>
+
+<p><img src="/assets/images/post/med5.png" alt="" /></p>
+
+<h4 id="时间复杂度-4">时间复杂度</h4>
+
+<p>$O(mn)$</p>
+
+<h3 id="rod-cutting-钢条切割">Rod-Cutting 钢条切割</h3>
+
+<h4 id="问题描述-3">问题描述</h4>
+
+<p><img src="/assets/images/post/rc1.png" alt="" /></p>
+
+<h4 id="问题表示-3">问题表示</h4>
+
+<p>$C[j]$：切割长度为 $j$ 的钢条可获得的最大收益</p>
+
+<p>$rec[j]$：记录长度为 $j$ 钢条的最优切割方案</p>
+
+<h4 id="递归结构建立">递归结构建立</h4>
+
+<p>$$
+C[j] = \max_{1\le i\le j-1}{p[i] + C[j-i],p[j]}
+$$</p>
+
+<h4 id="伪代码-11">伪代码</h4>
+
+<p><img src="/assets/images/post/rc2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/rc3.png" alt="" /></p>
+
+<h4 id="算法复杂度-1">算法复杂度</h4>
+
+<p>$O(n^2)$</p>
+
+<h3 id="chain-matrix-multiplication-矩阵链乘法">Chain Matrix Multiplication 矩阵链乘法</h3>
+
+<h4 id="问题定义-1">问题定义</h4>
+
+<p><img src="/assets/images/post/mm1.png" alt="" /></p>
+
+<h4 id="问题描述-4">问题描述</h4>
+
+<p>$D[i,j]$：计算矩阵链 $U_{i..j}$ 所需标量乘法的<strong>最小次数</strong></p>
+
+<h4 id="递归表达式建立">递归表达式建立</h4>
+
+<p>$$
+D[i,j]=\min_{1\le k&lt;j}(D[i,k]+D[k+1,j+p_{i-1}p_kp_j])
+$$</p>
+
+<p><img src="/assets/images/post/mm2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/mm3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/m4.png" alt="" /></p>
+
+<h4 id="伪代码-12">伪代码</h4>
+
+<p><img src="/assets/images/post/mm4.png" alt="" /></p>
+
+<p><img src="/assets/images/post/mm5.png" alt="" /></p>
+
+<p><img src="/assets/images/post/mm6.png" alt="" /></p>
+
+<h4 id="时间复杂度-5">时间复杂度</h4>
+
+<p>$O(n^3)$</p>
+
+<h1 id="greedy-algorithms">Greedy Algorithms</h1>
+
+<h2 id="算法描述">算法描述</h2>
+
+<ul>
+  <li>
+    <p><strong>提出贪心策略</strong></p>
+
+    <p>观察问题特征，构造贪心选择</p>
+  </li>
+  <li>
+    <p><strong>证明策略正确</strong></p>
+
+    <p>假设最优方案，通过替换证明</p>
+  </li>
+</ul>
+
+<h2 id="fractional-knapsack-部分背包问题">Fractional Knapsack 部分背包问题</h2>
+
+<h3 id="问题定义-2">问题定义</h3>
+
+<p><img src="/assets/images/post/fkp1.png" alt="" /></p>
+
+<h3 id="问题描述-5">问题描述</h3>
+
+<h3 id="伪代码-13">伪代码</h3>
+
+<p><img src="/assets/images/post/fkp2.png" alt="" /></p>
+
+<h3 id="算法复杂度-2">算法复杂度</h3>
+
+<p>$O(n\log n)$</p>
+
+<h2 id="huffman-coding-problem-赫夫曼编码">Huffman Coding Problem 赫夫曼编码</h2>
+
+<h3 id="背景">背景</h3>
+
+<ul>
+  <li><strong>编码树</strong>
+    <ul>
+      <li>顶点到左结点的边标记为 0，到右节点的边标记 1，通过编码方案构造编码树</li>
+      <li>每条根到叶子的路径对应的每个字符的二进制串</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="问题定义-3">问题定义</h3>
+
+<p><img src="/assets/images/post/hc1.png" alt="" /></p>
+
+<h3 id="伪代码-14">伪代码</h3>
+
+<p><img src="/assets/images/post/hc2.png" alt="" /></p>
+
+<h3 id="算法复杂度-3">算法复杂度</h3>
+
+<p>$O(n\log n)$</p>
+
+<h2 id="activity-selection-problem-活动选择问题">Activity Selection Problem 活动选择问题</h2>
+
+<h3 id="无权重">无权重</h3>
+
+<h4 id="问题定义-4">问题定义</h4>
+
+<p><img src="/assets/images/post/asp1.png" alt="" /></p>
+
+<h4 id="算法思路-1">算法思路</h4>
+
+<p>选择最早结束的活动，可以给后面的活动留更大的空间。</p>
+
+<h4 id="伪代码-15">伪代码</h4>
+
+<p><img src="/assets/images/post/asp2.png" alt="" /></p>
+
+<h4 id="算法复杂度-4">算法复杂度</h4>
+
+<p>$O(n\log n)$</p>
+
+<h3 id="有权重">有权重</h3>
+
+<h4 id="问题定义-5">问题定义</h4>
+
+<p><img src="/assets/images/post/asp3.png" alt="" /></p>
+
+<h4 id="问题分析">问题分析</h4>
+
+<p>$D[i]$：集合 ${a_1,a_2,a_3,…,a_i}$ 中不冲突活动的最大权限和</p>
+
+<h4 id="递推关系建立-4">递推关系建立</h4>
+
+<p>$$
+D[i] = \max{D[p[i]]+w_i,D[i-1] }<br />
+Rec[i] = 
+\left{
+\begin{array}{l}
+1 &amp; 选择活动 a_i<br />
+0 &amp; 不选活动 a_i
+\end{array}
+\right.
+$$</p>
+
+<p><img src="/assets/images/post/asp4.png" alt="" /></p>
+
+<h4 id="伪代码-16">伪代码</h4>
+
+<p><img src="/assets/images/post/asp5.png" alt="" /></p>
+
+<p><img src="/assets/images/post/asp6.png" alt="" /></p>
+
+<p><img src="/assets/images/post/asp7.png" alt="" /></p>
+
+<h4 id="算法复杂度-5">算法复杂度</h4>
+
+<p>$O(n\log n)$</p>
+
+<h1 id="graph-algorithms">Graph Algorithms</h1>
+
+<h2 id="basic-concepts-in-graphs">Basic Concepts in Graphs</h2>
+
+<h3 id="图的概念">图的概念</h3>
+
+<h4 id="图的定义">图的定义</h4>
+
+<p><strong>图</strong>可以表示为一个二元组 $G=&lt;V, E&gt;$，其中</p>
+
+<ul>
+  <li>
+    <p>$V$ 表示非空顶点集，其元素称为顶点 (Vertex)</p>
+  </li>
+  <li>
+    <p>$E$ 表示边集，其元素称为边 (Edge)</p>
+
+    <p>$e=(u,v)$ 表示一条边，其中 $u\in V,v\in V,e\in E$</p>
+  </li>
+</ul>
+
+<h4 id="相邻和关联">相邻和关联</h4>
+
+<h5 id="相邻-adjacent">相邻 (Adjacent)</h5>
+
+<p>边 $(u,v)$ 连接的顶点 $u$ 和 $v$ <strong>相邻</strong></p>
+
+<h5 id="关联-incident">关联 (Incident)</h5>
+
+<p>边 $(u,v)$ 和其连接的顶点 $u$ (或 $v$) 相互关联</p>
+
+<h4 id="度">度</h4>
+
+<h5 id="顶点的度-degree-of-a-vertex">顶点的度 (Degree of a Vertex)</h5>
+
+<p>顶点 $v$ 的度 $deg(v)$ 是 $v$ 关联的边数</p>
+
+<h5 id="图的度-degree-of-a-graph">图的度 (Degree of a Graph)</h5>
+
+<p>图 $G=&lt;V,E&gt;$ 的度，是图各顶点的度之和，$deg(G)=\sum_{v\in V}deg(v)$</p>
+
+<h4 id="握手定理-handshaking-lemma">握手定理 (Handshaking Lemma)</h4>
+
+<ul>
+  <li>无向图的度是边数的两倍</li>
+</ul>
+
+<h4 id="路径-path">路径 (Path)</h4>
+
+<ul>
+  <li>图中一个顶点序列 $&lt;v_0,v_1,…,v_k&gt;$ 称为 $v_0$ 到 $v_k$ 的<strong>路径</strong></li>
+  <li>路径包含顶点 $v_0,v_1,…,v_k$ 和边 $(v_0,v_1),(v_1,v_2),…,(v_{k-1}, v_k)$</li>
+  <li>存在路径 $&lt;v_0,v_1,…,v_k&gt;$，则 $v_0$ <strong>可达</strong> $v_k$</li>
+  <li>如果 $v_0,v_1,…,v_k$ 互不相同，则该路径的<strong>简单</strong>的</li>
+</ul>
+
+<h4 id="环路-cycle">环路 (Cycle)</h4>
+
+<ul>
+  <li>如果路径 $&lt;v_0,v_1,…,v_k&gt;$ 中 $v_0=v_k$ 且至少包含一条边，则该路径构成<strong>环路</strong>。</li>
+  <li>如果 $v_0,v_1,…,v_k$ 互不相同，则该环路的<strong>简单</strong>的</li>
+  <li><strong>无环图</strong> (Acyclic Graph)：图中不存在环路</li>
+</ul>
+
+<h4 id="连通-connectivity">连通 (Connectivity)</h4>
+
+<h5 id="连通">连通</h5>
+
+<ul>
+  <li>如果图的<strong>任意对顶点互相可达</strong>，则称该图是<strong>连通</strong>的，反之称为<strong>非连通</strong></li>
+</ul>
+
+<h5 id="连通分量-connected-components">连通分量 (Connected Components)</h5>
+
+<ul>
+  <li>根据是否连通将顶点进行分组，相互可达的顶点集称为<strong>连通分量</strong></li>
+</ul>
+
+<h4 id="子图-subgraph">子图 (Subgraph)</h4>
+
+<h5 id="子图-subgraph-1">子图 (Subgraph)</h5>
+
+<ul>
+  <li>如果 $V’\subseteq V,E’\subseteq E$，则称图 $G’=&lt;V’,E’&gt;$ 是图 $G$ 的一个<strong>子图</strong>。</li>
+</ul>
+
+<h5 id="生成子图-spanning-subgraph">生成子图 (Spanning Subgraph)</h5>
+
+<ul>
+  <li>如果 $V’=V, E\subseteq E$，则称图 $G’=&lt;V’, E’&gt;$ 是图 $G$ 的一个<strong>生成子图</strong>。</li>
+</ul>
+
+<h4 id="树-tree">树 Tree</h4>
+
+<h5 id="树-tree-1">树 (Tree)</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>连通、无环图 $T=&lt;V_T,E_T&gt;$，树有 $</td>
+      <td>V_T</td>
+      <td>-1$ 条边</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="森林-forest">森林 (Forest)</h5>
+
+<p>一至多棵树组成的无环图</p>
+
+<h3 id="图的表示">图的表示</h3>
+
+<h4 id="邻接链表">邻接链表</h4>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>图 $G=&lt;V,E&gt;$，其邻接链表由 $</td>
+          <td>V</td>
+          <td>$ 条链表的数组构成</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>每个顶点有一条链表，包含所有与其相邻的顶点</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>空间大小 $O(</td>
+          <td>V</td>
+          <td>+</td>
+          <td>E</td>
+          <td>)$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h4 id="邻接矩阵">邻接矩阵</h4>
+
+<ul>
+  <li>
+    <p>图 $G=&lt;V,E&gt;$ 的邻接矩阵由 $|V|\times |V|$ 的二维数组 $A$ 构成，满足
+$$
+A_{ij}=
+\left{
+\begin{array}{l}
+1 &amp; (i,j)\in E<br />
+0 &amp; (i,j)\not\in E
+\end{array}
+\right.
+$$</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>空间大小 $O(</td>
+          <td>V</td>
+          <td>^2)$，$O(1)$ 判断是否有边</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="breadth-first-search-bfs广度优先搜索">Breadth-First Search (BFS，广度优先搜索)</h2>
+
+<h3 id="辅助数组">辅助数组</h3>
+
+<p><img src="/assets/images/post/bfs1.png" alt="" /></p>
+
+<h3 id="伪代码-17">伪代码</h3>
+
+<p><img src="/assets/images/post/bfs2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/bfs3.png" alt="" /></p>
+
+<h3 id="时间复杂度-6">时间复杂度</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>+</td>
+      <td>E</td>
+      <td>)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="depth-first-search-dfs深度优先搜索">Depth-First Search (DFS，深度优先搜索)</h2>
+
+<h3 id="问题分析-1">问题分析</h3>
+
+<p><img src="/assets/images/post/dfs1.png" alt="" /></p>
+
+<h3 id="伪代码-18">伪代码</h3>
+
+<p><img src="/assets/images/post/dfs2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/dfs3.png" alt="" /></p>
+
+<h3 id="时间复杂度分析">时间复杂度分析</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>+</td>
+      <td>E</td>
+      <td>)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="深度优先树">深度优先树</h3>
+
+<h4 id="深度优先树-1">深度优先树</h4>
+
+<p>顶点以前驱为祖先形成的树</p>
+
+<h4 id="树边">树边</h4>
+
+<p>深度优先搜索树中的边</p>
+
+<h4 id="后向边">后向边</h4>
+
+<p>不是树边，但两顶点在深度优先树中是祖先后代关系</p>
+
+<p><strong>对于无向图，非树边一定是后向边。</strong></p>
+
+<p><strong>括号化定理</strong></p>
+
+<ul>
+  <li>点 $v$ 发现时刻和结束时刻构成区间 $[d[v], f[v]]$</li>
+  <li>任意两点 $v,w$ 必须满足以下情况之一：
+    <ul>
+      <li>$[d[v],f[v]]$ 包含 $[d[w], f[w]]$，$w$ 是 $v$ 的后代</li>
+      <li>$[d[w],f[w]]$ 包含 $[d[v],f[v]]$，$v$ 是 $w$ 的后代</li>
+      <li>$[d[v],f[v]]$ 和 $[d[w],f[w]]$ 完全不重合 $v$ 和 $w$ 均不是对方的后代</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>白色路径定理</strong></p>
+
+<ul>
+  <li>在深度优先树中，顶点 $v$ 是 $w$ 的祖先 $\Leftrightarrow$ 在 $v$ 被发现前，从 $v$ 到 $w$ 存在全为白色顶点构成的路径</li>
+</ul>
+
+<h4 id="前向边">前向边</h4>
+
+<p>不再深度优先树种，从祖先指向后代的边</p>
+
+<h4 id="横向边">横向边</h4>
+
+<p>顶点不具有祖先后代关系的边</p>
+
+<h2 id="cycle-detection-环路检测">Cycle Detection (环路检测)</h2>
+
+<h3 id="问题定义-6">问题定义</h3>
+
+<p><img src="/assets/images/post/cd1.png" alt="" /></p>
+
+<h3 id="伪代码-19">伪代码</h3>
+
+<p><img src="/assets/images/post/cd2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/cd3.png" alt="" /></p>
+
+<h3 id="时间复杂度-7">时间复杂度</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>+</td>
+      <td>E</td>
+      <td>)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="topological-sort-拓扑排序">Topological Sort (拓扑排序)</h2>
+
+<h3 id="问题定义-7">问题定义</h3>
+
+<p><img src="/assets/images/post/tp1.png" alt="" /></p>
+
+<h3 id="广度优先策略">广度优先策略</h3>
+
+<h4 id="算法思想-1">算法思想</h4>
+
+<ul>
+  <li>完成入度为 0 点对应的事件</li>
+  <li>删除完成事件，产生新的入度为 0 的点，继续完成</li>
+</ul>
+
+<h4 id="伪代码-20">伪代码</h4>
+
+<p><img src="/assets/images/post/tp2.png" alt="" /></p>
+
+<h4 id="事件复杂度">事件复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>+</td>
+      <td>E</td>
+      <td>)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="深度优先策略">深度优先策略</h3>
+
+<h4 id="算法思想-2">算法思想</h4>
+
+<p>DFS 搜索的完成时刻逆序即为拓扑排序顺序</p>
+
+<h4 id="算法伪代码">算法伪代码</h4>
+
+<p><img src="/assets/images/post/tp3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/tp4.png" alt="" /></p>
+
+<h4 id="算法时间复杂度">算法时间复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>+</td>
+      <td>E</td>
+      <td>)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="strongly-connected-components-强连通分量">Strongly Connected Components (强连通分量)</h2>
+
+<h3 id="问题定义-8">问题定义</h3>
+
+<h4 id="强连通分量">强连通分量</h4>
+
+<ul>
+  <li>一个强连通分量是顶点的子集</li>
+  <li>强连通分量种<strong>任意两点相互可达</strong></li>
+  <li>满足<strong>最大性</strong>：加入新顶点，不保证相互可达</li>
+</ul>
+
+<p><img src="/assets/images/post/scc1.png" alt="" /></p>
+
+<h4 id="gscc">$G^{SCC}$</h4>
+
+<p>把强连通分量看作一个点得到的有向图</p>
+
+<p><strong>$G^{SCC}$一定是有向无环图</strong></p>
+
+<h4 id="scc_sink">$SCC_{Sink}$</h4>
+
+<p>$G^{SCC}$ 中出度为 0 的点</p>
+
+<ul>
+  <li>$G^{SCC}$ 中存在至少一个 $SCC_{Sink}$</li>
+  <li>删除 $SCC_{Sink}$，会产生新的 $SCC_{Sink}$</li>
+</ul>
+
+<h3 id="算法步骤">算法步骤</h3>
+
+<ol>
+  <li>把边反向，得到反向图 $G^R$</li>
+  <li>在 $G^R$ 上执行 DFS，得到顶点完成时刻顺序 $L$</li>
+  <li>在 $G$ 上按 $L$ 逆序执行 DFS，得到强连通分量</li>
+</ol>
+
+<h3 id="伪代码-21">伪代码</h3>
+
+<p><img src="/assets/images/post/scc2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/scc3.png" alt="" /></p>
+
+<h3 id="时间复杂度-8">时间复杂度</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>+</td>
+      <td>E</td>
+      <td>)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="minimum-spanning-trees-最小生成树">Minimum Spanning Trees (最小生成树)</h2>
+
+<h3 id="问题背景">问题背景</h3>
+
+<h4 id="子图-subgraph-2">子图 Subgraph</h4>
+
+<p>如果 $V’\subseteq V$，$E’\subseteq E$，则称图 $G’=&lt;V’,E’&gt;$ 是图 $G$ 的一个子图</p>
+
+<h4 id="生成子图-spanning-subgraph-1">生成子图 Spanning Subgraph</h4>
+
+<p>如果 <strong>$\bold{V’= V}$</strong>，$E’\subseteq E$，则称图 $G’=&lt;V’,E’&gt;$ 是图 $G$ 的一个生成子图</p>
+
+<h4 id="生成树-spanning-tree">生成树 Spanning Tree</h4>
+
+<p>连通且无环的生成子图</p>
+
+<h4 id="最小生成树">最小生成树</h4>
+
+<p>权重最小的生成树</p>
+
+<h4 id="安全边-safe-edge">安全边 Safe Edge</h4>
+
+<ul>
+  <li>$A$ 是某棵最小生成树 $T$ 边的子集，即 $A\subseteq T$</li>
+  <li>$A\cup{(u,v)}$ 仍是 $T$ 边的一个子集，则称 $(u,v)$ 是 $A$ 的<strong>安全边</strong></li>
+  <li>若每次向边集中新增安全边，可保证边集 $A$ 是最小生成树的子集</li>
+</ul>
+
+<h4 id="割-cut">割 Cut</h4>
+
+<p>图 $G=&lt;V, E&gt;$ 是一个连通无向图，割 $(S, V-S)$ 将图 $G$ 的顶点集 $V$ 划分为两个部分</p>
+
+<h4 id="横跨-cross">横跨 Cross</h4>
+
+<p>给定割 $(S,V-S)$ 和边 $(u,v)$，$u\in S,v\in V-S$，称边 $(u,v)$ 横跨割 $(S,V-S)$</p>
+
+<h4 id="轻边-light-edge">轻边 Light Edge</h4>
+
+<p>横跨割的所有边中，权重最小的边称为横跨这个割的轻边</p>
+
+<h4 id="不妨害-respect">不妨害 Respect</h4>
+
+<p>如果一个边集 $A$ 中没有边横跨某割，则称该割不妨害边集 $A$</p>
+
+<h4 id="安全边辨识定理">安全边辨识定理</h4>
+
+<p><img src="/assets/images/post/safe.png" alt="" /></p>
+
+<h3 id="问题定义-9">问题定义</h3>
+
+<p><img src="/assets/images/post/st1.png" alt="" /></p>
+
+<p><img src="/assets/images/post/com.png" alt="" /></p>
+
+<h3 id="prim">Prim</h3>
+
+<h4 id="算法思想-3">算法思想</h4>
+
+<p><img src="/assets/images/post/prim.png" alt="" /></p>
+
+<h4 id="辅助数组-1">辅助数组</h4>
+
+<p><img src="/assets/images/post/prim2.png" alt="" /></p>
+
+<h4 id="伪代码-22">伪代码</h4>
+
+<p><img src="/assets/images/post/prim3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/prim4.png" alt="" /></p>
+
+<h4 id="时间复杂度-9">时间复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>^2)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="优化-prim采用优先队列">优化 Prim–采用优先队列</h3>
+
+<h4 id="伪代码-23">伪代码</h4>
+
+<p><img src="/assets/images/post/prim5.png" alt="" /></p>
+
+<p><img src="/assets/images/post/prim6.png" alt="" /></p>
+
+<h4 id="时间复杂度-10">时间复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>E</td>
+      <td>\cdot \log{</td>
+      <td>V</td>
+      <td>})$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="kruskal">Kruskal</h3>
+
+<h4 id="算法思想-4">算法思想</h4>
+
+<p><img src="/assets/images/post/k1.png" alt="" /></p>
+
+<h4 id="伪代码-24">伪代码</h4>
+
+<p><img src="/assets/images/post/k3.png" alt="" /></p>
+
+<p><strong>高效判定和维护所选边的顶点是否在一棵子树</strong>——<strong>不相交集合</strong></p>
+
+<p><img src="/assets/images/post/s1.png" alt="" /></p>
+
+<p><img src="/assets/images/post/s2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/s3.png" alt="" /></p>
+
+<h4 id="时间复杂度-11">时间复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>E</td>
+      <td>\log{</td>
+      <td>V</td>
+      <td>})$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="single-source-shortest-path-单源最短路径">Single Source Shortest Path (单源最短路径)</h2>
+
+<h3 id="问题定义-10">问题定义</h3>
+
+<p><img src="/assets/images/post/ss1.png" alt="" /></p>
+
+<h3 id="dijkstra">Dijkstra</h3>
+
+<blockquote>
+  <p>算法使用范围：边权为正的图</p>
+</blockquote>
+
+<h4 id="辅助数组-2">辅助数组</h4>
+
+<p><img src="/assets/images/post/ss2.png" alt="" /></p>
+
+<h4 id="算法思想-5">算法思想</h4>
+
+<p><img src="/assets/images/post/ss3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/ss4.png" alt="" /></p>
+
+<p><img src="/assets/images/post/ss5.png" alt="" /></p>
+
+<h4 id="伪代码-25">伪代码</h4>
+
+<p><img src="/assets/images/post/d1.png" alt="" /></p>
+
+<p><img src="/assets/images/post/d2.png" alt="" /></p>
+
+<h4 id="时间复杂度-12">时间复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>^2)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="用优先队列优化-dijkstra-算法">用优先队列优化 Dijkstra 算法</h3>
+
+<h4 id="伪代码-26">伪代码</h4>
+
+<p><img src="/assets/images/post/d3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/d4.png" alt="" /></p>
+
+<h4 id="时间复杂度-13">时间复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>E</td>
+      <td>\cdot \log{</td>
+      <td>V</td>
+      <td>})$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="bellman-ford">Bellman-Ford</h3>
+
+<h4 id="问题背景-1">问题背景</h4>
+
+<p>当图中存在<strong>负权边</strong>时，Dijkstra 算法不适用</p>
+
+<h4 id="问题定义-11">问题定义</h4>
+
+<p><img src="/assets/images/post/bf1.png" alt="" /></p>
+
+<h4 id="算法思想-6">算法思想</h4>
+
+<p><img src="/assets/images/post/bf2.png" alt="" /></p>
+
+<h4 id="伪代码-27">伪代码</h4>
+
+<p><img src="/assets/images/post/bf3.png" alt="" /></p>
+
+<p><img src="/assets/images/post/bf4.png" alt="" /></p>
+
+<h4 id="时间复杂度-14">时间复杂度</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>E</td>
+      <td>\cdot</td>
+      <td>V</td>
+      <td>)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="all-pairs-shortest-path-所有点对最短路径">All-Pairs Shortest Path (所有点对最短路径)</h2>
+
+<h3 id="问题定义-12">问题定义</h3>
+
+<p><img src="/assets/images/post/ap1.png" alt="" /></p>
+
+<h3 id="问题分析-2">问题分析</h3>
+
+<p>$D[k,i,j]$：可以从前 $k$ 个点选点经过时，$i$ 到 $j$ 的最短距离</p>
+
+<h3 id="递推关系建立-5">递推关系建立</h3>
+
+<p>$$
+D[k,i,j]=\min
+\left{
+\begin{array}{l}
+D[k-1,i,j]<br />
+D[k-1,i,k]+D[k-1,k,j]
+\end{array}
+\right.
+$$</p>
+
+<h3 id="伪代码-28">伪代码</h3>
+
+<p><img src="/assets/images/post/sp2.png" alt="" /></p>
+
+<p><img src="/assets/images/post/ap3.png" alt="" /></p>
+
+<h3 id="时间复杂度-15">时间复杂度</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$O(</td>
+      <td>V</td>
+      <td>^3)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="summary">Summary</h2>
+
+<p><img src="/assets/images/post/short.png" alt="" /></p>
+
+<h1 id="dealing-with-hard-problems">Dealing with Hard Problems</h1>
+
+<h2 id="definition-2">Definition</h2>
+
+<h3 id="input-size">Input Size</h3>
+
+<p>The <strong>input size</strong> of a problem is the <strong>minimum number</strong> of bits ({0, 1}) needed to encode the input of the problem.</p>
+
+<h3 id="decision-problem">Decision Problem</h3>
+
+<p>A <strong>decision problem</strong> is a question that has two possible answers: <strong>yes</strong> and <strong>no</strong>.</p>
+
+<blockquote>
+  <p>If $L$ is the problem and $x$ is the input, we often write $x\in L$ to denote a <strong>yes</strong> and $x\not\in L$ to denote a <strong>no</strong> answer.</p>
+</blockquote>
+
+<h3 id="optimization-problem">Optimization Problem</h3>
+
+<p>An <strong>optimization problem</strong> requires an answer that is an optimal configuration.</p>
+
+<blockquote>
+  <p>An optimization problem usually has a corresponding decision problem.</p>
+
+  <p>For almost all optimization problems there exists a corresponding simpler decision problem.</p>
+
+  <p>Thus if we prove that a given problem is hard to solve efficiently, then it is obvious that the optimization problem must be (at least as) hard.</p>
+</blockquote>
+
+<h3 id="yes--no-input">Yes / No Input</h3>
+
+<p>An instance of a decision problem is called a <strong>yes-input</strong> (respectively no-input) if the answer to the instance is <strong>yes</strong> (respectively no).</p>
+
+<h3 id="polynomial-time">Polynomial-time</h3>
+
+<p>An algorithm is <strong>polynomial-time</strong> if its running time is $O(n^k)$, where $k$ is a constant independent of n, and n is the <strong>input-size</strong> of the problem that the algorithm solves.</p>
+
+<blockquote>
+  <p>Whether you use $n$ or $n^\alpha$ (for fixed a &gt; 0) as the input size, it will not affect the conclusion of whether an algorithm is polynomial time.</p>
+
+  <p>Polynomial-time algorithm is “practical” and exponential-time algorithm is not.</p>
+</blockquote>
+
+<h3 id="p">P</h3>
+
+<p>The class <strong>P</strong> consists of all <strong>decision problems</strong> that are solvable in <strong>polynomial time</strong>. That is, there exists an algorithm that will <strong>decide</strong> in polynomial time if any given input is a yes-input or a no-input.</p>
+
+<h3 id="certificate">Certificate</h3>
+
+<p>A <strong>certificate</strong> is a specific object corresponding to a <strong>yes-input</strong>, such that it can be used to show that the input is <strong>indeed</strong> a yes-input.</p>
+
+<h3 id="np">NP</h3>
+
+<p>The class <strong>NP</strong> consists of all <strong>decision problems</strong> such that, for each yes-input, there exists a <strong>certificate</strong> which allows one to verify in <strong>polynomial time</strong> that the input is indeed a yes input.</p>
+
+<h3 id="polynomial-time-reducible">Polynomial-time reducible</h3>
+
+<ul>
+  <li>
+    <p>Let $L_1$ and $L_2$ be two decision problems.</p>
+  </li>
+  <li>
+    <p>A <strong>polynomial-time reduction</strong> from $L_1$ to $L_2$ is a transformation $f$ with the following two properties:</p>
+
+    <ol>
+      <li>$f$ transforms an input x for $L_1$ into an input $f(x)$ for $L_2$ such that: a yes-input of $L_1$ maps to a yes-input of $L_2$, and a no-input of $L_1$ maps to a no-input of $L_2$.</li>
+      <li>$f(x)$ is computable in <strong>polynomial time</strong> (in size (x))</li>
+    </ol>
+
+    <p>If such $f$ exists, we say that $L_1$ is <strong>polynomial-time reducible</strong> to $L_2$, and write $L_1\le pL_2$</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>If $L_2$ is polynomial-time algorithm, so is $L_1$</p>
+</blockquote>
+
+<h3 id="np-complete-npc">NP-Complete (NPC)</h3>
+
+<p>The class <strong>NPC</strong> of <strong>NP-Complete</strong> problems consists of all decision problems $L$ such that</p>
+
+<ul>
+  <li>$L\in NP$</li>
+  <li>for every $L’\in NP$, $L’\le pL$</li>
+</ul>
+
+<p>Intuitively, NPC consists of all the hardest problems in NP.</p>
+
+<h3 id="np-hard">NP-Hard</h3>
+
+<p>A problem $L$ is <strong>NP-Hard</strong> if problem in NPC can be <strong>polynomially reduced</strong> to it. (but $L$ does <strong>not</strong> need to be in NP)</p>
+
+<h2 id="theorem">Theorem</h2>
+
+<ol>
+  <li>If $L_1\le p L_2$ and $L_2\in P$, then $L_1\in P$</li>
+  <li>If $L_1\le p L_2$ and $L_2\le p L_3$, then $L_1\le p L_3$</li>
+  <li>If <strong>there is</strong> a polynomial-time algorithm for $L\in NPC$, then there is a polynomial-time algorithm for <strong>every</strong> $L’\in NP$</li>
+  <li>If <strong>there is no</strong> polynomial-time algorithm for $L\in NPC$, then there is  no polynomial-time algorithm for <strong>every</strong> $L’\in NPC$</li>
+</ol>
+
+<h2 id="example">Example</h2>
+
+<h3 id="p-1">P</h3>
+
+<ul>
+  <li>判断给定图是否为树</li>
+  <li>DFS, BFS</li>
+  <li>DMST，最小生成树决策类</li>
+  <li>2-SAT</li>
+</ul>
+
+<h3 id="np-1">NP</h3>
+
+<ul>
+  <li>D-SubsetSum</li>
+  <li>DVC (Decision Vertex Cover)</li>
+  <li>SAT (Satisfiability)</li>
+  <li>3-SAT</li>
+  <li>DMST</li>
+  <li>DKnapsack</li>
+</ul>
+
+<h3 id="np-complete">NP-Complete</h3>
+
+<p>Knapsack</p>
+
+<p>NPC</p>
+
+<p>DCLIQUE</p>
+
+<p>Decision Vertex Cover</p>
+
+<p>Decision Independent Set</p>
+
+<h2 id="question">Question</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$P\subseteq NP $</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>$NP\subseteq P$</td>
+      <td>unknown</td>
+    </tr>
+    <tr>
+      <td>$NPC\subseteq NP $</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>$P=NP $</td>
+      <td>unknown</td>
+    </tr>
+  </tbody>
+</table>
+
+:ET

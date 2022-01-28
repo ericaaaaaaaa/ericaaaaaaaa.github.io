@@ -1,0 +1,2 @@
+I"�<p>在语法分析的过程中，在遇到 Stmt -&gt; printf ‘(’ FormatString {, Exp} ‘)’ 时记录 Exp 的数量和 FormatString 中 ‘%d’ 的数量，将两者对比，若不同，则抛出 l 型错误</p>
+:ET
