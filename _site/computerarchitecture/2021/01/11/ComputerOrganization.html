@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Computer Organization | Erica’s Blog</title>
+<meta name="generator" content="Jekyll v4.2.1">
+<meta property="og:title" content="Computer Organization">
+<meta name="author" content="ericaaaaaaaa">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Computer Organization">
+<meta property="og:description" content="Computer Organization">
+<link rel="canonical" href="http://localhost:4000/computerarchitecture/2021/01/11/ComputerOrganization.html">
+<meta property="og:url" content="http://localhost:4000/computerarchitecture/2021/01/11/ComputerOrganization.html">
+<meta property="og:site_name" content="Erica’s Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-01-11T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Computer Organization">
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/computerarchitecture/2021/01/11/ComputerOrganization.html","headline":"Computer Organization","dateModified":"2021-01-11T00:00:00+08:00","datePublished":"2021-01-11T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/computerarchitecture/2021/01/11/ComputerOrganization.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"Computer Organization","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Erica's Blog" src="" onerror="this.style.display='none'">
+  Erica's Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Computer Organization</h1>
+  <h2 class="post-subtitle">计算机组成课程笔记</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2021-01-11T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 11, 2021
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#note">#note</a><a class="post-tag" href="/tags.html#computer-organization">#computer-organization</a><a class="post-tag" href="/tags.html#system">#system</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="computer-organization">Computer Organization</h1>
+
+<p>$Ericaaaaaaaa$</p>
+
+<p>$Jan,\ 2021$</p>
+
+<h2 id="组合逻辑设计">组合逻辑设计</h2>
+
+<h3 id="逻辑门电路">逻辑门电路</h3>
+
+<h4 id="ttlmos-集成门电路">TTL、MOS 集成门电路</h4>
+
+<ul>
+  <li>
+    <p>晶体管</p>
+
+    <ul>
+      <li>
+        <p>COMS</p>
+      </li>
+      <li>
+        <p><strong>N 型</strong></p>
+
+        <p><img src="/assets/images/post/image-20210101221532955.png" alt="image-20210101221532955"></p>
+      </li>
+      <li>
+        <p><strong>P 型</strong></p>
+
+        <p><img src="/assets/images/post/image-20210101221602975.png" alt="image-20210101221602975"></p>
+      </li>
+    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Gate</th>
+          <th>N 型</th>
+          <th>P 型</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0 (低电平)</td>
+          <td>OFF (截止)</td>
+          <td>ON (导通)</td>
+        </tr>
+        <tr>
+          <td>1 (高电平)</td>
+          <td>ON (导通)</td>
+          <td>OFF (截止)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>注意事项
+        <ul>
+          <li>导通时<strong>应该让 <code class="language-plaintext highlighter-rouge">Sourse</code> 和 <code class="language-plaintext highlighter-rouge">Gate</code> 之间电压有反差</strong>
+</li>
+          <li>避免无源驱动</li>
+          <li>避免短路</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>利用晶体管构建门电路</p>
+
+    <ul>
+      <li>
+        <p>NAND</p>
+
+        <p><img src="/assets/images/post/image-20210101221946733.png" alt="image-20210101221946733"></p>
+      </li>
+      <li>
+        <p>NOR</p>
+
+        <p><img src="/assets/images/post/image-20210101222004949.png" alt="image-20210101222004949"></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="与门非门或门复合逻辑门电路及其性能指标">与门、非门、或门、复合逻辑门电路及其性能指标</h4>
+
+<ul>
+  <li>
+    <p>门电路</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>示意图</th>
+          <th>真值表</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NOT</td>
+          <td><img src="/assets/images/post/image-20210101222127129.png" alt="image-20210101222127129"></td>
+          <td><img src="/assets/images/post/image-20210101222144259.png" alt="image-20210101222144259"></td>
+        </tr>
+        <tr>
+          <td>AND</td>
+          <td><img src="/assets/images/post/image-20210101222138567.png" alt="image-20210101222138567"></td>
+          <td><img src="/assets/images/post/image-20210101222149786.png" alt="image-20210101222149786"></td>
+        </tr>
+        <tr>
+          <td>OR</td>
+          <td><img src="/assets/images/post/image-20210101222208179.png" alt="image-20210101222208179"></td>
+          <td><img src="/assets/images/post/image-20210101222157106.png" alt="image-20210101222157106"></td>
+        </tr>
+        <tr>
+          <td>XOR</td>
+          <td><img src="/assets/images/post/image-20210101222250073.png" alt="image-20210101222250073"></td>
+          <td><img src="/assets/images/post/image-20210101222259353.png" alt="image-20210101222259353"></td>
+        </tr>
+        <tr>
+          <td>NAND</td>
+          <td><img src="/assets/images/post/image-20210101222216037.png" alt="image-20210101222216037"></td>
+          <td><img src="/assets/images/post/image-20210101222222169.png" alt="image-20210101222222169"></td>
+        </tr>
+        <tr>
+          <td>NOR</td>
+          <td><img src="/assets/images/post/image-20210101222232021.png" alt="image-20210101222232021"></td>
+          <td><img src="/assets/images/post/image-20210101222240024.png" alt="image-20210101222240024"></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="布尔代数">布尔代数</h3>
+
+<h4 id="布尔代数基本原理">布尔代数基本原理</h4>
+
+<h4 id="逻辑函数表达式标准表达式最小项表达式最大项表达式">逻辑函数表达式：标准表达式（最小项表达式、最大项表达式）</h4>
+
+<h4 id="逻辑函数表达式的简化法合并乘积项法吸收项法配项法">逻辑函数表达式的简化法：（合并乘积项法、吸收项法、配项法）</h4>
+
+<ul>
+  <li>
+    <p>合并乘积项法——利用互补律消去一个变量</p>
+
+    <p>$F = A(BC + \overline{B}\overline{C}) + AB\overline{C} + A\overline{B}C$</p>
+
+    <p>$\ \ \ \ =ABC + A\overline{B}\overline{C} + AB\overline{C} + A\overline{B}C$  利用分配律展开</p>
+
+    <p>$\ \ \ \ =(ABC + A\overline{B}C) + (A\overline{B}\overline{C} + AB\overline{C}))$   合并</p>
+
+    <p>$\ \ \ \ =AC(B + \overline{B}) + A\overline{C}(\overline{B} + B)$ 互补律</p>
+
+    <p>$\ \ \ \ =AC + A\overline{C}$ 互补律</p>
+
+    <p>$\ \ \ \ =A(C + \overline{C})$  互补律</p>
+
+    <p>$\ \ \ \ =A$</p>
+  </li>
+  <li>
+    <p>吸收项法——利用吸收律和包含律减少“与”项</p>
+
+    <p>$F = A\overline{B} + \overline{A}B + ABCD + \overline{A}\overline{B}CD$</p>
+
+    <p>$\ \ \ \ =(A\overline{B} + \overline{A}B) + (AB + \overline{A}\overline{B})CD$</p>
+
+    <p>$\ \ \ \ =(A\overline{B}+\overline{A}B) + \overline{A\overline{B} + \overline{A}B}CD\ \ \ \ \ \ 吸收律: A \pm AB = A\pm B$</p>
+
+    <p>$\ \ \ \ =A\overline{B} + \overline{A}B + CD$</p>
+  </li>
+  <li>
+    <p>配项法——利用互补律，配在乘积项上</p>
+
+    <p>$F = AB + \overline{A}\overline{B}C + BC$</p>
+
+    <p>$\ \ \ \ =AB + \overline{A}\overline{B}C + BC(A +\overline{A})$</p>
+
+    <p>$\ \ \ \ =AB + \overline{A}\overline{B}C + ABC + \overline{A}BC$</p>
+
+    <p>$\ \ \ \ =(AB + ABC) + (\overline{A}\overline{B}C + \overline{A}BC)$</p>
+
+    <p>$\ \ \ \ =AB(1 + C) + \overline{A}C(B + \overline{B})$</p>
+
+    <p>$\ \ \ \ =AB + \overline{A}C$</p>
+  </li>
+  <li>
+    <p><strong>卡诺图</strong> $(K-map)$</p>
+
+    <p><img src="/assets/images/post/image-20210101225103542.png" alt="image-20210101225103542"></p>
+
+    <p>$y = bd + b’d’ + acd$</p>
+
+    <p>用卡诺图生成的最简表达式不唯一。</p>
+
+    <p>使用卡诺图可以方便的化简多个布尔表达式。</p>
+
+    <ul>
+      <li>卡诺图采用<strong>格雷码</strong>，即相邻方格中有一个变量的值不同。</li>
+      <li>卡诺图是<strong>环绕的</strong>
+</li>
+      <li>用卡诺图得到最小化等式的规则
+        <ul>
+          <li>用<strong>最少</strong>的圈来圈住全部所有的1</li>
+          <li>每个圈中的<strong>所有</strong>方格都必须包含1</li>
+          <li>每个圈必须是<strong>矩形</strong>，其<strong>每个边长必须是 2 的整数次幂</strong>(例如 1, 2, 4)</li>
+          <li>每个圈必须<strong>尽可能的大</strong>
+</li>
+          <li>圈可以<strong>环绕卡诺图的边界</strong>
+</li>
+          <li>如果可以使用更少数量的圈，则卡诺图中一个为 1 的方格<strong>可以被多次圈住</strong>
+</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="verilog-hdl-介绍">Verilog HDL 介绍</h3>
+
+<p>【Verilog HDL】 是硬件描述语言的一种，用于数字电子系统设计。</p>
+
+<p>【HDL】$Hardware\ Description\ Language$ 硬件描述语言</p>
+
+<p>【VHDL】$VHSIC\ Hardware\ Description\ Language$ 高速集成电路硬件描述语言</p>
+
+<p>【VHSIC】$Very\ High\ Speed\ Integrated\ Circuit$ 高速集成电路</p>
+
+<h3 id="基本组合逻辑部件设计与分析">基本组合逻辑部件设计与分析</h3>
+
+<h4 id="运算单元电路加法器比较器">运算单元电路（加法器、比较器）</h4>
+
+<ul>
+  <li>
+    <p>一位全加器</p>
+
+    <ul>
+      <li>
+        <p>末位</p>
+
+        <ul>
+          <li>列出真值表</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th>$a_0$</th>
+              <th>$b_0$</th>
+              <th>$s_0$</th>
+              <th>$c_1\ (Carry Out Bit)$</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li>通过真值表写出表达式</li>
+        </ul>
+
+        <p>$s_0 = a_0\ XOR\  b_0$</p>
+
+        <p>$c_1 = a_0\ AND\  b_0$</p>
+      </li>
+      <li>
+        <p>其它位</p>
+
+        <ul>
+          <li>列出真值表</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th>$a_i$</th>
+              <th>$b_i$</th>
+              <th>$c_i$</th>
+              <th>$s_i$</th>
+              <th>$c_{i+1}\ (Carry Out Bit)$</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li>
+            <p>通过真值表写出表达式</p>
+
+            <p>$s_i = \overline{a_i}\overline{b_i}c_i + \overline{a_i}b_i\overline{c_i} + a_i\overline{b_i}\overline{c_i} + a_ib_ic_i$</p>
+
+            <p>$c_{i+1} = a_ib_i + a_ic_i + b_ic_i$</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>根据表达式构造一位全加器</p>
+
+        <p><img src="/assets/images/post/image-20210103110642597.png" alt="image-20210103110642597"></p>
+      </li>
+      <li>
+        <p>行波进位加法器</p>
+
+        <p><img src="/assets/images/post/image-20210103110722807.png" alt="image-20210103110722807"></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>比较器</p>
+
+    <p><img src="/assets/images/post/image-20210104203344207.png" alt="image-20210104203344207"></p>
+  </li>
+</ul>
+
+<h4 id="多路选择器译码器编码器">多路选择器，译码器，编码器</h4>
+
+<ul>
+  <li>
+    <p>8 选 1 数据选择器</p>
+
+    <p><img src="/assets/images/post/image-20210103095704509.png" alt="image-20210103095704509"><img src="/assets/images/post/image-20210103100252686.png" alt="image-20210103100252686"></p>
+
+    <ol>
+      <li>
+        <p>功能①</p>
+
+        <ul>
+          <li>
+            <p>控制端共三位，为 $A_2A_1A_0$，通过 $A_0,\ A_1,\ A_2$ 的组合选择某个 $D$</p>
+          </li>
+          <li>
+            <p>$Y = \overline{A_2}\overline{A_1}\overline{A_0}D_0 + \overline{A_2}\overline{A_1}A_0D_1 + \overline{A_2}A_1\overline{A_0}D_2 + \overline{A_2}A_1A_0D_3 + A_2\overline{A_1}\overline{A_0}D_4 + A_2\overline{A_1}A_0D_5 + A_2A_1\overline{A_0}D_6 + A_2A_1A_0D_7$</p>
+
+            <p>$\ \ \ =m_0D_0 + m_1D_1 + m_2D_2 + m_3D_3 + m_4D_4 + m_5D_5 + m_6D_6 + m_7D_7$</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>功能②</p>
+
+        <ul>
+          <li>
+            <p>$D_7 - D_0$ 为控制端——多功能运算电路</p>
+
+            <blockquote>
+              <p>通过 $D_7 - D_0$ 取不同的值，从输入变量 $A_2,\ A_1,\ A_0$ 的各个最小项中选取某几个最小项输出，实现不同的运算电路。</p>
+
+              <p>共 $2^8 = 256$ 种功能——包含 3 变量的各种最小项表达式，可实现任意<strong>组合逻辑电路</strong>的设计</p>
+            </blockquote>
+          </li>
+          <li>
+            <p>$Y = \overline{A_2}\overline{A_1}\overline{A_0}D_0 + \overline{A_2}\overline{A_1}A_0D_1 + \overline{A_2}A_1\overline{A_0}D_2 + \overline{A_2}A_1A_0D_3 + A_2\overline{A_1}\overline{A_0}D_4 + A_2\overline{A_1}A_0D_5 + A_2A_1\overline{A_0}D_6 + A_2A_1A_0D_7$</p>
+
+            <p>$\ \ \ =m_0D_0 + m_1D_1 + m_2D_2 + m_3D_3 + m_4D_4 + m_5D_5 + m_6D_6 + m_7D_7$</p>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <blockquote>
+      <p>【例】利用数据选择器实现逻辑函数 $F(A, B, C) = \overline{A}\overline{B}C + \overline{A}B\overline{C} + AB$</p>
+
+      <p>【解】</p>
+
+      <p>$A-A_2, B-A_1, C-A_0$</p>
+
+      <p>$F(A, B, C) = \overline{A}\overline{B}C + \overline{A}B\overline{C} + AB = m_1 + m_2 + m_6 + m_7$</p>
+
+      <p>故：$A_0 = 0, D_1 = 1, D_2 = 1, D_3 = 0, D_4 = 1, D_5 = 0, D_6 = 1, D_7 = 1$</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>译码器</p>
+
+    <p><img src="/assets/images/post/image-20210104180528566.png" alt="image-20210104180528566"></p>
+  </li>
+</ul>
+
+<h2 id="时序逻辑设计">时序逻辑设计</h2>
+
+<h3 id="锁存器和触发器">锁存器和触发器</h3>
+
+<h4 id="sr-锁存器d-锁存器">SR 锁存器，D 锁存器</h4>
+
+<h4 id="sr-锁存器">SR 锁存器</h4>
+
+<p>Q 与 ~Q 随着 R 与 S 的改变随时改变</p>
+
+<p><img src="/assets/images/post/image-20210104180721227.png" alt="image-20210104180721227"><img src="/assets/images/post/image-20210104181737359.png" alt="image-20210104181737359"></p>
+
+<p><img src="/assets/images/post/image-20210104182102227.png" alt="image-20210104182102227"></p>
+
+<h5 id="d-锁存器-d-latch">D 锁存器 (D-latch)</h5>
+
+<p>在 clk 置位时，D 实时改变 Q 与 ~Q，</p>
+
+<p>在 clk 为0时，D 对 Q 与 ~Q 无影响</p>
+
+<p><img src="/assets/images/post/image-20210104180803157.png" alt="image-20210104180803157"><img src="/assets/images/post/image-20210104182210605.png" alt="image-20210104182210605"></p>
+
+<h4 id="d-触发器-d-flip-flop">D 触发器 (D-flip flop)</h4>
+
+<p>在 clk <strong>上升沿</strong>时，Q 同步更新为 D 的值</p>
+
+<p><img src="/assets/images/post/image-20210104180922438.png" alt="image-20210104180922438"><img src="/assets/images/post/image-20210104182252202.png" alt="image-20210104182252202"></p>
+
+<h5 id="d-latch-vs-d-flip-flop">D Latch vs. D Flip-Flop</h5>
+
+<p><img src="/assets/images/post/image-20210104182659795.png" alt="image-20210104182659795"></p>
+
+<h4 id="jk-触发器">JK 触发器</h4>
+
+<h3 id="有限状态机-finite-state-machine-fsm">有限状态机 Finite State Machine (FSM)</h3>
+
+<h4 id="概述">概述</h4>
+
+<ul>
+  <li>
+<strong>状态</strong>：电路所处的特定工作阶段</li>
+  <li>
+<strong>状态寄存器</strong>：</li>
+  <li>
+<strong>状态寄存器的值</strong>：</li>
+  <li>
+<strong>次态逻辑</strong>：<em>根据输入和当前状态的编码值，计算下一个状态编码值</em>
+    <ul>
+      <li>次态逻辑也是组合逻辑</li>
+    </ul>
+  </li>
+  <li>
+<strong>输出逻辑</strong>：根据状态及输入，计算该状态下的输出值</li>
+</ul>
+
+<h4 id="表示方法">表示方法</h4>
+
+<p><img src="/assets/images/post/image-20210104184202716.png" alt="image-20210104184202716"><img src="/assets/images/post/image-20210104184212494.png" alt="image-20210104184212494"></p>
+
+<h4 id="构造方法">构造方法</h4>
+
+<ol>
+  <li>
+    <p>规划状态总数</p>
+  </li>
+  <li>
+    <p>构造状态图</p>
+
+    <p>每个状态的转移条件必须是<strong>完备</strong>的</p>
+  </li>
+  <li>
+    <p>根据【输入信号、当前状态编码、下一个状态编码】构造每个寄存器的 D 输入信号的门电路</p>
+
+    <p>方法：真值表→乘积项表达式→最简表达式→最简门电路</p>
+  </li>
+  <li>
+    <p>根据设计需求决定当前状态的输出</p>
+  </li>
+</ol>
+
+<h4 id="设计要点">设计要点</h4>
+
+<ul>
+  <li>
+    <p>初始状态</p>
+  </li>
+  <li>
+    <p>复位信号</p>
+  </li>
+  <li>
+    <p>状态编码方式</p>
+
+    <ul>
+      <li>二进制编码
+        <ul>
+          <li>$\log_2^N$ 个触发器表示 $N$ 个状态</li>
+          <li>节约逻辑资源，但可能产生毛刺</li>
+        </ul>
+      </li>
+      <li>格雷编码
+        <ul>
+          <li>$\log_2^N$ 个触发器表示 $N$ 个状态</li>
+          <li>节约逻辑资源，但可能产生毛刺</li>
+        </ul>
+      </li>
+      <li>一位独热编码(One Hot Encoding)
+        <ul>
+          <li>资源消耗多，但无毛刺</li>
+          <li>降低次态逻辑和输出逻辑的复杂度，有利于提高时钟频率</li>
+          <li>FPGA 具有丰富的寄存器资源，采用一位独热码编码可以有效提高电路的速度和可靠性</li>
+        </ul>
+      </li>
+    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th>状态</th>
+          <th>二进制编码</th>
+          <th>格雷编码</th>
+          <th>一位独热编码</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0</td>
+          <td>000</td>
+          <td>000</td>
+          <td>00000001</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>001</td>
+          <td>001</td>
+          <td>00000010</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>010</td>
+          <td>011</td>
+          <td>00000100</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>011</td>
+          <td>010</td>
+          <td>00001000</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>100</td>
+          <td>110</td>
+          <td>00010000</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>101</td>
+          <td>111</td>
+          <td>00100000</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>110</td>
+          <td>101</td>
+          <td>01000000</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>111</td>
+          <td>100</td>
+          <td>10000000</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h4 id="moore-型-fsm">Moore 型 FSM</h4>
+
+<p><img src="/assets/images/post/image-20210104185128315.png" alt="image-20210104185128315"><img src="/assets/images/post/image-20210104185501599.png" alt="image-20210104185501599"></p>
+
+<h4 id="mealy-型-fsm">Mealy 型 FSM</h4>
+
+<p><img src="/assets/images/post/image-20210104185140453.png" alt="image-20210104185140453"><img src="/assets/images/post/image-20210104185432851.png" alt="image-20210104185432851"></p>
+
+<h4 id="状态机类型的选择">状态机类型的选择</h4>
+
+<p><img src="/assets/images/post/image-20210104185231221.png" alt="image-20210104185231221"></p>
+
+<h3 id="时序逻辑电路分析">时序逻辑电路分析</h3>
+
+<h4 id="数据寄存器">数据寄存器</h4>
+
+<h4 id="移位寄存器">移位寄存器</h4>
+
+<p>包括时钟、串行输入 $S_{in}$、串行输出$S_{out}$和 N 位并行输出 $Q_{N-1:0}$</p>
+
+<p>移位寄存器可以看作是<em>串行到并行的转换器</em>。输入由 $S_{in}$以串行的方式提供（一次一位）。在 N 个周期后，前面的 N 位输入可以在 Q 中并行访问。</p>
+
+<p><img src="/assets/images/post/image-20210104204430980.png" alt="image-20210104204430980"></p>
+
+<h4 id="计数器">计数器</h4>
+
+<p>计数器 = 加法器 + 复位寄存器</p>
+
+<p><img src="/assets/images/post/image-20210104191512718.png" alt="image-20210104191512718"></p>
+
+<h1 id="主存储器">主存储器</h1>
+
+<h2 id="存储单元电路">存储单元电路</h2>
+
+<p><strong>存储器阵列（$memory\ array$）</strong>——可以有效存储大量数据</p>
+
+<ul>
+  <li>
+    <p>概述</p>
+
+    <ol>
+      <li>
+        <p>位单元</p>
+
+        <p>存储器阵列由为单元<img src="/assets/images/post/image-20210104205741949.png" alt="image-20210104205741949">（bit cell）的阵列组成，其中每个为单元存储一位数据。</p>
+      </li>
+      <li>
+        <p>存储器的结构</p>
+
+        <p><img src="https://img2020.cnblogs.com/blog/1593105/202003/1593105-20200319160616110-1518490028.png" alt="img"></p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>分类</p>
+
+    <ul>
+      <li>动态随机访问存储器（DRAM）</li>
+      <li>静态随机访问存储器（SRAM）</li>
+      <li>只读存储器（ROM）
+        <ul>
+          <li>现代ROM不再只读，<strong>也可以写入</strong>。不同点在于ROM的写入时间更长，但是是非易失的。</li>
+        </ul>
+      </li>
+    </ul>
+
+    <blockquote>
+      <p>RAM是<strong>易失型</strong>，关掉电源时会丢失数据；ROM是<strong>非易失型</strong>，没有电源也能无期限的保存数据。</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="sram-存储单元电路-static-random-access-memory">SRAM 存储单元电路 Static Random Access Memory</h3>
+
+<p>不需要刷新存储位</p>
+
+<p><img src="https://img2020.cnblogs.com/blog/1593105/202003/1593105-20200320103836982-1899282128.png" alt="img"></p>
+
+<h3 id="dram-存储单元电路-dynamic-random-access-memory">DRAM 存储单元电路 Dynamic Random Access Memory</h3>
+
+<p>以电容的充电和放电来存储位。位值存储在电容中，nMOS作为开关。字线作为MOS的开关</p>
+
+<p><img src="https://img2020.cnblogs.com/blog/1593105/202003/1593105-20200320102607807-194114994.png" alt="img"></p>
+
+<h3 id="rom-存储单元电路">ROM 存储单元电路</h3>
+
+<p>以是否存在晶体管作为是否存储一位。在读过程中，位线被拉高，如果存在MOS，则位线被拉低，不存在MOS则保持高。</p>
+
+<p><img src="https://img2020.cnblogs.com/blog/1593105/202003/1593105-20200320104511490-1402746880.png" alt="img"></p>
+
+<h2 id="主存储器的结构">主存储器的结构</h2>
+
+<h3 id="sram-芯片的内部结构">SRAM 芯片的内部结构</h3>
+
+<h3 id="dram-芯片的内部结构">DRAM 芯片的内部结构</h3>
+
+<h2 id="存储器的扩展">存储器的扩展</h2>
+
+<h3 id="芯片容量的基本描述">芯片容量的基本描述</h3>
+
+<p><strong>字单元数 × 每个字单元的位数</strong></p>
+
+<ul>
+  <li>
+    <p>1K × 2：1024个字单元，每个字单元 2 位（二进制位）</p>
+
+    <p><img src="/assets/images/post/image-20210104213022348.png" alt="image-20210104213022348"></p>
+  </li>
+  <li>
+    <p>64 K × 8：</p>
+
+    <p><img src="/assets/images/post/image-20210104213108434.png" alt="image-20210104213108434"></p>
+  </li>
+</ul>
+
+<h3 id="存储器的扩展方法">存储器的扩展方法</h3>
+
+<p><img src="/assets/images/post/image-20210104213156145.png" alt="image-20210104213156145"></p>
+
+<p><img src="/assets/images/post/image-20210104213224828.png" alt="image-20210104213224828"></p>
+
+<p><img src="/assets/images/post/image-20210104213241421.png" alt="image-20210104213241421"></p>
+
+<p><img src="/assets/images/post/image-20210104213300870.png" alt="image-20210104213300870"></p>
+
+<p><img src="/assets/images/post/image-20210104213324260.png" alt="image-20210104213324260"></p>
+
+<h2 id="dram-的刷新">DRAM 的刷新</h2>
+
+<p><img src="/assets/images/post/image-20210104213346438.png" alt="image-20210104213346438"></p>
+
+<p><img src="/assets/images/post/image-20210104213405991.png" alt="image-20210104213405991"></p>
+
+<h1 id="指令系统与-mips-汇编语言">指令系统与 MIPS 汇编语言</h1>
+
+<h2 id="指令系统概述">指令系统概述</h2>
+
+<h3 id="指令系统的基本要素">指令系统的基本要素</h3>
+
+<h3 id="指令格式">指令格式</h3>
+
+<p><img src="/assets/images/post/image-20210104214340696.png" alt="image-20210104214340696"></p>
+
+<p><img src="/assets/images/post/image-20210104214118528.png" alt=""><img src="/assets/images/post/image-20210104214146638.png" alt="image-20210104214146638"><img src="/assets/images/post/image-20210104214245791.png" alt="image-20210104214245791">!<img src="/assets/images/post/image-20210110094303699.png" alt="image-20210110094303699"><img src="/assets/images/post/image-20210110094436402.png" alt="image-20210110094436402"><img src="/assets/images/post/image-20210110094519161.png" alt="image-20210110094519161"></p>
+
+<p><img src="/assets/images/post/image-20210104214400175.png" alt="image-20210104214400175"></p>
+
+<h2 id="mips-指令系统">MIPS 指令系统</h2>
+
+<p><img src="/assets/images/post/image-20210104214413589.png" alt="image-20210104214413589"><img src="/assets/images/post/image-20210104214425889.png" alt="image-20210104214425889"></p>
+
+<h2 id="mips-汇编语言编程">MIPS 汇编语言编程</h2>
+
+<h1 id="mips-处理器设计">MIPS 处理器设计</h1>
+
+<h2 id="处理器的功能组成一般设计方法等">处理器的功能、组成、一般设计方法等</h2>
+
+<h2 id="mips-处理器设计概述">MIPS 处理器设计概述</h2>
+
+<h3 id="结构指令集数据通路的基本组件">结构、指令集、数据通路的基本组件</h3>
+
+<h2 id="单周期处理器设计">单周期处理器设计</h2>
+
+<p><img src="D:%5C%E5%A4%A7%E5%AD%A6%5C%E5%A4%A7%E4%BA%8C%20%E7%A7%8B%E5%AD%A3%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5Cp3%5Cmain.png" alt="main"></p>
+
+<h3 id="单周期数据通路和控制器设计">单周期数据通路和控制器设计</h3>
+
+<p><img src="D:%5C%E5%A4%A7%E5%AD%A6%5C%E5%A4%A7%E4%BA%8C%20%E7%A7%8B%E5%AD%A3%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5Cp3%5CDecoder.png" alt="Decoder"></p>
+
+<h3 id="单周期处理器性能分析">单周期处理器性能分析</h3>
+
+<h2 id="流水线处理器设计">流水线处理器设计</h2>
+
+<p><img src="/assets/images/post/image-20210104214456135.png" alt="image-20210104214456135"></p>
+
+<p><img src="D:%5Cverilog%20HDL%5Cp6%5CCPU_Pipeline_p6%5CCPU_Pipeline_p6_02.png" alt="CPU_Pipeline_p6_02"></p>
+
+<h3 id="流水线数据通路和控制器设计">流水线数据通路和控制器设计</h3>
+
+<h3 id="流水线处理器性能分析">流水线处理器性能分析</h3>
+
+<h3 id="流水线冒险及其处理">流水线冒险及其处理</h3>
+
+<h1 id="高速缓冲存储器-cache">高速缓冲存储器 （Cache）</h1>
+
+<h2 id="程序执行局部性原理">程序执行局部性原理</h2>
+
+<h3 id="时间局部性">时间局部性</h3>
+
+<h3 id="空间局部性">空间局部性</h3>
+
+<h3 id="局部性成因">局部性成因</h3>
+
+<ol>
+  <li>绝大多数情况下指令<strong>顺序执行</strong>
+</li>
+  <li>程序主要行为特征表现为<strong>循环</strong>
+</li>
+  <li>数组、结构等具有局部性</li>
+</ol>
+
+<h2 id="存储层次常用概念">存储层次常用概念</h2>
+
+<ol>
+  <li>
+    <p><strong>数据包含原则</strong>：高层次数据 $\in$ 低层次数据</p>
+  </li>
+  <li>
+    <p><strong>数据交换基本原则</strong>：数据交换一般只在相邻两层之间完成</p>
+  </li>
+  <li>
+    <p><strong>命中 Hit</strong></p>
+  </li>
+  <li>
+    <p><strong>命中率 Hite Rate (HR)</strong></p>
+  </li>
+  <li>
+    <p><strong>缺失 Miss</strong></p>
+  </li>
+  <li>
+    <p><strong>缺失率 Miss Rate (MR)</strong></p>
+
+    <blockquote>
+      <p>HR + MR = 1</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>命中时间 Hit Time (HT)</strong>：包括查找时间、判断时间以及数据读写时间的总和</p>
+  </li>
+  <li>
+    <p><strong>缺失代价 Miss Penalty (MP)</strong>：某层缺失后从下层获取数据所需要的时间。</p>
+  </li>
+</ol>
+
+<h2 id="cache-的结构与工作原理">Cache 的结构与工作原理</h2>
+
+<p><img src="/assets/images/post/image-20210104220539508.png" alt="image-20210104220539508"></p>
+
+<p>cache 的每个数据单元被称为<strong>块(cache block)</strong></p>
+
+<p>寄存器与 cache 之间的数据交换以 <em>寄存器</em> 为单位，但 cache 之间以及 cache 与下层主存储器之间的数据交换以 cache 块为单位。</p>
+
+<p><img src="/assets/images/post/image-20210104225313742.png" alt="image-20210104225313742"></p>
+
+<h2 id="cache-的映射机制">Cache 的映射机制</h2>
+
+<h3 id="直接映射-direct-mapped-cache">直接映射 Direct-Mapped Cache</h3>
+
+<p><img src="/assets/images/post/image-20210104220605473.png" alt="image-20210104220605473"></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>有效</th>
+      <th>标记</th>
+      <th>索引</th>
+      <th>块内偏移</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Valid</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Tag</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Index</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Offset</code></td>
+    </tr>
+    <tr>
+      <td>$1$</td>
+      <td>$地址总位数 - Offset - Index$</td>
+      <td>$\log_2{cache块总数}$</td>
+      <td>$\log_2{cache块大小}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="多级-cache">多级 Cache</h3>
+
+<p><img src="/assets/images/post/image-20210104224839359.png" alt="image-20210104224839359"></p>
+
+<h3 id="全相联映射">全相联映射</h3>
+
+<h3 id="组相联映射">组相联映射</h3>
+
+<p><img src="/assets/images/post/image-20210104225521131.png" alt="image-20210104225521131"></p>
+
+<p><img src="/assets/images/post/image-20210104225038208.png" alt="image-20210104225038208"></p>
+
+<p><img src="/assets/images/post/image-20210104225057771.png" alt="image-20210104225057771"></p>
+
+<p><img src="/assets/images/post/image-20210104225116164.png" alt="image-20210104225116164"></p>
+
+<p><img src="/assets/images/post/image-20210104225140142.png" alt="image-20210104225140142"></p>
+
+<p><img src="/assets/images/post/image-20210104225210851.png" alt="image-20210104225210851"></p>
+
+<h2 id="cache-的替换策略">Cache 的替换策略</h2>
+
+<h2 id="cache-性能分析与其他">Cache 性能分析与其他</h2>
+
+<h3 id="容量计算">容量计算</h3>
+
+<h3 id="性能分析">性能分析</h3>
+
+<h4 id="直接映射">直接映射</h4>
+
+<h5 id="amat-average-memoory-access-time">AMAT (Average Memoory Access Time)</h5>
+
+<p>average time to access memory considering both hits and misses.</p>
+
+<p><img src="/assets/images/post/image-20210104224118818.png" alt="image-20210104224118818"></p>
+
+<p><img src="/assets/images/post/image-20210104224319650.png" alt="image-20210104224319650"></p>
+
+<p><img src="/assets/images/post/image-20210104224516760.png" alt="image-20210104224516760"></p>
+
+<p><img src="/assets/images/post/image-20210104224538040.png" alt="image-20210104224538040"></p>
+
+<p><img src="/assets/images/post/image-20210104224557640.png" alt="image-20210104224557640"></p>
+
+<p><img src="/assets/images/post/image-20210104224617880.png" alt="image-20210104224617880"></p>
+
+<p><img src="/assets/images/post/image-20210104224634077.png" alt="image-20210104224634077"></p>
+
+<h4 id="多级-cache-1">多级 Cache</h4>
+
+<p><img src="/assets/images/post/image-20210104224755270.png" alt="image-20210104224755270"></p>
+
+<p><img src="/assets/images/post/image-20210104224904488.png" alt="image-20210104224904488"></p>
+
+<p><img src="/assets/images/post/image-20210104224919361.png" alt="image-20210104224919361"></p>
+
+<p><img src="/assets/images/post/image-20210104224938425.png" alt="image-20210104224938425"></p>
+
+<p><img src="/assets/images/post/image-20210104224957879.png" alt="image-20210104224957879"></p>
+
+<p><img src="/assets/images/post/image-20210104225016103.png" alt="image-20210104225016103"></p>
+
+<h4 id="组相联映射-1">组相联映射</h4>
+
+<h3 id="cache-数据一致性问题">Cache 数据一致性问题</h3>
+
+<h4 id="write-through-policy-写通">Write-Through Policy 写通</h4>
+
+<p><img src="/assets/images/post/image-20210104221411308.png" alt="image-20210104221411308"></p>
+
+<h4 id="write-back-policy-写回">Write-Back Policy 写回</h4>
+
+<p><img src="/assets/images/post/image-20210104221421857.png" alt="image-20210104221421857"></p>
+
+<h3 id="处理-cache-缺失">处理 Cache 缺失</h3>
+
+<p><img src="/assets/images/post/image-20210104221458231.png" alt="image-20210104221458231"><img src="/assets/images/post/image-20210104221521780.png" alt="image-20210104221521780"></p>
+
+<h3 id="改进-cache-性能">改进 Cache 性能</h3>
+
+<p><img src="/assets/images/post/image-20210104225417419.png" alt="image-20210104225417419"><img src="/assets/images/post/image-20210104225430923.png" alt="image-20210104225430923"></p>
+
+<h1 id="虚拟存储系统">虚拟存储系统</h1>
+
+<h2 id="辅助存储器">辅助存储器</h2>
+
+<h2 id="虚拟存储器的概念和作用">虚拟存储器的概念和作用</h2>
+
+<h2 id="虚拟存储器的工作原理">虚拟存储器的工作原理</h2>
+
+<h2 id="虚实地址转换">虚实地址转换</h2>
+
+<h2 id="页表工作原理">页表工作原理</h2>
+
+<h2 id="tlb-工作原理">TLB 工作原理</h2>
+
+<h2 id="虚拟存储器性能分析">虚拟存储器性能分析</h2>
+
+<h1 id="总线与输入输出方式">总线与输入输出方式</h1>
+
+<h2 id="计算机-i--o-系统">计算机 I / O 系统</h2>
+
+<h2 id="总线">总线</h2>
+
+<h2 id="i--o-方式">I / O 方式</h2>
+
+<h3 id="程序查询方式">程序查询方式</h3>
+
+<h3 id="中断方式">中断方式</h3>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="See Mips Run Linux">See Mips Run Linux</a><a class="next" href="/data/2021/01/11/DataStructure.html" title="Data Structure">Data Structure</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/artificialintelligence/2022/01/03/ArtificialIntelligence.html" title="Data Structure">Artificial Intelligence</a></li>
+<li><a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html" title="Data Structure">Machine Learning</a></li>
+<li><a class="post-link" href="/computerarchitecture/2021/06/10/OperatingSystem.html" title="Data Structure">Operating System</a></li>
+<li><a class="post-link" href="/data/2022/01/07/Database.html" title="Data Structure">Database</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>ericaaaaaaaa <span class="copyleft">©</span> 2019-2022 ericaaaaaaaa</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
