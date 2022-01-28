@@ -186,7 +186,7 @@ html[data-scroll-status='down'] .framework .sidebar { top: 20px; }
 .page-archives .post-meta { font-size: 12.25px; color: #828282; }
 
 /** Page banner */
-.page-banner { display: block; position: relative; height: 640px; background-color: rgba(0, 0, 0, 0.8); transition: height 0.2s; }
+.page-banner { display: block; position: relative; height: 340px; background-color: rgba(0, 0, 0, 0.8); transition: height 0.2s; }
 .page-banner .page-banner-img { position: absolute; width: 100%; height: 100%; overflow: hidden; }
 .page-banner .page-banner-img > *:first-child { height: 100%; max-width: 1000%; background-size: cover; background-position: center center; overflow: hidden; transition: 0.1s all ease-in-out; }
 .page-banner .page-banner-img > video { width: 100vw; object-fit: cover; }
@@ -207,7 +207,7 @@ html[data-scroll-status='down'] .framework .sidebar { top: 20px; }
 @media screen and (max-width: 600px) { .page-banner .page-banner-inner .post-tags { padding-right: 0; } }
 .page-banner .page-banner-inner .post-tags .post-tag { font-size: 15.75px; display: inline-block; text-decoration: none; margin: 9px 12px 0 0; color: #fff; }
 .page-banner .page-banner-inner .post-tags .post-tag:hover { text-decoration: underline; }
-@media screen and (max-width: 600px) { .page-banner { height: 426.6666666667px; } }
+@media screen and (max-width: 600px) { .page-banner { height: 226.6666666667px; } }
 
 /** Layout and sidebar */
 .framework .sidebar { padding-left: 8px; transition: top 0.2s, display 0.2s; position: sticky; position: -moz-sticky; /* <-- fix sticky compatibility issue */ position: -ms-sticky; position: -o-sticky; position: -webkit-sticky; align-self: flex-start; /* <-- fix the sticky not work issue */ transform: scale(0.9999); /* <-- fix the sticky x overflow issue */ top: 83.84px; }
