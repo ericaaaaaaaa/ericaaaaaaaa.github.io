@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Compiler | Erica’s Blog</title>
+<meta name="generator" content="Jekyll v4.2.1">
+<meta property="og:title" content="Compiler">
+<meta name="author" content="ericaaaaaaaa">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="编译实验课程设计文档">
+<meta property="og:description" content="编译实验课程设计文档">
+<link rel="canonical" href="http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html">
+<meta property="og:url" content="http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html">
+<meta property="og:site_name" content="Erica’s Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-12-22T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Compiler">
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html","headline":"Compiler","dateModified":"2021-12-22T00:00:00+08:00","datePublished":"2021-12-22T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/computerarchitecture/2021/12/22/Compiler.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"编译实验课程设计文档","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Erica's Blog" src="" onerror="this.style.display='none'">
+  Erica's Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Compiler</h1>
+  <h2 class="post-subtitle">算法设计与分析课程笔记</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2021-12-22T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 22, 2021
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 31 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#design-doc">#design-doc</a><a class="post-tag" href="/tags.html#system">#system</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <center><h1>编译实验课程设计文档</h1></center>
+
+<h2 id="写在前面">写在前面</h2>
+
+<p>本文档对于编译器的每个部分的实现进行了说明，大体上分为数据结构、算法思路和难点分析三个部分。</p>
+
+<h2 id="目录">目录</h2>
+
+<p>[toc]</p>
+
+<h2 id="词法分析">词法分析</h2>
+
+<h3 id="数据结构">数据结构</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Token</code></p>
+
+<p>建立 <code class="language-plaintext highlighter-rouge">Token</code> 类，存储每个 Token 所在的行号 (lineNum)，包含的内容 (content) 和 Token 的类别 (TokenType)。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">TokenType</span> <span class="p">{</span>
+    <span class="n">IDENFR</span><span class="p">,</span> <span class="n">INTCON</span><span class="p">,</span> <span class="n">STRCON</span><span class="p">,</span> <span class="n">MAINTK</span><span class="p">,</span> <span class="n">CONSTTK</span><span class="p">,</span> <span class="n">INTTK</span><span class="p">,</span> <span class="n">BREAKTK</span><span class="p">,</span>
+    <span class="n">CONTINUETK</span><span class="p">,</span> <span class="n">IFTK</span><span class="p">,</span> <span class="n">ELSETK</span><span class="p">,</span> <span class="n">NOT</span><span class="p">,</span> <span class="n">AND</span><span class="p">,</span> <span class="n">OR</span><span class="p">,</span> <span class="n">WHILETK</span><span class="p">,</span> <span class="n">VOIDTK</span><span class="p">,</span>
+    <span class="n">GETINTTK</span><span class="p">,</span> <span class="n">PRINTFTK</span><span class="p">,</span> <span class="n">RETURNTK</span><span class="p">,</span> <span class="n">PLUS</span><span class="p">,</span> <span class="n">MINU</span><span class="p">,</span> <span class="n">MULT</span><span class="p">,</span> <span class="n">DIV</span><span class="p">,</span> <span class="n">MOD</span><span class="p">,</span>
+    <span class="n">LSS</span><span class="p">,</span> <span class="n">LEQ</span><span class="p">,</span> <span class="n">GRE</span><span class="p">,</span> <span class="n">GEQ</span><span class="p">,</span> <span class="n">EQL</span><span class="p">,</span> <span class="n">NEQ</span><span class="p">,</span> <span class="n">ASSIGN</span><span class="p">,</span> <span class="n">ERROR</span><span class="p">,</span>
+    <span class="n">SEMICN</span><span class="p">,</span> <span class="n">COMMA</span><span class="p">,</span> <span class="n">LPARENT</span><span class="p">,</span> <span class="n">RPARENT</span><span class="p">,</span> <span class="n">LBRACK</span><span class="p">,</span> <span class="n">RBRACK</span><span class="p">,</span> <span class="n">LBRACE</span><span class="p">,</span> <span class="n">RBRACE</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Token</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">lineNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 行号</span>
+    <span class="n">string</span> <span class="n">content</span><span class="p">;</span> <span class="c1">// 内容</span>
+    <span class="n">string</span> <span class="n">classId</span><span class="p">;</span> <span class="c1">// 类别</span>
+    <span class="n">TokenType</span> <span class="n">tokenType</span> <span class="o">=</span> <span class="n">ERROR</span><span class="p">;</span>
+
+    <span class="n">Token</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// 默认构造</span>
+
+    <span class="n">Token</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="n">string</span> <span class="n">c</span><span class="p">,</span> <span class="n">string</span> <span class="n">id</span><span class="p">,</span> <span class="n">TokenType</span> <span class="n">type</span><span class="p">)</span> <span class="o">:</span> 
+        <span class="n">lineNum</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">classId</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span> <span class="n">content</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">c</span><span class="p">)),</span> <span class="n">tokenType</span><span class="p">(</span><span class="n">type</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="算法流程">算法流程</h3>
+
+<p>以字符为单位遍历输入程序，根据下图所示的流程图，将输入字符流逐一转化为相应 Token</p>
+
+<p><img src="/assets/images/post/resources/lexical_analysis.png" alt=""></p>
+
+<h3 id="难点分析">难点分析</h3>
+
+<p>词法分析的正确实现需要细致，这体现在以下几个方面：</p>
+<ul>
+  <li>不漏读，不复读字符：
+    <ul>
+      <li>在判断当前字符所对应的 Token 类型时，若不符合当前类型，应继续分析可能的下一种 Token 类型，而非将指针向后移动，从而跳过当前字符；也不能在当前字符已符合某种 Token 类型时继续判断当前字符类型，造成字符重复使用。</li>
+    </ul>
+  </li>
+  <li>Token 前缀相同时的判断
+    <ul>
+      <li>如 &lt;= 与 &lt;，&gt;= 与 &gt;，!= 与 !，== 与 = 等前缀相同的情况，需要根据后一个字符判断 Token 类型</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="语法分析">语法分析</h2>
+
+<h3 id="数据结构-1">数据结构</h3>
+
+<h3 id="astnode"><code class="language-plaintext highlighter-rouge">ASTNode</code></h3>
+
+<p>建立 AST 结点类 <code class="language-plaintext highlighter-rouge">ASTNode</code>，所有语法成分将继承自此节点。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ASTNode</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">ASTNode</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="n">ASTNode</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// 默认构造</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// 输出形式</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>对文法中的每个终结符和非终结符建类，所有类均继承自 <code class="language-plaintext highlighter-rouge">ASTNode</code>，类内含有该类可推导出的语法成分的指针。</p>
+
+<blockquote>
+  <p>例：</p>
+  <div class="language-cpp highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Exp</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ASTNode</span> <span class="p">{</span> <span class="c1">// 表达式</span>
+<span class="nl">public:</span>
+ <span class="n">AddExp</span> <span class="o">*</span><span class="n">addExp</span><span class="p">;</span>
+
+ <span class="n">Exp</span><span class="p">()</span> <span class="o">:</span> <span class="n">ASTNode</span><span class="p">()</span> <span class="p">{}</span>
+
+ <span class="k">explicit</span> <span class="n">Exp</span><span class="p">(</span><span class="n">AddExp</span> <span class="o">*</span><span class="n">ae</span><span class="p">)</span> <span class="o">:</span> <span class="n">addExp</span><span class="p">(</span><span class="n">ae</span><span class="p">)</span> <span class="p">{}</span>
+
+ <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
+     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"&lt;Exp&gt;"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+ <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="算法流程-1">算法流程</h3>
+
+<ol>
+  <li>消除文法中的左递归
+    <blockquote>
+      <p>e.g.
+原文法：AddExp := MulExp | AddExp (’+’ | ‘-‘) MulExp
+消除左递归后的文法：AddExp := MulExp | MulExp (’+’ | ‘-‘) AddExp</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>采用 LL(n) 的方式进行语法分析，避免回溯</p>
+  </li>
+  <li>
+    <p>构建 AST (Abstract Syntax Tree，抽象语法树)</p>
+
+    <p>采用递归的方式对每个非终结符构建 parse 函数。</p>
+
+    <blockquote>
+      <p>例：</p>
+      <div class="language-cpp highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="n">Exp</span><span class="o">*</span> <span class="nf">parseExp</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 解析 Exp 类</span>
+<span class="k">auto</span> <span class="o">*</span><span class="n">exp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Exp</span><span class="p">(</span><span class="n">parseAddExp</span><span class="p">());</span> <span class="c1">// 调用 addExp 调用程序 (返回 * addExp)</span>
+<span class="n">ASTTree</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">exp</span><span class="p">);</span> <span class="c1">// 将 expression 结点加入树中</span>
+<span class="k">return</span> <span class="n">exp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="难点分析-1">难点分析</h3>
+
+<ul>
+  <li>消除左递归：
+    <ul>
+      <li>由于原文法中存在左递归的情况，因此为了避免在语法分析中出现循环的情况，需要消除原文法中的左递归。但由于输出为根据原文法生成的语法树的后缀形式，因此在消除左递归后应适当变换，使输出满足原文法要求。</li>
+    </ul>
+  </li>
+  <li>指针的使用
+    <ul>
+      <li>在设计时考虑在每个类中存储对象本身而非对象的指针，但在实现过程中，由于各个类之间存在复杂的调用关系（包括环路），因此可能需要提前使用未定义的类。因此于其在类中用对象的形式存储属性，用指针更加节约空间且灵活，除此之外，还能避免拷贝构造时发生浅拷贝等问题。</li>
+    </ul>
+  </li>
+  <li>利用堆空间而非栈空间存储对象
+    <ul>
+      <li>在设计时，设想直接在 parse 函数中创建各个类的对象，但由于复杂的程序往往涉及到多层深入的调用关系，而函数内部声明的对象也有其生存周期，因此发生了程序在面对长输入程序时出现信息丢失和爆栈的情况。</li>
+      <li>解决方案是用 <code class="language-plaintext highlighter-rouge">new</code> 声明对象，将各个类的对象存放在堆空间中，加长对象的生存周期，避免爆栈和信息缺失的问题。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="符号表生成">符号表生成</h2>
+
+<h3 id="数据结构-2">数据结构</h3>
+
+<h4 id="symbol"><code class="language-plaintext highlighter-rouge">Symbol</code></h4>
+
+<p>建立符号类 <code class="language-plaintext highlighter-rouge">Symbol</code> 记录符号的名字，地址，维度，声明行号和使用行号等信息。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">VarType</span> <span class="p">{</span>
+    <span class="n">DEFAULT</span><span class="p">,</span> <span class="n">INTCONST</span><span class="p">,</span> <span class="n">INTVAR</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Symbol</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">address</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">VarType</span> <span class="n">varType</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">;</span> <span class="c1">// const?</span>
+    <span class="kt">int</span> <span class="n">declareLine</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 声明行号</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">usedLine</span><span class="p">;</span> <span class="c1">// 使用行号</span>
+
+    <span class="n">Symbol</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="n">Symbol</span><span class="p">(</span><span class="k">const</span> <span class="n">Token</span><span class="o">&amp;</span> <span class="n">token</span><span class="p">,</span> <span class="n">VarType</span> <span class="n">vt</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dim</span><span class="p">)</span> <span class="o">:</span> <span class="n">name</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">content</span><span class="p">),</span> <span class="n">varType</span><span class="p">(</span><span class="n">vt</span><span class="p">),</span> <span class="n">dimension</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span>
+                                               <span class="n">declareLine</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">lineNum</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="kt">void</span> <span class="n">use</span><span class="p">(</span><span class="kt">int</span> <span class="n">lineNum</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">usedLine</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">lineNum</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="symboltable"><code class="language-plaintext highlighter-rouge">SymbolTable</code></h4>
+
+<p>建立符号表类，用 map 的方式存储符号集 Symbol，其中，键为 Symbol 的名称，值为 Symbol 的指针</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SymbolTable</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Symbol</span> <span class="o">*&gt;</span> <span class="n">symbols</span><span class="p">;</span> <span class="c1">// symbol 符号集</span>
+    <span class="n">SymbolTable</span> <span class="o">*</span><span class="n">father</span> <span class="o">=</span> <span class="nb">nullptr</span> <span class="c1">// 指向父符号表的指针</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="n">SymbolTable</span> <span class="o">*&gt;</span> <span class="n">sons</span><span class="p">;</span> <span class="c1">// 指向子符号表的指针集</span>
+
+    <span class="n">SymbolTable</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// 默认构造</span>
+
+    <span class="kt">int</span> <span class="n">insert</span><span class="p">(</span><span class="n">Symbol</span> <span class="o">*</span><span class="n">sym</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 向符号表中插入 Symbol* sym</span>
+        <span class="cm">/* return 1 on success, return 0 on failure */</span>
+        <span class="n">string</span> <span class="n">sym_name</span> <span class="o">=</span> <span class="n">sym</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Symbol</span> <span class="o">*&gt;::</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">;</span>
+        <span class="n">iter</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">sym_name</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="n">symbols</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// not find</span>
+            <span class="n">symbols</span><span class="p">[</span><span class="n">sym_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">sym</span><span class="p">;</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Symbol</span> <span class="o">*</span><span class="n">find</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">sym_name</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 在符号表及其父符号表中查找名为 sym_name 的 Symbol</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Symbol</span> <span class="o">*&gt;::</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">;</span>
+        <span class="n">iter</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">sym_name</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="n">symbols</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// not find</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">father</span> <span class="o">==</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="o">*</span><span class="n">symbol</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Symbol</span><span class="p">();</span>
+                <span class="k">return</span> <span class="n">symbol</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">father</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="n">sym_name</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">SymbolTable</span> <span class="o">*</span><span class="n">newSon</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 建立子符号表并返回其指针</span>
+        <span class="k">auto</span> <span class="o">*</span><span class="n">symbolTable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SymbolTable</span><span class="p">();</span>
+        <span class="n">symbolTable</span><span class="o">-&gt;</span><span class="n">father</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">sons</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">symbolTable</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">symbolTable</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">SymbolTable</span> <span class="o">*</span><span class="n">newBrother</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 建立兄弟符号表返回其指针</span>
+        <span class="k">auto</span> <span class="o">*</span><span class="n">symbolTable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SymbolTable</span><span class="p">();</span>
+        <span class="n">symbolTable</span><span class="o">-&gt;</span><span class="n">father</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">father</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">father</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">father</span><span class="o">-&gt;</span><span class="n">sons</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">symbolTable</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">symbolTable</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">SymbolTable</span> <span class="o">*</span><span class="n">back</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// 返回父符号表的指针</span>
+        <span class="k">return</span> <span class="n">father</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="算法流程-2">算法流程</h3>
+
+<p>建立根符号表，并将当前符号表的指针指向根符号表。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SymbolTable</span> <span class="o">*</span><span class="n">symbolTable</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SymbolTable</span><span class="p">();</span>
+<span class="n">SymbolTable</span> <span class="o">*</span><span class="n">currentSymbolTable</span> <span class="o">=</span> <span class="n">symbolTable</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>每当进入一个新的 Block 或新的函数时，建立新的子符号表，并将当前符号表的指针 <code class="language-plaintext highlighter-rouge">currentSymbolTable</code> 指向新的子符号表。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Block</span><span class="o">*</span> <span class="nf">parseBlock</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">currentSymbolTable</span> <span class="o">=</span> <span class="n">currentSymbolTable</span><span class="o">-&gt;</span><span class="n">newSon</span><span class="p">();</span>
+    <span class="c1">// ...</span>
+    <span class="n">currentSymbolTable</span> <span class="o">=</span> <span class="n">currentSymbolTable</span><span class="o">-&gt;</span><span class="n">back</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">;</span>    
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>当遇到声明 (<code class="language-plaintext highlighter-rouge">Decl</code>) 语句和函数形参声明时，向符号表中填入 Symbol 并检查是否存在重名问题</p>
+
+<p>在 <code class="language-plaintext highlighter-rouge">Stmt</code> 中使用符号时，由当前符号表逐层向上检索所用符号名和符号类型，检查是否存在未定义和改变 const 值等问题。</p>
+
+<h3 id="难点分析-2">难点分析</h3>
+
+<p>符号表实现中的困难主要来自于对变量生存周期和作用域的理解。</p>
+
+<p>在函数中，形参和函数体应共享一个符号表，而不能因为函数体为 <code class="language-plaintext highlighter-rouge">Block</code> 而创建只属于函数体的符号表。因此在进入 <code class="language-plaintext highlighter-rouge">parseBlock</code> 时，应首先判断是否在函数体内，若是，则不创建新符号表，否则创建新的子符号表，并将当前符号表的指针指向该符号表。</p>
+
+<h2 id="函数表生成">函数表生成</h2>
+
+<h3 id="数据结构-3">数据结构</h3>
+
+<h4 id="function"><code class="language-plaintext highlighter-rouge">Function</code></h4>
+
+<p>建立 Function 类，存储函数名，形参和返回值等信息</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">ReturnType</span> <span class="p">{</span>
+    <span class="n">VOID</span><span class="p">,</span> <span class="n">INT</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Function</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">string</span> <span class="n">name</span><span class="p">;</span> <span class="c1">// 函数名</span>
+    <span class="n">ReturnType</span> <span class="n">returnType</span> <span class="o">=</span> <span class="n">VOID</span><span class="p">;</span> <span class="c1">// 函数返回值类型</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="n">Symbol</span> <span class="o">*&gt;</span> <span class="n">parameters</span><span class="p">;</span>
+
+    <span class="n">Function</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="n">Function</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">,</span> <span class="n">ReturnType</span> <span class="n">rt</span><span class="p">,</span> <span class="n">list</span><span class="o">&lt;</span><span class="n">Symbol</span> <span class="o">*&gt;</span> <span class="n">p</span><span class="p">)</span> <span class="o">:</span> <span class="n">name</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">returnType</span><span class="p">(</span><span class="n">rt</span><span class="p">),</span> <span class="n">parameters</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="p">{}</span>
+
+    <span class="kt">int</span> <span class="n">paramsMatch</span><span class="p">(</span><span class="n">list</span><span class="o">&lt;</span><span class="n">Symbol</span> <span class="o">*&gt;</span> <span class="n">params</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 判断函数参数个数，类别是否吻合</span>
+        <span class="cm">/* return: 0 -- success, -1 -- number doesn't fit, -2 -- type doesn't fit */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">parameters</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">params</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">require_iter</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+            <span class="k">auto</span> <span class="n">get_iter</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">require_iter</span> <span class="o">!=</span> <span class="n">parameters</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">((</span><span class="o">*</span><span class="n">require_iter</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">varType</span> <span class="o">==</span> <span class="p">(</span><span class="o">*</span><span class="n">get_iter</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">varType</span> <span class="o">&amp;&amp;</span>
+                      <span class="p">(</span><span class="o">*</span><span class="n">require_iter</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">dimension</span> <span class="o">==</span> <span class="p">(</span><span class="o">*</span><span class="n">get_iter</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">dimension</span><span class="p">))</span>
+                    <span class="k">return</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+                <span class="o">++</span><span class="n">require_iter</span><span class="p">;</span>
+                <span class="o">++</span><span class="n">get_iter</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="functiontable"><code class="language-plaintext highlighter-rouge">FunctionTable</code></h4>
+
+<p>建立函数表 <code class="language-plaintext highlighter-rouge">FunctionTable</code>，用于存储全部声明函数的函数名，返回值等信息。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FunctionTable</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Function</span> <span class="o">*&gt;</span> <span class="n">functions</span><span class="p">;</span> <span class="c1">// 用 map 存储全部声明函数</span>
+
+    <span class="n">FunctionTable</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// 默认构造</span>
+
+    <span class="kt">int</span> <span class="n">insert</span><span class="p">(</span><span class="n">Function</span> <span class="o">*</span><span class="n">func</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* return 1 on success, return 0 on failure */</span>
+        <span class="n">string</span> <span class="n">func_name</span> <span class="o">=</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Function</span> <span class="o">*&gt;::</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">;</span> 
+        <span class="n">iter</span> <span class="o">=</span> <span class="n">functions</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">func_name</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="n">functions</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// not find</span>
+            <span class="n">functions</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">;</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Function</span> <span class="o">*</span><span class="n">find</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">func_name</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 在函数表中寻找名为 func_name 的函数</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Function</span> <span class="o">*&gt;::</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">;</span>
+        <span class="n">iter</span> <span class="o">=</span> <span class="n">functions</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">func_name</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="n">functions</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// not find</span>
+            <span class="k">auto</span> <span class="o">*</span><span class="n">function</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Function</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">function</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="算法流程-3">算法流程</h3>
+
+<p>建立全局函数表 functionTable，每声明一个新的函数时向其中加入 Function 并判断函数是否存在重名等问题。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FunctionTable</span> <span class="o">*</span><span class="n">functionTable</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">FunctionTable</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>每次用到函数时在函数表中根据函数名查找函数，判断是否存在未声明的问题。若函数已经声明，则进一步判断参数个数与类型是否与声明中相吻合。</p>
+
+<h3 id="难点分析-3">难点分析</h3>
+
+<p>函数表中不仅需要记录函数名和返回值等信息，还需记录函数参数个数和类型等信息。</p>
+
+<h2 id="错误处理">错误处理</h2>
+
+<h3 id="数据结构-4">数据结构</h3>
+
+<h4 id="error"><code class="language-plaintext highlighter-rouge">Error</code></h4>
+
+<p>建立 <code class="language-plaintext highlighter-rouge">Error</code> 类，存储错误行号和错误类型</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Error</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">lineNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 错误行号</span>
+    <span class="n">string</span> <span class="n">errorType</span><span class="p">;</span> <span class="c1">// 错误类型</span>
+
+    <span class="n">Error</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// 默认构造</span>
+
+    <span class="n">Error</span><span class="p">(</span><span class="kt">int</span> <span class="n">ln</span><span class="p">,</span> <span class="n">string</span> <span class="n">et</span><span class="p">)</span> <span class="o">:</span> <span class="n">lineNum</span><span class="p">(</span><span class="n">ln</span><span class="p">),</span> <span class="n">errorType</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">et</span><span class="p">))</span> <span class="p">{}</span>
+
+    <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">out</span><span class="p">,</span> <span class="n">Error</span> <span class="o">&amp;</span><span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">t</span><span class="p">.</span><span class="n">lineNum</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">t</span><span class="p">.</span><span class="n">errorType</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="算法流程-4">算法流程</h3>
+
+<p>建立全局错误队列，存储所有程序中出现的错误，由于错误处理的输出需要有序，因此在输出前统一对错误进行排序，再逐一输出。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vector</span><span class="o">&lt;</span><span class="n">Error</span><span class="o">*&gt;</span> <span class="n">errors</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>错误处理办法：</p>
+<ul>
+  <li>分析每个错误所有可能出现的位置</li>
+  <li>在语法分析建立 AST 的同时对生成符号表、函数表并对错误进行判断。</li>
+  <li>每判断出一个错误将错误的行号和类型码存储在 Error 类中，并将其加入 errors</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>错误类别码</th>
+      <th>错误类型</th>
+      <th>判断方法</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a</td>
+      <td>非法符号</td>
+      <td>当 Token 为 STRCONST 时，对格式字符串的合法性进行判断。</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td>名字重定义</td>
+      <td>建立符号表与函数表，每定义新的符号 / 函数时向表中添加，当前符号 / 函数名在当前作用域内已定义，则产生名字重定义问题。</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td>未定义的名字</td>
+      <td>在使用变量和函数时在符号表和函数表中查询，若无法查询到，则证明出现未定义的名字。</td>
+    </tr>
+    <tr>
+      <td>d</td>
+      <td>函数参数个数不匹配</td>
+      <td>在函数声明时在 Function 类中存储函数的形参信息（类别、数量、顺序），在调用函数时记录传递参数的信息，并于 Function 中的参数个数相对比，若不同，则抛出函数参数个数不匹配的错误</td>
+    </tr>
+    <tr>
+      <td>e</td>
+      <td>函数参数类型不匹配</td>
+      <td>函数声明时在 Function 类中存储函数的形参信息（类别、数量、顺序），在调用函数时记录传递参数的信息，并于 Function 中的参数类型（类型、维度）相对比，若不同，则抛出函数参数个数不匹配的错误</td>
+    </tr>
+    <tr>
+      <td>f</td>
+      <td>无返回值的函数存在不匹配的 <code class="language-plaintext highlighter-rouge">return</code>
+</td>
+      <td>在函数声明时，若函数的 returnType 为 VOIDTK，则获取函数块内最后一条语句，若其为 return 语句且不为 “return;”，则报错</td>
+    </tr>
+    <tr>
+      <td>g</td>
+      <td>有返回值的函数缺少 return 语句</td>
+      <td>在函数声明时，若函数的 returnType 为 INTTK，则获取函数块内最后一条语句，若其不为 return 语句，则报错</td>
+    </tr>
+    <tr>
+      <td>h</td>
+      <td>不能改变常量的值</td>
+      <td>在变量声明并加入符号表时存储其是否为 const，在对变量赋值时，若变量存在且为 INTCONST，则报错</td>
+    </tr>
+    <tr>
+      <td>i</td>
+      <td>缺少分号</td>
+      <td>在 parse 函数遇到 <code class="language-plaintext highlighter-rouge">auto *semicn = new Semicn(*(iter++));</code> 时将其替换为先检查当前 iter 的 Token 类是否为 SEMICN，若是，则重复之前的操作，若不是，则自动补全分号并抛出 i 型错误</td>
+    </tr>
+    <tr>
+      <td>j</td>
+      <td>缺少右小括号</td>
+      <td>在 parse 函数遇到 <code class="language-plaintext highlighter-rouge">auto *rparent = new Rparent(*(iter++));</code> 时将其替换为先检查当前 iter 的 Token 类是否为 RPARENT，若是，则重复之前的操作，若不是，则自动补全右小括号并抛出 j 型错误</td>
+    </tr>
+    <tr>
+      <td>k</td>
+      <td>缺少右中括号</td>
+      <td>在 parse 函数遇到 <code class="language-plaintext highlighter-rouge">auto *rbrack = new Rbrack(*(iter++));</code> 时将其替换为先检查当前 iter 的 Token 类是否为 RBRACK，若是，则重复之前的操作，若不是，则自动补全右中括号并抛出 k 型错误</td>
+    </tr>
+    <tr>
+      <td>l</td>
+      <td>
+<code class="language-plaintext highlighter-rouge">printf</code> 中格式字符串与表达式个数不匹配</td>
+      <td>在语法分析的过程中，在遇到 Stmt -&gt; printf ‘(’ FormatString {, Exp} ‘)’ 时记录 Exp 的数量和 FormatString 中 ‘%d’ 的数量，将两者对比，若不同，则抛出 l 型错误</td>
+    </tr>
+    <tr>
+      <td>m</td>
+      <td>在非循环块中使用 <code class="language-plaintext highlighter-rouge">break</code> 和 <code class="language-plaintext highlighter-rouge">continue</code> 语句</td>
+      <td>设立 recursive 变量，用于记录所在的循环层数，当循环层数为 0 (不处于任何循环当中时)，若出现 <code class="language-plaintext highlighter-rouge">break</code> 和 <code class="language-plaintext highlighter-rouge">continue</code> 则抛出 m 类型错误。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="难点分析-4">难点分析</h3>
+
+<p>错误处理考察实现细节，需要对每种错误可能出现的情况进行详细的讨论，并适当修改语法分析代码。</p>
+
+<p>另外，对于“缺失”类型的错误，需要注意不让程序进入死循环。</p>
+
+<p>例：在语法分析中，读取函数形参 parseFuncFParams 在读入右小括号时退出</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="p">(...)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">((</span><span class="o">*</span><span class="n">iter</span><span class="p">).</span><span class="n">tokenType</span> <span class="o">==</span> <span class="n">LBRACK</span><span class="p">)</span> <span class="p">{</span>
+    	<span class="k">break</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>但需要考虑右小括号缺失的情况，此时应添加条件判断，即：若读入 <code class="language-plaintext highlighter-rouge">{</code> （代表进入函数体），也视作函数形参输入完成，且抛出右小括号缺失类型错误。</p>
+
+<h2 id="中间代码生成">中间代码生成</h2>
+
+<p>中间代码采用 SSA（静态单一赋值）的形式，采用类似 LLVMIR 的语言，便于后续优化。</p>
+
+<blockquote>
+  <p>在静态单一赋值的代码中，每个变量仅被赋值一次。生成 SSA 形式的中间代码极大的简化了优化的实现和优化程序的效率，但缺点在于构建 SSA 形式的代码难度较大。</p>
+</blockquote>
+
+<h3 id="中间代码语法简述">中间代码语法简述</h3>
+
+<p>由于中间代码并不需要真正被 LLVM 编译器编译通过，因此在实现上以方便书写且满足 SSA 规范为准，在具体语法上可能与标准的 LLVM 有所差异。</p>
+
+<h4 id="类型">类型</h4>
+
+<p>中间代码中需要对变量的类型进行标识，为了使得优化程序更好的对于各个不同的变量类型执行相应的优化操作，因此选择保留尽量多的信息。如：源程序中的 int 在中间代码中可以对应全局变量和局部变量。</p>
+
+<p>中间代码中所使用的变量 / 常量类型如下：</p>
+
+<ul>
+  <li>
+    <p>临时变量 <code class="language-plaintext highlighter-rouge">TEMP</code></p>
+
+    <p>在定义后使用一次即消亡的变量，不对应程序中的变量，用于在计算时保存临时结果。</p>
+  </li>
+  <li>
+    <p>全局变量 <code class="language-plaintext highlighter-rouge">INTGLOBAL</code></p>
+
+    <p>对应程序中全局声明的 <code class="language-plaintext highlighter-rouge">int</code> 类型。</p>
+  </li>
+  <li>
+    <p>全局常量 <code class="language-plaintext highlighter-rouge">INTGLOBALCONST</code></p>
+
+    <p>对应程序中全局声明的 <code class="language-plaintext highlighter-rouge">const int</code> 类型。</p>
+  </li>
+  <li>
+    <p>局部变量 <code class="language-plaintext highlighter-rouge">INTLOCAL</code></p>
+
+    <p>对应程序中局部声明的 <code class="language-plaintext highlighter-rouge">int</code> 类型。</p>
+  </li>
+  <li>
+    <p>局部常量 <code class="language-plaintext highlighter-rouge">INTLOCALCONST</code></p>
+
+    <p>对应程序中局部声明的 <code class="language-plaintext highlighter-rouge">const int</code> 类型。</p>
+  </li>
+  <li>
+    <p>指针变量 <code class="language-plaintext highlighter-rouge">POINTER</code></p>
+
+    <p>对应程序中声明的局部数组类型。</p>
+  </li>
+  <li>
+    <p>数字 <code class="language-plaintext highlighter-rouge">NUMBER</code></p>
+
+    <p>对应程序中的立即数。</p>
+  </li>
+  <li>
+    <p>字符串 <code class="language-plaintext highlighter-rouge">FORMATSTRING</code></p>
+
+    <p>对应程序中 <code class="language-plaintext highlighter-rouge">printf</code> 中的字符串。</p>
+  </li>
+  <li>
+    <p>函数名称 <code class="language-plaintext highlighter-rouge">FUNCTIONNAME</code></p>
+
+    <p>对应程序中的函数名。</p>
+  </li>
+  <li>
+    <p>label <code class="language-plaintext highlighter-rouge">LABEL</code></p>
+
+    <p>用于表示基本块的开始和便于基本块之间跳转语句的正常实现。</p>
+  </li>
+</ul>
+
+<p>为了能够更加直观的在输出到文件中的中间代码中辨识各个变量类型，对每种类型均定义了不同的输出方式，如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>变量类型</th>
+      <th>输出方式</th>
+      <th>举例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TEMP</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32 ${id}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32 $1</code></td>
+    </tr>
+    <tr>
+      <td>
+<code class="language-plaintext highlighter-rouge">INTGLOBAL</code> or <code class="language-plaintext highlighter-rouge">INTGLOBALCONST</code>
+</td>
+      <td>
+<code class="language-plaintext highlighter-rouge">i32 @{id}</code> or <code class="language-plaintext highlighter-rouge">[{size} * i32]* @{id}</code>
+</td>
+      <td>
+<code class="language-plaintext highlighter-rouge">i32 @0</code>, <code class="language-plaintext highlighter-rouge">[3 * i32] @4</code>
+</td>
+    </tr>
+    <tr>
+      <td>
+<code class="language-plaintext highlighter-rouge">INTLOCAL</code> or <code class="language-plaintext highlighter-rouge">INTLOCALCONST</code>
+</td>
+      <td><code class="language-plaintext highlighter-rouge">i32 %{id}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32 %5</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">POINTER</code></td>
+      <td>
+<code class="language-plaintext highlighter-rouge">i32* %{id}</code> or <code class="language-plaintext highlighter-rouge">[size * i32]* %{id}</code>
+</td>
+      <td>
+<code class="language-plaintext highlighter-rouge">i32* %1</code> or <code class="language-plaintext highlighter-rouge">[2 * i32]* %5</code>
+</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LABEL</code></td>
+      <td>
+<code class="language-plaintext highlighter-rouge">label{id}</code> or <code class="language-plaintext highlighter-rouge">main</code>
+</td>
+      <td>
+<code class="language-plaintext highlighter-rouge">label1</code> or <code class="language-plaintext highlighter-rouge">main</code>
+</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FUNCTIONNAME</code></td>
+      <td><code class="language-plaintext highlighter-rouge">@{name}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">@func</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">NUMBER</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32 {number}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">i32 512</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="语句">语句</h4>
+
+<p>中间代码的语句主要分为一下几种：</p>
+
+<ul>
+  <li>声明语句</li>
+  <li>算数语句：实现基本的加减乘除等操作，变量类型可以为 <code class="language-plaintext highlighter-rouge">TEMP</code> 或 <code class="language-plaintext highlighter-rouge">NUMBER</code>
+    <ul>
+      <li>双目运算
+        <ul>
+          <li>算数运算 (<code class="language-plaintext highlighter-rouge">ADDIR</code>, <code class="language-plaintext highlighter-rouge">SUBIR</code>, <code class="language-plaintext highlighter-rouge">MULIR</code>, <code class="language-plaintext highlighter-rouge">DIVIR</code>, <code class="language-plaintext highlighter-rouge">MODIR</code>)</li>
+          <li>逻辑运算 (<code class="language-plaintext highlighter-rouge">ANDIR</code>, <code class="language-plaintext highlighter-rouge">ORIR</code>, <code class="language-plaintext highlighter-rouge">EQIR</code>, <code class="language-plaintext highlighter-rouge">NEQIR</code>, <code class="language-plaintext highlighter-rouge">GREIR</code>, <code class="language-plaintext highlighter-rouge">GEQIR</code>, <code class="language-plaintext highlighter-rouge">LSSIR</code>, <code class="language-plaintext highlighter-rouge">LEQIR</code>)</li>
+        </ul>
+      </li>
+      <li>单目运算
+        <ul>
+          <li>算数运算 (<code class="language-plaintext highlighter-rouge">ADDSINGLEIR</code>, <code class="language-plaintext highlighter-rouge">SUBSINGLEIR</code>)</li>
+          <li>逻辑运算 (<code class="language-plaintext highlighter-rouge">NOTIR</code>)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>跳转语句
+    <ul>
+      <li>无条件跳转 (<code class="language-plaintext highlighter-rouge">BR</code>)</li>
+      <li>有条件跳转 (<code class="language-plaintext highlighter-rouge">BRTRUE</code>, <code class="language-plaintext highlighter-rouge">BRFALSE</code>)</li>
+      <li>跳转并移动栈指针（由于存在 <code class="language-plaintext highlighter-rouge">continue</code> 和 <code class="language-plaintext highlighter-rouge">break</code> 语句，在跳转时可能出现跳转前后栈指针不一致的情况，因此这种指令需要在跳转后将栈指针移动至正确的位置）<code class="language-plaintext highlighter-rouge">BRCHECK</code>
+</li>
+    </ul>
+  </li>
+  <li>函数相关语句
+    <ul>
+      <li>函数定义 (<code class="language-plaintext highlighter-rouge">FUNCDECLIR</code>)</li>
+      <li>函数调用 (<code class="language-plaintext highlighter-rouge">CALL</code>)</li>
+      <li>函数返回 (<code class="language-plaintext highlighter-rouge">RET</code>)</li>
+    </ul>
+  </li>
+  <li>存取语句 (<code class="language-plaintext highlighter-rouge">LOAD</code>, <code class="language-plaintext highlighter-rouge">STORE</code>, <code class="language-plaintext highlighter-rouge">GETPOINTER</code>)，其中，<code class="language-plaintext highlighter-rouge">GETPOINTER</code> 可获得数组相应位置的地址</li>
+  <li>mem2reg 相关语句 (<code class="language-plaintext highlighter-rouge">MEM2REGASSIGN</code>, <code class="language-plaintext highlighter-rouge">MEM2REGMOVE</code>)</li>
+  <li>其它语句（用于标识程序中 Block 的开始和结尾，便于栈指针移动至正确位置）
+    <ul>
+      <li>
+<code class="language-plaintext highlighter-rouge">LBRACEIR</code>, <code class="language-plaintext highlighter-rouge">RBRACEIR</code>, <code class="language-plaintext highlighter-rouge">LSHARPIR</code>, <code class="language-plaintext highlighter-rouge">RSHARPIR</code>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<p>为了能更清楚的在输出后的中间代码中辨识语句类型，对每种语句定义了相应的输出操作。</p>
+
+<h4 id="mem2reg-与-phi">mem2reg 与 phi</h4>
+
+<p>静态单一赋值要求同一个变量只能被赋值一次，但遇到下图所示的情况，应当如何确定应该输出哪一个 i 的值呢？</p>
+
+<p>一个最简单的实现办法就是利用 LOAD 和 STORE 语句，每次直接从内存中读写，而不需要考虑具体应当取哪一种赋值（如下图中左边代码所示），但这样做显然效率不高，大量的存取指令会占用大量的程序运行时间。</p>
+
+<p>为了能够提高程序的运行效率，需要消解 LOAD 与 STORE 语句，将其变为 SSA 形式的赋值语句，而实现从 LOAD, STORE 到 SSA 的转化的步骤就被称作 mem2reg。为了使程序能够在具有分支的情况下依然保持正确性，引入 phi 指令。</p>
+
+<p>phi 指令的语法是</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">result</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">&lt;</span><span class="n">ty</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">val0</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">label0</span><span class="o">&gt;</span><span class="p">],</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">val1</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">label1</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">...</span>
+</code></pre></div></div>
+
+<p>phi 指令被安排在每个基本块的最开头，且执行没有先后顺序。phi 指令中的 label 对应着基本块的前驱，而 val 则是 result 可能的取值。</p>
+
+<p>举例来说，下图中右面的代码就是插入了 phi 的代码。其中，语句 <code class="language-plaintext highlighter-rouge">&amp;4 = phi [&amp;2, label1] [&amp;3, label2]</code> 代表若从 label1 跳转至该基本块，则 <code class="language-plaintext highlighter-rouge">&amp;4</code> 取 <code class="language-plaintext highlighter-rouge">&amp;2</code> 的值，否则若从 label2 跳转至该基本块，<code class="language-plaintext highlighter-rouge">&amp;4</code> 取 <code class="language-plaintext highlighter-rouge">&amp;3</code> 的值。</p>
+
+<p><img src="/assets/images/post/mem2reg.png" alt=""></p>
+
+<h3 id="数据结构-5">数据结构</h3>
+
+<h4 id="value"><code class="language-plaintext highlighter-rouge">Value</code></h4>
+
+<p>在 SSA 形式的中间代码中，包括变量、常量、label 等一切皆是 <code class="language-plaintext highlighter-rouge">Value</code>，因此建立 <code class="language-plaintext highlighter-rouge">Value</code> 类以及其对应的 <code class="language-plaintext highlighter-rouge">VarType</code> 枚举类。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">VarType</span> <span class="p">{</span>
+    <span class="n">DEFAULT</span><span class="p">,</span> <span class="n">INTCONST</span><span class="p">,</span> <span class="n">INTVAR</span><span class="p">,</span> <span class="n">VOIDVAR</span><span class="p">,</span>
+    <span class="n">INTGLOBAL</span><span class="p">,</span> <span class="n">INTGLOBALCONST</span><span class="p">,</span> <span class="n">INTLOCAL</span><span class="p">,</span> <span class="n">INTLOCALCONST</span><span class="p">,</span>
+    <span class="n">LABEL</span><span class="p">,</span> <span class="n">POINTER</span><span class="p">,</span> <span class="n">NUMBER</span><span class="p">,</span> <span class="n">FUNCTIONNAME</span><span class="p">,</span> <span class="n">FORMATSTRING</span><span class="p">,</span>
+    <span class="n">TEMP</span><span class="p">,</span> <span class="n">STRING</span><span class="p">,</span> <span class="n">PMET</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Value</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span> <span class="c1">// 独一无二的 id，若为 NUMBER 则 id 为其对应的值</span>
+    <span class="n">VarType</span> <span class="n">varType</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">;</span> <span class="c1">// Value 类型</span>
+    <span class="kt">int</span> <span class="n">symbolTableId</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// 对应的符号表</span>
+    <span class="n">string</span> <span class="n">name</span><span class="p">;</span> <span class="c1">// 对应的函数名或变量名</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 变量大小</span>
+    <span class="kt">int</span> <span class="n">declLine</span><span class="p">;</span> <span class="c1">// 定义变量的行号</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">useLine</span><span class="p">;</span> <span class="c1">// 使用变量的行号</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="llvmir"><code class="language-plaintext highlighter-rouge">LLVMIR</code></h4>
+
+<p>建立中间代码类 <code class="language-plaintext highlighter-rouge">LLVMIR</code> 以及其对应的枚举类 <code class="language-plaintext highlighter-rouge">IRType</code>，用于表示各类中间代码，它的构造函数接受不同数量的 <code class="language-plaintext highlighter-rouge">Value</code> 和 <code class="language-plaintext highlighter-rouge">IRType</code>，生成各种形式的 IR。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">IRType</span> <span class="p">{</span>
+    <span class="n">IRTYPE</span><span class="p">,</span> <span class="c1">// DEFAULT</span>
+    <span class="n">ADDIR</span><span class="p">,</span> <span class="n">SUBIR</span><span class="p">,</span> <span class="n">MULIR</span><span class="p">,</span> <span class="n">DIVIR</span><span class="p">,</span> <span class="n">MODIR</span><span class="p">,</span> <span class="c1">// 加减乘除</span>
+    <span class="n">ANDIR</span><span class="p">,</span> <span class="n">ORIR</span><span class="p">,</span> <span class="n">EQIR</span><span class="p">,</span> <span class="n">NEQIR</span><span class="p">,</span> <span class="c1">// 与或非、等于、不等于</span>
+    <span class="n">NOTIR</span><span class="p">,</span> <span class="n">ADDSINGLEIR</span><span class="p">,</span> <span class="n">SUBSINGLEIR</span><span class="p">,</span> <span class="c1">// 单目运算</span>
+    <span class="n">GREIR</span><span class="p">,</span> <span class="n">GEQIR</span><span class="p">,</span> <span class="n">LSSIR</span><span class="p">,</span> <span class="n">LEQIR</span><span class="p">,</span> <span class="c1">// 比较运算</span>
+    <span class="n">BR</span><span class="p">,</span> <span class="n">RET</span><span class="p">,</span> <span class="n">CALL</span><span class="p">,</span> <span class="n">BRTRUE</span><span class="p">,</span> <span class="n">BRFALSE</span><span class="p">,</span> <span class="n">BRCHECK</span><span class="p">,</span> <span class="c1">// 跳转运算</span>
+    <span class="n">FUNCDECLIR</span><span class="p">,</span> <span class="n">GLOBALDECLIR</span><span class="p">,</span> <span class="n">LOCALDECLIR</span><span class="p">,</span> <span class="n">CONSTDECLIR</span><span class="p">,</span> <span class="c1">// 定义（函数、全局、局部、常量）</span>
+    <span class="n">LOAD</span><span class="p">,</span> <span class="n">STORE</span><span class="p">,</span> <span class="n">ALLOCA</span><span class="p">,</span> <span class="n">LABELIR</span><span class="p">,</span> <span class="n">ASSIGNIR</span><span class="p">,</span> <span class="n">TEMPALLOCA</span><span class="p">,</span> <span class="c1">// 存取运算</span>
+    <span class="n">LBRACEIR</span><span class="p">,</span> <span class="n">RBRACEIR</span><span class="p">,</span> <span class="n">LSHARPIR</span><span class="p">,</span> <span class="n">RSHARPIR</span><span class="p">,</span> <span class="c1">// 大括号 / 中括号（用于标记 Block 的始末，便于 stack pointer 移动到正确的位置）</span>
+    <span class="n">GETPOINTERIR</span><span class="p">,</span> <span class="c1">// 数组取地址</span>
+    <span class="n">MEM2REGASSIGN</span><span class="p">,</span> <span class="n">MEM2REGMOVE</span><span class="p">,</span> <span class="n">TEMPPHI</span><span class="p">,</span> <span class="n">PHI</span> <span class="c1">// mem2reg 有关指令</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">LLVMIR</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">IRType</span> <span class="n">irType</span> <span class="o">=</span> <span class="n">IRTYPE</span><span class="p">;</span> <span class="c1">// IR 类型</span>
+    <span class="kt">int</span> <span class="n">lineNum</span><span class="p">;</span> <span class="c1">// IR 行号</span>
+    <span class="kt">int</span> <span class="n">blockLineNum</span><span class="p">;</span> <span class="c1">// 在 BasicBlock 中的行号（在变量冲突分析时使用）</span>
+    <span class="c1">// 以下属性均为 LLVMIR 构造时需要用到的参数</span>
+    <span class="n">Value</span> <span class="o">*</span><span class="n">dest</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">Value</span> <span class="o">*&gt;</span> <span class="n">params</span><span class="p">;</span>
+    <span class="n">Variable</span> <span class="o">*</span><span class="n">variable</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">Variable</span> <span class="o">*&gt;</span> <span class="n">varParams</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">labels</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">valueId</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="basicblock"><code class="language-plaintext highlighter-rouge">BasicBlock</code></h4>
+
+<p><code class="language-plaintext highlighter-rouge">BasicBlock</code> 的含义是”基本块“，用来表示一段连续执行的程序序列。基本块中的代码只能顺序执行，只能从开头进入，从结尾离开。将程序划分为基本块的优点在于便于分析程序的控制流，从而使得优化能够更加方便的完成。</p>
+
+<p>由基本块的特性，定义对应的类及其属性如下：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BasicBlock</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span> <span class="c1">// 每个 BasicBlock 独有的 id, 对应其开头的 label 值</span>
+    <span class="kt">int</span> <span class="n">dfnNum</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// 深度优先搜索遍历顺序，在构建控制流图时使用</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="n">BasicBlock</span> <span class="o">*&gt;</span> <span class="n">precursor</span><span class="p">;</span> <span class="c1">// 前驱基本块</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="n">BasicBlock</span> <span class="o">*&gt;</span> <span class="n">successor</span><span class="p">;</span> <span class="c1">// 后继基本块</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="n">BasicBlock</span> <span class="o">*&gt;</span> <span class="n">bucket</span><span class="p">;</span> <span class="c1">// 深度优先搜索树中的孩子节点，在构建控制流图时使用</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="n">BasicBlock</span> <span class="o">*&gt;</span> <span class="n">strictDominator</span><span class="p">;</span> <span class="c1">// 严格支配基本块</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="n">BasicBlock</span> <span class="o">*&gt;</span> <span class="n">dominanceFrontier</span><span class="p">;</span> <span class="c1">// 支配边界</span>
+    <span class="n">BasicBlock</span> <span class="o">*</span><span class="n">sdom</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// 直接支配基本块</span>
+    <span class="n">BasicBlock</span> <span class="o">*</span><span class="n">idom</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// 半支配基本块</span>
+    <span class="n">BasicBlock</span> <span class="o">*</span><span class="n">dfsFather</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// 深度优先搜索树中的父亲节点</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">defValue</span><span class="p">;</span> <span class="c1">// 当前基本块中定义的变量</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">useValue</span><span class="p">;</span> <span class="c1">// 当前基本块中使用的变量</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">phis</span><span class="p">;</span> <span class="c1">// 当前基本块开头插入的 phi 指令</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">def</span><span class="p">;</span> <span class="c1">// 当前基本块中定义的变量及其定义行号</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">use</span><span class="p">;</span> <span class="c1">// 当前基本块中使用的变量及其使用行号</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">defBeforeUse</span><span class="p">;</span> <span class="c1">// 当前基本块中定义先于使用的变量</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">useBeforeDef</span><span class="p">;</span> <span class="c1">// 当前基本快中使用先于定义的变量</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">;</span> <span class="c1">// 进入基本快的数据流</span>
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">out</span><span class="p">;</span> <span class="c1">// 从基本快中出来的数据流</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="edge"><code class="language-plaintext highlighter-rouge">Edge</code></h4>
+
+<p>为了更方便的得到控制流图，还需要了解基本块之间的跳转关系，对应图论中两个节点之间的边，因此定义边类 <code class="language-plaintext highlighter-rouge">Edge</code>。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Edge</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">BasicBlock</span> <span class="o">*</span><span class="n">source</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// 边的起始点</span>
+    <span class="n">BasicBlock</span> <span class="o">*</span><span class="n">dest</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// 边的终点</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="算法流程-5">算法流程</h3>
+
+<h4 id="0-判断代码是否存在错误">0. 判断代码是否存在错误</h4>
+
+<p>若代码有错误，则直接退出程序。在需要编译的代码无语法错误时，进入中间代码生成程序。</p>
+
+<h4 id="1-含有-alloca-load-store-的中间代码">1. 含有 ALLOCA, LOAD, STORE 的中间代码</h4>
+
+<p>遍历语法树，对其中的每一个节点建立 <code class="language-plaintext highlighter-rouge">CodeGen</code> 函数，并返回一个 <code class="language-plaintext highlighter-rouge">Value</code> 值。</p>
+
+<p>例如，对于 <code class="language-plaintext highlighter-rouge">AddExp</code>，其在文法中的定义为 <code class="language-plaintext highlighter-rouge">AddExp -&gt; MulExp | AddExp ('+' | '-') MulExp</code>，由定义可知，<code class="language-plaintext highlighter-rouge">AddExp</code> 需要将 <code class="language-plaintext highlighter-rouge">MulExp</code> 计算出的结果进行加法或减法操作并返回计算结果。故其生成中间代码的函数为：（只展示主题结构）</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Value</span><span class="o">*</span> <span class="n">AddExp</span><span class="o">::</span><span class="n">codeGen</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="n">mulExps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">codeGen</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">length</span> <span class="o">=</span> <span class="n">addSubASTs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="o">*</span><span class="n">temp_val</span> <span class="o">=</span> <span class="n">mulExps</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">codeGen</span><span class="p">();</span> <span class="c1">// 调用每个 MulExp 的 codeGen 函数，得到 MulExp 的运算结果。</span>
+        <span class="c1">// ...</span>
+        <span class="n">midCode</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="k">new</span> <span class="n">LLVMIR</span><span class="p">((</span><span class="n">opType</span> <span class="o">==</span> <span class="n">PLUS</span> <span class="o">?</span> <span class="n">ADDIR</span> <span class="o">:</span> <span class="n">SUBIR</span><span class="p">),</span> <span class="n">llvmLineNumber</span><span class="o">++</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">params</span><span class="p">));</span> <span class="c1">// 根据运算符生成对应的中间代码（加法 / 减法）</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>将遍历语法树时产生的所有中间代码都保存在全局的 <code class="language-plaintext highlighter-rouge">midCode</code> 中，便于之后进行多遍优化。</p>
+
+<p>需要注意的是，由于中间代码需要保持静态单一赋值的特性，因此所有对变量的定义均转化为 <code class="language-plaintext highlighter-rouge">ALLOCA</code> 语句，意为直接为变量分配一段内存；所有对变量的取值操作则转化为 <code class="language-plaintext highlighter-rouge">LOAD</code> 语句，意为从内存中读相应值；而所有对变量的赋值操作则转化为 <code class="language-plaintext highlighter-rouge">STORE</code>，意为向内存中存入相应值。</p>
+
+<p>特别的，对于数组，用 <code class="language-plaintext highlighter-rouge">GETPOINTER</code> 指令获取数组的首地址，再用 <code class="language-plaintext highlighter-rouge">LOAD</code> 和 <code class="language-plaintext highlighter-rouge">STORE</code> 指令对数组内容进行存取。</p>
+
+<h4 id="2-mem2reg">2. mem2reg</h4>
+
+<p>mem2reg 需要将 load / store 形式的中间代码通过插入 phi 的方式转化为 phi 形式的 SSA。</p>
+
+<blockquote>
+  <p>需要注意的是，该步骤只针对局部 int 类型变量进行处理，而不考虑数组、全局变量等情况。</p>
+</blockquote>
+
+<h5 id="a-划分基本块">a. 划分基本块</h5>
+
+<blockquote>
+  <p><strong>基本块</strong>的程式有以下特点：</p>
+
+  <ul>
+    <li>单一入口点，其他程式中，没有任何一个分支指令的目标在这段程式基本块之内（基本块的第一行除外）。</li>
+    <li>单一结束点，这段程式一定要执行完最后一行才会执行其他基本块的程式。</li>
+  </ul>
+
+  <p>因为上述特点，基本块中的程式，只要执行了第一行，后面的程式码就会依序执行，每一行程式都会执行一次。</p>
+</blockquote>
+
+<p>由基本块的特性，在划分基本块时只需关心跳转指令，并根据不同的跳转指令生成基本块的前驱、后继关系，其具体算法如下：</p>
+
+<ul>
+  <li>
+    <p>由于在生成中间代码时，需要跳转到的地址前均有一个对应的 label，因此先针对每一个 label 新建其对应的基本块类，并初始化其前驱、后继基本块为空集。</p>
+  </li>
+  <li>
+    <p>遍历所有中间代码，并记录当前基本块 <code class="language-plaintext highlighter-rouge">currentBasicBlock</code> 和上一个遍历完的基本块 <code class="language-plaintext highlighter-rouge">prevBasicBlock</code></p>
+
+    <ul>
+      <li>
+        <p>当遇到一个新的 label 时</p>
+
+        <ul>
+          <li>
+            <p>若 <code class="language-plaintext highlighter-rouge">prevBasicBlock</code> 为空，则说明当前基本块为程序第一个基本块，没有对应的前驱。</p>
+          </li>
+          <li>
+            <p>否则，寻找上一个基本块中最后一条指令，并分类讨论</p>
+
+            <p><img src="/assets/images/post/branch.png" alt=""></p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="b-建立深度优先搜索树">b. 建立深度优先搜索树</h5>
+
+<p>根据基本块的定义，我们很容易联想到图论中的知识，我们可以把每个基本块当作一个节点，而基本块之间的跳转关系则为基本块之间的边。这样生成的图就是程序的控制流图 (CFG, Control Flow Graph)。可以发现，由于循环和跳转的存在，有些基本块无法被到达，而有些可以形成环路。但这样复杂的跳转关系不利于生成 phi 节点，因此我们需要在控制流图的基础上生成支配树。</p>
+
+<p>从第一个基本块开始，依照深度优先的顺序遍历所有基本块，每遇到一个新的基本块时则将其的 dfn 更新为深度优先搜索树的遍历顺序。</p>
+
+<h5 id="c-无用基本块删除">c. 无用基本块删除</h5>
+
+<p>在深度优先遍历后，未被遍历到（dfn 未更新）的基本块是在程序中不可到达的，因此可以直接删除。</p>
+
+<h5 id="d-计算半必经点">d. 计算半必经点</h5>
+
+<h6 id="前置概念参考链接1-参考链接2-">前置概念（<a href="https://buaa-se-compiling.github.io/miniSysY-tutorial/challenge/mem2reg/help.html">参考链接1</a>, <a href="https://www.cnblogs.com/ZeonfaiHo/p/6594642.html">参考链接2</a> ）</h6>
+
+<ul>
+  <li>
+<strong>定义</strong>：对变量进行初始化、赋值等改变变量的值的行为。</li>
+  <li>
+<strong>使用</strong>：在语句/指令中将变量的值作为参数的行为。</li>
+  <li>
+<strong>控制流图</strong>（Control Flow Graph, CFG）：一个程序中所有基本块执行的可能流向图，图中的每个节点代表一个基本块，有向边代表基本块间的跳转关系。</li>
+  <li>
+<strong>支配</strong>（dominate）：对于 CFG 中的节点 $n_1$ 和 $n_2$，$n_1$ 支配 $n_2$ 当且仅当所有从入口节点到 $n_2$ 的路径中都包含 $n_1$，即 $n_1$ 是从入口节点到 $n_2$ 的必经节点。需要特别注意的是，每个基本块都支配自身。</li>
+  <li>
+<strong>严格支配</strong>（strictly dominate）：$n_1$ 严格支配 $n_2$ 当且仅当 $n_1$ 支配 $n_2$ 且 $n_1\neq n_2$。</li>
+  <li>
+<strong>直接支配者</strong>（immediate dominator, idom）：节点 $n$ 的直接支配者严格支配 $n$，且不严格支配任何严格支配 $n$ 的节点的节点）. 入口节点以外的节点都有直接支配者. 节点之间的直接支配关系可以形成一棵<strong>支配树</strong>（dominator tree）。</li>
+  <li>
+<strong>必经点</strong>：若 $n_1$ 严格支配 $n_2$，则 $n_1$ 为 $n_2$ 的必经点</li>
+  <li>
+<strong>半必经点</strong>：对于一个节点 $n_2$，若存在某个点 $n_1$ 能够通过一系列点 $p_i$ （不包含 $n_1$ 和 $n_2$）到达且 $\forall p_i$ 都有 dfn[$p_i$] &gt; dfn[$n_2$]，则称 $n_1$ 是 $n_2$ 的半必经点，用 sdom 表示。</li>
+</ul>
+
+<p><img src="/assets/images/post/cfg.png" alt=""></p>
+
+<h6 id="算法流程-6">算法流程</h6>
+
+<p>依据深度优先搜索的相反顺序遍历所有基本块，并通过下面的算法找出每个基本块的半必经点。</p>
+
+<ul>
+  <li>对于基本块 Y，对于它的每一个前驱基本块 X，若 dfn[X] &lt; dfn[Y]，则 X 是 Y 的一个半必经点。</li>
+  <li>否则，对于 X 在深度优先搜索树中的祖先 Z （包括 X 自身），如果满足 dfn[Z] &gt; dfn[Y]，那么 Z 的半必经点也是 Y 的半必经点。</li>
+</ul>
+
+<h5 id="e-计算直接支配点">e. 计算直接支配点</h5>
+
+<blockquote>
+  <p>一个点的半必经点可能是也可能不是一个点的支配点。</p>
+</blockquote>
+
+<p>对于一个点 X，考虑深度优先搜索树上从 X 的 半必经点 X.sdom 到 X 路径上的所有点 $p_0, p_1, …, p_k$，对于所有的 $p_i:0&lt;i&lt; k$，记其中 dfn[$p_i$.sdom] 最小的一个 $p_i$ 为 Z。</p>
+
+<ul>
+  <li>若 Z.sdom = X.sdom，则 X.idom = X.sdom</li>
+  <li>否则，X.idom = Z.idom</li>
+</ul>
+
+<p>由此，已经计算出所有基本块的直接支配者，也就是在支配树中的父节点。</p>
+
+<h5 id="f-计算支配边界">f. 计算支配边界</h5>
+
+<p>在完成上一步后，我们已经成功将控制流图转化为支配树，下一步需要计算出每个基本块的支配边界 (Dominance Frontier)，以便之后插入 phi 节点。</p>
+
+<p>计算支配边界的算法如下：</p>
+
+<p><img src="https://buaa-se-compiling.github.io/miniSysY-tutorial/pic/algorithm_compute_DF.png" alt=""></p>
+
+<h5 id="g-插入-phi-节点">g. 插入 phi 节点</h5>
+
+<p>构建出支配树，求出各基本块的支配边界之后，我们终于可以向正规的 SSA 形式迈进了，这种实现从 STORE, LOAD 形式的代码向 SSA 转换的过程被称为 mem2reg，具体的实现方法则是插入 phi 节点。</p>
+
+<p>插入 phi 节点需要计算出每个变量的定义、使用情况，其具体算法如下：</p>
+
+<p><img src="https://buaa-se-compiling.github.io/miniSysY-tutorial/pic/algorithm_insert_phi.png" alt=""></p>
+
+<h5 id="h-变量重命名">h. 变量重命名</h5>
+
+<p>在插入 phi 节点后，我们还需要对变量进行重命名，从而使其满足 SSA 的要求。</p>
+
+<p>具体的来说，对于 STORE 指令，我们新产生一个变量，并将其转化为对该变量的赋值语句 (assign)；对于 LOAD 指令，我们将其转化为 move 指令；而对于 phi 指令，我们也新产生一个变量，并将 phi 指令中的 val 值相应的填充为变量号。</p>
+
+<p>一个具体的例子如下：</p>
+
+<p><img src="/assets/images/post/phi.png" alt=""></p>
+
+<p>通过上述一系列的操作，我们终于得到了含有 phi 语句，且符合 SSA 规范的程序了。</p>
+
+<h3 id="难点分析-5">难点分析</h3>
+
+<p>生成 SSA 形式的中间代码是整个编译器中较为复杂的一步，它设计到大量图论相关的知识，且在实现时也需要阅读很多的教材、文献。</p>
+
+<p>笔者在最初生成中间代码时由于懒惰和过分自信，并没有阅读文献就自行编写 mem2reg 相关代码。编写出的编译器针对小型样例可以通过，但在编译大型程序时出现了时间复杂度过高的情况，因此不得不阅读论文并重构，在这一步走了不少弯路。事实证明，阅读文献是很重要的，文献中的方法不但经过了正确性的检验，算法的时间复杂度也较低，虽然阅读文献需要耗费时间和经历，但却能大大提高写码时的效率，也让 debug 变得简单。</p>
+
+<h2 id="中间代码优化">中间代码优化</h2>
+
+<p>下面简单介绍编译器中在中间代码中进行的优化，需要注意的是，在实现时对每一种优化均设置了开关，这样便于查看优化效果，也便于程序调试。</p>
+
+<p>生成 SSA 形式的中间代码极大的简化了中间代码的优化难度。以下是一些笔者采用的代码优化：</p>
+
+<h3 id="死代码删除">死代码删除</h3>
+
+<h4 id="一般代码删除">一般代码删除</h4>
+
+<p>生成 SSA 形式的代码后，死代码删除就很好实现了，只需要找到定义但未被使用的变量，将其相关语句删除即可。</p>
+
+<h4 id="跳转代码删除">跳转代码删除</h4>
+
+<p>对于 <code class="language-plaintext highlighter-rouge">BRTRUE</code> 与 <code class="language-plaintext highlighter-rouge">BRFALSE</code> 语句，当判断跳转的变量取固定值时，则只有一种跳转的可能，因此可删去无法跳转到的分支。</p>
+
+<h3 id="常量折叠">常量折叠</h3>
+
+<p>由于每个变量只被定义一次，因此若在定义时为常数，则变量始终为常数。特别的，当 phi 语句可取的值均为常数且相同时，phi 语句生成的变量也为常数。</p>
+
+<h3 id="函数内联">函数内联</h3>
+
+<h4 id="1-判断函数是否内联">1. 判断函数是否内联</h4>
+
+<p>当函数不存在递归调用时，则可以内联。由于 SysY 语法中不包含函数声明语句，因此不需要生成函数调用关系图即可以判断函数是否可以内联。</p>
+
+<p>具体的来说，在语法分析的过程中，若在函数定义中调用了自己，则存在递归调用；否则则为可以内联的函数。</p>
+
+<h4 id="2-函数内联实现">2. 函数内联实现</h4>
+
+<h5 id="返回语句">返回语句</h5>
+
+<p>函数内联实现时，需要特别注意返回语句的处理。由于返回语句执行后将不再执行之后的语句，因此需要对每个内联的函数末尾生成一个 label，将返回语句转化为向相应 label 的跳转语句。</p>
+
+<h5 id="返回值">返回值</h5>
+
+<p>由于函数可能包含多条返回语句，且可能有多种可能的返回值，因此将返回值作为一个变量处理。</p>
+
+<p>具体的来说，若函数的返回类型为 int，则在开始函数内联之前先声明一个变量，用于存储返回值。在遇到内联函数的返回语句时向该变量中填入相应的值。</p>
+
+<h3 id="循环优化">循环优化</h3>
+
+<p>循环是程序中很重要的组成部分，且虽然语句量不一定多，但占据了程序运行中的大量时间，因此针对循环的优化可以有效提高程序的运行效率。</p>
+
+<h4 id="1-while---do-while">1. while -&gt; do-while</h4>
+
+<p>将 <code class="language-plaintext highlighter-rouge">while</code> 语句改写为 <code class="language-plaintext highlighter-rouge">do-while</code> 形式，可以减少跳转次数。</p>
+
+<p><img src="/assets/images/post/dowhile.png" alt=""></p>
+
+<h4 id="删除无用循环">删除无用循环</h4>
+
+<p>当循环内部的变量在循环外不再使用时，可以将整个循环删除。判断循环内变量是否使用需要配合活跃变量分析。</p>
+
+<h4 id="循环展开">循环展开</h4>
+
+<p>将小循环体展开，配合跳转代码删除，可以有效减少循环所需要的判断。</p>
+
+<h3 id="局部数组提升--标记常量数组">局部数组提升 &amp; 标记常量数组</h3>
+
+<p>由于在全局中可直接用 <code class="language-plaintext highlighter-rouge">.word</code> 进行初始化且不需要占用运行时间。因此，若局部数组的值未被改变或原本就定义为常量数组，则可以将其提升为全局数组并在全局中初始化。</p>
+
+<h3 id="全局转局部">全局转局部</h3>
+
+<p>由于对全局变量的读写均需要直接进行内存的读写，占用程序运行时间，因此对于函数中不会直接引用到的全局变量，可将其转化为局部变量并对其分配寄存器，减少存取指令，提高运行效率。</p>
+
+<h2 id="目标代码生成">目标代码生成</h2>
+
+<p>下面介绍由中间代码生成目标代码的过程。</p>
+
+<h3 id="数据结构-6">数据结构</h3>
+
+<h4 id="registertype"><code class="language-plaintext highlighter-rouge">RegisterType</code></h4>
+
+<p>为了能够更方便的表示各个寄存器，新建 <code class="language-plaintext highlighter-rouge">RegisterType</code> 枚举类，如下：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">RegisterType</span> <span class="p">{</span>
+    <span class="n">REGZERO</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">REGAT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">REGV0</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">REGV1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">REGA0</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">REGA1</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">REGA2</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">REGA3</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="n">REGT0</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">REGT1</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">REGT2</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">REGT3</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="n">REGT4</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">REGT5</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">REGT6</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">REGT7</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">REGT8</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span> <span class="n">REGT9</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="n">REGS0</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">REGS1</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span> <span class="n">REGS2</span> <span class="o">=</span> <span class="mi">18</span><span class="p">,</span> <span class="n">REGS3</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span> <span class="n">REGS4</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">REGS5</span> <span class="o">=</span> <span class="mi">21</span><span class="p">,</span> <span class="n">REGS6</span> <span class="o">=</span> <span class="mi">22</span><span class="p">,</span> <span class="n">REGS7</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span>
+    <span class="n">REGK0</span> <span class="o">=</span> <span class="mi">26</span><span class="p">,</span> <span class="n">REGK1</span> <span class="o">=</span> <span class="mi">27</span><span class="p">,</span>
+    <span class="n">REGGP</span> <span class="o">=</span> <span class="mi">28</span><span class="p">,</span> <span class="n">REGSP</span> <span class="o">=</span> <span class="mi">29</span><span class="p">,</span> <span class="n">REGFP</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">REGRA</span> <span class="o">=</span> <span class="mi">31</span><span class="p">,</span>
+    <span class="n">REGDEFAULT</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="mipscode"><code class="language-plaintext highlighter-rouge">MIPSCode</code></h4>
+
+<p>构建 <code class="language-plaintext highlighter-rouge">MIPSCode</code> 类，用来表示 mips 代码。此外，为了更好的区别不同种类的 mips 代码，新建枚举类 <code class="language-plaintext highlighter-rouge">MIPSType</code>，如下：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">MIPSType</span> <span class="p">{</span>
+    <span class="n">MIPSADD</span><span class="p">,</span> <span class="n">MIPSADDI</span><span class="p">,</span> <span class="n">MIPSDIV</span><span class="p">,</span> <span class="n">MIPSMULT</span><span class="p">,</span> <span class="n">MIPSSUB</span><span class="p">,</span> <span class="n">MIPSSUBI</span><span class="p">,</span> <span class="n">MIPSMUL</span><span class="p">,</span> <span class="n">MIPSMULU</span><span class="p">,</span>
+    <span class="n">MIPSAND</span><span class="p">,</span> <span class="n">MIPSANDI</span><span class="p">,</span> <span class="n">MIPSOR</span><span class="p">,</span> <span class="n">MIPSORI</span><span class="p">,</span> <span class="n">MIPSNOT</span><span class="p">,</span>
+    <span class="n">MIPSBEQ</span><span class="p">,</span> <span class="n">MIPSBGEZ</span><span class="p">,</span> <span class="n">MIPSBGTZ</span><span class="p">,</span> <span class="n">MIPSBLEZ</span><span class="p">,</span> <span class="n">MIPSBLTZ</span><span class="p">,</span> <span class="n">MIPSBNE</span><span class="p">,</span>
+    <span class="n">MIPSSLT</span><span class="p">,</span> <span class="n">MIPSSLE</span><span class="p">,</span> <span class="n">MIPSSGT</span><span class="p">,</span> <span class="n">MIPSSGE</span><span class="p">,</span> <span class="n">MIPSSEQ</span><span class="p">,</span> <span class="n">MIPSSNE</span><span class="p">,</span>
+    <span class="n">MIPSJ</span><span class="p">,</span> <span class="n">MIPSJAL</span><span class="p">,</span> <span class="n">MIPSJALR</span><span class="p">,</span> <span class="n">MIPSJR</span><span class="p">,</span>
+    <span class="n">MIPSMFHI</span><span class="p">,</span> <span class="n">MIPSMFLO</span><span class="p">,</span>
+    <span class="n">MIPSSLL</span><span class="p">,</span> <span class="n">MIPSSLLV</span><span class="p">,</span> <span class="n">MIPSSLTI</span><span class="p">,</span> <span class="n">MIPSSRA</span><span class="p">,</span> <span class="n">MIPSSRAV</span><span class="p">,</span> <span class="n">MIPSSRL</span><span class="p">,</span> <span class="n">MIPSSRLV</span><span class="p">,</span>
+    <span class="n">MIPSSW</span><span class="p">,</span> <span class="n">MIPSLW</span><span class="p">,</span> <span class="n">MIPSLWLABEL</span><span class="p">,</span> <span class="n">MIPSSWLABEL</span><span class="p">,</span>
+    <span class="n">MIPSSYSCALL</span><span class="p">,</span> <span class="n">MIPSLABEL</span><span class="p">,</span> <span class="n">MIPSDATA</span><span class="p">,</span> <span class="n">MIPSTEXT</span><span class="p">,</span> <span class="n">MIPSLI</span><span class="p">,</span> <span class="n">MIPSLA</span><span class="p">,</span>
+    <span class="n">MIPSSPACE</span><span class="p">,</span> <span class="n">MIPSWORD</span><span class="p">,</span> <span class="n">MIPSASCIIZ</span><span class="p">,</span> <span class="n">MIPSMOVE</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">MIPSCode</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">MIPSType</span> <span class="n">op</span><span class="p">;</span> <span class="c1">// 操作符</span>
+    <span class="n">RegisterType</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">REGDEFAULT</span><span class="p">;</span> <span class="c1">// rs 寄存器</span>
+    <span class="n">RegisterType</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">REGDEFAULT</span><span class="p">;</span> <span class="c1">// rt 寄存器</span>
+    <span class="n">RegisterType</span> <span class="n">rd</span> <span class="o">=</span> <span class="n">REGDEFAULT</span><span class="p">;</span> <span class="c1">// rd 寄存器</span>
+    <span class="kt">int</span> <span class="n">imm</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 立即数</span>
+    <span class="n">string</span> <span class="n">label</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="register"><code class="language-plaintext highlighter-rouge">Register</code></h4>
+
+<p><img src="C:%5CUsers%5CEricaaaaaaaa%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211114221256460.png" alt="image-20211114221256460"></p>
+
+<p>为了能够更好的调度寄存器和存储寄存器的使用情况，构建 <code class="language-plaintext highlighter-rouge">Register</code> 类，用于存储各个寄存器是否被使用，已经分配空寄存器。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Register</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="n">RegisterType</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;</span> <span class="n">registers</span><span class="p">;</span> <span class="c1">// 各个寄存器的标号及其使用情况</span>
+
+    <span class="n">Register</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// initialize register</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">registers</span><span class="p">[(</span><span class="n">RegisterType</span><span class="p">)</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 初始化寄存器，将所有使用位标志为空闲 (true)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kt">void</span> <span class="n">freeRegister</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">registers</span><span class="p">[(</span><span class="n">RegisterType</span><span class="p">)</span> <span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 将指定 id 的寄存器标记为空闲</span>
+    <span class="p">}</span>
+    
+    <span class="kt">int</span> <span class="n">getFreeTRegister</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 获得空闲的 t 寄存器，若全部 t 寄存器均被使用，则返回 -1</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="算法流程-7">算法流程</h3>
+
+<p>生成中间代码的主要算法流程用下图表示。</p>
+
+<p><img src="/assets/images/post/mips.png" alt=""></p>
+
+<p>其中，需要特别注意的是在函数调用过程中的寄存器偏移和在退出基本块时的寄存器偏移。</p>
+
+<p>此外，也需要在生成代码时记录下各个变量的地址，以便后续调用。</p>
+
+<h3 id="难点分析-6">难点分析</h3>
+
+<h4 id="函数调用">函数调用</h4>
+
+<p>函数调用时需要对 s 寄存器和必要的 t 寄存器进行保存，为了程序实现的正确性以及规范性，需要区分调用者和被调用者，并分别保存相应的变量。</p>
+
+<p>更具体的来说</p>
+
+<ul>
+  <li>调用者需要保存必要的临时变量</li>
+  <li>被调用者需要保存所有 s 寄存器，函数的返回地址，传入参数，初始栈指针与帧指针</li>
+</ul>
+
+<h4 id="栈指针偏移">栈指针偏移</h4>
+
+<p>目标代码生成时最重要也最容易出问题的部分就是栈指针偏移。</p>
+
+<p>对于全局变量，可以直接用 la (load address) 从全局中获取变量地址并进行存取操作，而对于局部变量，则需要通过栈指针 sp 和帧指针 fp 来确定其相对地址。</p>
+
+<p>在实现时，在进入函数时将原帧指针地址保存并将帧指针移动至此时栈指针所在的位置，并在整个函数体内部不再改变，直至函数体执行完毕后再将帧指针恢复。这样做的好处是，在栈指针地址不断变化时可以通过相对于帧指针的偏移来获取局部变量的地址。</p>
+
+<h4 id="phi-函数的实现">phi 函数的实现</h4>
+
+<p>phi 函数两种可能的实现方式，一是在遇到 phi 函数时用 move 指令将所有可能的取值移动到同一个寄存器上，而另一种相对简单的方法是在分配寄存器时即将属于同一个 phi 函数的变量分配同一个寄存器。笔者采用的是后者。因此在全局分配寄存器前，需要先根据 phi 函数对变量进行归类，再将同一类的多个变量看作一个变量，进行活跃、冲突分析和寄存器分配操作。</p>
+
+<h2 id="目标代码优化">目标代码优化</h2>
+
+<h4 id="寄存器分配">寄存器分配</h4>
+
+<p>采用图着色寄存器分配法，先通过活跃变量分析得到各个变量之间的冲突图，再在图中不断移去变量，最终完成寄存器分配。</p>
+
+<h3 id="乘除优化">乘除优化</h3>
+
+<p>乘除法占据的指令周期数极大，尤其是除法指令，一条就可以占据 100 个时钟周期，因此乘除指令的优化效果也十分显著。</p>
+
+<p>主要针对一个操作数为常数的乘除指令进行优化。</p>
+
+<p>乘法的优化方式主要为：将乘法转化为左移和加法操作，需要注意正负号的问题。</p>
+
+<p>除法的优化方式参照论文 Division by Invariant Integers using Multiplication，可以将除法指令转化为乘法指令。</p>
+
+<p>余数也可以转化为乘除指令，再进行相应优化 (a % b = a - a / b)</p>
+
+<h3 id="窥孔优化">窥孔优化</h3>
+
+<h4 id="无用跳转指令删除">无用跳转指令删除</h4>
+
+<p><img src="/assets/images/post/jump.png" alt=""></p>
+
+<h4 id="无用-move-指令删除">无用 move 指令删除</h4>
+
+<p><img src="/assets/images/post/move.png" alt=""></p>
+
+<h2 id="结语">结语</h2>
+
+<p>一学期的编译实验终于要告一段落了。</p>
+
+<p>在学期开始之初，我无论如何也想象不到自己可以用并（没）不（有）熟（用）练（过）的 c++ 写出上万行的程序，并且取得还不错的性能。因此，编译对我的代码能力和设计能力都有着极大的提升。看到编译器正确运行并且输出目标代码，还是很有成就感的。</p>
+
+<p>在编写大型系统时，一个清晰的设计尤其重要。因此，在编写代码前我都会给自己列出一个步骤清单，先把架构设计想清楚，从整体结构再到每步实现时的注意事项，然后严格按照之前书写的步骤进行编译器的书写。这样做虽然一开始进度可能会慢于周围的同学，但一个清晰的思路会让后面的工作轻松不少。</p>
+
+<p>除此之外，代码风格和命名也十分重要。在编译器的规模逐渐增加时，一些具体的函数实现方法可能已经变得模糊，如果能有一个清晰的命名和辅助的注释，则可以让自己迅速理解函数的作用，并决定是否调用。</p>
+
+<p>总的来说，虽然中间有过很痛苦的时候，但能自己写出一个基本的编译器还是很有趣的经历 : )</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>[1] 《编译技术》，张莉，史晓华等</p>
+
+<p>[2]  <em>Modern Compiler Implementation in C</em>, Andrew W. Appel (2004)</p>
+
+<p>[3] <em>Static Single Assignment Book</em>, 2018, Lots of authors</p>
+
+<p>[4] <em>LLVM IR TUTORIAL</em>, LLVM Developers Conference, Vince Bridgers, Felipe de Azevedo Piovezan</p>
+
+<p>[5] <em>LLVM Cookbook</em>, Mayur Pandey, Suyog Sarda</p>
+
+<p>[6] A Linear Time Alogorithm for Placing $\phi$-Nodes, Vugranam C. Sreedhar, Guang R. Gap, School of Computer Science, McGill University</p>
+
+<p>[7] Division by Invariant Integers using Multiplication., Granlund, Torbjorn &amp; Montgomery, Peter. (2004).</p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/artificialintelligence/2021/09/14/ComputerVision.html" title="Computer Vision">Computer Vision</a><a class="next" href="/artificialintelligence/2022/01/03/ArtificialIntelligence.html" title="Artificial Intelligence">Artificial Intelligence</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html" title="Artificial Intelligence">Compiler</a></li>
+<li><a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="Artificial Intelligence">See Mips Run Linux</a></li>
+<li><a class="post-link" href="/algorithms/2022/01/11/Algorithm.html" title="Artificial Intelligence">Algorithm</a></li>
+<li><a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="Artificial Intelligence">Discrete Mathematics</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>ericaaaaaaaa <span class="copyleft">©</span> 2019-2022 ericaaaaaaaa</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
