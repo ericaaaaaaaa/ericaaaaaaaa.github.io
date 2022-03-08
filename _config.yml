@@ -189,11 +189,11 @@ banner:
 #   shortname: "Your Disqus username"
 
 # Gitment comments
-gitment:
-  username: "ericaaaaaaaa"
-  repo: "ericaaaaaaaa.github.io"
-  client_id: "14080a74e6dd13b2ffcc"
-  client_secret: "7da679e2272b496bfc9e351be356a3bf2b4f1b25"
+#gitment:
+#  username: "ericaaaaaaaa"
+#  repo: "ericaaaaaaaa.github.io"
+#  client_id: "14080a74e6dd13b2ffcc"
+#  client_secret: "7da679e2272b496bfc9e351be356a3bf2b4f1b25"
 #   redirect_uri: "Your redirect url"   # If you use a custom domain name
 
 # Build settings
