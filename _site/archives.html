@@ -117,7 +117,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 </style>
 </head>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+        }
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <body>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -421,7 +441,7 @@ function googleTranslateElementInit() {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -444,6 +464,16 @@ function googleTranslateElementInit() {
   }
   document.addEventListener('DOMContentLoaded', initHeader);
 </script>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -779,6 +809,50 @@ function googleTranslateElementInit() {
       
         
         <li> 
+<span class="post-meta">Mar 08, 2022</span>
+<span>
+  <a class="post-link" href="/softwareengineering/2022/03/08/ModernSoftwareEngineering.html">
+    现代软件工程
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 05, 2022</span>
+<span>
+  <a class="post-link" href="/others/2022/03/05/HowToAskQuestion.html">
+    提问的智慧
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 17, 2022</span>
+<span>
+  <a class="post-link" href="/statistics/2022/02/17/Statistics.html">
+    概率论与数理统计
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 13, 2022</span>
+<span>
+  <a class="post-link" href="/machinelearning/2022/02/13/WatermelonBook.html">
+    机器学习
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
 <span class="post-meta">Jan 28, 2022</span>
 <span>
   <a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html">
@@ -943,7 +1017,7 @@ function googleTranslateElementInit() {
   <ul>
     <li>
       <a href="/index.html">
-        All<span>11</span>
+        All<span>15</span>
       </a>
     </li>
 
@@ -962,7 +1036,7 @@ function googleTranslateElementInit() {
     
       <li>
         <a href="/archives.html#h-2022">
-          2022 <span>4</span>
+          2022 <span>8</span>
         </a>
       </li>
     

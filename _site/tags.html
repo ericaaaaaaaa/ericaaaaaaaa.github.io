@@ -117,7 +117,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 </style>
 </head>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+        }
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <body>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -421,7 +441,7 @@ function googleTranslateElementInit() {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -444,6 +464,16 @@ function googleTranslateElementInit() {
   }
   document.addEventListener('DOMContentLoaded', initHeader);
 </script>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -797,6 +827,17 @@ function googleTranslateElementInit() {
       
         
         <li> 
+<span class="post-meta">Feb 13, 2022</span>
+<span>
+  <a class="post-link" href="/machinelearning/2022/02/13/WatermelonBook.html">
+    机器学习
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
 <span class="post-meta">Jan 28, 2022</span>
 <span>
   <a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html">
@@ -831,6 +872,28 @@ function googleTranslateElementInit() {
     
     <h2 id="book-report" class="segment-name">book-report</h2>
       
+      
+        
+        <li> 
+<span class="post-meta">Mar 08, 2022</span>
+<span>
+  <a class="post-link" href="/softwareengineering/2022/03/08/ModernSoftwareEngineering.html">
+    现代软件工程
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 13, 2022</span>
+<span>
+  <a class="post-link" href="/machinelearning/2022/02/13/WatermelonBook.html">
+    机器学习
+  </a>
+</span>
+ </li>
+        
       
         
         <li> 
@@ -991,6 +1054,17 @@ function googleTranslateElementInit() {
       
         
         <li> 
+<span class="post-meta">Feb 13, 2022</span>
+<span>
+  <a class="post-link" href="/machinelearning/2022/02/13/WatermelonBook.html">
+    机器学习
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
 <span class="post-meta">Jan 28, 2022</span>
 <span>
   <a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html">
@@ -1006,6 +1080,17 @@ function googleTranslateElementInit() {
       
         
         <li> 
+<span class="post-meta">Feb 17, 2022</span>
+<span>
+  <a class="post-link" href="/statistics/2022/02/17/Statistics.html">
+    概率论与数理统计
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
 <span class="post-meta">Jun 29, 2021</span>
 <span>
   <a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html">
@@ -1018,6 +1103,17 @@ function googleTranslateElementInit() {
     
     <h2 id="note" class="segment-name">note</h2>
       
+      
+        
+        <li> 
+<span class="post-meta">Feb 17, 2022</span>
+<span>
+  <a class="post-link" href="/statistics/2022/02/17/Statistics.html">
+    概率论与数理统计
+  </a>
+</span>
+ </li>
+        
       
         
         <li> 
@@ -1134,6 +1230,51 @@ function googleTranslateElementInit() {
         
       
     
+    <h2 id="others" class="segment-name">others</h2>
+      
+      
+        
+        <li> 
+<span class="post-meta">Mar 05, 2022</span>
+<span>
+  <a class="post-link" href="/others/2022/03/05/HowToAskQuestion.html">
+    提问的智慧
+  </a>
+</span>
+ </li>
+        
+      
+    
+    <h2 id="software-engineering" class="segment-name">software-engineering</h2>
+      
+      
+        
+        <li> 
+<span class="post-meta">Mar 08, 2022</span>
+<span>
+  <a class="post-link" href="/softwareengineering/2022/03/08/ModernSoftwareEngineering.html">
+    现代软件工程
+  </a>
+</span>
+ </li>
+        
+      
+    
+    <h2 id="statistics" class="segment-name">statistics</h2>
+      
+      
+        
+        <li> 
+<span class="post-meta">Feb 17, 2022</span>
+<span>
+  <a class="post-link" href="/statistics/2022/02/17/Statistics.html">
+    概率论与数理统计
+  </a>
+</span>
+ </li>
+        
+      
+    
     <h2 id="system" class="segment-name">system</h2>
       
       
@@ -1201,7 +1342,7 @@ function googleTranslateElementInit() {
   <ul>
     <li>
       <a href="/index.html">
-        All<span>11</span>
+        All<span>15</span>
       </a>
     </li>
 
@@ -1214,13 +1355,13 @@ function googleTranslateElementInit() {
     
       <li>
         <a href="/tags.html#h-artificial-intelligence">
-          artificial-intelligence <span>3</span>
+          artificial-intelligence <span>4</span>
         </a>
       </li>
     
       <li>
         <a href="/tags.html#h-book-report">
-          book-report <span>1</span>
+          book-report <span>3</span>
         </a>
       </li>
     
@@ -1274,25 +1415,43 @@ function googleTranslateElementInit() {
     
       <li>
         <a href="/tags.html#h-machine-learning">
-          machine-learning <span>1</span>
+          machine-learning <span>2</span>
         </a>
       </li>
     
       <li>
         <a href="/tags.html#h-math">
-          math <span>1</span>
+          math <span>2</span>
         </a>
       </li>
     
       <li>
         <a href="/tags.html#h-note">
-          note <span>9</span>
+          note <span>10</span>
         </a>
       </li>
     
       <li>
         <a href="/tags.html#h-operating-system">
           operating-system <span>1</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tags.html#h-others">
+          others <span>1</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tags.html#h-software-engineering">
+          software-engineering <span>1</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tags.html#h-statistics">
+          statistics <span>1</span>
         </a>
       </li>
     

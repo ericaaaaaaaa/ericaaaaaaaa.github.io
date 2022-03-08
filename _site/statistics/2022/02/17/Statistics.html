@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>概率论与数理统计 | Erica’s Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="概率论与数理统计" />
+<meta name="author" content="ericaaaaaaaa" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="样本空间与概率" />
+<meta property="og:description" content="样本空间与概率" />
+<link rel="canonical" href="http://localhost:4000/statistics/2022/02/17/Statistics.html" />
+<meta property="og:url" content="http://localhost:4000/statistics/2022/02/17/Statistics.html" />
+<meta property="og:site_name" content="Erica’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-17T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="概率论与数理统计" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/statistics/2022/02/17/Statistics.html","headline":"概率论与数理统计","dateModified":"2022-02-17T00:00:00+08:00","datePublished":"2022-02-17T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/statistics/2022/02/17/Statistics.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"样本空间与概率","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+        }
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Erica&#39;s Blog" src="" onerror="this.style.display='none'">
+  Erica&#39;s Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger"><a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span></div>
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="样本空间与概率">样本空间与概率</h1>
+
+<h2 id="集合">集合</h2>
+
+<h3 id="集合运算">集合运算</h3>
+
+<h3 id="集合的代数">集合的代数</h3>
+
+<h2 id="概率模型">概率模型</h2>
+
+<h3 id="样本空间和事件">样本空间和事件</h3>
+
+<h3 id="选择适当的样本空间">选择适当的样本空间</h3>
+
+<h3 id="序贯模型">序贯模型</h3>
+
+<h3 id="概率律">概率律</h3>
+
+<h3 id="离散模型">离散模型</h3>
+
+<h3 id="连续模型">连续模型</h3>
+
+<h3 id="概率律的性质">概率律的性质</h3>
+
+<h3 id="模型和现实">模型和现实</h3>
+
+<h2 id="条件概率">条件概率</h2>
+
+<h3 id="条件概率是一个概率律">条件概率是一个概率律</h3>
+
+<h3 id="利用条件概率定义概率模型">利用条件概率定义概率模型</h3>
+
+<h2 id="全概率定义和贝叶斯准则">全概率定义和贝叶斯准则</h2>
+
+<h2 id="独立性">独立性</h2>
+
+<h3 id="条件独立">条件独立</h3>
+
+<h3 id="一组事件的独立性">一组事件的独立性</h3>
+
+<h3 id="可靠性">可靠性</h3>
+
+<h3 id="独立试验和二项概率">独立试验和二项概率</h3>
+
+<h2 id="计数法">计数法</h2>
+
+<h3 id="计数准则">计数准则</h3>
+
+<h3 id="n-选-k-排列">n 选 k 排列</h3>
+
+<h3 id="组合">组合</h3>
+
+<h3 id="分割">分割</h3>
+
+<h1 id="离散随机变量">离散随机变量</h1>
+
+<h2 id="基本概念">基本概念</h2>
+
+<p><strong>与随机变量有关的主要概念</strong></p>
+
+<ul>
+  <li>
+    <p><strong>随机变量</strong>是试验结果的实值函数。</p>
+
+    <blockquote>
+      <p>注意：随机变量需要有数学取值（随机变量的取值），而不能是一个序列或其它无明显取值的量。</p>
+    </blockquote>
+  </li>
+  <li><strong>随机变量的函数</strong>定义了另一个随机变量。</li>
+  <li>对于一个随机变量，可以定义一些平均量，如<strong>均值</strong>和<strong>方差</strong>。</li>
+  <li>可以在某事件或随机变量的<strong>条件</strong>之下定义一个随机变量。</li>
+  <li>存在一个随机变量与某事件或某随机变量相互<strong>独立</strong>的概念。</li>
+</ul>
+
+<p><strong>随机变量的分类</strong></p>
+
+<ul>
+  <li><strong>离散随机变量</strong></li>
+  <li><strong>连续随机变量</strong></li>
+</ul>
+
+<p><strong>与离散随机变量相关的概念</strong></p>
+
+<ul>
+  <li><strong>离散随机变量</strong>是试验结果的一个实值函数，但是它的取值范围只能是有限多个值或可数无限多个值。</li>
+  <li>一个随机变量有一个<strong>分布列</strong>，它对于随机变量的每一个取值，给出一个概率。</li>
+  <li><strong>离散随机变量函数</strong>也是一个离散随机变量，它的分布列可以从原随机变量的分布列得到。</li>
+</ul>
+
+<h2 id="分布列">分布列</h2>
+
+<p>用<strong>分布列</strong>表示离散随机变量的取值概率的特征。用 $p_X$ 表示随机变量 $X$ 的分布列。设 $x$ 是随机变量 $X$ 的取值，则 $X$ 取值为 $x$ 的概率定义为事件 ${X=x}$ 的概率，即所有与 $x$ 对应的试验结果所组成的事件的概率，用 $p_X(x)$ 表示。</p>
+
+\[p_X(x) = P(\{X=x\})\]
+
+<blockquote>
+  <p>约定：用大写字母表示随机变量，用小写字母表示实数。</p>
+</blockquote>
+
+<p><strong>分布列的性质</strong>：</p>
+
+\[\sum_x p_X(x) = 1\\
+P(X\in S) = \sum_{x\in S}p_X(x)\]
+
+<h3 id="伯努利随机变量">伯努利随机变量</h3>
+
+<blockquote>
+  <p>背景：抛掷一枚硬币，正面向上的概率为 $p$，反面向上的概率为 $1-p$。</p>
+</blockquote>
+
+<p>伯努利随机变量呈 0-1 分布，其分布列为：</p>
+
+\[p_X(k) =
+\left\{
+    \begin{array}{l}
+        p &amp; 若 k=1\\
+        1-p &amp; 若 k=0
+    \end{array}
+\right.\]
+
+<h3 id="二项随机变量">二项随机变量</h3>
+
+<blockquote>
+  <p>背景：将一枚硬币抛掷 $n$ 次，每次抛掷，正面出现的概率为 $p$，反面出现的概率为 $1-p$，而且各次抛掷是相互独立的。</p>
+</blockquote>
+
+<p>分布列：</p>
+
+\[p_X(k) =
+\left(
+    \begin{array}{l}
+        n \\
+        k
+    \end{array}
+\right)
+p^k(1-p)^{n-k}\]
+
+<h3 id="几何随机变量">几何随机变量</h3>
+
+<h3 id="泊松随机变量">泊松随机变量</h3>
+
+<h2 id="随机变量的函数">随机变量的函数</h2>
+
+<h2 id="期望均值和方差">期望、均值和方差</h2>
+
+<h3 id="方差矩和随机变量的函数的期望规则">方差、矩和随机变量的函数的期望规则</h3>
+
+<h3 id="均值和方差的性质">均值和方差的性质</h3>
+
+<h3 id="某些常用的随机变量的均值和方差">某些常用的随机变量的均值和方差</h3>
+
+<h3 id="利用期望值进行决策">利用期望值进行决策</h3>
+
+<h2 id="多个随机变量的联合分布列">多个随机变量的联合分布列</h2>
+
+<h3 id="多个随机变量的函数">多个随机变量的函数</h3>
+
+<h3 id="多于两个随机变量的情况">多于两个随机变量的情况</h3>
+
+<h2 id="条件">条件</h2>
+
+<h3 id="某个事件发生的条件下的随机变量">某个事件发生的条件下的随机变量</h3>
+
+<h3 id="给定另一个随机变量的值的条件下的随机变量">给定另一个随机变量的值的条件下的随机变量</h3>
+
+<h3 id="条件期望">条件期望</h3>
+
+<h2 id="独立性-1">独立性</h2>
+
+<h3 id="随机变量与事件的相互独立性">随机变量与事件的相互独立性</h3>
+
+<h3 id="随机变量之间的相互独立性">随机变量之间的相互独立性</h3>
+
+<h3 id="几个随机变量的相互独立性">几个随机变量的相互独立性</h3>
+
+<h3 id="若干个相互毒瘤的随机变量的和的方差">若干个相互毒瘤的随机变量的和的方差</h3>
+
+<h1 id="一般随机变量">一般随机变量</h1>
+
+<h2 id="连续随机变量和概率密度函数">连续随机变量和概率密度函数</h2>
+
+<h1 id="经典统计推断">经典统计推断</h1>
+
+<blockquote>
+  <p>本章中认为未知参数 $\theta$ 是确定（非随机）的，而取值未知。观测 $X$ 是随机的，根据 $\theta$ 取值的不同，服从 $p_X(x;\theta)$（若 $X$ 是离散的）或 $f_X(x;\theta)$（若 $X$ 是连续的）。</p>
+</blockquote>
+
+<p><strong>本章的主要术语、问题和方法</strong></p>
+
+<ul>
+  <li><strong>经典估计</strong>是将未知参数看作是待确定的常数。对于未知参数的每个可能取值都假设一个单独的概率模型。</li>
+  <li>在<strong>参数估计</strong>中，希望找到在未知参数取任何可能值的情况下都基本正确的估计。</li>
+  <li>在<strong>假设检验</strong>中，未知参数对应于对立假设取有限的 $m(m\ge 2)$ 个值，想要选择一个假设，使得在任何可能的假设下错误的概率最小。</li>
+</ul>
+
+<p><strong>本章主要的经典推断方法</strong></p>
+
+<ul>
+  <li><strong>最大似然估计</strong>：选择参数使得被观测到的数据“最有可能”出现，比如使获得当前数据的概率最大。</li>
+  <li><strong>线性回归</strong>：在这样的意义下找出一组成对数据之间最合适的线性关系：这种线性关系使得模型与真实数据之间的差值的平方和最小</li>
+  <li><strong>似然比检验</strong>：给定两个假设，根据它们发生“可能性”的比值选择其一，使得犯错的概率适当小。</li>
+  <li><strong>显著性检验</strong>：给定一个假设，当且仅当观测数据落在某个拒绝域的时候拒绝该假设，特别设计的拒绝域使得错误的概率低于某个给定阈值。</li>
+</ul>
+
+<h2 id="经典参数估计">经典参数估计</h2>
+
+<p>将参数 $\theta$ 看作未知常数，而不是随机变量。</p>
+
+<h3 id="估计量的性质">估计量的性质</h3>
+
+<p>给定观测 $X=(X_1, …, X_n)$，<strong>估计量</strong>是指形式为 $\hat{\Theta}=g(X)$ 的随机变量。注意，由于 $X$ 的分布依赖于 $\theta$，因而 $\hat{\theta}$ 的分布也一样。估计量 $\theta$ 的取值称为<strong>估计值</strong>。</p>
+
+<p><strong>估计量的相关术语</strong></p>
+
+<p>$\hat{\Theta}$ 是未知参数 $\theta$ 的一个<strong>估计量</strong>，也即关于 $n$ 个观测 $X_1, …, X_n$（服从依赖参数 $\theta$ 的分布）的一个函数。</p>
+
+<ul>
+  <li><strong>估计误差</strong>，记为 $\tilde{\Theta}_n$，定义为 $\tilde{\Theta}_n=\hat{\Theta}_n-\theta$</li>
+  <li><strong>估计量的偏差</strong>，记为 $b_\theta(\hat{\Theta}_n)$，是估计误差的期望值
+\(b_\theta(\hat{\Theta}_n) = \textnormal{E}_\theta[\hat{\Theta}_n]-\theta\)</li>
+  <li>$\hat{\Theta}$ 的期望值、方差和偏差都依赖于 $\theta$，而估计误差同时还依赖于观测 $X_1, …, X_n$</li>
+  <li>称 $\hat{\Theta}<em>n$ <strong>无偏</strong>，若 $\textnormal{E}</em>\theta[\hat{\Theta}_n] = \theta$ 对于 $\theta$ 所有可能的取值都成立。</li>
+  <li>称 $\hat{\Theta}<em>n$ <strong>渐近无偏</strong>，若 $\lim</em>{n\rightarrow\infty}\textnormal{E}_\theta[\hat{\Theta}_n] = \theta$ 对于所有可能的取值都成立。</li>
+  <li>称 $\hat{\Theta}_n$ 为 $\theta$ 的<strong>相合</strong>估计序列，如果对于 $\theta$ 所有可能的取值，序列 $\hat{\Theta}_n$ 依概率收敛到参数 $\theta$ 的真值。</li>
+</ul>
+
+\[\textnormal{E}_\theta[\tilde{\Theta}_n^2]=b_\theta^2(\hat{\Theta}_n)+\textnormal{var}_\theta(\hat{\Theta}_n)\]
+
+<h3 id="最大似然估计">最大似然估计</h3>
+
+<p>设观测向量 $X=(X_1,…,X_n)$ 的联合分布列为 $p_X(x;\theta)=p_X(x_1, …, x_n;\theta)$（$\theta$ 可为向量或数量），其中 $X = (X_1, …, X_n)$ 为 $X$ 的观测值。那么，<strong>最大似然估计</strong>是使（$\theta$ 的）数值函数 $p_X=(x_1, …, x_n;\theta)$ 达到最大的参数值：</p>
+
+\[\hat{\theta}_n=\underset{\theta}{\argmax} p_X(x_1, ..., x_n;\theta)\]
+
+<p>当 $X$ 为连续型随机变量时，可将同样的方法用于联合概率密度函数 $f_X(x;\theta)$</p>
+
+\[\hat{\theta}_n=\underset{\theta}{\argmax} f_X(x_1, ..., x_n;\theta)\]
+
+<p>称 $p_X(x;\theta)$（或 $f_X(x;\theta)$，若 $X$ 为连续型随机变量）为<strong>似然函数</strong>。</p>
+
+<blockquote>
+  <p>对于已知 $X$ 的观测值 $x$，$p_X(x;\theta)$ 不是未知参数等于 $\theta$ 的概率，而是当参数取值为 $\theta$ 时，观测值 $x$ 可能出现的概率。
+为取定 $\theta$ 的估计值时，会考虑基于已知的观测，$\theta$ 取什么值可使观测值最可能出现，这就是“似然”的本意。</p>
+</blockquote>
+
+<p>很多应用中都假设观测 $X_i$ 独立，从而对于每个 $i$，$X_i$ 是离散的随机变量，似然函数的形式为</p>
+
+\[p_X(x_1,...,x_n;\theta)=\prod_{i=1}^n p_{X_i}(x_i;\theta)\]
+
+<p>在这种情况下，为了分析和计算的方便可让其对数达到最大，下面的式子称为<strong>对数似然函数</strong>。</p>
+
+\[\ln p_X(x_1,...,x_n;\theta) =\ln \prod_{i=1}^n p_{X_i}(x_i;\theta) = \sum_{i=1}^n\ln p_{X_i}(x_i;\theta)\]
+
+<p>当 $X$ 为连续型随机变量时，类似的用概率密度函数取代分布列：</p>
+
+\[\ln f_X(x_1,...,x_n;\theta) =\ln \prod_{i=1}^n f_{X_i}(x_i;\theta) = \sum_{i=1}^n\ln f_{X_i}(x_i;\theta)\]
+
+<h3 id="随机变量均值和方差的估计">随机变量均值和方差的估计</h3>
+
+<h3 id="置信区间">置信区间</h3>
+
+<h3 id="基于方差近似估计量的置信区间">基于方差近似估计量的置信区间</h3>
+
+<h2 id="线性回归">线性回归</h2>
+
+<h3 id="最小二乘公式的合理性">最小二乘公式的合理性</h3>
+
+<h3 id="贝叶斯线性回归">贝叶斯线性回归</h3>
+
+<h3 id="非线性回归">非线性回归</h3>
+
+<h2 id="简单假设检验">简单假设检验</h2>
+
+<h3 id="假设检验的基本思想与概念">假设检验的基本思想与概念</h3>
+
+<h4 id="假设检验问题">假设检验问题</h4>
+
+<p>假如试验结果与假设 H 发生矛盾就拒绝原假设 H，否则就接受原假设。</p>
+
+<ul>
+  <li><strong>假设</strong>：如 $\theta\in\Theta_0$ 或 $\theta\in\Theta_1$</li>
+  <li>
+    <p><strong>检验</strong>或<strong>检验法则</strong>：通过样本对一个假设作出“对”或“不对”的具体判断的规则称为该假设的一个检验或检验法则。</p>
+
+    <blockquote>
+      <p>检验的结果若是肯定该命题，则接受这个假设，否则就拒绝该假设。</p>
+    </blockquote>
+  </li>
+  <li><strong>参数假设检验问题</strong> &amp; <strong>非参数假设检验问题</strong>：若假设可用一个参数的集合表示，该假设问题称为<strong>参数假设检验问题</strong>，否则称为<strong>非参数假设检验问题</strong>。</li>
+</ul>
+
+<h4 id="假设检验的基本步骤">假设检验的基本步骤</h4>
+
+<blockquote>
+  <p>一般情况下，寻找某对假设的显著性检验的步骤如下：</p>
+  <ul>
+    <li>根据实际问题，建立统计假设 $H_0$ vs $H_1$</li>
+    <li>选取一个合适的检验统计量 $T(X)$，使得当 $H_0$ 成立时（或 $H_0$ 中某个具体参数下），$T$ 的分布完全已知，并根据 $H_0$ 及 $H_1$ 的特点，确定拒绝域 $W$ 的形状</li>
+    <li>确定显著性水平 $\alpha$，确定具体的拒绝域 $W$</li>
+    <li>由样本观测值 $x_1,x_2,…,x_n$，计算检验统计量的 $T(x_1,…,x_n)$，由 $T(x_1,…,x_n)$ 是否属于 $W$，做出最终判断。</li>
+  </ul>
+</blockquote>
+
+<h5 id="一建立假设">一、建立假设</h5>
+
+<blockquote>
+  <p>背景：
+设有来自某一个参数分布族 ${F(x,\theta)|\theta\in\Theta}$ 的样本 $x_1, x_2,…,x_n$，其中 $\Theta$ 为<strong>参数空间</strong>，设 $\Theta_0\subset \Theta$，且 $\Theta_0\not ={\emptyset}$，则命题 $H_0:\theta\in\Theta_0$ 称为一个假设或<strong>原假设</strong>或<strong>零假设</strong> (null hypothesis)，若有另一个 $\Theta_1(\Theta_1\subset\Theta$，$\Theta_1\Theta_0=\emptyset$，常见的一种情况是 $\Theta_1=\Theta-\Theta_0)$，则命题 $H_1:\theta\in\Theta_1$ 称为 $H_0$ 的<strong>对立假设</strong>或<strong>备择假设</strong>。</p>
+</blockquote>
+
+<p>$H_0:\theta\in\Theta_0\qquad vs\qquad H_1:\theta\in\Theta_1$</p>
+
+<ul>
+  <li><strong>简单原假设</strong>与<strong>复杂原假设</strong>：如果 $\Theta_0$ 只含一个点，我们称之为<strong>简单原假设</strong>，否则称之为<strong>复杂</strong>或<strong>复合</strong>原假设。</li>
+  <li><strong>双侧假设</strong>或<strong>双边假设</strong>：备择假设分散在原假设两侧，如 $H_1’:\theta\not ={\theta_0}$，$H_1’’:\theta&lt;\theta_0$……</li>
+  <li><strong>单侧假设</strong>或<strong>单边假设</strong>：备择假设位于原假设的一侧</li>
+</ul>
+
+<h5 id="二选择检验统计量给出拒绝域形式">二、选择检验统计量，给出拒绝域形式</h5>
+
+<ul>
+  <li><strong>假设的检验</strong>：对于假设的<strong>检验</strong>是指这样的一个法则：当有了具体的样本后，按该法则就可以决定是接受 $H_0$ 还是拒绝 $H_0$，即检验就等于把样本空间划分为两个互不相交的部分 $W$ 和 $\overline{W}$，当样本属于 $W$ 时，拒绝 $H_0$；否则接受 $H_0$。</li>
+  <li><strong>拒绝域</strong>与<strong>接受域</strong>：称 $W$ 为该假设的<strong>拒绝域</strong>，而 $\overline{W}$ 称为<strong>接受域</strong>。</li>
+  <li><strong>检验统计量</strong>：由样本对原假设进行检验通过的统计量。</li>
+  <li>检验的<strong>判断准则</strong>：
+    <ul>
+      <li>若 $(x_1,…,x_n)\in W$，则拒绝 $H_0$</li>
+      <li>若 $(x_1,…,x_n)\in \overline{W}$，则接受 $H_0$</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="三选择显著性水平">三、选择显著性水平</h5>
+
+<ul>
+  <li><strong>第一类错误</strong>与<strong>第二类错误</strong>
+| 观测数据情况 | $H_0$ 为真 | $H_1$ 为真 |
+| — | — | — |
+| $(x_1, x_2,…, x_n)\in W$ | 犯第一类错误 | 正确 |
+} $(x_1, x_2,…, x_n)\in \overline{W}$ | 正确 | 犯第二类错误 |
+    <ul>
+      <li>称第一类错误为<strong>拒真错误</strong></li>
+      <li>称第二类错误为<strong>取伪错误</strong></li>
+    </ul>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$\alpha$：犯第一类错误的概率：$\alpha=P_\theta{X\in W},\theta\in\Theta_0$，也记为 $P{X\in W</td>
+          <td>H_0}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$\beta$：犯第二类错误的概率：$\beta=P_\theta{X\in\overline{W}</td>
+          <td>H_1}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li><strong>势函数</strong>或<strong>功效函数</strong> (power function)
+设检验问题 $H_0:\theta\in\Theta_0\qquad vs\qquad H_1:\theta\in\Theta_1$ 的拒绝域为 $W$，则样本观测值 $X$ 落在拒绝域 $W$ 内的概率称为该检验的<strong>势函数</strong>，记为 $g(\theta)=P_\theta(X\in W)$，$\theta\in\Theta=\Theta_0\cup\Theta_1$</li>
+</ul>
+
+\[g(\theta) = 
+\left\{
+  \begin{array}
+    \alpha(\theta) &amp; \theta\in\Theta_0\\
+    1-\beta(\theta) &amp; \theta\in\Theta_1
+  \end{array}
+\right.\]
+
+<p>或</p>
+
+\[g(\theta) = 
+\left\{
+  \begin{array}
+    \alpha(\theta) = g(\theta) &amp; \theta\in\Theta_0 \\
+    \beta(\theta) = 1-g(\theta) &amp; \theta\in\Theta_1
+  \end{array}
+\right.\]
+
+<ul>
+  <li>
+    <p><strong>显著性水平为 $\alpha$ 的显著性检验</strong>：对检验问题 $H_0:\theta\in\Theta_0\qquad vs\qquad H_1:\theta\in\Theta_1$，如果一个检验满足对任意的$\theta\in\Theta_0$，都有 $g(\theta)\le\alpha$，则称该检验是显著性水平为 $\alpha$ 的显著性检验。</p>
+
+    <blockquote>
+      <p>常用的选择是 $\alpha = 0.05$，有时也可以选择 $\alpha=0.10$ 或 $\alpha=0.01$</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h5 id="四给出拒绝域">四、给出拒绝域</h5>
+
+<h5 id="五做出判断">五、做出判断</h5>
+
+<h4 id="检验的-p-值">检验的 p 值</h4>
+
+<ul>
+  <li><strong>检验的 p 值</strong>：再一个假设检验问题中，利用样本观测能够做出拒绝原假设的最小显著性水平称为检验的 p 值。
+    <ul>
+      <li>如果 $\alpha \ge p$，则再显著性水平 $\alpha$ 下拒绝 $H_0$</li>
+      <li>如果 $\alpha &lt; p$，则在显著性水平 $\alpha$ 下接受 $H_0$</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="正态总体参数假设检验">正态总体参数假设检验</h2>
+
+<h3 id="单个正态总体均值的检验">单个正态总体均值的检验</h3>
+
+<p>设 $x_1, …, x_n$ 是来自 $N(\mu,\sigma^2)$ 的样本，考虑如下三种关于 $\mu$ 的检验问题：</p>
+
+\[I\qquad H_0:\mu\le \mu_0 \qquad vs \qquad H_1:\mu&gt;\mu_0\\
+II\qquad H_0:\mu\ge\mu_0\qquad vs\qquad H_1:\mu&lt;\mu_0 \\
+III\qquad H_0:\mu = \mu_0\qquad vs\qquad H_1:\mu\not ={\mu_0}\]
+
+<p>其中 $\mu_0$ 是已知常数。</p>
+
+<h4 id="一sigma-已知时的-u-检验">一、$\sigma$ 已知时的 $u$ 检验</h4>
+
+<ul>
+  <li><strong>检验统计量</strong> $u = \frac{\overline{x}-\mu_0}{\sigma/\sqrt{n}}$
+    <ul>
+      <li>由于 $\mu$ 的点估计是 $\overline{x}$，且 $\overline{x}\sim N(\mu, \sigma^2/n)$</li>
+    </ul>
+  </li>
+  <li><strong>拒绝域</strong> $W_1={(x_1,…,x_n):u\ge c}$</li>
+</ul>
+
+<h2 id="显著性检验">显著性检验</h2>
+
+<h3 id="一般方法">一般方法</h3>
+
+<h3 id="广义似然比和拟合优度检验">广义似然比和拟合优度检验</h3>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/machinelearning/2022/02/13/WatermelonBook.html" title="机器学习">机器学习</a><a class="next" href="/others/2022/03/05/HowToAskQuestion.html" title="提问的智慧">提问的智慧</a></div><div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html" title="提问的智慧">Compiler</a></li><li><a class="post-link" href="/artificialintelligence/2022/01/03/ArtificialIntelligence.html" title="提问的智慧">Artificial Intelligence</a></li><li><a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="提问的智慧">Discrete Mathematics</a></li><li><a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="提问的智慧">See Mips Run Linux</a></li></ul>
+    </div><div class="post-comments">  <div id="gitment_thread"></div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+  <script>
+    var gitment = new Gitment({
+      id: '/statistics/2022/02/17/Statistics',
+      owner: 'ericaaaaaaaa',
+      repo: 'ericaaaaaaaa.github.io',
+      oauth: {
+        client_id: '14080a74e6dd13b2ffcc',
+        client_secret: '7da679e2272b496bfc9e351be356a3bf2b4f1b25',
+      },
+    });
+    gitment.render('gitment_thread')
+  </script>
+</div></section>
+</div>
+
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>ericaaaaaaaa <span class="copyleft">&copy;</span> 2019-2022 ericaaaaaaaa</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

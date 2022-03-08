@@ -117,6 +117,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 </style>
 </head>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+        }
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <body>
 
 
@@ -655,7 +665,7 @@ function googleTranslateElementInit() {
 
             video.onloadstart = function() {
               video.currentTime = 8.5;
-              video.volume = 0.8;
+              video.volume = 0;
               video.muted = (video.volume == 0);
               videoPlay();
             }
@@ -908,8 +918,24 @@ function googleTranslateElementInit() {
       <div>Related Articles</div>
       <ul>
         </ul>
-    </div><div class="post-comments"></div></section>
+    </div><div class="post-comments">  <div id="gitment_thread"></div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+  <script>
+    var gitment = new Gitment({
+      id: '',
+      owner: 'ericaaaaaaaa',
+      repo: 'ericaaaaaaaa.github.io',
+      oauth: {
+        client_id: '14080a74e6dd13b2ffcc',
+        client_secret: '7da679e2272b496bfc9e351be356a3bf2b4f1b25',
+      },
+    });
+    gitment.render('gitment_thread')
+  </script>
+</div></section>
 </div>
+
 
 
   </section>

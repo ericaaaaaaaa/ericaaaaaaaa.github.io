@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>现代软件工程 | Erica’s Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="现代软件工程" />
+<meta name="author" content="ericaaaaaaaa" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="【读书笔记】构建之法：现代软件工程" />
+<meta property="og:description" content="【读书笔记】构建之法：现代软件工程" />
+<link rel="canonical" href="http://localhost:4000/softwareengineering/2022/03/08/ModernSoftwareEngineering.html" />
+<meta property="og:url" content="http://localhost:4000/softwareengineering/2022/03/08/ModernSoftwareEngineering.html" />
+<meta property="og:site_name" content="Erica’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-08T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="现代软件工程" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/softwareengineering/2022/03/08/ModernSoftwareEngineering.html","headline":"现代软件工程","dateModified":"2022-03-08T00:00:00+08:00","datePublished":"2022-03-08T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/softwareengineering/2022/03/08/ModernSoftwareEngineering.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"【读书笔记】构建之法：现代软件工程","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Erica's Blog" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+        }
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Erica&#39;s Blog" src="" onerror="this.style.display='none'">
+  Erica&#39;s Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger"><a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/about.html">ABOUT</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span></div>
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="读书笔记构建之法现代软件工程">【读书笔记】构建之法：现代软件工程</h1>
+
+<h1 id="第一章-概论">第一章 概论</h1>
+
+<h2 id="11-软件--程序--软件工程">1.1 软件 = 程序 + 软件工程</h2>
+
+<p>一个复杂的软件不但要有合理的软件架构 (Software Architecture)、软件设计与实现 (software Design, Implementation and Debug)，还要有各种文件和数据来描述各个程序文件之间的依赖关系、编译参数、链接参数，等等。</p>
+
+<h2 id="12-软件工程是什么">1.2 软件工程是什么</h2>
+
+<p><strong>软件工程</strong>是把系统的、有序的、可量化的方法应用到软件的开发、运营和维护上的过程。</p>
+
+<p>软件工程包括：</p>
+<ul>
+  <li><strong>软件需求分析</strong></li>
+  <li><strong>软件设计</strong></li>
+  <li><strong>软件构件</strong></li>
+  <li><strong>软件测试</strong></li>
+  <li><strong>软件维护</strong></li>
+</ul>
+
+<h3 id="121-软件的特殊性">1.2.1 软件的特殊性</h3>
+
+<ol>
+  <li>复杂性 (Complexity)</li>
+  <li>不可见性 (Invisibility)</li>
+  <li>易变性 (Changeability)</li>
+  <li>服从性 (Conformity)</li>
+  <li>非连续型 (Discontinuity)</li>
+</ol>
+
+<h3 id="122-软件工程与计算机科学的关系">1.2.2 软件工程与计算机科学的关系</h3>
+
+<p>工程：创造性的运用科学原理，设计和实现建筑、及其、装置或生产过程；或者是在实践中使用一个或多个上述实体；或者是在实现这些实体的过程。</p>
+
+<h3 id="123-软件工程的知识领域">1.2.3 软件工程的知识领域</h3>
+
+<h3 id="124-软件工程的目标构建足够好的软件">1.2.4 软件工程的目标——构建“足够好”的软件</h3>
+
+<ul>
+  <li>用户满意度</li>
+  <li>可靠性</li>
+  <li>软件流程的质量</li>
+  <li>可维护性</li>
+</ul>
+
+<ol>
+  <li>研发出符合用户需求的软件说明</li>
+  <li>通过一定的软件流程，在预计时间内发布“足够好”的软件说明</li>
+  <li>通过数据和其他方式展现所开发的软件是可以维护和继续发展的说明</li>
+</ol>
+
+<p><strong>软件的种类</strong></p>
+<ul>
+  <li>ShrinkWrap （在包装盒子里面的软件）</li>
+  <li>Web APP （基于网页的软件）</li>
+  <li>Internal Software （企业或学校或某组织内部的软件）</li>
+  <li>Games （游戏）</li>
+  <li>Mobile Apps （手机应用）</li>
+  <li>Operating Systems （操作系统）</li>
+  <li>Tools （工具软件）</li>
+</ul>
+
+<h1 id="第二章-个人技术和流程">第二章 个人技术和流程</h1>
+
+<p>PSP (Personal Software Process) 个人软件开发流程</p>
+
+<h2 id="单元测试">单元测试</h2>
+
+<h3 id="211-用-vsts-写单元测试">2.1.1 用 VSTS 写单元测试</h3>
+
+<h3 id="212-好的单元测试的标准">2.1.2 好的单元测试的标准</h3>
+
+<p>单元测试应该准确、快速地保证程序基本模块的正确性。</p>
+
+<p>单元测试需要有程序的作者编写，因为代码作者最了解代码的目的、特点和实现的局限性。</p>
+
+<p>单元测试应：</p>
+<ul>
+  <li>速度快</li>
+  <li>认为构造数据，而非用随机数（可能导致错误不可复现）</li>
+  <li>覆盖所有代码路径，包括错误处理路径</li>
+  <li>测试公开的和私有的函数 / 方法</li>
+</ul>
+
+<p>100% 代码覆盖率不能保证 100% 程序正确性：</p>
+<ul>
+  <li>未处理问题，如内存未释放</li>
+  <li>代码效能问题</li>
+  <li>多线程环境中的同步问题</li>
+  <li>其他与外部条件相关的问题</li>
+</ul>
+
+<p>单元测试的运行与维护</p>
+<ul>
+  <li>团队一般在每日构建之后运行单元测试</li>
+  <li>单元测试一般与产品代码一起保存和维护</li>
+</ul>
+
+<h3 id="213-回归测试">2.1.3 回归测试</h3>
+
+<p>在单元测试的基础上，建立关于某一模块的回归测试 (Regression Test)</p>
+
+<blockquote>
+  <p>Regress: return to a worse or less developed state.</p>
+</blockquote>
+
+<p>一旦有关的测试用例通过，我们就得到了此模块的功能基准线 (Baseline)，一个模块的所有单元测试就是这个模块最初的 Baseline。</p>
+
+<p>工程师们应该在新版本上运行所有已通过的测试用例，以验证有没有“退化”情况发生。</p>
+
+<p>如果倒退是由于模块功能发生了正常变化引起的，那么要修改测试用例，以便和新功能保持一致。</p>
+
+<p>针对一个 Bug Fix，也要做 Regression Test，目的是：</p>
+<ul>
+  <li>验证新代码的确改正了缺陷</li>
+  <li>同时验证新代码有没有破坏模块的现有功能，有没有 Regression</li>
+</ul>
+
+<p>回归测试最好自动化，因为这样就可以对每一个构建你快速运行所有的回归测试。</p>
+
+<p>在一个项目的最后稳定阶段，需要做全面的回归测试，确保所有已修复的 Bug 的确得到了修复，且没有复发。</p>
+
+<p>除回归测试外，还有功能测试——从用户的角度检查功能的完成情况。</p>
+
+<h2 id="效能分析工具">效能分析工具</h2>
+
+<ul>
+  <li>抽样 (Sampling)
+    <ul>
+      <li>当程序运行时，每隔一段时间记录程序运行在哪个函数内，得到程序运行时间的大致印象</li>
+      <li>优点：无需改动程序，运行较快</li>
+      <li>缺点：结果不精确，不能准确表示代码中的调用关系树 (Call Tree)</li>
+    </ul>
+  </li>
+  <li>代码注入 (Instrumentation)
+    <ul>
+      <li>将检测的代码注入到每个函数中</li>
+      <li>优点：测量结果精确</li>
+      <li>缺点：程序运行时间长</li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>效能分析名词</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>调用者 Caller</td>
+      <td>函数 <code class="language-plaintext highlighter-rouge">Foo()</code> 调用了 <code class="language-plaintext highlighter-rouge">Bar()</code>，<code class="language-plaintext highlighter-rouge">Foo()</code> 就是调用者</td>
+    </tr>
+    <tr>
+      <td>被调用函数 Callee</td>
+      <td>见上，<code class="language-plaintext highlighter-rouge">Bar()</code> 就是被调用函数</td>
+    </tr>
+    <tr>
+      <td>调用关系树 Call Tree</td>
+      <td>从程序的 <code class="language-plaintext highlighter-rouge">Main()</code> 函数开始，调用者和被调用函数形成树形关系——调用树</td>
+    </tr>
+    <tr>
+      <td>消失时间 Elapsed Time</td>
+      <td>从用户的角度看程序运行所花的时间。</td>
+    </tr>
+    <tr>
+      <td>应用程序事件 Application Time</td>
+      <td>应用程序占用 CPU 的事件，不包括调用者使用时间</td>
+    </tr>
+    <tr>
+      <td>本函数时间 Exclusive Time</td>
+      <td>所有在本函数花费的时间，不包括被调用者使用的时间</td>
+    </tr>
+    <tr>
+      <td>所有时间 Inclusive Time</td>
+      <td>包含本函数和所有调用者使用的时间</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="个人开发流程">个人开发流程</h2>
+
+<h1 id="第三章-软件工程师的成长">第三章 软件工程师的成长</h1>
+
+<h2 id="个人能力的衡量与发展">个人能力的衡量与发展</h2>
+
+<p>软件开发的工作量与质量衡量标准</p>
+
+<ul>
+  <li>项目的大小
+    <ul>
+      <li>一般用代码行数表示</li>
+      <li>用功能点表示</li>
+    </ul>
+  </li>
+  <li>项目耗时</li>
+  <li>项目质量
+    <ul>
+      <li>代码缺陷与代码行数比</li>
+      <li>re-work 数量（不与最终质量成正比关系）</li>
+    </ul>
+  </li>
+  <li>项目是否按时交付</li>
+</ul>
+
+<h2 id="问题的层次">问题的层次</h2>
+
+<ul>
+  <li>低层次问题（变成自动操作）</li>
+  <li>中间层次问题（花脑力解决）</li>
+  <li>高层次问题（无暇顾及）</li>
+</ul>
+
+<h1 id="第四章-两人合作">第四章 两人合作</h1>
+
+<h2 id="41-代码规范">4.1 代码规范</h2>
+
+<ol>
+  <li>代码风格规范
+主要是文字上的规定</li>
+  <li>代码设计规范
+牵涉到程序设计、模块之间的关系、设计模式等通用原则</li>
+</ol>
+
+<h2 id="42-代码风格规范">4.2 代码风格规范</h2>
+
+<p>代码风格的原则是：简明，易读，无二义性。</p>
+
+<h3 id="421-缩进">4.2.1 缩进</h3>
+
+<p>用 4 个空格</p>
+
+<h3 id="422-行宽">4.2.2 行宽</h3>
+
+<p>100 字符</p>
+
+<h3 id="423-括号">4.2.3 括号</h3>
+
+<p>在复杂的条件表达式中，用括号清楚地表示逻辑优先级</p>
+
+<h3 id="424-断行与空白的--行">4.2.4 断行与空白的 {} 行</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="n">DoSomething</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">DoSomethingElse</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="425-分行">4.2.5 分行</h3>
+
+<ul>
+  <li>不要把多条语句放在一行上</li>
+  <li>更严格地说，不要把多个变量定义在一行上</li>
+</ul>
+
+<h3 id="426-命名">4.2.6 命名</h3>
+
+<h3 id="427-下划线">4.2.7 下划线</h3>
+
+<p>下划线用来分隔变量名字中的作用域标注和变量的语义。</p>
+
+<h3 id="428-大小写">4.2.8 大小写</h3>
+
+<p>一个通用的做法是：</p>
+<ul>
+  <li>所有的类型 / 类 / 函数名都用 Pascal 形式</li>
+  <li>所有变量都用 Camel 形式。</li>
+  <li>类 / 类型 / 变量用名词或组合名词形式</li>
+  <li>函数用动词或动宾组合词表示</li>
+</ul>
+
+<h3 id="429-注释">4.2.9 注释</h3>
+
+<p>注释（包括所有源代码）应该只用 ASCII 字符，不用中文或其他特殊字符。</p>
+
+<h2 id="43-代码设计规范">4.3 代码设计规范</h2>
+
+<h3 id="431-函数">4.3.1 函数</h3>
+
+<h3 id="432-goto">4.3.2 goto</h3>
+
+<p>函数最好有单一的出口，为达到此目的，可以使用 goto</p>
+
+<h3 id="433-错误处理">4.3.3 错误处理</h3>
+
+<h3 id="434-如何处理-c-中的类">4.3.4 如何处理 c++ 中的类</h3>
+
+<h2 id="44-代码复审">4.4 代码复审</h2>
+
+<ul>
+  <li>自我复审</li>
+  <li>同伴复审
+    <ul>
+      <li>不止一人</li>
+      <li>找熟悉代码且有经验的人</li>
+    </ul>
+  </li>
+  <li>团队复审</li>
+</ul>
+
+<h3 id="441-为什么要代码复审">4.4.1 为什么要代码复审</h3>
+
+<ul>
+  <li>发现代码问题
+    <ul>
+      <li>编码错误</li>
+      <li>风格问题</li>
+      <li>逻辑错误</li>
+      <li>算法错误</li>
+      <li>潜在错误与回归性错误</li>
+    </ul>
+  </li>
+  <li>发现可能的改进之处</li>
+  <li>从代码中学习</li>
+</ul>
+
+<h3 id="442-代码复审的步骤">4.4.2 代码复审的步骤</h3>
+
+<ul>
+  <li>代码必须通过编译</li>
+  <li>代码必须通过测试</li>
+</ul>
+
+<p>复审结果</p>
+<ul>
+  <li>打回</li>
+  <li>有条件同意</li>
+  <li>放行</li>
+</ul>
+
+<h2 id="45-结对编程">4.5 结对编程</h2>
+
+<h3 id="结对编程的优点">结对编程的优点</h3>
+
+<ol>
+  <li>提供更好的设计质量和代码质量，两人合作解决问题的能力更强</li>
+  <li>带来更多信心，高质量的产出带来满足感</li>
+  <li>更有效的交流，相互学习和传递经验，分享知识，更好的应对人员流动</li>
+</ol>
+
+<h1 id="第五章-团队和流程">第五章 团队和流程</h1>
+
+<h2 id="51-非团队和团队">5.1 非团队和团队</h2>
+
+<h2 id="52-软件团队的模式">5.2 软件团队的模式</h2>
+
+<h2 id="53-开发流程">5.3 开发流程</h2>
+
+<h3 id="531-写了再改模式-code-and-fix">5.3.1 写了再改模式 (Code-and-Fix)</h3>
+
+<p>适用场景：</p>
+<ul>
+  <li>“只用一次”的程序</li>
+  <li>“看过了就扔”的原型</li>
+  <li>一些不实用的演示程序</li>
+</ul>
+
+<h3 id="532-瀑布模型-waterfall-model">5.3.2 瀑布模型 (Waterfall Model)</h3>
+
+<p>局限性：</p>
+<ul>
+  <li>各步骤之间相互分离</li>
+  <li>回溯修改困难，甚至不可能</li>
+  <li>最终产品知道最后才出现</li>
+</ul>
+
+<h3 id="532-瀑布模型的各种变形">5.3.2 瀑布模型的各种变形</h3>
+
+<ul>
+  <li>生鱼片模型</li>
+  <li>大瀑布带小瀑布</li>
+</ul>
+
+<h3 id="534-rational-unified-process-rup">5.3.4 Rational Unified Process (RUP)</h3>
+
+<p>重计划，重事先设计，重文档表达。</p>
+
+<p>规程 (Discipline) 或工作流 (Workflow)</p>
+<ul>
+  <li>业务建模
+    <ul>
+      <li>用精确的语言（通常是 UML）把用户的活动描述出来</li>
+    </ul>
+  </li>
+  <li>需求
+    <ul>
+      <li>分析并确认软件系统提供什么样的功能满足用户需求</li>
+    </ul>
+  </li>
+  <li>分析和设计
+    <ul>
+      <li>将需求转化成系统设计</li>
+    </ul>
+  </li>
+  <li>实现</li>
+  <li>测试</li>
+  <li>部署
+    <ul>
+      <li>将最终版本分发给最终用户</li>
+    </ul>
+  </li>
+  <li>配置和变更管理</li>
+  <li>项目管理
+    <ul>
+      <li>平衡各种可能产生冲突的目标，管理风险</li>
+    </ul>
+  </li>
+  <li>环境
+    <ul>
+      <li>向软件开发组织提供软件开发环境，包括过程和工具</li>
+    </ul>
+  </li>
+</ul>
+
+<p>阶段</p>
+<ul>
+  <li>初始阶段
+    <ul>
+      <li>分析软件系统大概的构成，系统与外部的边界在哪里</li>
+    </ul>
+  </li>
+  <li>细化阶段
+    <ul>
+      <li>分析问题领域，建立健全的体系结构基础，编制项目计划，按优先级处理项目中的风险。</li>
+    </ul>
+  </li>
+  <li>构造阶段（beta）
+    <ul>
+      <li>开发出所有的功能集，有秩序地把功能集成为经过各种测试验证过的产品</li>
+    </ul>
+  </li>
+  <li>交付阶段
+    <ul>
+      <li>确保软件能满足最终用户的实际需求</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="535-老板驱动的流程-boss-driven-process">5.3.5 老板驱动的流程 (Boss-Driven Process)</h3>
+
+<h3 id="536-渐进交付的流程-evolutionary-delivery-mvp-和-mbp">5.3.6 渐进交付的流程 (Evolutionary Delivery), MVP 和 MBP</h3>
+
+<p>[开发 $\rightarrow$ 发布 $\rightarrow$ 听取反馈 $\rightarrow$ 根据反馈做改进]</p>
+
+<h1 id="第六章-敏捷流程">第六章 敏捷流程</h1>
+
+<h2 id="61-敏捷的流程">6.1 敏捷的流程</h2>
+
+<h3 id="611-敏捷开发原则">6.1.1 敏捷开发原则</h3>
+
+<ol>
+  <li><strong>尽早</strong>并<strong>持续</strong>地交付有价值的软件以满足顾客需求</li>
+  <li>敏捷流程欢迎<strong>需求的变化</strong>，并利用这种变化来提高用户的竞争优势</li>
+  <li>经常发布可用的软件，发布间隔可以从几周到几个月，<strong>能短则短</strong></li>
+  <li><strong>业务人员和开发人员</strong>在项目开发过程中应该每天共同工作</li>
+  <li>以<strong>有进取心</strong>的人为项目核心，充分信任他们</li>
+  <li>无论团队内外，<strong>面对面</strong>的交流始终是最有效的沟通方式</li>
+  <li><strong>可用</strong>的软件是衡量项目进展的主要指标</li>
+  <li>敏捷流程应能保持可持续发展。领导、团队和用户应该按照目前的步调持续合作下去</li>
+  <li>只有不断关注技术和设计，才能越来越敏捷</li>
+  <li>保持<strong>简明</strong>——尽可能简化工作量</li>
+  <li>只有能自我管理的软对才能创造优秀的架构、需求和设计</li>
+  <li>时时总结如何提高团队效率，并付诸行动</li>
+</ol>
+
+<h3 id="612-敏捷流程概述">6.1.2 敏捷流程概述</h3>
+
+<ol>
+  <li>找出产品需要做的事情——Product Back-log</li>
+  <li>决定当前的冲刺 (Sprint) 需要解决的事情——Sprint Backlog</li>
+  <li>冲刺 (Sprint)
+    <ul>
+      <li>每日例会 (Scrum Meeting)</li>
+      <li>燃尽图 (Burn Down Chart)
+        <ul>
+          <li>实际剩余时间 (Remaining Hour)</li>
+          <li>预估剩余时间 (Projected Remaining Hour)</li>
+          <li>实际花费时间 (Completed Hour)</li>
+        </ul>
+      </li>
+      <li>看版图 (Kanban)</li>
+    </ul>
+  </li>
+  <li>得到软件的一个增量版本，发布给用户。</li>
+</ol>
+
+<h2 id="62-敏捷流程的问题和解法">6.2 敏捷流程的问题和解法</h2>
+
+<h2 id="63-敏捷的团队">6.3 敏捷的团队</h2>
+
+<h2 id="64-敏捷总结">6.4 敏捷总结</h2>
+
+<h2 id="65-敏捷的故事">6.5 敏捷的故事</h2>
+
+<h1 id="第七章-msf">第七章 MSF</h1>
+
+<h2 id="71-msf-简史">7.1 MSF 简史</h2>
+
+<h2 id="72-msf-基本原则">7.2 MSF 基本原则</h2>
+
+<ol>
+  <li>推动信息共享与沟通 (Foster open communications)</li>
+  <li>为共同的远景而工作 (Work toward a shared vision)</li>
+  <li>充分授权和信任 (Empower team members)</li>
+  <li>各司其职，对项目共同负责 (Establish clear accountability and shared responsibility)</li>
+  <li>交付增量的价值 (Deliver incremental value)</li>
+  <li>保持敏捷，预期和适应变化 (Stay agile, expect and adapt change)</li>
+  <li>投资质量 (Invest in quality)</li>
+  <li>学习所有经验 (Learn from all experiences)</li>
+  <li>与顾客合作 (Partner with internal and external customers)</li>
+</ol>
+
+<h1 id="第八章-需求分析">第八章 需求分析</h1>
+
+<h2 id="81-软件需求">8.1 软件需求</h2>
+
+<ol>
+  <li>获取和引导需求 (Elicitation)
+软件企业 = 软件 + 商业模式</li>
+  <li>分析和定义需求 (Analysis &amp; Specification)</li>
+  <li>验证需求 (Validation)</li>
+  <li>在软件产品的生命周期中管理需求 (Management)
+    <ul>
+      <li>功能性要求</li>
+      <li>产品开发过程的需求</li>
+      <li>非功能性需求（服务质量需求）</li>
+      <li>综合需求</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="82-软件产品的利益相关者">8.2 软件产品的利益相关者</h2>
+
+<ul>
+  <li>用户（最终用户）</li>
+  <li>顾客（客户）</li>
+  <li>软件工程师</li>
+</ul>
+
+<h2 id="83-获取用户需求用户调查">8.3 获取用户需求——用户调查</h2>
+
+<ol>
+  <li>焦点小组 (Focus Group)
+找到目标用户的代表，加上项目的利益相关者</li>
+  <li>深入面谈 (In-depth Interview)</li>
+  <li>卡片分类 (Card Sorting)</li>
+  <li>用户调查问卷 (User Survey)
+常见错误
+    <ul>
+      <li>问题定义不准确</li>
+      <li>使用含糊不清的形容词</li>
+      <li>让用户花额外的努力来回答问题</li>
+      <li>问题带有有引导性的倾向</li>
+      <li>问题涉及用户隐私
+问题形式</li>
+      <li>全开放式问题</li>
+      <li>二项选择题</li>
+      <li>多项选择题</li>
+      <li>顺位选择题（优先级）</li>
+    </ul>
+  </li>
+  <li>用户日志研究 (User Diary Study)</li>
+  <li>人类学调查 (Ethnographic Study)</li>
+  <li>眼动跟踪研究</li>
+  <li>快速原型调研</li>
+  <li>A/B 测试 (A/B Testing)</li>
+</ol>
+
+<h2 id="84-竞争性需求分析的框架">8.4 竞争性需求分析的框架</h2>
+
+<p>NABCD 模型</p>
+
+<ol>
+  <li>N (Need，需求)</li>
+  <li>A (Approach，做法)</li>
+  <li>B (Benefit，好处)</li>
+  <li>C (Competitors，竞争)</li>
+  <li>D (Delivery，推广)</li>
+</ol>
+
+<h2 id="85-功能的定位和优先级">8.5 功能的定位和优先级</h2>
+
+<ul>
+  <li>功能和需求分类</li>
+  <li>杀手功能</li>
+  <li>外围功能</li>
+  <li>必要需求</li>
+  <li>辅助需求</li>
+</ul>
+
+<p>做法的分类</p>
+<ul>
+  <li>维持</li>
+  <li>抵消</li>
+  <li>优化</li>
+  <li>差异化</li>
+  <li>不做</li>
+</ul>
+
+<h2 id="86-计划和估计">8.6 计划和估计</h2>
+
+<p>整个软件项目的时间估计：</p>
+<ul>
+  <li>自底向上</li>
+  <li>回溯</li>
+</ul>
+
+<p>在敏捷开发中不需要精确的估计，只需要粗粒度的估计，然后进入实现阶段并不断复盘即可。</p>
+
+<h2 id="87-分而治之-work-breakdown-structure-wbs">8.7 分而治之 (Work Breakdown Structure, WBS)</h2>
+
+<ol>
+  <li>保证所有子结点覆盖了全部父节点包含的内容</li>
+  <li>保证各个子结点不要相互覆盖</li>
+  <li>叶子结点要保证足够小，能在一个里程碑中完成</li>
+  <li>从结果 (Outcome) 出发构建 WBS，而不是从团队的活动 (Action) 出发</li>
+</ol>
+
+<h1 id="第九章-项目经理">第九章 项目经理</h1>
+
+<h2 id="91-pm-是啥">9.1 PM 是啥</h2>
+
+<p>PM</p>
+<ul>
+  <li>Product Manager: 产品经理</li>
+  <li>Program Manager: 项目经理</li>
+</ul>
+
+<h2 id="92-微软-pm-的来历">9.2 微软 PM 的来历</h2>
+
+<h1 id="第十章-典型用户和场景">第十章 典型用户和场景</h1>
+
+<h1 id="第十一章-软件设计与实现">第十一章 软件设计与实现</h1>
+
+<h1 id="第十二章-用户体验">第十二章 用户体验</h1>
+
+<h1 id="第十三章-软件测试">第十三章 软件测试</h1>
+
+<h2 id="131-基本名词解释及分类">13.1 基本名词解释及分类</h2>
+
+<ul>
+  <li>Bug: 软件的缺陷</li>
+  <li>Test Case: 测试用例</li>
+  <li>Test Suite: 测试用例集</li>
+</ul>
+
+<h3 id="1311-按测试设计的方法分类">13.1.1 按测试设计的方法分类</h3>
+
+<ul>
+  <li>黑箱 (Black Box)</li>
+  <li>白箱 (White Box)</li>
+</ul>
+
+<h3 id="1312-按测试的目的分类">13.1.2 按测试的目的分类</h3>
+
+<h3 id="1313-按测试的时机和作用分类">13.1.3 按测试的时机和作用分类</h3>
+
+<h2 id="132-各种测试方法">13.2 各种测试方法</h2>
+
+<h3 id="1321-单元测试-unit-test">13.2.1 单元测试 (Unit Test)</h3>
+
+<h3 id="1322-代码覆盖率测试-code-coverage-analysis">13.2.2 代码覆盖率测试 (Code Coverage Analysis)</h3>
+
+<h3 id="1323-构建验证测试-build-verification-test-bvt">13.2.3 构建验证测试 (Build Verification Test, BVT)</h3>
+
+<h3 id="1324-验收测试-acceptance-test">13.2.4 验收测试 (Acceptance Test)</h3>
+
+<h3 id="1325-探索式的测试-ad-hoc-test">13.2.5 “探索式”的测试 (Ad hoc Test)</h3>
+
+<h3 id="1326-回归测试-regression-test">13.2.6 回归测试 (Regression Test)</h3>
+
+<h3 id="1327-场景--集成--系统测试-scenario--integration--system-test">13.2.7 场景 / 集成 / 系统测试 (Scenario / Integration / System Test)</h3>
+
+<h3 id="1328-伙伴测试-buddy-test">13.2.8 伙伴测试 (Buddy Test)</h3>
+
+<h3 id="1329-效能测试-performance-test">13.2.9 效能测试 (Performance Test)</h3>
+
+<h3 id="13210-压力测试-stress-test">13.2.10 压力测试 (Stress Test)</h3>
+
+<h3 id="13211-内部--外部公开测试-alpha--beta-test">13.2.11 内部 / 外部公开测试 (Alpha / Beta Test)</h3>
+
+<h3 id="13212-易用性测试-usability-test">13.2.12 易用性测试 (Usability Test)</h3>
+
+<h3 id="13213-小强大扫荡-bug-bash">13.2.13 “小强”大扫荡 (Bug Bash)</h3>
+
+<h1 id="第十四章-质量保障">第十四章 质量保障</h1>
+
+<h2 id="141-软件的质量">14.1 软件的质量</h2>
+
+<h2 id="1411-程序的质量">14.1.1 程序的质量</h2>
+
+<ul>
+  <li>准确度 (Precision)</li>
+  <li>覆盖率 (Recall)</li>
+  <li>速度</li>
+  <li>吞吐量</li>
+  <li>用户数量</li>
+  <li>……</li>
+</ul>
+
+<h2 id="1412-软件工程的质量">14.1.2 软件工程的质量</h2>
+
+<ul>
+  <li>软件开发过程的可见性 (Visibility)</li>
+  <li>软件开发过程的风险控制 (Risk Management)</li>
+  <li>软件内部模块，项目中间阶段的交付质量，项目管理工具的因素</li>
+  <li>软件开发成本的控制 (Cost Control)</li>
+  <li>内部质量指标的完成情况 (Internal Benchmarks)</li>
+</ul>
+
+<h3 id="1413-软件工程的质量">14.1.3 软件工程的质量</h3>
+
+<p>CMMI (Capacity Maturity Model Integrated，能力成熟度模型集成)</p>
+
+<h1 id="第十五章-稳定和发布阶段">第十五章 稳定和发布阶段</h1>
+
+<h1 id="第十六章-it-行业的创新">第十六章 IT 行业的创新</h1>
+
+<h1 id="第十七章-人绩效和职业道德">第十七章 人、绩效和职业道德</h1>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/others/2022/03/05/HowToAskQuestion.html" title="提问的智慧">提问的智慧</a><span></span></div><div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/artificialintelligence/2021/09/14/ComputerVision.html" title="">Computer Vision</a></li><li><a class="post-link" href="/others/2022/03/05/HowToAskQuestion.html" title="">提问的智慧</a></li><li><a class="post-link" href="/data/2021/01/11/DataStructure.html" title="">Data Structure</a></li><li><a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="">Computer Organization</a></li></ul>
+    </div><div class="post-comments">  <div id="gitment_thread"></div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+  <script>
+    var gitment = new Gitment({
+      id: '/softwareengineering/2022/03/08/ModernSoftwareEngineering',
+      owner: 'ericaaaaaaaa',
+      repo: 'ericaaaaaaaa.github.io',
+      oauth: {
+        client_id: '14080a74e6dd13b2ffcc',
+        client_secret: '7da679e2272b496bfc9e351be356a3bf2b4f1b25',
+      },
+    });
+    gitment.render('gitment_thread')
+  </script>
+</div></section>
+</div>
+
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>ericaaaaaaaa <span class="copyleft">&copy;</span> 2019-2022 ericaaaaaaaa</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

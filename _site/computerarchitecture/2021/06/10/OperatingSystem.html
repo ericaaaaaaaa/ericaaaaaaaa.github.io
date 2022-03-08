@@ -119,7 +119,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 </style>
 </head>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+        }
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <body>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -423,7 +443,7 @@ function googleTranslateElementInit() {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -446,6 +466,16 @@ function googleTranslateElementInit() {
   }
   document.addEventListener('DOMContentLoaded', initHeader);
 </script>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -757,50 +787,6 @@ function googleTranslateElementInit() {
 
 
 
-<header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Operating System</h1>
-  <h2 class="post-subtitle">操作系统课程笔记</h2>
-
-  <p class="post-meta">
-    <time class="dt-published" datetime="2021-06-10T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jun 10, 2021
-    </time>
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 hour 16 mins</span>
-  </p><div class="post-tags"><a class="post-tag" href="/tags.html#note">#note</a><a class="post-tag" href="/tags.html#system">#system</a><a class="post-tag" href="/tags.html#operating-system">#operating-system</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -5507,9 +5493,25 @@ Need_i := Need_i - Request\)</p>
 <div class="post-nav"><a class="previous" href="/data/2021/01/11/DataStructure.html" title="Data Structure">Data Structure</a><a class="next" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="Discrete Mathematics">Discrete Mathematics</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="Discrete Mathematics">See Mips Run Linux</a></li><li><a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="Discrete Mathematics">Discrete Mathematics</a></li><li><a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html" title="Discrete Mathematics">Compiler</a></li><li><a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html" title="Discrete Mathematics">Machine Learning</a></li></ul>
-    </div><div class="post-comments"></div></section>
+        <li><a class="post-link" href="/softwareengineering/2022/03/08/ModernSoftwareEngineering.html" title="Discrete Mathematics">现代软件工程</a></li><li><a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="Discrete Mathematics">Computer Organization</a></li><li><a class="post-link" href="/statistics/2022/02/17/Statistics.html" title="Discrete Mathematics">概率论与数理统计</a></li><li><a class="post-link" href="/data/2021/01/11/DataStructure.html" title="Discrete Mathematics">Data Structure</a></li></ul>
+    </div><div class="post-comments">  <div id="gitment_thread"></div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+  <script>
+    var gitment = new Gitment({
+      id: '/computerarchitecture/2021/06/10/OperatingSystem',
+      owner: 'ericaaaaaaaa',
+      repo: 'ericaaaaaaaa.github.io',
+      oauth: {
+        client_id: '14080a74e6dd13b2ffcc',
+        client_secret: '7da679e2272b496bfc9e351be356a3bf2b4f1b25',
+      },
+    });
+    gitment.render('gitment_thread')
+  </script>
+</div></section>
 </div>
+
 
 
   </section>
