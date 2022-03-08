@@ -803,8 +803,17 @@ function googleTranslateElementInit() {
 <div>A computer program is said to <i>learn</i> from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.</div>
 <div>Category<ul><li>Supervised Learning</li><li>Unsupervised Learning</li></ul></div>
 
+<h2 id="categories">Categories</h2>
+
+<h3 id="supervised--unsupervised">Supervised &amp; Unsupervised</h3>
+
 <div style="background-color: #D6EAF8;"><b><h4>Supervised Learning</h4></b></div>
 <div>"right answers" given</div>
+
+<div style="background-color: #D6EAF8;"><b><h4>Unsupervised Learning</h4></b></div>
+<div>no "right answers" given</div>
+
+<h3 id="regression--classification">Regression &amp; Classification</h3>
 
 <div style="background-color: #D6EAF8;"><b><h4>Regression Problem</h4></b></div>
 <div>Predict <b>continuous</b> valued output.</div>
@@ -812,8 +821,579 @@ function googleTranslateElementInit() {
 <div style="background-color: #D6EAF8;"><b><h4>Classification Problem</h4></b></div>
 <div>Predict <b>discrete</b> valued output.</div>
 
-<div style="background-color: #D6EAF8;"><b><h4>Unsupervised Learning</h4></b></div>
-<div>no "right answers" given</div>
+<h2 id="notations">Notations</h2>
+
+<div style="background-color: #E9F8D6;"><b><h4>Notations</h4></b></div>
+<div>
+<li><b>m</b> = Number of training examples</li>
+<li><b>x</b> = input variables / features</li>
+<li><b>y</b> = output variable / features</li>
+<li><b>h</b> = hypothesis </li>
+<li><b>(x, y)</b> = one training example</li>
+<li><b>(x<sup>i</sup>, y<sup>i</sup>)</b> = i<sup>th</sup> training example</li>
+</div>
+
+<p>The learning algorithm uses the training set to find the best hypothesis h which maps from x to y.</p>
+
+<h2 id="problem">Problem</h2>
+
+<div style="background-color: #D6EAF8;"><b><h4>Linear Regression</h4></b></div>
+<div>Predict Linear regression attempts to model the relationship between two variables by fitting a linear equation to observed data. A linear regression line has an equation of the form <b>Y = a + bX</b>, where X is the explanatory variable and Y is the dependent variable.</div>
+
+<h2 id="loss-function-cost-function">Loss Function (Cost Function)</h2>
+
+<div style="background-color: #D6EAF8;"><b><h4>Loss Function</h4></b></div>
+<div>A loss function is a function that maps an event or values of one or more variables onto a real number intuitively representing some "cost" asspcoated with the event.</div>
+<div>An optimization problem seeks to <b>minimize</b> a loss function.</div>
+
+<center><h2>Part I. Linear Regression</h2></center>
+
+<h2 id="method">Method</h2>
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+
+<p>Start with some initial $\theta$, and repeatedly performs the update to minimize $J(\theta)$.</p>
+
+<ul>
+  <li>$\alpha$: <strong>learning rate</strong></li>
+  <li>$\theta$: parameter(s)</li>
+  <li>$J(\theta)$: cost function</li>
+</ul>
+
+<h4 id="lms-update-rule">LMS Update Rule</h4>
+
+<p><strong>LMS</strong> stands for <strong>least mean squares</strong>.
+\(J(\theta) = \frac{1}{2}\sum_{i=1}^{n}(h_\theta(x^{(i)})-y^{(i)})^2 \\
+\theta_j\gets \theta_j - \alpha \frac{\part}{\part\theta_j}J(\theta) 
+\gets \theta_j + \alpha (y^{(i)}-h_\theta(x^{(i)}))x_j^{(i)}\)</p>
+
+<h4 id="classification">Classification</h4>
+
+<div style="background-color: #D6EAF8;"><b><h4>Batch Gradient Descent (Batch GD)</h4></b></div>
+<div>Looks at every example in the <b>entire training set</b> on every step.</div>
+
+\[\theta_j\gets \theta_j - \alpha \frac{\part}{\part\theta_j}J(\theta)\]
+
+<ul>
+  <li>Computationally Expensive</li>
+  <li>Great for convex or relatively smooth error manifolds</li>
+</ul>
+
+<div style="background-color: #D6EAF8;"><b><h4>Stochastic Gradient Descent (SGD) (Incremental Gradient Descent)</h4></b></div>
+<div>Repeatedly run through the training set, and each time we encounter a training example, we update the parameters according to the gradient of the error with respect to that <b>single training example only</b>.</div>
+
+<ul>
+  <li>doesn’t settle at global minimum (can be solved by reducing learning rate)</li>
+  <li>faster and less computationally expensive</li>
+</ul>
+
+<h3 id="the-normal-equations">The Normal Equations</h3>
+
+<h4 id="matrix-derivatives">Matrix Derivatives</h4>
+
+<p>For a function $f$: $\R^{n\times d}\rightarrow \R$ mapping from n-by-d matrices to the real numbers, we define the derivative of $f$ with respect to $A$ be:
+\(\triangledown_A f(A) = 
+\begin{bmatrix}
+\frac{\part f}{\part A_{11}} &amp; ... &amp; \frac{\part f}{\part A_{1d}} \\
+... &amp; ... &amp; ...\\
+\frac{\part f}{\part A_{n1}} &amp; ... &amp; \frac{\part f}{\part A_{nd}}
+\end{bmatrix}\)</p>
+
+<h4 id="least-squares-revisited">Least squares revisited</h4>
+
+<ul>
+  <li>
+    <p>define the matrix X to be the n-by-d matrix that contains the training examples’ input values in its rows.
+\(X = \begin{bmatrix}(x^{(1)})^T\\ (x^{(2)})^T\\ ...\\ (x^{(n)})^T\end{bmatrix}\)</p>
+  </li>
+  <li>
+    <p>define $\overrightarrow{y}$ to be the n-dimensional vector containing all the target values from the training set.
+\(\overrightarrow{y} = \begin{bmatrix}y^{(1)}\\ y^{(2)}\\ ...\\ y^{(n)}\end{bmatrix}\)</p>
+  </li>
+</ul>
+
+<p>The loss function $J$ can be represented by
+\(J(\theta) = \frac{1}{2}(X_\theta-\overrightarrow{y})^T(X_\theta-\overrightarrow{y})\)
+To minimize $J$, we set its derivatives to zero, and obtain the <strong>normal equations</strong>:
+\(X^TX\theta = X^T\overrightarrow{y}\)
+Minimize $J(\theta)$ by explicitly taking its derivatives with respect to the $\theta_j$’s, and setting them to zero.
+\(\theta = (X^TX)^{-1}X^T\overrightarrow{y}^3\)</p>
+
+<h3 id="probabilistic-interpretation">Probabilistic Interpretation</h3>
+
+<p>Give a set of probabilistic assumptions</p>
+
+<p>Under he previous probabilistic assumptions on the data. least-squares regression corresponds to finding the maximum likelihood estimate of $\theta$.</p>
+
+<p>Assume that the target variables and the inputs are related via the equation $y^{(i)}=\theta^Tx^{(i)}+\varepsilon^{(i)}$.</p>
+
+<blockquote>
+  <p>$\varepsilon^{(i)}$ is an error term that captures either unmodeled effects or random noise. Assume that $\varepsilon^{(i)}$ are distributed according to the Gaussian distribution with mean zero and some variance $\sigma^2$, namely $\varepsilon^{(i)}\sim N(0, \sigma^2)$</p>
+
+  <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/720px-Normal_Distribution_PDF.svg.png" alt="" /></p>
+
+  <p>$p(\varepsilon^{(i)})=\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(\varepsilon^{(i)})^2}{2\sigma^2})$</p>
+</blockquote>
+
+<p>The principle of <strong>maximum likelihood</strong> says that we should choose $\theta$ to maximize $L(\theta)$.</p>
+
+<p>Instead of maximizing $l(\theta)$, we can also maximize any strictly increasing function of $L(\theta)$. In particular, the derivations will be simpler if we instead maximize the <strong>log likelihood</strong> $\mathscr{l}(\theta) = \log L(\theta) = n\log \frac{1}{\sqrt{2\pi}\sigma}-\frac{1}{\sigma^2}\cdot\frac{1}{2}\sum_{i=1}^{n}(y^{(i)}-\theta^Tx^{(i)})^2$.</p>
+
+<h3 id="locally-weighted-linear-regression-lwr">Locally Weighted Linear Regression (LWR)</h3>
+
+<p>Is a kind of <strong>non-parametric</strong> algorithm.</p>
+
+<div style="background-color: #D6EAF8;"><b><h4>non-parametric algorithm</h4></b></div>
+<div>Algorithms that do not make strong assimptions about the form of the mapping function. By not making assumptions, they are free to learn any functional form from the training data.</div>
+
+<p><strong>Pros</strong></p>
+
+<ul>
+  <li><strong>Flexibility</strong>: capable of fitting a large number of functional forms</li>
+  <li><strong>Power</strong>: No assumptions (or weak assumptions) about the underlying function</li>
+  <li><strong>Performance</strong>: Can result in higher performance models for prediction</li>
+</ul>
+
+<p><strong>Cons</strong></p>
+
+<ul>
+  <li><strong>More data</strong>: require a lot more training data to estimate the mapping function</li>
+  <li><strong>Slower</strong>: A lot slower to train as they often have a far more parameters to train</li>
+  <li><strong>Overfitting</strong>: More of a risk to overfit the training data and it is harder to explain why specific predictions are made.</li>
+</ul>
+
+<div style="background-color: #D6EAF8;"><b><h4>parametric algorithm</h4></b></div>
+<div>AS learning model that summarizes the data with a set of parameters of fixed size.</div>
+
+<ol>
+  <li>Select a form for the function.</li>
+  <li>Learn the coefficients for the function from the training data.</li>
+</ol>
+
+<div style="background-color: #D6EAF8;"><b><h4>underfitting</h4></b></div>
+<div>The model cannot capture the underlying trend of the data</div>
+
+<ul>
+  <li><strong>cause</strong>
+    <ul>
+      <li>too few data</li>
+      <li>the learning model is too easy and flexible</li>
+    </ul>
+  </li>
+  <li><strong>solution</strong>
+    <ul>
+      <li>Increase model complexity.</li>
+      <li>Increase the number of features, performing feature engineering.</li>
+      <li>remove noise from the data.</li>
+      <li>Increase the number of epochs or increase the duration of training to get better results.</li>
+    </ul>
+  </li>
+</ul>
+
+<div style="background-color: #D6EAF8;"><b><h4>overfitting</h4></b></div>
+<div>The model contains too many detail and noise</div>
+
+<ul>
+  <li><strong>cause</strong>
+    <ul>
+      <li>non-parametric and non-linear methods</li>
+    </ul>
+  </li>
+  <li><strong>solution</strong>
+    <ul>
+      <li>Increase training data</li>
+      <li>Reduce model complexity</li>
+      <li>Early stopping during the training phase</li>
+      <li>Ridge Regularization and Lasso Regularization</li>
+      <li>Use dropout for neural networks to tackle overfitting</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="procedure-of-lwr">Procedure of LWR</h4>
+
+<ol>
+  <li>Fit $\theta$ to minimize $\sum_i\bold{w^{(i)}}(y^{(i)}-\theta^Tx^{(i)})^2$</li>
+  <li>Output of $\theta^Tx$</li>
+</ol>
+
+<p>The $w^{(i)}$’s are non-negative valued <strong>weights</strong>.</p>
+
+<p>A fairly standard choice for the weight is $w^{(i)}=\exp{(-\frac{(x^{(i)}-x)^2}{2\tau^2})}$</p>
+
+<ul>
+  <li>$\tau$: The <strong>bandwidth</strong> parameter</li>
+</ul>
+
+<center><h2>Part II. Classification and Logistic Regression</h2></center>
+
+<h2 id="logistic-regression">Logistic Regression</h2>
+
+<div style="background-color: #E9F8D6;"><b><h4>Logistic Function (Sigmoid Function)</h4></b></div>
+
+\[g(z) = \frac{1}{1+e^{-z}}\]
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/640px-Logistic-curve.svg.png" alt="" /></p>
+
+<p>Squeeze the input into range  [0, 1)</p>
+
+<h2 id="digression-the-perceptron-learning-algorithm">Digression: The perceptron learning algorithm</h2>
+
+\[g(z)\left\{\begin{array}{l} 1 &amp; if\ z\ge 0\\ 0 &amp; if\ z &lt; 0\end{array}\right.\\
+h_\theta(x)=g(\theta^T x)\in\{0,1\}\\
+\theta_j\gets \theta_j + \alpha(y^{(i)}-h_\theta(x)^{(i)})x_j^{(i)}\]
+
+<ul>
+  <li>$\alpha$: learning rate</li>
+</ul>
+
+<p>Usage: 0-1 Classification Problem</p>
+
+<h2 id="another-algorithm-for-maximizing-mathscrltheta">Another Algorithm for Maximizing $\mathscr{l}(\theta)$</h2>
+
+<p>Using Newton’s method to find the maximum of $\mathscr{l}(\theta)$.</p>
+
+<center><h2>Part III. Generalized Linear Models</h2></center>
+
+<h2 id="the-exponential-family">The Exponential Family</h2>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Exponential_probability_density.svg/360px-Exponential_probability_density.svg.png" alt="" /></p>
+
+<p>A class of distributions is in the exponential family if it can be written in the form: (probability distribution function)
+\(p(y;\eta)=b(y)\frac{\exp{(\eta^TT(y))}}{\exp({\alpha(\eta)})}\)</p>
+
+<ul>
+  <li>$y$: data</li>
+  <li>$b(y)$: base measure</li>
+  <li>$\eta$: natural parameter (canonical parameter)</li>
+  <li>$T(y)$: sufficient statistic (in this example, T(y) == y)</li>
+  <li>$\alpha(\eta)$: log partition function</li>
+  <li>$e^{-\alpha(\eta)}$: normalization constant</li>
+</ul>
+
+<h3 id="the-bernoulli-distributions">The Bernoulli Distributions</h3>
+
+<blockquote>
+  <p>Bernoulli Distributions: a distribution over $y\in{0,1}$</p>
+</blockquote>
+
+\[\left\{
+\begin{array}{l}
+p(y=1;\phi) = \phi\\
+p(y=0;\phi) = 1-\phi
+\end{array}
+\right.\\
+p(y;\phi) = \exp((\log(\frac{\phi}{1-\phi}))y+\log(1-\phi))\]
+
+<p>where
+\(\eta = \log{(\frac{\phi}{1-\phi})} \\
+T(y)=y\\
+\alpha(\eta)=-\log(1-\phi)=\log(1+e^\eta)\\
+b(y)=1\)</p>
+
+<h3 id="the-gaussian-distributions">The Gaussian Distributions</h3>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/720px-Normal_Distribution_PDF.svg.png" alt="" />
+\(p(y;u)=\frac{1}{\sqrt{2\pi}}\exp{(-\frac{1}{2}y^2)}\cdot\exp(\mu y-\frac{1}{2}\mu^2)\)
+where
+\(\eta = \mu\\
+T(y) = y\\
+\alpha(\eta) = \mu^2/2 = \eta^2/2\\
+b(y) = (1/\sqrt{2\pi})\exp{(-y^2/2)}\)</p>
+
+<h2 id="constructing-glms-generalized-linear-model">Constructing GLMs (Generalized Linear Model)</h2>
+
+<h3 id="assumptions">Assumptions</h3>
+
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$y</td>
+          <td>x;\theta\sim$ ExponentialFamily($\eta$). I.e., given $x$ and $\theta$, the distribution of $y$ follows some exponential family distribution, with parameter $\eta$.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Given $x$, our goal is to predict the expected value of $T(y)$.</li>
+  <li>The natural parameter $\eta$ and the inputs $x$ are related linearly: $\eta=\theta^T x$.</li>
+</ol>
+
+<h3 id="ordinary-least-squares">Ordinary Least Squares</h3>
+
+<ul>
+  <li>The target variable $y$ (also called <strong>response variable</strong> in GLM terminology) is continuous</li>
+  <li>The conditional distribution of $y$ given $x$ as a Gaussian $N(\mu,\sigma^2)$</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$h_\theta(x)=E[y</td>
+      <td>x;\theta]=\mu=\eta=\theta^Tx$</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="logistic-regression-1">Logistic Regression</h3>
+
+<ul>
+  <li>Binary classification, $y\in{0,1}$</li>
+  <li>Bernoulli distrubution</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$h_\theta(x)=E[y</td>
+      <td>x;\theta]=\phi=1/(1+e^{-\eta})=1/(1+e^{-\theta^Tx})$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Canonical Response Function</strong>: the function $g$ giving the distribution’s mean as a function of the natural parameter</p>
+
+<p><strong>Canonical Link Function</strong>: the inverse of $g$, namely $g^{-1}$</p>
+
+<h3 id="softmax-regression">Softmax Regression</h3>
+
+<ul>
+  <li>$y\in{1,2,…,k}$</li>
+</ul>
+
+\[p(y;\phi)=b(y)\exp{(\eta^T(y)-\alpha(\eta))}\]
+
+<p>where
+\(T(1)=
+\left[
+	\begin{array}{c}
+	1\\0\\0\\...\\0
+	\end{array}
+\right]\quad
+T(2)=
+\left[
+	\begin{array}{c}
+	0\\1\\0\\...\\0
+	\end{array}
+\right]\quad
+...\quad
+T(k-1)=
+\left[
+	\begin{array}{c}
+	0\\0\\0\\...\\1
+	\end{array}
+\right]\quad
+T(k)=
+\left[
+	\begin{array}{c}
+	0\\0\\0\\...\\0
+	\end{array}
+\right]
+\\
+\eta=
+\left[
+	\begin{array}{c}
+	\log{(\phi_1/\phi_k)}\\
+	\log{(\phi_2/\phi_k)}\\
+	...\\
+	\log{(\phi_{k-1}/\phi_k)}
+	\end{array}
+\right]\\
+\alpha(\eta) = -\log{(\phi_k)}\\
+b(y)=1\)
+The log-likelihood
+\(\mathscr{l}(\theta) = \sum_{i=1}^{n}\log\prod_{l=1}^k(\frac{e^{\theta_l^Tx^{(i)}}}{\sum_{j=1}^{k}e^{\theta_j^Tx^{(i)}}})^{1\{y^{(i)}=l\}}\)</p>
+
+<center><h2>Part IV. Generative Learning Algorithms</h2></center>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Discriminative Algorithm</strong>: Learn mapping directly from the space of inputs $\chi$ to the labels ${0, 1}$. (learn $p(y</td>
+      <td>x)$)</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Generative Algorithm</strong>: Distinguish different classes by training different model for different classes. (learn $p(x</td>
+      <td>y)$ and $p(y)$)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The $p(y)$ can be called as <strong>class priors</strong>.</p>
+</blockquote>
+
+\[p(y|x)=\frac{p(x|y)p(y)}{p(x)}\]
+
+<h2 id="gaussian-discriminant-analysis-gda">Gaussian Discriminant Analysis (GDA)</h2>
+
+<p>GDA – Gaussian Discriminant Analysis</p>
+
+<blockquote>
+  <p>Suppose $x\in\R^n$</p>
+
+  <table>
+    <tbody>
+      <tr>
+        <td>Assume that $p(x</td>
+        <td>y)$ is distributed according to a multivariate normal distribution.</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<h3 id="the-multivariate-normal-distribution">The multivariate Normal Distribution</h3>
+
+<p>The multivariate normal distribution in $d$-dimensions, also called the multivariate Gaussian distribution, is parameterized by a <strong>mean  vector</strong> $\mu\in\R^d$ and a <strong>covariance matrix</strong> $\sum\in\R^{d\times d}$, where $\sum\ge 0$ is symmetric and positive semi-definite.
+\(p(x;\mu,\Sigma)=\frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}\exp{(-\frac{1}{2}(x-\mu )^T\Sigma^{-1}(x-\mu))}\)</p>
+
+<blockquote>
+  <table>
+    <tbody>
+      <tr>
+        <td>$</td>
+        <td>\Sigma</td>
+        <td>$ denotes the determinant of matrix $\Sigma$.</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>A Gaussian with zero mean and identity covariance is also called the <strong>standard normal distribution</strong>.</p>
+
+<h3 id="the-gaussian-discriminant-analysis-model">The Gaussian Discriminant Analysis Model</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>A classification problem in which the input features $x$ are continuous-valued random variables, we can then use the Gaussian Discriminant Analysis (GDA) model, which models $p(x</td>
+      <td>y)$ using a multivariate normal distribution.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The model is:
+\(y\sim Bernoulli(\phi)\\
+x|y=0\sim N(\mu_0,\Sigma)\\
+x|y=1\sim N(\mu_1, \Sigma)\)
+the distribution:
+\(p(y)=\phi^y(1-\phi)^{1-y}\\
+p(x|y=0)=\frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}\exp{(-\frac{1}{2}(x-\mu_0 )^T\Sigma^{-1}(x-\mu_0))}\\
+p(x|y=1)=\frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}\exp{(-\frac{1}{2}(x-\mu_1 )^T\Sigma^{-1}(x-\mu_1))}\)
+The parameters of our model are $\phi$, $\Sigma$, $\mu_0$, and $\mu_1$.</p>
+
+<p>The likelihood of the data is given by:
+\(l(\phi, \mu_0, \mu_1, \Sigma)=\log{\prod^n_{i=1}p(x^{(i)}|y^{(i)};\mu_0,\mu_1,\Sigma)p(y^{(i)};\phi)}\)
+By maximizing $l$ with respect to the parameters, we find the maximum likelihood estimate of the parameters to be:
+\(\phi=\frac{1}{n}\sum_{i=1}^{n}1\{y^{(i)}=1\}\\
+\mu_0=\frac{\sum_{i=1}^n 1\{y^{(i)}=0\}x^{(i)}}{\sum_{i=1}^n 1\{y^{(i)}=0\}}\\
+\mu_1=\frac{\sum_{i=1}^n 1\{y^{(i)}=1\}x^{(i)}}{\sum_{i=1}^n 1\{y^{(i)}=1\}}\\
+\Sigma=\frac{1}{n}\sum_{i=1}^n(x^{(i)}-\mu_{y^{(i)}})(x^{(i)}-\mu_{y^{(i)}})^T\)</p>
+
+<h3 id="discussion-gda-and-logistic-regression">Discussion: GDA and logistic regression</h3>
+
+<p>GDA makes <em>stronger</em> modeling assumptions about the data than does logistic regression.</p>
+
+<blockquote>
+  <table>
+    <tbody>
+      <tr>
+        <td>Specifically, when $p(x</td>
+        <td>y)$ is indeed gaussian (with shared $\Sigma$), then GDA is <strong>asymptotically efficient</strong>.</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>Logistic regression is more <em>robust</em> and less sensitive to incorrect modeling assumptions.</p>
+
+<p><strong>Summarization</strong>:</p>
+
+<ul>
+  <li>GDA makes stronger modeling assumptions, and is more data efficient (i.e. requires less training data to learn “well”) when the modeling assumptions are correct or at least approximately correct.</li>
+  <li>Logistic regression makes weaker assumptions, and is significantly more robust to deviations from modeling assumptions.</li>
+</ul>
+
+<h3 id="naive-bayes">Naive Bayes</h3>
+
+<p>The problem in which $x_j$’s are discrete-valued.</p>
+
+<p><strong>Naive Bayes (NB) assumption</strong>: assume that the $x_i$’s are conditionally independent given $y$. The resulting algorithm is called <strong>Naive Bayes classifier</strong>.
+\(p(x_1,...,x_d|y)=\prod_{j=1}^d p(x_j|y)\)
+Given a training set ${(x^{(i)},y^{(i)});i=1,…,n}$, the joint likelihood of the data is:
+\(L(\phi_y,\phi_{j|y=0},\phi_{j|y=1})=\prod_{i=1}^{n}p(x^{(i)},y^{(i)})\)
+The maximum likelihood estimates:
+\(\phi_{j|y=0}=\frac{\sum_{i=1}^n 1\{x_j^{(i)}=1\wedge y^{(i)}=0\}}{\sum_{i=1}^n 1\{y^{(i)}=0\}}\\
+\phi_{j|y=1}=\frac{\sum_{i=1}^n 1\{x_j^{(i)}=1\wedge y^{(i)}=1\}}{\sum_{i=1}^n 1\{y^{(i)}=1\}}\\
+\phi_y=\frac{\sum_{i=1}^n 1\{y^{(i)}=1\}}{n}\)</p>
+
+<h3 id="laplace-smoothing">Laplace Smoothing</h3>
+
+<p>It is statistically a bad idea to estimate the probability of some event to zero just because you haven’t seen it before in your finite training set. <strong>Laplace smoothing</strong> (also called additive smoothing) is a technique used to smooth categorical data.</p>
+
+<p>Defining the problem:</p>
+
+<ul>
+  <li>mission: estimating the mean of multinomial random variable $z$ taking values in ${1,…,k}$</li>
+  <li>parameterize the multinomial with $\phi_j=p(z=j)$</li>
+</ul>
+
+<p>No laplace smoothing:
+\(\phi_j = \frac{\sum_{i=1}^n 1\{z^{(i)}=j\}}{n}\)
+With laplace smoothing:
+\(\phi_j = \frac{1+\sum_{i=1}^n 1\{z^{(i)}=j\}}{k+n}\)</p>
+
+<h3 id="event-models-for-text-classification">Event Models for Text Classification</h3>
+
+<p>A different model, called the <strong>Multinomial event model</strong>.</p>
+
+<center><h2>Part V. Kernel Moethods</h2></center>
+
+<h2 id="feature-maps">Feature Maps</h2>
+
+<ul>
+  <li>
+    <p>The input <strong>attributes</strong> of a problem: the “original” input value, e.g. $x$</p>
+  </li>
+  <li>
+    <p>The <strong>featured</strong> variables, e.g. $x^0$, $x^1$, …</p>
+  </li>
+  <li>
+    <p>The <strong>featured</strong> maps $\phi(x)$
+\(\phi(x) = 
+\left[
+\begin{array}{l}
+1 \\ x \\ ... \\ x^n
+\end{array}
+\right]\in \R^n\)</p>
+  </li>
+</ul>
+
+<h2 id="lms-least-mean-squares-with-features">LMS (least mean squares) with features</h2>
+
+<p>Batch gradient descent update rule:
+\(\theta \gets \theta + \alpha\sum_{i=1}^n (y^{(i)}-\theta^T\phi(x^{(i)}))\phi(x^{(i)})\)
+Stochastic gradient descent update rule:
+\(\theta \gets \theta + \alpha (y^{(i)}-\theta^T\phi(x^{(i)}))\phi(x^{(i)})\)</p>
+
+<p>where:</p>
+
+<ul>
+  <li>$\phi: \R^d\rightarrow \R^p$: a feature map that maps attributes $x$ (in $\R^d$) to the features $\phi(x)$ in $\R^p$.</li>
+  <li>$\theta$: a vector in $\R^p$</li>
+  <li>$\alpha$: learning rate</li>
+  <li>goal: fit to the function $\theta^T\phi(x)$</li>
+</ul>
+
+<h2 id="lms-with-the-kernel-trick">LMS with the kernel trick</h2>
+
+<p>The gradient descent update, whether it is batch or stochastic becomes computationally expensive when the features $\phi(x)$ is high-dimensional.</p>
 
 
 
@@ -823,7 +1403,7 @@ function googleTranslateElementInit() {
 <div class="post-nav"><a class="previous" href="/algorithms/2022/01/11/Algorithm.html" title="Algorithm">Algorithm</a><a class="next" href="/machinelearning/2022/02/13/WatermelonBook.html" title="机器学习">机器学习</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/computerarchitecture/2021/06/10/OperatingSystem.html" title="机器学习">Operating System</a></li><li><a class="post-link" href="/others/2022/03/05/HowToAskQuestion.html" title="机器学习">提问的智慧</a></li><li><a class="post-link" href="/data/2021/01/11/DataStructure.html" title="机器学习">Data Structure</a></li><li><a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html" title="机器学习">Compiler</a></li></ul>
+        <li><a class="post-link" href="/machinelearning/2022/02/13/WatermelonBook.html" title="机器学习">机器学习</a></li><li><a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="机器学习">Discrete Mathematics</a></li><li><a class="post-link" href="/algorithms/2022/01/11/Algorithm.html" title="机器学习">Algorithm</a></li><li><a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="机器学习">Computer Organization</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 

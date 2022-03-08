@@ -4,20 +4,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Categories | Erica’s Blog</title>
+<title>特征工程 | Erica’s Blog</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="Categories" />
+<meta property="og:title" content="特征工程" />
 <meta name="author" content="ericaaaaaaaa" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
-<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
-<link rel="canonical" href="http://localhost:4000/categories.html" />
-<meta property="og:url" content="http://localhost:4000/categories.html" />
+<meta name="description" content="利用领域知识和现有数据，创造出新的特征，用于机器学习算法。" />
+<meta property="og:description" content="利用领域知识和现有数据，创造出新的特征，用于机器学习算法。" />
+<link rel="canonical" href="http://localhost:4000/machinelearning/2022/02/25/FeatureEngineering.html" />
+<meta property="og:url" content="http://localhost:4000/machinelearning/2022/02/25/FeatureEngineering.html" />
 <meta property="og:site_name" content="Erica’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-25T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Categories" />
+<meta property="twitter:title" content="特征工程" />
 <script type="application/ld+json">
-{"@type":"WebPage","url":"http://localhost:4000/categories.html","headline":"Categories","author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/machinelearning/2022/02/25/FeatureEngineering.html","headline":"特征工程","dateModified":"2022-02-25T00:00:00+08:00","datePublished":"2022-02-25T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/machinelearning/2022/02/25/FeatureEngineering.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"利用领域知识和现有数据，创造出新的特征，用于机器学习算法。","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -774,7 +776,8 @@ function googleTranslateElementInit() {
         <div class="framework">
   <section class="main">
 
-     
+     <div class="post">
+  <section>
 
 
 
@@ -784,366 +787,300 @@ function googleTranslateElementInit() {
 
 
 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>利用领域知识和现有数据，创造出新的特征，用于机器学习算法。</p>
+
+<blockquote>
+  <p>“数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已。”</p>
+
+  <p>参考链接：</p>
+
+  <p><a href="https://www.cnblogs.com/jasonfreak/p/5448385.html">使用 sklearn 做单机特征工程</a></p>
+
+  <p><a href="https://segmentfault.com/a/1190000024522693">一文读懂特征工程</a></p>
+</blockquote>
+
+<h2 id="特征工程是什么">特征工程是什么</h2>
+
+<p><img src="https://images2015.cnblogs.com/blog/927391/201604/927391-20160430145122660-830141495.jpg" alt="" /></p>
+
+<h2 id="数据预处理">数据预处理</h2>
+
+<h3 id="特征理解">特征理解</h3>
+
+<h4 id="结构化数据--非结构化数据">结构化数据 &amp; 非结构化数据</h4>
+
+<p>以表格形式存储的数据称为结构化数据，不呈现明显结构的数据称为非结构化数据，类似文本、报文、日志等。</p>
+
+<h4 id="定量--定性数据">定量 &amp; 定性数据</h4>
+
+<ul>
+  <li><strong>定量数据</strong></li>
+  <li><strong>定性数据</strong></li>
+</ul>
+
+<p><img src="https://pic1.zhimg.com/v2-ab91b1bce987e33096fa52df1bab44c0_b.png" alt="" />)</p>
+
+<h3 id="特征清洗">特征清洗</h3>
+
+<p><img src="https://pic1.zhimg.com/v2-bdd10e10aa307015f0cb7a0378753738_b.png" alt="" /></p>
+
+<h4 id="数据对齐">数据对齐</h4>
+
+<h5 id="时间">时间</h5>
+
+<ul>
+  <li>格式不一致</li>
+  <li>时间戳单位不一致</li>
+  <li>使用无效时间表示</li>
+</ul>
+
+<h5 id="字段">字段</h5>
+
+<ul>
+  <li>填写错误</li>
+</ul>
+
+<h5 id="量纲">量纲</h5>
+
+<ul>
+  <li>量纲不统一</li>
+  <li>数值类型不统一</li>
+</ul>
+
+<h4 id="缺失值处理">缺失值处理</h4>
+
+<p>主要包括<strong>少量缺失</strong>的情况下，考虑<strong>不处理</strong>或<strong>删除缺失数据</strong>或者<strong>采用均值、中位数、众数、同类均值填充。</strong>
+当缺失值对模型影响比较大，存在比较多的不缺失数据的情况下，可以采用<strong>模型预测</strong>或者<strong>插值</strong>的方式。当缺失值过多时，可以对<strong>缺失值</strong>进行编码操作。</p>
+
+<p><img src="https://pic3.zhimg.com/v2-44cfe5bed189f76aa8d6c4a45c03bd12_b.png" alt="" /></p>
+
+<h5 id="删除">删除</h5>
+
+<h5 id="均值中位数众数同类均值">均值、中位数、众数、同类均值</h5>
+
+<h5 id="建模预测插值">建模预测、插值</h5>
+
+<h5 id="缺失编码">缺失编码</h5>
+
+<h4 id="异常值处理">异常值处理</h4>
+
+<h5 id="异常值识别">异常值识别</h5>
+
+<h6 id="箱线法">箱线法</h6>
+
+<h6 id="正态分布">正态分布</h6>
+
+<h6 id="异常值检测算法">异常值检测算法</h6>
+
+<h5 id="处理方法">处理方法</h5>
+
+<h6 id="模型预测插值">模型预测、插值</h6>
+
+<h6 id="删除-1">删除</h6>
+
+<h6 id="分位数截断">分位数截断</h6>
+
+<h6 id="模型预测删除">模型预测删除</h6>
+
+<h4 id="数据转化">数据转化</h4>
+
+<h5 id="文本转数值">文本转数值</h5>
+
+<h5 id="图像转数值">图像转数值</h5>
+
+<h5 id="标记符号转换">标记符号转换</h5>
+
+<h5 id="特殊数据转换">特殊数据转换</h5>
+
+<h2 id="特征选择">特征选择</h2>
+
+<p>当数据预处理完成后，我们需要选择有意义的特征输入机器学习的算法和模型进行训练。通常来说，从两个方面考虑来选择特征：</p>
+
+<ul>
+  <li>特征是否发散：如果一个特征不发散，例如方差接近于0，也就是说样本在这个特征上基本上没有差异，这个特征对于样本的区分并没有什么用。</li>
+  <li>特征与目标的相关性：这点比较显见，与目标相关性高的特征，应当优选选择。除方差法外，本文介绍的其他方法均从相关性考虑。</li>
+</ul>
+
+<p>根据特征选择的形式又可以将特征选择方法分为3种：</p>
+
+<ul>
+  <li>Filter：过滤法，按照发散性或者相关性对各个特征进行评分，设定阈值或者待选择阈值的个数，选择特征。</li>
+  <li>Wrapper：包装法，根据目标函数（通常是预测效果评分），每次选择若干特征，或者排除若干特征。</li>
+  <li>Embedded：嵌入法，先使用某些机器学习的算法和模型进行训练，得到各个特征的权值系数，根据系数从大到小选择特征。类似于Filter方法，但是是通过训练来确定特征的优劣。</li>
+</ul>
+
+<p>我们使用sklearn中的feature_selection库来进行特征选择。</p>
+
+<h3 id="filter">Filter</h3>
+
+<h4 id="方差选择法">方差选择法</h4>
+
+<p>使用方差选择法，先要计算各个特征的方差，然后根据阈值，选择方差大于阈值的特征。使用 feature_selection 库的 VarianceThreshold 类来选择特征。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">VarianceThreshold</span>
+</code></pre></div></div>
+
+<h4 id="相关系数法">相关系数法</h4>
+
+<p>使用相关系数法，先要计算各个特征对目标值的相关系数以及相关系数的P值。用 feature_selection 库的 SelectKBest 类结合相关系数来选择特征。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+</code></pre></div></div>
+
+<h2 id="降维">降维</h2>
+
+<h2 id="总结">总结</h2>
+
+<h2 id="参考资料">参考资料</h2>
 
 
+    </div>
 
-
-
-
-
-
-  
-  <div class="page-segments">
-  <ul class="page-segments-list">
-    
-    <h2 id="Algorithms" class="segment-name">Algorithms</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Jan 11, 2022</span>
-<span>
-  <a class="post-link" href="/algorithms/2022/01/11/Algorithm.html">
-    Algorithm
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="ArtificialIntelligence" class="segment-name">ArtificialIntelligence</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Jan 28, 2022</span>
-<span>
-  <a class="post-link" href="/artificialintelligence/2022/01/28/MachineLearning.html">
-    Machine Learning
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Jan 03, 2022</span>
-<span>
-  <a class="post-link" href="/artificialintelligence/2022/01/03/ArtificialIntelligence.html">
-    Artificial Intelligence
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Sep 14, 2021</span>
-<span>
-  <a class="post-link" href="/artificialintelligence/2021/09/14/ComputerVision.html">
-    Computer Vision
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="ComputerArchitecture" class="segment-name">ComputerArchitecture</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Dec 22, 2021</span>
-<span>
-  <a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html">
-    Compiler
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Jun 10, 2021</span>
-<span>
-  <a class="post-link" href="/computerarchitecture/2021/06/10/OperatingSystem.html">
-    Operating System
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Jan 11, 2021</span>
-<span>
-  <a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html">
-    Computer Organization
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Dec 23, 2020</span>
-<span>
-  <a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html">
-    See Mips Run Linux
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="Data" class="segment-name">Data</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Jan 07, 2022</span>
-<span>
-  <a class="post-link" href="/data/2022/01/07/Database.html">
-    Database
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Jan 11, 2021</span>
-<span>
-  <a class="post-link" href="/data/2021/01/11/DataStructure.html">
-    Data Structure
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="Internet" class="segment-name">Internet</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Mar 04, 2022</span>
-<span>
-  <a class="post-link" href="/internet/2022/03/04/Internet.html">
-    计算机网络
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Feb 24, 2022</span>
-<span>
-  <a class="post-link" href="/internet/2022/02/24/TheInternet.html">
-    The Internet
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="MachineLearning" class="segment-name">MachineLearning</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Feb 25, 2022</span>
-<span>
-  <a class="post-link" href="/machinelearning/2022/02/25/FeatureEngineering.html">
-    特征工程
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Feb 21, 2022</span>
-<span>
-  <a class="post-link" href="/machinelearning/2022/02/21/Explanation.html">
-    神经网络的可解释性
-  </a>
-</span>
- </li>
-        
-      
-        
-        <li> 
-<span class="post-meta">Feb 13, 2022</span>
-<span>
-  <a class="post-link" href="/machinelearning/2022/02/13/WatermelonBook.html">
-    机器学习
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="Mathematics" class="segment-name">Mathematics</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Jun 29, 2021</span>
-<span>
-  <a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html">
-    Discrete Mathematics
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="Others" class="segment-name">Others</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Mar 05, 2022</span>
-<span>
-  <a class="post-link" href="/others/2022/03/05/HowToAskQuestion.html">
-    提问的智慧
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="SoftwareEngineering" class="segment-name">SoftwareEngineering</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Mar 08, 2022</span>
-<span>
-  <a class="post-link" href="/softwareengineering/2022/03/08/ModernSoftwareEngineering.html">
-    现代软件工程
-  </a>
-</span>
- </li>
-        
-      
-    
-    <h2 id="Statistics" class="segment-name">Statistics</h2>
-      
-      
-        
-        <li> 
-<span class="post-meta">Feb 17, 2022</span>
-<span>
-  <a class="post-link" href="/statistics/2022/02/17/Statistics.html">
-    概率论与数理统计
-  </a>
-</span>
- </li>
-        
-      
-    
-  </ul>
+</article>
+<div class="post-nav"><a class="previous" href="/internet/2022/02/24/TheInternet.html" title="The Internet">The Internet</a><a class="next" href="/internet/2022/03/04/Internet.html" title="计算机网络">计算机网络</a></div><div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="计算机网络">See Mips Run Linux</a></li><li><a class="post-link" href="/others/2022/03/05/HowToAskQuestion.html" title="计算机网络">提问的智慧</a></li><li><a class="post-link" href="/softwareengineering/2022/03/08/ModernSoftwareEngineering.html" title="计算机网络">现代软件工程</a></li><li><a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html" title="计算机网络">Compiler</a></li></ul>
+    </div><div class="post-comments"></div></section>
 </div>
 
+<script src="https://utteranc.es/client.js"
+        repo="ericaaaaaaaa/ericaaaaaaaa.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
 
   </section>
   <section class="sidebar" style="margin-left: 15px;">
-    <!-- Get sidebar items -->
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="common-list">
-  <ul>
-    <li>
-      <a href="/index.html">
-        All<span>19</span>
-      </a>
-    </li>
-
-    
-      <li>
-        <a href="/categories.html#h-Algorithms">
-          Algorithms <span>1</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-ArtificialIntelligence">
-          ArtificialIntelligence <span>3</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-ComputerArchitecture">
-          ComputerArchitecture <span>4</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-Data">
-          Data <span>2</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-Internet">
-          Internet <span>2</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-MachineLearning">
-          MachineLearning <span>3</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-Mathematics">
-          Mathematics <span>1</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-Others">
-          Others <span>1</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-SoftwareEngineering">
-          SoftwareEngineering <span>1</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-Statistics">
-          Statistics <span>1</span>
-        </a>
-      </li>
-    
-  </ul>
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
 </div>
 
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
 </section>
 </div>
 

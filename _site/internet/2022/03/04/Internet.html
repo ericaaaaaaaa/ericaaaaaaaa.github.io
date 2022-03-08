@@ -4,22 +4,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Artificial Intelligence | Erica’s Blog</title>
+<title>计算机网络 | Erica’s Blog</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="Artificial Intelligence" />
+<meta property="og:title" content="计算机网络" />
 <meta name="author" content="ericaaaaaaaa" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Loss Function" />
-<meta property="og:description" content="Loss Function" />
-<link rel="canonical" href="http://localhost:4000/artificialintelligence/2022/01/03/ArtificialIntelligence.html" />
-<meta property="og:url" content="http://localhost:4000/artificialintelligence/2022/01/03/ArtificialIntelligence.html" />
+<meta name="description" content="计算机网络 授课教师：刘轶 E-mail: yi.liu@buaa.edu.cn" />
+<meta property="og:description" content="计算机网络 授课教师：刘轶 E-mail: yi.liu@buaa.edu.cn" />
+<link rel="canonical" href="http://localhost:4000/internet/2022/03/04/Internet.html" />
+<meta property="og:url" content="http://localhost:4000/internet/2022/03/04/Internet.html" />
 <meta property="og:site_name" content="Erica’s Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-01-03T00:00:00+08:00" />
+<meta property="article:published_time" content="2022-03-04T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Artificial Intelligence" />
+<meta property="twitter:title" content="计算机网络" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://localhost:4000/artificialintelligence/2022/01/03/ArtificialIntelligence.html","headline":"Artificial Intelligence","dateModified":"2022-01-03T00:00:00+08:00","datePublished":"2022-01-03T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/artificialintelligence/2022/01/03/ArtificialIntelligence.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"Loss Function","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"http://localhost:4000/internet/2022/03/04/Internet.html","headline":"计算机网络","dateModified":"2022-03-04T00:00:00+08:00","datePublished":"2022-03-04T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/internet/2022/03/04/Internet.html"},"author":{"@type":"Person","name":"ericaaaaaaaa"},"description":"计算机网络 授课教师：刘轶 E-mail: yi.liu@buaa.edu.cn","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -791,396 +791,458 @@ function googleTranslateElementInit() {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h1 id="loss-function">Loss Function</h1>
-
-<h2 id="regularization-add-term-to-loss">Regularization: Add term to loss</h2>
-
-<p>$L=\frac{1}{N}\sum_{i=1}^{N}\sum_{j\not= y_i}\max(0, f(x_i;W)<em>j-f(x_i;W)</em>{y_i}+1)+\lambda R(W)$</p>
-
-<p>In common use:</p>
-
-<p><img src="/assets/images/post/reg.png" alt="" /></p>
-
-<h3 id="dropout">Dropout</h3>
-
-<p>In each forward pass, randomly set some neurons to zero</p>
-
-<p>Probability of dropping is a hyperparameter; 0.5 is common</p>
-
-<p><img src="/assets/images/post/drop.png" alt="" /></p>
-
-<h3 id="data-augmentation">Data Augmentation</h3>
-
-<ul>
-  <li>Horizontal Flipping 水平翻转</li>
-  <li>Random Cropping 随机裁剪</li>
-  <li>Random Scaling 随机放缩</li>
-  <li>Color Jittering 颜色抖动</li>
-  <li>Random Translation 随机平移</li>
-  <li>Random Shearing 随机剪切</li>
-</ul>
-
-<h2 id="regression">Regression</h2>
-
-<h3 id="l1-loss">L1 Loss</h3>
-
-<table>
-  <tbody>
-    <tr>
-      <td>$L(y, \hat{y})=w(\theta)</td>
-      <td>\hat{y}-y</td>
-      <td>$</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="l2-loss">L2 Loss</h3>
-
-<p>$L(y, \hat{y})=w(\theta)(\hat{y}-y)^2$</p>
-
-<h2 id="classification">Classification</h2>
-
-<h3 id="hinge-loss-function-铰链损失函数">Hinge Loss Function 铰链损失函数</h3>
-
-<p>$L(y, \hat{y}) = \max{(0, 1-\hat{y}y)}$</p>
-
-<p>$y\in{-1, 1}$</p>
-
-<h3 id="cross-entropy-loss-function-交叉熵损失函数">Cross-Entropy Loss Function 交叉熵损失函数</h3>
-
-<p>In binary classification, $L(y, \hat{y}) = -y\log{(\hat{y})}-(1-y)\log{(1-\hat{y})}$</p>
-
-<p>In multiclass classification (class number = M), $L(y) = -\sum_{c=1}^My_o, c\log{(p_o, c)}$</p>
-
-<blockquote>
-  <ul>
-    <li>M - number of classes (dog, cat, fish)</li>
-    <li>log - the natural log</li>
-    <li>y - binary indicator (0 or 1) if class label cc is the correct classification for observation $o$</li>
-    <li>p - predicted probability observation $o$ is of class $c$</li>
-  </ul>
+      <blockquote>
+  <p>计算机网络
+授课教师：刘轶
+E-mail: yi.liu@buaa.edu.cn</p>
 </blockquote>
 
-<h3 id="exponential-loss-function-指数损失函数">Exponential Loss Function 指数损失函数</h3>
+<p><strong>考核方式</strong></p>
 
-<p>$L(y,\hat{y}) = \exp{(-y\hat{y})}$</p>
+<ul>
+  <li>平时成绩：10%</li>
+  <li>期末考试：90%</li>
+  <li>考试时间在 6 月上旬</li>
+</ul>
 
-<h2 id="sgd-stochastic-gradient-descent-随机梯度下降">SGD, Stochastic Gradient Descent 随机梯度下降</h2>
+<p><strong>课本</strong></p>
 
-<p>在梯度下降时，为了加快收敛速度，通常使用一些优化方法。</p>
+<ul>
+  <li>《计算机网络》（第 8 版）谢系仁</li>
+</ul>
 
-<p><img src="/assets/images/post/sgd.png" alt="" /></p>
+<p><strong>参考书</strong></p>
 
-<p>SGD每次都会在当前位置上沿着负梯度方向更新（下降，沿着正梯度则为上升），并不考虑之前的方向梯度大小等等。而动量（moment）通过引入一个新的变量 v去积累之前的梯度（通过指数衰减平均得到），得到加速学习过程的目的。</p>
+<ul>
+  <li><em>Computer Networks</em></li>
+</ul>
+
+<h1 id="第一章-概述">第一章 概述</h1>
 
 <blockquote>
-  <p>最直观的理解就是，若当前的梯度方向与累积的历史梯度方向一致，则当前的梯度会被加强，从而这一步下降的幅度更大。若当前的梯度方向与累积的梯度方向不一致，则会减弱当前下降的梯度幅度。</p>
+  <p><strong>Host</strong>: 主机，在网络中的设备
+ <strong>AP</strong>: 进程</p>
 </blockquote>
 
-<h3 id="nesterov-momentum">Nesterov Momentum</h3>
+<h2 id="11-计算机网络的定义与分类">1.1 计算机网络的定义与分类</h2>
 
-<p><img src="https://img-blog.csdn.net/20180518154303163" alt="" /></p>
-
-<h3 id="ada-grad-adaptive-gradient">Ada Grad (Adaptive Gradient)</h3>
-
-<p>通常，我们在每一次更新参数时，对于所有的参数使用相同的学习率。而AdaGrad算法的思想是：每一次更新参数时（一次迭代），不同的参数使用不同的学习率。</p>
-
-<p>Added element-wise scaling of the gradient based on the historical sum of squares in each dimension.</p>
-
-<p><img src="/assets/images/post/ada.png" alt="" /></p>
-
-<h3 id="rmsprop-leaky-adagrad">RMSProp: “Leaky AdaGrad”</h3>
-
-<p><img src="/assets/images/post/rms.png" alt="" /></p>
-
-<h3 id="adam">Adam</h3>
-
-<p><img src="/assets/images/post/adam.png" alt="" /></p>
-
-<p>Adam with beta1 = 0.9, beta2 = 0.999, and learning_rate = 1e-3 or 5e-4 is a great starting point for many models</p>
-
-<h1 id="gradient-descent">Gradient Descent</h1>
-
-<h2 id="1-dimension">1 Dimension</h2>
-
-<ol>
-  <li>Randomly pick an initial value $w^0$</li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>Compute $\frac{\partial L}{\partial w}</td>
-          <td>_{w=w^0}$</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>$w^1\gets w^0-\eta\frac{\partial L}{\partial w}</td>
-          <td>_{w=w^0}$, where $\eta$ stands for <strong>learning rate</strong></td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ol>
-
-<h2 id="2-dimension">2 Dimension</h2>
-
-<p>$y=wx_1+b$</p>
-
-<ol>
-  <li>Randomly pick an initial value $w^0, b^0$</li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>Compute $\frac{\partial L}{\partial w}</td>
-          <td>_{w=w^0}$, $\frac{\partial L}{\partial b}</td>
-          <td>_{w=w^0, b=b^0}$</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>Update $w$ and $b$ iteratively: $w^1\gets w^0-\eta\frac{\partial L}{\partial w}</td>
-          <td>_{w=w^0}$, $b^1\gets b^0-\eta\frac{\partial L}{\partial b}</td>
-          <td>_{w=w^0, b=b^0}$, where $\eta$ stands for <strong>learning rate</strong></td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ol>
-
-<h2 id="learning-rate-decay">Learning rate decay</h2>
-
-<h3 id="step">Step</h3>
-
-<p>Reduce learning rate at a few fixed points. E.g. for ResNets, multiply LR by 0.1 after epochs 30, 60, and 90</p>
-
-<h3 id="cosine">Cosine</h3>
-
-<p>$\alpha_t=\frac{1}{2}\alpha_0(1+\cos (t\pi/T))$</p>
+<h3 id="一计算机网络的定义">一、计算机网络的定义</h3>
 
 <ul>
-  <li>$\alpha_0$: initial learning rate</li>
-  <li>$\alpha_t$: learning rate at epoch t</li>
-  <li>$T$: total number of epochs</li>
+  <li><strong>计算机网络</strong> (Computer Network) 是一些<strong>互相连接</strong>的、<strong>自治</strong>的计算机的<strong>集合</strong>。</li>
+  <li>网络的功能
+    <ul>
+      <li>连通性</li>
+      <li>资源共享</li>
+    </ul>
+  </li>
+  <li>计算机网络与<strong>分布式系统</strong> (distributed system)
+    <ul>
+      <li>建立在网络基础上，一组独立的计算机展现给用户的是一个独立的整体。</li>
+    </ul>
+  </li>
 </ul>
 
-<h3 id="linear">Linear</h3>
+<h3 id="二计算机网络的分类">二、计算机网络的分类</h3>
 
-<p>$\alpha_t=\alpha_0(1-t/T)$</p>
+<ul>
+  <li>按作用范围（或覆盖范围）分类
+    <ul>
+      <li><strong>广域网</strong> WAN (Wide Area Network)</li>
+      <li><strong>局域网</strong> LAN (Local Area Network)</li>
+      <li><strong>城域网</strong> MAN (Metropolitan Area Network)
+        <ul>
+          <li>作用范围通常为一座城市</li>
+          <li>采用局域网技术建立</li>
+        </ul>
+      </li>
+      <li><strong>个人区域网</strong> PAN (Personal Area Network)
+        <ul>
+          <li>在个人区域内实现各种设备互联的网络，如蓝牙</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>按网络的使用者进行分类
+    <ul>
+      <li>公用网 (public network)</li>
+      <li>专用网 (private network)</li>
+    </ul>
+  </li>
+</ul>
 
-<h3 id="inverse-sqrt">Inverse Sqrt</h3>
+<h2 id="12-计算机网络与-internet-发展概述">1.2 计算机网络与 Internet 发展概述</h2>
 
-<p>$\alpha_t = \alpha_1/\sqrt{t}$</p>
+<h3 id="一计算机网络发展的三个阶段">一、计算机网络发展的三个阶段</h3>
 
-<h2 id="looking-at-learning-curves">Looking at learning curves</h2>
+<ul>
+  <li><strong>主机-终端时代</strong> (20 世纪 50-60 年代)
+    <ul>
+      <li>计算机以大型主机的形式存在</li>
+      <li>终端通过专用线路或通信网络链接到主机上，实现多用户远程共享主机计算资源</li>
+    </ul>
+  </li>
+  <li><strong>主机互联时代</strong> (20 世纪 60-70 年代)</li>
+  <li><strong>网络时代</strong> (20 世纪 70 年代之后)</li>
+</ul>
 
-<p>Losses may be noisy, use a scatter plot and also plot moving average to see trends better.</p>
+<h3 id="二internet-发展概述">二、Internet 发展概述</h3>
 
-<h1 id="activation-function">Activation Function</h1>
+<ul>
+  <li>第一阶段：ARPANET $\rightarrow$ 网际互联发展
+    <ul>
+      <li>军事产物</li>
+    </ul>
+  </li>
+  <li>第二阶段：建成三级结构的 Internet
+    <ul>
+      <li>网络分为主干网、地区网和校园网（或企业网）</li>
+    </ul>
+  </li>
+  <li>第三阶段：形成多层次 ISP 结构的 Internet
+    <ul>
+      <li>商业化极大推动 Internet 发展</li>
+      <li>IP 地址、域名管理等均交由专门企业运营</li>
+    </ul>
+  </li>
+</ul>
 
 <blockquote>
-  <p>introduce non-linear properties to the network</p>
+  <p>Internet 特指现在的互联网（又称因特网），internet 指多个网络互联形成的网络。</p>
 </blockquote>
 
-<p><img src="/assets/images/post/activationFunction.png" alt="" /></p>
+<h2 id="13-计算机网络的性能">1.3 计算机网络的性能</h2>
 
-<h2 id="sigmoid">Sigmoid</h2>
-
-<h3 id="formula">Formula</h3>
-
-\[\sigma(x) = \frac{1}{1+e^{-x}}\]
-
-<h3 id="features">Features</h3>
+<h3 id="一性能指标">一、性能指标</h3>
 
 <ul>
-  <li>Squashes numbers to range <strong>[0, 1]</strong></li>
-</ul>
-
-<h3 id="problems">Problems</h3>
-
-<ul>
-  <li>
-    <p>Saturated neurons <strong>“kill” the gradients</strong></p>
+  <li><strong>速率</strong>
+    <ul>
+      <li>传送数据的速率，即数据速率 (data rate) 或比特率 (bit rate)</li>
+      <li>单位：b/s，也写为 bps (bit per second), kb/s, Mb/s, Gb/s, …</li>
+    </ul>
   </li>
-  <li>
-    <p>Sigmoid outputs are <strong>not zero-centered</strong></p>
-
-    <blockquote>
-      <p>The gradient on $w$ is always all positive or negative, so the gradient can upgrade in only one direction.</p>
-    </blockquote>
+  <li><strong>带宽</strong> (bandwidth)
+    <ul>
+      <li>指通信线路传送数据的能力，即<strong>最高</strong>数据率</li>
+    </ul>
   </li>
-  <li>
-    <p>A bit <strong>compute expensive</strong></p>
+  <li><strong>吞吐量</strong></li>
+  <li><strong>时延</strong> (delay, latency)
+    <ul>
+      <li>网络从一端传到另一端的时间</li>
+    </ul>
+  </li>
+  <li><strong>时延带宽积</strong></li>
+  <li><strong>时延带宽积</strong> = 传播时延 $\times$ 带宽</li>
+  <li><strong>往返时间</strong> (RTT, Round Trip Time)
+    <ul>
+      <li>从发送方发出数据到收到接收方应答所经历的时间。$\not ={2\times delay}$</li>
+    </ul>
+  </li>
+  <li><strong>利用率</strong>
+    <ul>
+      <li>包括信道利用率和网络利用率</li>
+    </ul>
   </li>
 </ul>
 
-<h2 id="tanh">Tanh</h2>
-
-<h3 id="formula-1">Formula</h3>
-
-\[\tanh(x) = \frac{\sinh(x)}{\cosh(x)}=\frac{e^x-e^{-x}}{e^x+e^{-x}}\]
-
-<h3 id="features-1">Features</h3>
+<h3 id="二非性能指标">二、非性能指标</h3>
 
 <ul>
-  <li>Squashes number to range <strong>[-1, 1]</strong></li>
-  <li><strong>Zero centered</strong></li>
+  <li>费用</li>
+  <li>质量</li>
+  <li>标准化</li>
+  <li>可靠性</li>
+  <li>可扩展性和可升级性</li>
+  <li>易于管理和维护</li>
 </ul>
 
-<h3 id="problems-1">Problems</h3>
+<h2 id="14-计算机网络体系结构">1.4 计算机网络体系结构</h2>
+
+<h3 id="一网络体系结构概述">一、网络体系结构概述</h3>
 
 <ul>
-  <li>Saturated neurons <strong>“kill” the gradients</strong></li>
+  <li>计算机网络体系结构 (architecture) 是<strong>计算机网络的各层及其协议的集合</strong>。</li>
+  <li>OSI 体系结构</li>
 </ul>
 
-<h2 id="relu">ReLU</h2>
-
-<h3 id="formula-2">Formula</h3>
-
-\[f(x) = \max(0, x)\]
-
-<h3 id="features-2">Features</h3>
+<h3 id="二具有七层和五层协议的体系结构">二、具有七层和五层协议的体系结构</h3>
 
 <ul>
-  <li><strong>Does not saturate</strong> (in &gt;0 region)</li>
-  <li>Very <strong>computationally efficient</strong></li>
-  <li>Converges much <strong>faster</strong></li>
-  <li>More biologically plausible</li>
+  <li>OSI 体系结构（从上到下）
+    <ul>
+      <li>应用层 (application layer)</li>
+      <li>表示层 (presentation layer)</li>
+      <li>会话层 (session layer)</li>
+      <li>传输层 (transport layer)</li>
+      <li>网络层 (network layer)</li>
+      <li>数据链路层 (data link layer)</li>
+      <li>物理层 (physical layer)</li>
+    </ul>
+  </li>
+  <li>TCP / IP 体系结构（从上到下）
+    <ul>
+      <li>应用层（包含应用层、表示层和会话层）</li>
+      <li>传输层</li>
+      <li>网际层</li>
+      <li>网络接口层</li>
+    </ul>
+  </li>
+  <li>五层体系结构（从上到下， 现实世界中没有相关标准，但方便讲解）
+    <ul>
+      <li>应用层（包含应用层、表示层和会话层）</li>
+      <li>传输层</li>
+      <li>网际层</li>
+      <li>数据链路层</li>
+      <li>物理层</li>
+    </ul>
+  </li>
+  <li>协议数据单元 (PDU, Protocol Data Unit)：对等层次之间传送的数据单位</li>
 </ul>
 
-<h3 id="problems-2">Problems</h3>
+<h3 id="三实体协议服务和服务访问点">三、实体、协议、服务和服务访问点</h3>
 
 <ul>
-  <li><strong>Not zero-centered</strong></li>
-  <li><strong>“kill” the gradients</strong> (in $\le$ 0 region), what we called the <em>“dead ReLU”</em></li>
+  <li>若干概念
+    <ul>
+      <li><strong>实体</strong> (entity)：任何可发送或接受信息的硬件或软件进程</li>
+      <li><strong>协议</strong> (protocol)：控制两个对等实体进行通信的规则的集合</li>
+      <li>在协议的控制下，两个对等实体间的通信使得本层能够向上一层提供<strong>服务</strong> (service)</li>
+      <li>…… ==TODO==</li>
+    </ul>
+  </li>
+  <li>协议的设计还需要考虑异常情况</li>
 </ul>
 
-<h2 id="leaky-relu">Leaky ReLU</h2>
+<h3 id="四tcp--ip">四、TCP / IP</h3>
 
-<h3 id="formula-3">Formula</h3>
+<h2 id="15-网络标准化">1.5 网络标准化</h2>
 
-\[f(x) = \max(0.01x, x)\]
-
-<h3 id="features-3">Features</h3>
+<h3 id="一概述">一、概述</h3>
 
 <ul>
-  <li>Does <strong>not saturate</strong> (in &gt;0 region)</li>
-  <li>Vary <strong>computationally efficient</strong></li>
-  <li>Converges much <strong>faster</strong></li>
-  <li>Will <strong>not “die”</strong></li>
+  <li>标准化对于计算机网络至关重要</li>
+  <li>标准的分类
+    <ul>
+      <li><strong>法定标准</strong>：由权威机构制定的、正式的、合法的标准</li>
+      <li><strong>事实标准</strong></li>
+    </ul>
+  </li>
 </ul>
 
-<h3 id="references">References</h3>
-
-<h4 id="parametric-rectifier-prelu">Parametric Rectifier (PReLU)</h4>
-
-\[f(x) = \max(\alpha x, x)\]
-
-<h2 id="elu">ELU</h2>
-
-<h3 id="formula-4">Formula</h3>
-
-\[f(x) = \left\{ \begin{array}{lc} x &amp; if\ x &gt; 0\\\alpha(\exp{(x)}-1) &amp; if\ x \le 0\end{array}\right.\]
-
-<h3 id="features-4">Features</h3>
+<h3 id="三标注化组织">三、标注化组织</h3>
 
 <ul>
-  <li><strong>All</strong> benefits of ReLU</li>
-  <li>Closer to zero mean outputs</li>
-  <li>Negative saturation regime compared with Leaky ReLU adds some robustness to noise</li>
+  <li>ITU-T</li>
+  <li>ISO
+    <ul>
+      <li>国际标准化组织</li>
+    </ul>
+  </li>
+  <li>IEEE</li>
+  <li>IETF</li>
 </ul>
 
-<h3 id="problems-3">Problems</h3>
+<h1 id="第二章-物理层">第二章 物理层</h1>
+
+<h2 id="21-物理层的基本概念">2.1 物理层的基本概念</h2>
 
 <ul>
-  <li>Computation requires exp()</li>
+  <li>物理层的主要任务
+在传输介质上传输比特流</li>
+  <li>物理层涉及的四个特性
+    <ul>
+      <li>机械特性（e.g. 接口形状）</li>
+      <li>电气特性（e.g. 电压范围）</li>
+      <li>功能特性（e.g. 不同电平的电压表示何种意义）</li>
+      <li>过程特性（e.g. 不同功能的各种可能事件的出现顺序）</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="maxout">Maxout</h2>
+<h2 id="22-数据通信的基础知识">2.2 数据通信的基础知识</h2>
+
+<h3 id="一数据通信系统的模型">一、数据通信系统的模型</h3>
 
 <blockquote>
-  <p>There is also another popular variant called <em>maxout</em> which is the generalized form above relu and leaky relu.</p>
+  <p>调制解调器</p>
 </blockquote>
 
-<h3 id="formula-5">Formula</h3>
-
-\[\max(w_1^T x+b_1, w_2^T x+b_2)\]
-
-<h3 id="features-5">Features</h3>
-
+<p>数据通信系统包含</p>
 <ul>
-  <li><strong>Generalizes</strong> ReLU and Leaky ReLU</li>
-  <li>Does <strong>not saturate</strong></li>
-  <li>Does <strong>not die</strong></li>
+  <li>信源</li>
+  <li>发送器</li>
+  <li>传输系统</li>
+  <li>接收器</li>
+  <li>……</li>
 </ul>
 
-<h3 id="problems-4">Problems</h3>
-
+<h3 id="二若干术语和概念">二、若干术语和概念</h3>
 <ul>
-  <li>Doubles the number of parameters / neuron</li>
+  <li><strong>信道</strong>一般表示向某一方向传送信息的介质</li>
+  <li>通信的目的是为了传送<strong>消息</strong></li>
+  <li>消息的实体是<strong>数据</strong></li>
+  <li><strong>信号</strong>是数据的电气或电磁的表示</li>
+  <li>在使用时间域的波形表示数字信号时，代表不同离散数值的基本波形称为<strong>码元</strong>
+    <ul>
+      <li>码元速率：单位时间内通过信道的码元个数</li>
+      <li>数据速率：单位时间内通过信道的信息量（比特数）</li>
+      <li>希望一个码元尽可能携带多个比特</li>
+    </ul>
+  </li>
+  <li>通信双方的交互方式
+    <ul>
+      <li>单向通信（单工通信，simplex）
+        <ul>
+          <li>只有一个方向可以发送信息</li>
+        </ul>
+      </li>
+      <li>双向交替通信（半双工通信，half-duplex）√
+        <ul>
+          <li>双方都能发送信息，但不能同时发送信息</li>
+        </ul>
+      </li>
+      <li>双向通信（双工通信，duplex）
+        <ul>
+          <li>双方可以同时发送和接受信息</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>基带 (baseband) 信号和带通 (band pass) 信号
+    <ul>
+      <li><strong>基带信号</strong>，即基本频带信号</li>
+      <li>基带信号是来自信源的信号，常常包含较多的低频成分，且可能为直流</li>
+      <li>必须对基带信号进行<strong>调制</strong></li>
+      <li><strong>带通信号</strong>是基带信号经过调制后的信号</li>
+    </ul>
+  </li>
+  <li>最基本的二元制调制方法
+    <ul>
+      <li><strong>调幅</strong> (AM)：载波的振幅随基带数字信号而变化</li>
+      <li><strong>调频</strong> (FM)：载波的频率随基带数字信号而变化</li>
+      <li><strong>调相</strong> (PM)：载波的相位随基带数字信号而变化</li>
+    </ul>
+  </li>
+  <li>经常采用多元制混合的调制方法，如振幅和相位相结合的正交振幅调制（QAM）</li>
 </ul>
 
-<h1 id="layers">Layers</h1>
+<h3 id="三信道的极限容量">三、信道的极限容量</h3>
 
-<h2 id="fully-connected-layer">Fully Connected Layer</h2>
+<ul>
+  <li><strong>信号的失真问题</strong></li>
+  <li><strong>信号能够通过的频率范围</strong>
+    <ul>
+      <li><strong>奈奎斯特定理</strong> (Nyquist)
+        <ul>
+          <li>理想低通信道最大数据传输率 = $2H\log_2 V$ (bps)
+            <ul>
+              <li>H：信道带宽</li>
+              <li>V：信号电平的级数（信号的状态数）</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>信噪比</strong>
+    <ul>
+      <li>信号的平均功率与噪声的平均功率之比，常记为：S/N。以分贝 (dB) 为计量单位</li>
+      <li>信噪比 = $10\log_{10}(S/N)$</li>
+    </ul>
+  </li>
+  <li><strong>香农公式</strong>
+    <ul>
+      <li>信道的极限信息传输速率 C（有噪声）</li>
+      <li>$C = W\log_2(1+S/N)$ b/s
+        <ul>
+          <li>W：信道带宽（单位：Hz）</li>
+          <li>S：信道内所传信号的平均功率</li>
+          <li>N：信道内部的高频噪声功率</li>
+        </ul>
+      </li>
+      <li>信噪比越大，信息极限传输速率越高</li>
+    </ul>
+  </li>
+</ul>
 
-<p>dot product</p>
+<h2 id="23-物理层下面的传输介质">2.3 物理层下面的传输介质</h2>
 
-<p><img src="/assets/images/post/q1.png" alt="" /></p>
+<p>介质 media</p>
 
-<h2 id="convolution-layer">Convolution Layer</h2>
+<ul>
+  <li>传输介质，又称为传输媒体或传输媒介，指数据传输系统中发送器与接收器之间的物理通路</li>
+  <li>分类
+    <ul>
+      <li>导引型传输介质</li>
+      <li>非导引型传输介质</li>
+    </ul>
+  </li>
+</ul>
 
-<p><img src="/assets/images/post/cnn.png" alt="" /></p>
+<h3 id="一导引型传输介质">一、导引型传输介质</h3>
 
-<p>Number of parameters in the layer: $K\times (F^2\times C + 1)$</p>
+<ul>
+  <li><strong>双绞线</strong>：通过两根绝缘线绞合，减少相互干扰
+    <ul>
+      <li>分类
+        <ul>
+          <li>屏蔽双绞线 STP（外面带有铜网）</li>
+          <li>无屏蔽双绞线 UTP（外面无铜网）</li>
+        </ul>
+      </li>
+      <li>价格便宜，便于安装使用，传输距离较短</li>
+      <li>局域网布线系统常用</li>
+    </ul>
+  </li>
+  <li><strong>同轴电缆</strong></li>
+  <li><strong>光纤</strong> (fiber optics)
+    <ul>
+      <li>由非常透明的石英玻璃拉成的细丝，由纤芯包层构成双层通信圆柱体</li>
+      <li>分类
+        <ul>
+          <li>多模光纤</li>
+          <li>单模光纤：适用于长距离传输</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-<blockquote>
-  <p>$+1$ for bias</p>
-</blockquote>
+<h3 id="二非导引型传输介质">二、非导引型传输介质</h3>
 
-<h1 id="gans-generative-adversarial-network-生成对抗网络">GANS, Generative Adversarial Network 生成对抗网络</h1>
-
-<p><img src="/assets/images/post/gan.png" alt="" /></p>
-
-<h2 id="generative-model-g-生成器">Generative Model G 生成器</h2>
-
-<p>Captures data distribution and generate samples close to real distribution</p>
-
-<h2 id="discriminative-model-d-判别器">Discriminative Model D 判别器</h2>
-
-<p>Estimates the probability that a sample came from the training data rather than G</p>
-
-<p><img src="/assets/images/post/q0.png" alt="" /></p>
-
-<p><img src="/assets/images/post/q2.png" alt="" /></p>
-
-<p><img src="/assets/images/post/q3.png" alt="" /></p>
-
-<p><img src="/assets/images/post/t0.png" alt="" /></p>
-
-<p><img src="/assets/images/post/t1.png" alt="" /></p>
-
-<p><img src="/assets/images/post/t2.png" alt="" /></p>
-
-<p><img src="/assets/images/post/t3.png" alt="" /></p>
+<ul>
+  <li>非导引型传输介质指可传播无线电波的自由空间</li>
+  <li>无线电波适用于
+    <ul>
+      <li>偏远地区通信</li>
+      <li>城市中布线较为困难的场合</li>
+      <li>移动设备</li>
+    </ul>
+  </li>
+  <li>主要分类
+    <ul>
+      <li>短波通信</li>
+      <li>微波通信和卫星通信</li>
+      <li>地面微波通信</li>
+    </ul>
+  </li>
+  <li>关于无线频谱政策
+    <ul>
+      <li>多数无线频段由政府管理和分配，需获得许可才能使用</li>
+    </ul>
+  </li>
+</ul>
 
 
     </div>
 
 </article>
-<div class="post-nav"><a class="previous" href="/computerarchitecture/2021/12/22/Compiler.html" title="Compiler">Compiler</a><a class="next" href="/data/2022/01/07/Database.html" title="Database">Database</a></div><div class="post-related">
+<div class="post-nav"><a class="previous" href="/machinelearning/2022/02/25/FeatureEngineering.html" title="特征工程">特征工程</a><a class="next" href="/others/2022/03/05/HowToAskQuestion.html" title="提问的智慧">提问的智慧</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/computerarchitecture/2021/01/11/ComputerOrganization.html" title="Database">Computer Organization</a></li><li><a class="post-link" href="/mathematics/2021/06/29/DiscreteMathematics.html" title="Database">Discrete Mathematics</a></li><li><a class="post-link" href="/computerarchitecture/2021/12/22/Compiler.html" title="Database">Compiler</a></li><li><a class="post-link" href="/data/2021/01/11/DataStructure.html" title="Database">Data Structure</a></li></ul>
+        <li><a class="post-link" href="/data/2022/01/07/Database.html" title="提问的智慧">Database</a></li><li><a class="post-link" href="/algorithms/2022/01/11/Algorithm.html" title="提问的智慧">Algorithm</a></li><li><a class="post-link" href="/computerarchitecture/2020/12/23/SeeMIPSRunLinux.html" title="提问的智慧">See Mips Run Linux</a></li><li><a class="post-link" href="/softwareengineering/2022/03/08/ModernSoftwareEngineering.html" title="提问的智慧">现代软件工程</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 
