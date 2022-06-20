@@ -63,17 +63,7 @@ $$
 
 ### Pre-processing
 
-```flow
-st=>start: Passage
-op=>operation: Split into sentences
-cond=>condition: Is it number?
-op1=>operation: Replace with <NUM> tag
-op2=>operation: To lowercase
-e=>end: Finish Preprocessing
-st->op->cond
-cond(yes)->op1->e
-cond(no)->op2->e
-```
+![](/assets/images/post/paper/k-skip-flow.PNG)
 
 ### Evaluation Technique
 
